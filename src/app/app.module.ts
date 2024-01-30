@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { IdeasServicioService } from './sevicios/ideas-servicio.service';
 
 
 
@@ -7,6 +8,7 @@ import { NgModule } from '@angular/core';
   declarations: [],
   imports: [],
   exports: [],
+  providers: [IdeasServicioService],
   bootstrap: []
 })
 export class AppModule { }

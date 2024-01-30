@@ -1,0 +1,25 @@
+.foto-idea {
+    max-height: 30%;
+}
+
+.card {
+    max-height: 315px;
+}
+
+.caja-des {
+    height: 75px;
+}
+
+.descripcion {
+    max-height: 50px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    // text-overflow: ellipsis;
+    // white-space: pre-line;
+}
+
+.campo {
+    font-size: 12px;
+}

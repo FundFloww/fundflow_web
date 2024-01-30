@@ -17,7 +17,6 @@
                 </div>
                 <div>
                     <a href="#" class="btn btn-primary text-light">Enviar mensaje</a>
-                    <!-- <button class="btn bg-primary text-light">Enviar mensaje</button> -->
                 </div>
             </div>
         </div>
@@ -29,7 +28,7 @@
                         <p class="h2"><strong>1.208</strong></p>
                         <p>Recibido</p>
                     </div>
-                    <div class="col-2 text-center ">
+                    <div class="col-2 text-center">
                         <p class="h2"><strong>2</strong></p>
                         <p>Inversores</p>
                     </div>
@@ -43,6 +42,11 @@
         </div>
     </div>
     <div class="row bg-light-l mt-4 mx-0">
+        @for (idea of ideas; track idea.id) {
+            <app-idea-item [idea]="idea"></app-idea-item>
+        }
+    </div>
+    <!-- <div class="row bg-light-l mt-4 mx-0">
         <div class="card mb-3 col-4 m-4 shadow-lg">
             <img src="" alt="foto_idea" class="card-img-top">
             <div class="card-body">
@@ -53,5 +57,5 @@
                 <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, illo.</p>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
