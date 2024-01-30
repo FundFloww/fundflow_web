@@ -16,30 +16,9 @@
                     <button class="filter text-light bg-primary-d">Comida</button>
                 </div>
                 <div class="default-bar card-bar bg-light-l">
-                    <div class="card">
-                        Card
-                    </div>
-                    <div class="card">
-                        Card
-                    </div>
-                    <div class="card">
-                        Card
-                    </div>
-                    <div class="card">
-                        Card
-                    </div>
-                    <div class="card">
-                        Card
-                    </div>
-                    <div class="card">
-                        Card
-                    </div>
-                    <div class="card">
-                        Card
-                    </div>
-                    <div class="card">
-                        Card
-                    </div>
+                    @for (idea of ideas; track idea.id) {
+                        <app-idea-item [idea]="idea"></app-idea-item>
+                    }
                 </div>
             </section>
         </div>
