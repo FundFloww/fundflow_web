@@ -17,6 +17,11 @@
     font-weight: 700 !important;
 }
 
+.root {
+    min-height: 100vh;
+    border-right: 3px solid #b5b5b5;
+}
+
 .default-bar {
     min-height: 72px;
 }
@@ -24,7 +29,7 @@
 .title-bar {
     display: flex;
     align-items: center;
-    min-height: 90px;
+    min-height: 74.3px;
     padding: 10px;
 }
 

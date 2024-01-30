@@ -1,10 +1,13 @@
 .foto-idea {
-    max-height: 30%;
+    margin-top: 0;
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
 }
 
 .card {
-    max-height: 315px;
     width: 375px;
+    margin: 20px;
 }
 
 .caja-des {

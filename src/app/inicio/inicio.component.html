@@ -1,7 +1,7 @@
 <div class="container-fluid root-element bg-light">
     <div class="row">
-        <app-side-bar class="col-2 pe-0 ps-0"></app-side-bar>
-        <div class="col h-100 pe-0 ps-0">
+        <app-side-bar class="col-2 px-0"></app-side-bar>
+        <div class="col-10 h-100 pe-0 ps-0">
             <section class="section-content">
                 <div class="default-bar top-bar bg-light-l">
                     <a class="img-profile bg-primary" href="perfil"></a>
@@ -11,11 +11,11 @@
                     </div>
                 </div>
                 <div class="default-bar filter-bar bg-light-l">
-                    <button class="filter text-light bg-primary-d">Aplicaciones</button>
-                    <button class="filter text-light bg-primary-d">Salud</button>
-                    <button class="filter text-light bg-primary-d">Comida</button>
+                    <button class="filter text-light bg-primary">Aplicaciones</button>
+                    <button class="filter text-light bg-primary">Salud</button>
+                    <button class="filter text-light bg-primary">Comida</button>
                 </div>
-                <div class="default-bar card-bar bg-light-l">
+                <div class="default-bar card-bar bg-light-l d-flex justify-content-center">
                     @for (idea of ideas; track idea.id) {
                         <app-idea-item [idea]="idea"></app-idea-item>
                     }
