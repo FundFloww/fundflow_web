@@ -41,21 +41,11 @@
                 </div>
         </div>
     </div>
-    <div class="row bg-light-l mt-4 mx-0">
-        @for (idea of ideas; track idea.id) {
-            <app-idea-item [idea]="idea"></app-idea-item>
-        }
-    </div>
-    <!-- <div class="row bg-light-l mt-4 mx-0">
-        <div class="card mb-3 col-4 m-4 shadow-lg">
-            <img src="" alt="foto_idea" class="card-img-top">
-            <div class="card-body">
-                <div class="row mb-">
-                    <h5 class="card-title">Nombre idea</h5>
-                    <p class="card-text"><small class="text-body-secondary">Campo: IT</small></p>
-                </div>
-                <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, illo.</p>
-            </div>
+    <div class="container bg-light-l mt-4 mx-0">
+        <div class="row">
+            @for (idea of ideas; track idea.id) {
+                <app-idea-item [idea]="idea" class="col-4-lg col-6-md col-sm"></app-idea-item>
+            }
         </div>
-    </div> -->
+    </div>
 </div>
