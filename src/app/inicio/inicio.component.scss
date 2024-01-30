@@ -4,6 +4,10 @@
     background-color: #ffffff;
 }
 
+.text-light-l {
+    color: #ffffff !important;
+}
+
 .bg-primary-d {
     background-color: #1E3D58 !important;
 }
@@ -71,7 +75,20 @@
     padding: 10px;
     border-radius: 15px;
     font-size: 14px;
+    cursor: pointer;
+    font-weight: 700;
     font-family: 'Sora', sans-serif;
+    transition: 0.3s;
+}
+
+.filter:hover {
+    background-color: #2b91d5 !important;
+}
+
+.card-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 0.5fr);
+    justify-content: center;
 }
 
 .card-bar > .card {
@@ -89,4 +106,28 @@
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     width: 420px;
     height: 200px;
+}
+
+@media (width < 1850px) {
+    .card-bar {
+        grid-template-columns: repeat(3, 0.5fr);
+    }
+}
+
+@media (width < 1400px) {
+    .card-bar {
+        grid-template-columns: repeat(2, 0.5fr);
+    }
+}
+
+@media (width < 900px) {
+    .card-bar {
+        grid-template-columns: repeat(1, 0.5fr);
+    }
+}
+
+@media (width < 400px) {
+    .img-profile {
+        width: 40px;
+    }
 }

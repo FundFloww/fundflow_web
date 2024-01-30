@@ -11,11 +11,11 @@
                     </div>
                 </div>
                 <div class="default-bar filter-bar bg-light-l">
-                    <button class="filter text-light bg-primary">Aplicaciones</button>
-                    <button class="filter text-light bg-primary">Salud</button>
-                    <button class="filter text-light bg-primary">Comida</button>
+                    <button class="filter bg-primary text-light-l">Aplicaciones</button>
+                    <button class="filter bg-primary text-light-l">Salud</button>
+                    <button class="filter bg-primary text-light-l">Comida</button>
                 </div>
-                <div class="default-bar card-bar bg-light-l d-flex justify-content-center">
+                <div class="default-bar card-bar bg-light-l">
                     @for (idea of ideas; track idea.id) {
                         <app-idea-item [idea]="idea"></app-idea-item>
                     }
