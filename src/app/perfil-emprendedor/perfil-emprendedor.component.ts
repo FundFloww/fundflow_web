@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IdeasServicioService } from '../sevicios/ideas-servicio.service';
+import { IdeasServicioService } from '../servicios/ideas-servicio.service';
 import { Idea } from '../interfaces/idea';
 import { IdeaItemComponent } from '../idea-item/idea-item.component';
 import { SideBarComponent } from '../side-bar/side-bar.component';

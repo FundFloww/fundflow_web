@@ -1,7 +1,7 @@
 import { Idea } from '../interfaces/idea';
 import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 import { Router } from '@angular/router';
-import { IdeasServicioService } from '../sevicios/ideas-servicio.service';
+import { IdeasServicioService } from '../servicios/ideas-servicio.service';
 
 @Component({
   selector: 'app-idea-item',
