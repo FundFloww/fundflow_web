@@ -36,7 +36,7 @@ export class SideBarComponent {
             id: 4,
             nombre: 'Iniciar sesión',
             icono: 'login',
-            destino: '/registro',
+            destino: '/login',
             ruta: `${this.rutaIconos}/login.svg`
         },
         {
