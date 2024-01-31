@@ -18,6 +18,8 @@ export class PerfilEmprendedorComponent {
   constructor(private ideaService: IdeasServicioService) { }
   
   ngOnInit() {
-    this.ideas = this.ideaService.getIdeas();
+    this.ideaService.getIdeas().then(ideas => {
+      this.ideas = ideas;
+    });
   }
 }

@@ -4,4 +4,5 @@ export interface Idea {
     campo: string;
     imagenes: string[];
     descripcion: string;
+    emprendedor: string[];
 }
