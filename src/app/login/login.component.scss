@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.text-welcome{
+    color: #484B51;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+section {
+    background: rgb(56, 172, 250);
+    background: linear-gradient(135deg, rgba(56, 172, 250, 1) 0%, rgba(47, 132, 192, 1) 43%, rgba(30, 61, 88, 1) 96%);
+}
+
+div.card {
+    border-radius: 33px;
+    -webkit-box-shadow: 16px 22px 15px -10px rgba(31, 61, 88, 0.79);
+    -moz-box-shadow: 16px 22px 15px -10px rgba(31, 61, 88, 0.79);
+    box-shadow: 16px 22px 15px -10px rgba(31, 61, 88, 0.79);
+}
+
+button.btn {
+    color: white;
+    font-weight: 500;
+    height: 43px;
+}
+
+form div.mb-3 input {
+    height: 43px;
+    padding: 6px 12px;
+    border-radius: .375rem;
+    border: 0px solid #057DCD;
+    background-color: #ebefff;
+    outline: none;
+}
+
+form div.mb-3 input:focus {
+    border: 3px solid #057DCD;
+}
+
+form div.mb-3 input::placeholder {
+    font-size: 0.8em;
+    color: #626262;
+    font-size: 13px;
+}
+
+div.card-footer div {
+    font-size: 13px;
+    color: #484b51;
+    font-weight: 500;
+}
+
+div.card-footer div a, form div a{
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+}
