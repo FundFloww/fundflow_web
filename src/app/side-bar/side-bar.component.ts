@@ -8,7 +8,7 @@ import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento
     templateUrl: './side-bar.component.html',
     styleUrl: './side-bar.component.scss'
 })
-export class SideBarComponent {
+export class SideBarComponent { 
     rutaIconos = '../../assets/icons';
     elementos = [
         {
@@ -48,4 +48,8 @@ export class SideBarComponent {
         
         }
     ];
+
+    onHomeClick() {
+        window.location.href = '/';
+    }
 }

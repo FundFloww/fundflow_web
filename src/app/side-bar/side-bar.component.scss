@@ -34,6 +34,10 @@
     height: 75px;
 }
 
+.title-bar > * {
+    cursor: pointer;
+}
+
 .title-bar > img {
     width: 30px;
     height: 30px;
