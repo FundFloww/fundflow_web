@@ -30,8 +30,15 @@
 .title-bar {
     display: flex;
     align-items: center;
-    min-height: 74.3px;
-    padding: 10px;
+    justify-content: center;
+    height: 75px;
+}
+
+.title-bar > img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-bottom: 8px;
 }
 
 .options {
@@ -60,9 +67,6 @@
 }
 
 @media (max-width: 1300px) {
-    .option {
-    }
-
     .options {
         display: flex;
         flex-direction: column;
@@ -70,11 +74,17 @@
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
     .title-bar > h3 {
         display: none;
     }
 
+    .title-bar > img {
+        margin: 0px;
+    }
+}
+
+@media (max-width: 900px) {
     .option {
         padding: 10px;
     }
