@@ -27,9 +27,6 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    background-color: #f1f4ff;
-    border-radius: 99px;
     padding: .75rem;
 }
 
@@ -50,27 +47,12 @@ input[type="radio"]{
     transition: color 0.15s ease-in;
 }
 
+div.tabs label{
+    color: #b6b9be;
+}
+
 input[type="radio"]:checked + label{
-    color: white
-}
-
-input[type="radio-1"]:checked ~ .glider{
-    transform: translateX(0);
-}
-
-input[type="radio-2"]:checked ~ .glider{
-    transform: translateX(100%);
-}
-
-.glider{
-    position: absolute;
-    display: flex;
-    height: 20px;
-    width: 200px;
-    background-color: #057DCD;
-    color: white;
-    z-index: 1;
-    border-radius: 99px;
+    color: #303236
 }
 
 div.card {
