@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UsuarioDTO } from '../interfaces/loginDTO';
+import { UsuarioDTO } from '../interfaces/loginDto';
 
 @Injectable({
     providedIn: 'root'
@@ -7,27 +7,51 @@ import { UsuarioDTO } from '../interfaces/loginDTO';
 export class UsuariosServicioService {
     constructor() { }
 
-    urlBase = 'http://10.100.11.1:9000';
+    urlBase = 'http://localhost:9000';
 
-    login(usuario: UsuarioDTO) {
-        return new Promise((resolve, reject) => {
-            fetch(`${this.urlBase}/api/login`, {
+    async login(usuario: UsuarioDTO) {
+        try {
+            const response = await fetch(`${this.urlBase}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(usuario),
-            }).then(response => {
-                if (!response.ok) {
-                    reject(response);
-                }
-
-                resolve(response.json());
-            }
-            ).catch(error => {
-                console.error(error);
-                reject(error);
             });
-        });
+    
+            if (!response.ok) {
+                throw new Error('Error al iniciar sesión');
+            }
+    
+            return true;
+        } catch (error) {
+            throw error;
+        }
     }
+    
+
+    async loggedIn() {
+        try {
+            const response = await fetch(`${this.urlBase}/api/session/getSession`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (!response.ok) {
+                return false;
+            }
+    
+            const text = await response.text();
+
+            return text.trim() !== 'Username: null';
+        } catch (error) {
+            console.error('Error al realizar la solicitud HTTP:', error);
+            return false;
+        }
+    }
+    
+    
+    
 }

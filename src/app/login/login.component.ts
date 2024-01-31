@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UsuariosServicioService } from '../servicios/usuarios-servicio.service';
-import { UsuarioDTO } from '../interfaces/loginDTO';
+import { UsuarioDTO } from '../interfaces/loginDto';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -13,13 +13,25 @@ import { FormsModule } from '@angular/forms';
 export class LoginComponent {
     constructor(private usuariosService: UsuariosServicioService) { }
 
-    usuario!: UsuarioDTO;
+    usuario: UsuarioDTO = {
+        correo: '',
+        contrasena: ''
+    };
 
-    onSubmit() {
-        this.usuariosService.login(this.usuario).then(response => {
-            console.log(response);
-        }).catch(error => {
-            console.error(error);
-        });
+    async ngOnInit() {
+        const loggedIn = await this.usuariosService.loggedIn();
+        if (loggedIn) {
+            console.log('Usuario logueado');
+            window.location.href = '/home';
+        }
+
+        console.log('Usuario no logueado');
+    }
+
+    async onSubmit() {
+        const userCorrect = await this.usuariosService.login(this.usuario);
+        if (userCorrect) {
+            window.location.href = '/home';
+        }
     }
 }

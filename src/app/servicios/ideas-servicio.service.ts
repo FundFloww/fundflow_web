@@ -37,9 +37,11 @@ export class IdeasServicioService {
     //     }
     ];
 
+    private urlBase = 'http://localhost:9000';
+
     getIdeas(): Promise<Idea[]> {
         return new Promise((resolve, reject) => {
-            fetch("http://10.100.11.1:9000/api/ideas/dto")
+            fetch(`${this.urlBase}/api/ideas/dto`)
                 .then(response => response.json())
                 .then(datos => {
                     resolve(datos);
@@ -53,7 +55,7 @@ export class IdeasServicioService {
 
     getIdeasEmprendedor(emprendedor: Usuario): Promise<Idea[]> {
         return new Promise((resolve, reject) => {
-            fetch("http://10.100.11.1:9000/api/ideas")
+            fetch(`${this.urlBase}/api/ideas`)
                 .then(response => response.json())
                 .then((datos: Idea[]) => {
                     const ideasFiltradas = datos.filter(idea => {
