@@ -1,12 +1,12 @@
 <div class="root">
     <section class="root-element">
         <div class="default-bar title-bar bg-light-l">
-            <img src="../../assets/img/logo_color.png" alt="logo">
-            <h3 class="f-sora-bold">FundFlow</h3>
+            <img (click)="onHomeClick()" src="../../assets/img/logo_color.png" alt="logo">
+            <h3 (click)="onHomeClick()" class="f-sora-bold">FundFlow</h3>
         </div>
         <div class="options">
             @for (elemento of elementos; track elemento.id) {
-                <app-side-bar-elemento class="option" [elemento]="elemento"></app-side-bar-elemento>
+                <app-side-bar-elemento [elemento]="elemento"></app-side-bar-elemento>
             }
         </div>
     </section>

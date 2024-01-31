@@ -18,6 +18,8 @@
 }
 
 .root {
+    position: sticky;
+    top: 0;
     min-width: 50px;
     min-height: 100vh;
     border-right: 3px solid #b5b5b5;
@@ -34,6 +36,10 @@
     height: 75px;
 }
 
+.title-bar > * {
+    cursor: pointer;
+}
+
 .title-bar > img {
     width: 30px;
     height: 30px;
@@ -43,27 +49,6 @@
 
 .options {
     padding: 20px;
-}
-
-.option {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-    gap: 5px;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 10px;
-}
-
-.option:hover {
-    background-color: rgb(201, 201, 201);
-    transition: 0.3s all;
-}
-
-.option > p {
-    text-align: center;
 }
 
 @media (max-width: 1300px) {
@@ -81,11 +66,5 @@
 
     .title-bar > img {
         margin: 0px;
-    }
-}
-
-@media (max-width: 900px) {
-    .option {
-        padding: 10px;
     }
 }

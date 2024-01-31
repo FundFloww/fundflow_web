@@ -1,51 +1,59 @@
-<div class="container-fluid bg-light h-100">
-    <div class="row bg-light">
-        <div class="row bg-primary mx-0">
-            <img src="" alt="banner_perfil" class="img-fluid banner">
-        </div>
-        <div class="row">
-
-        </div>
-        <div class="col-4 bg-light-l">
-            <div class="info-perfil d-grid gap-4">
-                <div>
-                    <img src="https://png.pngtree.com/background/20230524/original/pngtree-sad-pictures-for-desktop-hd-backgrounds-picture-image_2705986.jpg" alt="foto_perfil" class="rounded-circle foto-perfil">
+<div class="container-fluid root-element bg-light">
+    <div class="row">
+        <app-side-bar class="col-2 px-0 me-0 no-bootstrap-styles"></app-side-bar>
+        <div class="col-10 mx-0 bg-light h-100">
+            <div class="row bg-light">
+                <div class="banner bg-primary mx-0">
+                    <img src="" alt="banner_perfil">
                 </div>
-                <div>
-                    <p class="h2"><strong>Ainhoa Gomez</strong></p>
-                    <p class="h5 text-muted">Desarrolladora web</p>
+                <div class="col-md-4 col-12 bg-light-l mx-0">
+                    <div class="info-perfil d-grid gap-4">
+                        <div>
+                            <img src="https://png.pngtree.com/background/20230524/original/pngtree-sad-pictures-for-desktop-hd-backgrounds-picture-image_2705986.jpg"
+                                alt="foto_perfil" class="rounded-circle foto-perfil">
+                        </div>
+                        <div>
+                            <p class="h2"><strong>Ainhoa Gomez</strong></p>
+                            <p class="h5 text-muted">Desarrolladora web</p>
+                        </div>
+                        <div>
+                            <a href="#" class="btn btn-primary text-light">Enviar mensaje</a>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <a href="#" class="btn btn-primary text-light">Enviar mensaje</a>
+                <div class="col-md-8 col-12 bg-light-l pt-5">
+                    <div class="row mt-5 fila-vacia"></div>
+                    <div class="row justify-content-start mt-3 fila-datos">
+                        <div class="row justify-content-start inversores">
+                            <div class="col-2 text-center me-5">
+                                <p class="h2"><strong>1.208</strong></p>
+                                <p>Recibido</p>
+                            </div>
+                            <div class="col-2 text-center">
+                                <p class="h2"><strong>2</strong></p>
+                                <p>Inversores</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-10">
+                                <p class="h4"><strong>Descripción</strong></p>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt itaque laudantium
+                                    magnam
+                                    quidem dolorum possimus temporibus earum eveniet, repellat quae beatae autem labore
+                                    reprehenderit cupiditate vel repudiandae facilis aperiam fugit nam? Dolores eius
+                                    laborum
+                                    inventore quae labore expedita nisi accusantium quod. Ipsa saepe assumenda
+                                    reiciendis
+                                    nam numquam impedit, accusantium laudantium!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="default-bar card-bar bg-light-l mt-4 mx-0">
+                    @for (idea of ideas; track idea.id) {
+                    <app-idea-item [idea]="idea"></app-idea-item>
+                    }
                 </div>
             </div>
         </div>
-        <div class="col-8 bg-light-l pt-5">
-            <div class="row mt-5"></div>
-            <div class="row justify-content-start mt-3">
-                <div class="row justify-content-start inversores">
-                    <div class="col-2 text-center me-5">
-                        <p class="h2"><strong>1.208</strong></p>
-                        <p>Recibido</p>
-                    </div>
-                    <div class="col-2 text-center">
-                        <p class="h2"><strong>2</strong></p>
-                        <p>Inversores</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-10">
-                        <p class="h4"><strong>Descripción</strong></p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt itaque laudantium magnam quidem dolorum possimus temporibus earum eveniet, repellat quae beatae autem labore reprehenderit cupiditate vel repudiandae facilis aperiam fugit nam? Dolores eius laborum inventore quae labore expedita nisi accusantium quod. Ipsa saepe assumenda reiciendis nam numquam impedit, accusantium laudantium!</p>
-                    </div>
-                </div>
-        </div>
     </div>
-    <div class="container bg-light-l mt-4 mx-0">
-        <div class="row">
-            @for (idea of ideas; track idea.id) {
-                <app-idea-item [idea]="idea" class="col-4-lg col-6-md col-sm"></app-idea-item>
-            }
-        </div>
-    </div>
-</div>

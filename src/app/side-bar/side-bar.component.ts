@@ -8,32 +8,48 @@ import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento
     templateUrl: './side-bar.component.html',
     styleUrl: './side-bar.component.scss'
 })
-export class SideBarComponent {
-    rutaIconos = '../../assets/icons/';
+export class SideBarComponent { 
+    rutaIconos = '../../assets/icons';
     elementos = [
         {
             id: 1,
             nombre: 'Inicio',
             icono: 'home',
-            ruta: `${this.rutaIconos}home.svg`
+            destino: '/',
+            ruta: `${this.rutaIconos}/home.svg`
         },
         {
             id: 2,
             nombre: 'Configuración',
             icono: 'settings',
-            ruta: `${this.rutaIconos}settings.svg`
+            destino: '/',
+            ruta: `${this.rutaIconos}/settings.svg`
         },
         {
             id: 3,
             nombre: 'Ayuda',
             icono: 'help',
-            ruta: `${this.rutaIconos}help.svg`
+            destino: '/',
+            ruta: `${this.rutaIconos}/help.svg`
         },
         {
             id: 4,
+            nombre: 'Iniciar sesión',
+            icono: 'login',
+            destino: '/registro',
+            ruta: `${this.rutaIconos}/login.svg`
+        },
+        {
+            id: 5,
             nombre: 'Cerrar sesión',
             icono: 'logout',
-            ruta: `${this.rutaIconos}logout.svg`
+            destino: '/',
+            ruta: `${this.rutaIconos}/logout.svg`
+        
         }
     ];
+
+    onHomeClick() {
+        window.location.href = '/';
+    }
 }

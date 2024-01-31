@@ -1,6 +1,28 @@
+a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+a:hover {
+    background-color: rgb(201, 201, 201);
+    transition: 0.3s all;
+}
+
+a > p {
+    text-align: center;
+}
+
 label {
     display: inline-block;
     margin-left: 10px;
+    cursor: inherit;
 }
 
 @media (max-width: 1300px) {
