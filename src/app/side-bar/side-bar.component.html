@@ -6,7 +6,7 @@
         </div>
         <div class="options">
             @for (elemento of elementos; track elemento.id) {
-                <app-side-bar-elemento class="option" [elemento]="elemento"></app-side-bar-elemento>
+                <app-side-bar-elemento [elemento]="elemento"></app-side-bar-elemento>
             }
         </div>
     </section>
