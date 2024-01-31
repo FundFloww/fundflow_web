@@ -1,8 +1,12 @@
+import { Campos } from "../enum/campos";
+import { Usuario } from "./usuario";
+
 export interface Idea {
     id?: number;
     titulo: string;
-    campo: string;
-    imagenes: string[];
     descripcion: string;
-    emprendedor: string[];
+    imagenes: string[];
+    campo: Campos;
+    emprendedor: Usuario[];
+    inversor: Usuario[];
 }
