@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+section {
+    background: rgb(56, 172, 250);
+    background: linear-gradient(135deg, rgba(56, 172, 250, 1) 0%, rgba(47, 132, 192, 1) 43%, rgba(30, 61, 88, 1) 96%);
+}
+
+.selector{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tabs *{
+    z-index: 2;
+}
+
+.tabs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #f1f4ff;
+    border-radius: 99px;
+    padding: .75rem;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+.tab{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 200px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: color 0.15s ease-in;
+}
+
+input[type="radio"]:checked + label{
+    color: white
+}
+
+input[type="radio-1"]:checked ~ .glider{
+    transform: translateX(0);
+}
+
+input[type="radio-2"]:checked ~ .glider{
+    transform: translateX(100%);
+}
+
+.glider{
+    position: absolute;
+    display: flex;
+    height: 20px;
+    width: 200px;
+    background-color: #057DCD;
+    color: white;
+    z-index: 1;
+    border-radius: 99px;
+}
+
+div.card {
+    border-radius: 33px;
+    -webkit-box-shadow: 16px 22px 15px -10px rgba(31, 61, 88, 0.79);
+    -moz-box-shadow: 16px 22px 15px -10px rgba(31, 61, 88, 0.79);
+    box-shadow: 16px 22px 15px -10px rgba(31, 61, 88, 0.79);
+}
+
+button.btn {
+    color: white;
+    font-weight: 500;
+    height: 43px;
+}
+
+form div.mb-3 input {
+    height: 43px;
+    padding: 6px 12px;
+    border-radius: .375rem;
+    border: 0px solid #057DCD;
+    background-color: #ebefff;
+    outline: none;
+}
+
+form div.mb-3 input:focus {
+    border: 2px solid #057DCD;
+}
+
+form div.mb-3 input::placeholder {
+    font-size: 0.8em;
+    color: #626262;
+    font-size: 13px;
+}
+
+div.card-footer div {
+    font-size: 13px;
+    color: #484b51;
+    font-weight: 500;
+}
+
+div.card-footer div a {
+    text-decoration: none;
+    font-weight: 700;
+}
