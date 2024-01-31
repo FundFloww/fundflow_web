@@ -1,1 +1,69 @@
-<p>registro works!</p>
+<section class="d-flex justify-content-center align-items-center h-100 bg-primary">
+    <div class="container">
+        <div class="row justify-content-sm-center h-100">
+            <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-7 col-sm-9 col">
+                <div class="card">
+                    <div class="card-body px-5 py-4">
+                        <div class="text-center mb-3">
+                            <img src="assets/img/logo_color.png" alt="logo" width="50">
+                        </div>
+                        <h1 class="fs-4 card-title fw-bold mb-3 text-center text-primary">Crear Cuenta</h1>
+                        <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+                            <div class="mb-3 selector">
+                                <div class="w-100 tabs">
+                                    <input type="radio" name="tab" id="radio-1" checked>
+                                    <label for="radio-1" class="tab">Emprendedor</label>
+
+                                    <input type="radio" name="tab" id="radio-2">
+                                    <label for="radio-2" class="tab">Inversor</label>
+                                
+                                    <span class="glider"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <input id="name" type="text" name="name" value="" placeholder="Nombre Completo" class="w-100" required
+                                    autofocus>
+                                <div class="invalid-feedback">
+                                    Name is required
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <input id="email" type="email" name="email" value="" placeholder="Email" class="w-100" required>
+                                <div class="invalid-feedback">
+                                    Email is invalid
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <input id="password" type="password" name="password" placeholder="Contraseña" class="w-100" required>
+                                <div class="invalid-feedback">
+                                    Password is required
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <input id="password" type="password" name="password" placeholder="Confirmar Contraseña" class="w-100" required>
+                                <div class="invalid-feedback">
+                                    Password is required
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-center">
+                                <button type="submit" class="btn bg-primary w-100">
+                                    Continuar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer py-3 border-1">
+                        <div class="text-center">
+                            ¿Ya tienes una cuenta? <a href="/login" class="text-link">Entrar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
