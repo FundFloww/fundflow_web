@@ -4,6 +4,7 @@ import { PerfilEmprendedorComponent } from './perfil-emprendedor/perfil-emprende
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { IdeaComponent } from './idea/idea.component';
+import { FormIdeaComponent } from './form-idea/form-idea.component';
 
 export const routes: Routes = [
     { path: 'inicio', component: InicioComponent },
@@ -11,6 +12,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegistroComponent },
     { path: 'idea/:id', component: IdeaComponent },
+    { path: 'idea/añadir', component: FormIdeaComponent },
     { path: '', redirectTo: '/inicio', pathMatch: 'full' },
     { path: '**', redirectTo: '/inicio', pathMatch: 'full' }
 ];
