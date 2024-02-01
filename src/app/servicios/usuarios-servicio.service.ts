@@ -11,7 +11,7 @@ export class UsuariosServicioService {
 
     async login(usuario: UsuarioDTO) {
         try {
-            const response = await fetch(`${this.urlBase}/api/login`, {
+            const response = await fetch(`${this.urlBase}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export class UsuariosServicioService {
                 throw new Error('Error al iniciar sesión');
             }
     
-            return true;
+            return await response.json();
         } catch (error) {
             throw error;
         }
@@ -31,25 +31,12 @@ export class UsuariosServicioService {
     
 
     async loggedIn() {
-        try {
-            const response = await fetch(`${this.urlBase}/api/session/getSession`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-    
-            if (!response.ok) {
-                return false;
-            }
-    
-            const text = await response.text();
-
-            return text.trim() !== 'Username: null';
-        } catch (error) {
-            console.error('Error al realizar la solicitud HTTP:', error);
-            return false;
+        let token = localStorage.getItem('token');
+        if (token !== null) {
+            return true;
         }
+
+        return false;
     }
     
     

@@ -19,18 +19,18 @@ export class LoginComponent {
     };
 
     async ngOnInit() {
-        const loggedIn = await this.usuariosService.loggedIn();
-        if (loggedIn) {
+        const token = localStorage.getItem('token');
+        if (token !== null) {
             console.log('Usuario logueado');
             window.location.href = '/home';
         }
-
-        console.log('Usuario no logueado');
     }
 
     async onSubmit() {
-        const userCorrect = await this.usuariosService.login(this.usuario);
-        if (userCorrect) {
+        const userCorrectData = await this.usuariosService.login(this.usuario);
+        if(userCorrectData.token !== null)
+        {
+            localStorage.setItem('token', userCorrectData.token);
             window.location.href = '/home';
         }
     }
