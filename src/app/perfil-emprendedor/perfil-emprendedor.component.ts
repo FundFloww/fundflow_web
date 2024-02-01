@@ -17,9 +17,17 @@ export class PerfilEmprendedorComponent {
 
   constructor(private ideaService: IdeasServicioService) { }
   
-  ngOnInit() {
-    this.ideaService.getIdeas().then(ideas => {
-      this.ideas = ideas;
-    });
+  async ngOnInit() {
+    try {
+      this.ideas = await this.ideaService.getIdeas();
+    } catch (error) {
+      console.error("Ocurrió un error al obtener las ideas: ", error);
+    }
   }
+
+  // async ngOnInit() {
+  //   this.ideaService.getIdeas().then(ideas => {
+  //     this.ideas = ideas;
+  //   });
+  // }
 }

@@ -16,9 +16,17 @@ export class InicioComponent {
 
     constructor(private ideaService: IdeasServicioService) { }
     
-    ngOnInit() {
-      this.ideaService.getIdeas().then(ideas => {
-        this.ideas = ideas;
-      });
+    async ngOnInit() {
+      try {
+        this.ideas = await this.ideaService.getIdeas();
+      } catch (error) {
+        console.error("Ocurrió un error al obtener las ideas: ", error);
+      }
     }
+
+    // ngOnInit() {
+    //   this.ideaService.getIdeas().then(ideas => {
+    //     this.ideas = ideas;
+    //   });
+    // }
 }
