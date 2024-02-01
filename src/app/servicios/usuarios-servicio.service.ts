@@ -7,7 +7,7 @@ import { UsuarioDTO } from '../interfaces/loginDto';
 export class UsuariosServicioService {
     constructor() { }
 
-    urlBase = 'http://localhost:9000';
+    urlBase = 'http://10.100.11.1:9000';
 
     async login(usuario: UsuarioDTO) {
         try {
