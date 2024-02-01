@@ -11,8 +11,14 @@ export const routes: Routes = [
     { path: 'perfil', component: PerfilEmprendedorComponent },
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegistroComponent },
-    { path: 'idea/:id', component: IdeaComponent },
-    { path: 'idea/añadir', component: FormIdeaComponent },
+    { 
+        path: 'idea',
+        children: [
+            { path: 'anadir', component: FormIdeaComponent },
+            { path: ':id', component: IdeaComponent },
+            { path: '', redirectTo: '/inicio', pathMatch: 'full' },
+        ]
+    },
     { path: '', redirectTo: '/inicio', pathMatch: 'full' },
     { path: '**', redirectTo: '/inicio', pathMatch: 'full' }
 ];

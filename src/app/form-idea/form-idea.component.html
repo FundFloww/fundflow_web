@@ -1,1 +1,31 @@
-<p>form-idea works!</p>
+<div class="container-fluid root-element bg-light">
+    <div class="row">
+        <app-side-bar class="col-2 px-0"></app-side-bar>
+        <div class="col-10">
+            <form>
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Titulo</label>
+                    <input type="text" class="form-control" id="titulo">
+                </div>
+                <div class="mb-3">
+                    <label for="descripción" class="form-label">Descripción</label>
+                    <textarea id="textArea" placeholder="Introduce aquí la descripción de tu idea..." class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">Imagen</label>
+                    @for (imagen of nuevaIdea.imagenes; track nuevaIdea.imagenes) {
+                        <input type="file" class="form-control mb-1" name="image" #fileImage>
+                    }
+                </div>
+                <button class="btn btn-primary text-light mb-3" (click)="agregarOtraImagen($event)">Agregar otra imagen</button>
+                <select class="form-select mb-3">
+                    <option selected>Elija una categoria</option>
+                    @for (campo of camposArray; track $index ) {
+                        <option value={{campo}}>{{campo}}</option>
+                    }
+                </select>
+                <button type="submit" class="btn btn-primary text-light">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
