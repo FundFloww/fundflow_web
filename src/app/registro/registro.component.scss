@@ -19,10 +19,6 @@ section {
     justify-content: center;
 }
 
-.tabs *{
-    z-index: 2;
-}
-
 .tabs{
     display: flex;
     align-items: center;
@@ -30,7 +26,7 @@ section {
     padding: .75rem;
 }
 
-input[type="radio"]{
+input[type='radio']{
     display: none;
 }
 
@@ -51,7 +47,7 @@ div.tabs label{
     color: #b6b9be;
 }
 
-input[type="radio"]:checked + label{
+input[type='radio']:checked + label{
     color: #303236
 }
 
