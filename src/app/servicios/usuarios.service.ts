@@ -1,33 +1,67 @@
 import { Injectable } from '@angular/core';
 import { UsuarioRegistroDTO } from '../interfaces/usuario-registro-dto';
+import { UsuarioDTO } from '../interfaces/loginDto';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UsuariosService {
 
-  constructor() { }
+    constructor() { }
 
-  async addUsuario(nuevoUsuario: UsuarioRegistroDTO) {
-    try {
-      const response = await fetch("http://10.100.11.1:9000/api/registro/nuevo", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(nuevoUsuario),
-      });
+    urlBase = 'http://10.100.11.1:9000';
 
-      if (!response.ok) {
-        throw new Error('Error al registrar usuario');
-      }
+    async addUsuario(nuevoUsuario: UsuarioRegistroDTO) {
+        try {
+            const response = await fetch(`${this.urlBase}/api/registro/nuevo`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(nuevoUsuario),
+            });
 
-      return false;
-    } catch (error) {
-      console.error('Error al realizar la operación:', error);
-      return true;
+            if (!response.ok) {
+                throw new Error('Error al registrar usuario');
+            }
+
+            return false;
+        } catch (error) {
+            console.error('Error al realizar la operación:', error);
+            return true;
+        }
     }
-  }
+
+
+    async login(usuario: UsuarioDTO) {
+        try {
+            const response = await fetch(`${this.urlBase}/api/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(usuario),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al iniciar sesión');
+            }
+
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+
+    async loggedIn() {
+        let token = localStorage.getItem('token');
+        if (token !== null) {
+            return true;
+        }
+
+        return false;
+    }
 
 
 

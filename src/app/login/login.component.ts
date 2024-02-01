@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UsuariosServicioService } from '../servicios/usuarios-servicio.service';
+import { UsuariosService } from '../servicios/usuarios.service';
 import { UsuarioDTO } from '../interfaces/loginDto';
 import { FormsModule } from '@angular/forms';
 
@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-    constructor(private usuariosService: UsuariosServicioService) { }
+    constructor(private usuariosService: UsuariosService) { }
 
     usuario: UsuarioDTO = {
         correo: '',
