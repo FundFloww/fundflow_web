@@ -3,6 +3,7 @@ import { IdeasServicioService } from '../servicios/ideas-servicio.service';
 import { Idea } from '../interfaces/idea';
 import { IdeaItemComponent } from '../idea-item/idea-item.component';
 import { SideBarComponent } from '../side-bar/side-bar.component';
+import { IdeaDto } from '../interfaces/ideaDto';
 
 @Component({
   selector: 'app-perfil-emprendedor',
@@ -13,7 +14,7 @@ import { SideBarComponent } from '../side-bar/side-bar.component';
 })
 
 export class PerfilEmprendedorComponent {
-  ideas: Idea[] = [];
+  ideas: IdeaDto[] = [];
 
   constructor(private ideaService: IdeasServicioService) { }
   

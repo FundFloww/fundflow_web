@@ -34,13 +34,20 @@ export class SideBarComponent {
         },
         {
             id: 4,
+            nombre: 'Añadir Idea',
+            icono: 'añadir',
+            destino: '/idea/anadir',
+            ruta: `${this.rutaIconos}/añadir.svg`
+        },
+        {
+            id: 5,
             nombre: 'Iniciar sesión',
             icono: 'login',
             destino: '/login',
             ruta: `${this.rutaIconos}/login.svg`
         },
         {
-            id: 5,
+            id: 6,
             nombre: 'Cerrar sesión',
             icono: 'logout',
             destino: '/logout',

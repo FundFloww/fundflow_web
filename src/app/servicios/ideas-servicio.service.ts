@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Idea } from '../interfaces/idea';
 import { Usuario } from '../interfaces/usuario';
+import { IdeaDto } from '../interfaces/ideaDto';
 
 @Injectable({
     providedIn: 'root'
@@ -8,7 +9,7 @@ import { Usuario } from '../interfaces/usuario';
 export class IdeasServicioService {
     private ideas: Idea[] = [];
 
-    async getIdeas(): Promise<Idea[]> {
+    async getIdeas(): Promise<IdeaDto[]> {
         try {
             const response = await fetch("http://10.100.11.1:9000/api/ideas/dto");
             const datos = await response.json();

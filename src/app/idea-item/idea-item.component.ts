@@ -2,6 +2,7 @@ import { Idea } from '../interfaces/idea';
 import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { IdeasServicioService } from '../servicios/ideas-servicio.service';
+import { IdeaDto } from '../interfaces/ideaDto';
 
 @Component({
   selector: 'app-idea-item',
@@ -11,7 +12,7 @@ import { IdeasServicioService } from '../servicios/ideas-servicio.service';
   styleUrl: './idea-item.component.scss'
 })
 export class IdeaItemComponent {
-  @Input() idea!: Idea;
+  @Input() idea!: IdeaDto;
   @Input() index!: number;
 
   constructor(private router: Router) { }
@@ -22,7 +23,7 @@ export class IdeaItemComponent {
     this.router.navigate(['/idea', ideaId]);
   }
 
-  ideas: Idea[] = [];
+  ideas: IdeaDto[] = [];
 
 
   // agregarIdea() {

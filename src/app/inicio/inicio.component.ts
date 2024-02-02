@@ -3,6 +3,7 @@ import { SideBarComponent } from '../side-bar/side-bar.component';
 import { IdeasServicioService } from '../servicios/ideas-servicio.service';
 import { Idea } from '../interfaces/idea';
 import { IdeaItemComponent } from '../idea-item/idea-item.component';
+import { IdeaDto } from '../interfaces/ideaDto';
 
 @Component({
   selector: 'app-inicio',
@@ -12,7 +13,7 @@ import { IdeaItemComponent } from '../idea-item/idea-item.component';
   styleUrl: './inicio.component.scss'
 })
 export class InicioComponent {
-    ideas: Idea[] = [];
+    ideas: IdeaDto[] = [];
 
     constructor(private ideaService: IdeasServicioService) { }
     
