@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SideBarComponent } from '../side-bar/side-bar.component';
 import { IdeasServicioService } from '../servicios/ideas-servicio.service';
 import { Idea } from '../interfaces/idea';
+import { camposKeys } from '../enum/campos';
 import { IdeaItemComponent } from '../idea-item/idea-item.component';
 import { IdeaDto } from '../interfaces/ideaDto';
 
@@ -14,6 +15,8 @@ import { IdeaDto } from '../interfaces/ideaDto';
 })
 export class InicioComponent {
     ideas: IdeaDto[] = [];
+
+    camposArray: string[] = camposKeys;
 
     constructor(private ideaService: IdeasServicioService) { }
     

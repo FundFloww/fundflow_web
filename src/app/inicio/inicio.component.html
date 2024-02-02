@@ -11,9 +11,9 @@
                     </div>
                 </div>
                 <div class="default-bar filter-bar bg-light-l">
-                    <button class="filter bg-primary text-light-l">Aplicaciones</button>
-                    <button class="filter bg-primary text-light-l">Salud</button>
-                    <button class="filter bg-primary text-light-l">Comida</button>
+                    @for (campo of camposArray; track $index ) {
+                        <button class="filter bg-primary text-light-l">{{campo}}</button>
+                    }
                 </div>
                 <div class="default-bar card-bar bg-light-l">
                     @for (idea of ideas; track idea.id) {
