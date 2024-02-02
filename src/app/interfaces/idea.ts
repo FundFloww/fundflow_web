@@ -6,7 +6,7 @@ export interface Idea {
     titulo: string;
     descripcion: string;
     imagenes: string[];
-    campo: Campos;
+    campo?: Campos;
     emprendedor: Usuario[];
     inversor: Usuario[];
 }
