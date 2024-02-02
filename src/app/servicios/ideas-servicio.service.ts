@@ -68,7 +68,22 @@ export class IdeasServicioService {
     //     });
     // }
 
-    addIdea(idea: Idea) {
-        this.ideas.push(idea);
+    async addIdea(idea: Idea) {
+        try {
+            const response = await fetch("http://10.100.11.1:9000/api/ideas/nueva", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(idea),
+            });
+            if(!response.ok) {
+                throw new Error(`Error al enviar la idea a la base de datos. Código de estado: ${response.status}`);
+            }
+            this.ideas.push(idea);
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 }

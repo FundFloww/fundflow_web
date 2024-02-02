@@ -13,8 +13,14 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'logout', component: LogoutComponent },
     { path: 'registro', component: RegistroComponent },
-    { path: 'idea/:id', component: IdeaComponent },
-    { path: 'idea/añadir', component: FormIdeaComponent },
+    { 
+        path: 'idea',
+        children: [
+            { path: 'anadir', component: FormIdeaComponent },
+            { path: ':id', component: IdeaComponent },
+            { path: '', redirectTo: '/inicio', pathMatch: 'full' },
+        ]
+    },
     { path: '', redirectTo: '/inicio', pathMatch: 'full' },
     { path: '**', redirectTo: '/inicio', pathMatch: 'full' }
 ];
