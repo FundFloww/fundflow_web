@@ -55,6 +55,11 @@ export class FormIdeaComponent {
     this.nuevaIdea.imagenes.push('');
   }
 
+  borrarImagen(index: number) {
+    console.log(index);
+    this.nuevaIdea.imagenes.splice(index, 1);
+  }
+
   async enviarIdea() {
     console.log(this.nuevaIdea.imagenes);
     try {

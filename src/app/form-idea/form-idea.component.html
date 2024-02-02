@@ -14,7 +14,10 @@
                 <div class="mb-3">
                     <label for="imagen" class="form-label">Imagen</label>
                     @for (imagen of nuevaIdea.imagenes; track $index) {
-                        <input type="file" class="form-control mb-1" name="imagen" #fileImage (change)="changeImage(fileImage, $index)" required>
+                        <div class="imagen">
+                            <input type="file" class="form-control mb-1" name="imagen" #fileImage (change)="changeImage(fileImage, $index)" required>
+                            <div class="btn btn-danger ms-2" (click)="borrarImagen($index)">X</div>
+                        </div>
                     }
                 </div>
                 <button class="btn btn-primary text-light mb-3" (click)="agregarOtraImagen($event)">Agregar otra imagen</button>
