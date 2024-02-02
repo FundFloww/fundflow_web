@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UsuariosServicioService } from '../servicios/usuarios-servicio.service';
 import { UsuarioDTO } from '../interfaces/loginDto';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-    constructor(private usuariosService: UsuariosServicioService) { }
+    constructor(private usuariosService: UsuariosServicioService, private router: Router) { }
 
     usuario: UsuarioDTO = {
         correo: '',
@@ -21,8 +22,7 @@ export class LoginComponent {
     async ngOnInit() {
         const token = localStorage.getItem('token');
         if (token !== null) {
-            console.log('Usuario logueado');
-            window.location.href = '/home';
+            this.router.navigate(['/home']);
         }
     }
 
@@ -31,7 +31,7 @@ export class LoginComponent {
         if(userCorrectData.token !== null)
         {
             localStorage.setItem('token', userCorrectData.token);
-            window.location.href = '/home';
+            this.router.navigate(['/home']);
         }
     }
 }

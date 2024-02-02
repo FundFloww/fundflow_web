@@ -43,7 +43,7 @@ export class SideBarComponent {
             id: 5,
             nombre: 'Cerrar sesión',
             icono: 'logout',
-            destino: '/',
+            destino: '/logout',
             ruta: `${this.rutaIconos}/logout.svg`
         
         }
