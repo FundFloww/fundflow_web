@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-    constructor(private usuariosService: UsuariosServicioService, private router: Router) { }
+    constructor(private usuariosService: UsuariosService, private router: Router) { }
 
     usuario: UsuarioDTO = {
         correo: '',
