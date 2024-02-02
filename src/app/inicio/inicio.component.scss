@@ -17,10 +17,16 @@
 }
 
 .top-bar {
+    position: sticky;
+    top: 0;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     padding: 20px;
+    z-index: 1;
+    -webkit-box-shadow: 0px 14px 38px -15px rgba(0, 0, 0, 0.47);
+    -moz-box-shadow: 0px 14px 38px -15px rgba(0, 0, 0, 0.47);
+    box-shadow: 0px 14px 38px -15px rgba(0, 0, 0, 0.20);
 }
 
 .search {
@@ -30,13 +36,13 @@
     border-radius: 10px;
 }
 
-.search > img {
+.search>img {
     height: 100%;
     width: 12%;
     padding-left: 10px;
 }
 
-.search > input {
+.search>input {
     all: unset;
     width: 75%;
     height: 100%;
@@ -91,7 +97,7 @@
     justify-content: center;
 }
 
-.card-bar > .card {
+.card-bar>.card {
     background-color: #1E3D58;
 }
 
