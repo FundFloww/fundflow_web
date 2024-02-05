@@ -1,6 +1,11 @@
 <div class="container-fluid root-element bg-light">
     <div class="row">
-        <app-side-bar (click)="onOpenBar()" class="col-2 px-0" id="side-bar" [open]="open"></app-side-bar>
+        <app-side-bar 
+            class="col-2 px-0" id="side-bar" 
+            (click)="onOpenBar()" 
+            [open]="open"
+            [session]="session"
+        ></app-side-bar>
         <div id="content" class="col-10 h-100 pe-0 ps-0">
             <section class="section-content">
                 <div class="default-bar top-bar bg-light-l">

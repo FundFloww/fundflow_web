@@ -8,10 +8,11 @@ import { IdeaDto } from '../interfaces/ideaDto';
 })
 export class IdeasServicioService {
     private ideas: Idea[] = [];
+    private apiURL = "http://localhost:9000";
 
     async getIdeas(): Promise<IdeaDto[]> {
         try {
-            const response = await fetch("http://10.100.11.1:9000/api/ideas/dto");
+            const response = await fetch(`${this.apiURL}/api/ideas/dto`);
             const datos = await response.json();
             return datos;
         } catch (error) {
@@ -22,7 +23,7 @@ export class IdeasServicioService {
     
     async getIdeasEmprendedor(emprendedor: Usuario): Promise<Idea[]> {
         try {
-            const response = await fetch("http://10.100.11.1:9000/api/ideas");
+            const response = await fetch(`${this.apiURL}/api/ideas`);
             const datos: Idea[] = await response.json();
             
             const ideasFiltradas = datos.filter(idea => {
@@ -70,7 +71,7 @@ export class IdeasServicioService {
 
     async addIdea(idea: Idea) {
         try {
-            const response = await fetch("http://10.100.11.1:9000/api/ideas/nueva", {
+            const response = await fetch(`${this.apiURL}/api/ideas/nueva`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

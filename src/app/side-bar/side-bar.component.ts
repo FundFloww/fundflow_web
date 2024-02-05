@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento.component';
 
 @Component({
@@ -9,7 +9,10 @@ import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento
     styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent {
-    @Input() open: boolean = true;
+    @Input() session: boolean | null = null;
+    @Input() open: boolean = false;
+
+    timesLoaded = 0;
 
     rutaIconos = '../../assets/icons';
     elementos = [
@@ -62,10 +65,24 @@ export class SideBarComponent {
         window.location.href = '/';
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        const sideBar = document.getElementById('sidebar-content')!;    
+    ngOnChanges() {
+        if(this.session != null) this.validateSession();
+        this.sideBarChange();
+    }
+
+    validateSession() {
+        if(this.session) {
+            this.elementos = this.elementos.filter(e => e.nombre !== "Iniciar sesión");
+            return;
+        }
+
+        this.elementos = this.elementos.filter(e => e.nombre !== "Cerrar sesión");
+    }
+
+    sideBarChange() {
+        const sideBar = document.getElementById('sidebar-content')!;
         
-        if(!changes['open'].currentValue) {
+        if(!this.open) {
             sideBar.classList.add("small-bar");
             return;
         }

@@ -8,7 +8,7 @@
             @for (elemento of elementos; track elemento.id) {
                 @if(elemento.id === 1)
                 {
-                    <app-side-bar-elemento [open]="open"  [elemento]="elemento"></app-side-bar-elemento>
+                    <app-side-bar-elemento [open]="open" [elemento]="elemento"></app-side-bar-elemento>
                 } @else {
                     <app-side-bar-elemento [elemento]="elemento"></app-side-bar-elemento>
                 }
@@ -16,4 +16,8 @@
         </div>
         <span class="abrir-cerrar-bar"><img src="../../assets/icons/abrir-barra.svg" alt="open-bar"></span>
     </section>
+    <div class="default-bar title-bar bg-light-l change-theme">
+        <!-- ligth mode / dark mode -->
+        <p>Tema</p>
+    </div>
 </div>
