@@ -1,4 +1,4 @@
-<div class="root">
+<div id="sidebar-content" class="root">
     <section class="root-element">
         <div class="default-bar title-bar bg-light-l">
             <img (click)="onHomeClick()" src="../../assets/img/logo_color.png" alt="logo">
@@ -6,8 +6,14 @@
         </div>
         <div class="options">
             @for (elemento of elementos; track elemento.id) {
-                <app-side-bar-elemento [elemento]="elemento"></app-side-bar-elemento>
+                @if(elemento.id === 1)
+                {
+                    <app-side-bar-elemento [open]="open"  [elemento]="elemento"></app-side-bar-elemento>
+                } @else {
+                    <app-side-bar-elemento [elemento]="elemento"></app-side-bar-elemento>
+                }
             }
         </div>
+        <span class="abrir-cerrar-bar"><img src="../../assets/icons/abrir-barra.svg" alt="open-bar"></span>
     </section>
 </div>

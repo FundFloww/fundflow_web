@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento.component';
 
 @Component({
@@ -8,7 +8,9 @@ import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento
     templateUrl: './side-bar.component.html',
     styleUrl: './side-bar.component.scss'
 })
-export class SideBarComponent { 
+export class SideBarComponent {
+    @Input() open: boolean = true;
+
     rutaIconos = '../../assets/icons';
     elementos = [
         {
@@ -58,5 +60,16 @@ export class SideBarComponent {
 
     onHomeClick() {
         window.location.href = '/';
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        const sideBar = document.getElementById('sidebar-content')!;    
+        
+        if(!changes['open'].currentValue) {
+            sideBar.classList.add("small-bar");
+            return;
+        }
+
+        sideBar.classList.remove("small-bar");
     }
 }
