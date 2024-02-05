@@ -56,8 +56,13 @@ export class FormIdeaComponent {
   }
 
   borrarImagen(index: number) {
-    console.log(index);
-    this.nuevaIdea.imagenes.splice(index, 1);
+    let opcionEliminada: HTMLElement = document.getElementsByClassName("imagen")[index] as HTMLElement;
+    console.log(opcionEliminada);
+    opcionEliminada.style.display = "none";
+    // this.nuevaIdea.imagenes = this.nuevaIdea.imagenes.filter((_, i) => i !== index);
+
+    // console.log(this.nuevaIdea.imagenes[index]);
+    // this.nuevaIdea.imagenes.splice(index, 1);
   }
 
   async enviarIdea() {
