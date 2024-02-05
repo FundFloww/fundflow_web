@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento.component';
 
 @Component({
@@ -8,7 +8,12 @@ import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento
     templateUrl: './side-bar.component.html',
     styleUrl: './side-bar.component.scss'
 })
-export class SideBarComponent { 
+export class SideBarComponent {
+    @Input() session: boolean | null = null;
+    @Input() open: boolean = false;
+
+    timesLoaded = 0;
+
     rutaIconos = '../../assets/icons';
     elementos = [
         {
@@ -58,5 +63,30 @@ export class SideBarComponent {
 
     onHomeClick() {
         window.location.href = '/';
+    }
+
+    ngOnChanges() {
+        if(this.session != null) this.validateSession();
+        this.sideBarChange();
+    }
+
+    validateSession() {
+        if(this.session) {
+            this.elementos = this.elementos.filter(e => e.nombre !== "Iniciar sesión");
+            return;
+        }
+
+        this.elementos = this.elementos.filter(e => e.nombre !== "Cerrar sesión");
+    }
+
+    sideBarChange() {
+        const sideBar = document.getElementById('sidebar-content')!;
+        
+        if(!this.open) {
+            sideBar.classList.add("small-bar");
+            return;
+        }
+
+        sideBar.classList.remove("small-bar");
     }
 }

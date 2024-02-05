@@ -25,6 +25,17 @@ label {
     cursor: inherit;
 }
 
+.small-bar-mode {
+    label {
+        display: none;
+    }
+
+    img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
 @media (max-width: 1300px) {
     label {
         display: none;

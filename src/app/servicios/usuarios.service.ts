@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UsuarioRegistroDTO } from '../interfaces/usuario-registro-dto';
 import { UsuarioDTO } from '../interfaces/loginDto';
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,7 @@ export class UsuariosService {
 
     constructor() { }
 
-    urlBase = 'http://10.100.11.1:9000';
+    urlBase = 'http://localhost:9000';
 
     async addUsuario(nuevoUsuario: UsuarioRegistroDTO) {
         try {
@@ -53,7 +54,6 @@ export class UsuariosService {
         }
     }
 
-
     async loggedIn() {
         let token = localStorage.getItem('token');
         if (token !== null) {
@@ -63,6 +63,30 @@ export class UsuariosService {
         return false;
     }
 
+    async getUsuario() {
+        let token = localStorage.getItem('token');
+        if (token === null) {
+            return null;
+        }
 
+        let userId = jwtDecode(token).sub;
+
+        try {
+            const response = await fetch(`${this.urlBase}/api/usuarios/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al obtener usuario');
+            }
+
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
 
 }
