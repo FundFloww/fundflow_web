@@ -8,8 +8,7 @@
                             <img src="assets/img/logo_color.png" alt="logo" width="50">
                         </div>
                         <h1 class="fs-4 card-title fw-bold mb-3 text-center text-primary">Crear Cuenta</h1>
-                        <form (ngSubmit)="addNewUsuario()" novalidate autocomplete="off"
-                            #registroForm="ngForm">
+                        <form (ngSubmit)="addNewUsuario()" novalidate autocomplete="off" #registroForm="ngForm">
                             <div class="mb-3 selector">
                                 <div class="w-100 tabs">
                                     <input type="radio" name="tipoUsuario" id="radio-1" [value]="'EMPRENDEDOR'"
@@ -51,35 +50,34 @@
                             </div>
 
                             <div class="mb-3">
-                                <div class="form-group">
-                                    <input id="email" type="text" class="form-control" name="email" value=""
-                                        placeholder="Email" class="w-100" [(ngModel)]="newUsuario.correo"
-                                        #email="ngModel" required
-                                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                                        [ngClass]="validClasses(email, 'is-valid', 'is-invalid')">
-                                    <div class="invalid-feedback">
-                                        Email requerido (debe cumplir con un formato válido de email)
-                                    </div>
+                                <input id="email" type="text" class="form-control w-100" name="email" value=""
+                                    placeholder="Email" [(ngModel)]="newUsuario.correo" #email="ngModel" required
+                                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                    [ngClass]="validClasses(email, 'is-valid', 'is-invalid')">
+                                <div class="invalid-feedback">
+                                    Email requerido (debe cumplir con un formato válido de email)
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <div class="form-group">
-                                    <input id="password" class="form-control" type="password" name="password" placeholder="Contraseña"
-                                        class="w-100" [(ngModel)]="newUsuario.contrasena" required #password="ngModel"
-                                        [ngClass]="validClasses(password, 'is-valid', 'is-invalid')">
-                                    <div class="invalid-feedback">
-                                        Contraseña requerida
-                                    </div>
+                                <input id="password" class="form-control w-100" type="password" name="password"
+                                    placeholder="Contraseña" [(ngModel)]="newUsuario.contrasena" required
+                                    #password="ngModel" [ngClass]="validClasses(password, 'is-valid', 'is-invalid')">
+                                <div class="invalid-feedback">
+                                    Contraseña requerida
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <input id="confirmPassword" type="password" name="confirmPassword"
-                                    placeholder="Confirmar Contraseña" class="w-100"
-                                    [(ngModel)]="newUsuario.confirmarContrasena" required>
-                                <div *ngIf="showError" class="text-danger mt-2" style="font-size: 14px;">{{
-                                    errorContrasena }}</div>
+                                <input id="confirmPassword" class="form-control w-100" type="password"
+                                    name="confirmPassword" placeholder="Confirmar Contraseña"
+                                    [(ngModel)]="newUsuario.confirmarContrasena" required #passwordValidate="ngModel"
+                                    [ngClass]="validClasses(passwordValidate, 'is-valid', 'is-invalid')">
+                                <div class="invalid-feedback">
+                                    Las contraseñas no coinciden
+                                </div>
+                                <!-- <div *ngIf="showError" class="text-danger mt-2" style="font-size: 14px;">{{
+                                    errorContrasena }}</div> -->
                             </div>
 
                             <div *ngIf="userExists" class="text-danger mb-3" style="font-size: 14px;">El usuario ya
