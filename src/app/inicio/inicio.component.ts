@@ -5,7 +5,7 @@ import { IdeaDto } from '../interfaces/ideaDto';
 import { IdeasServicioService } from '../servicios/ideas-servicio.service';
 import { SideBarComponent } from '../side-bar/side-bar.component';
 import { UsuariosService } from '../servicios/usuarios.service';
-import { onOpenBar } from '../functions/sideBarFunctions';
+import { onOpenBarFunction } from '../functions/sideBarFunctions';
 
 @Component({
     selector: 'app-inicio',
@@ -36,6 +36,6 @@ export class InicioComponent {
     }
 
     onOpenBar() {
-        this.open = onOpenBar(this.open);
+        this.open = onOpenBarFunction(this.open);
     }
 }

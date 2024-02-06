@@ -5,6 +5,7 @@ import { Campos, camposKeys } from '../enum/campos';
 import { IdeasServicioService } from '../servicios/ideas-servicio.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { onOpenBarFunction } from '../functions/sideBarFunctions';
 
 @Component({
   selector: 'app-form-idea',
@@ -15,6 +16,8 @@ import { Router } from '@angular/router';
   styleUrl: './form-idea.component.scss'
 })
 export class FormIdeaComponent {
+    open: boolean = true;
+    session: boolean | null = null;
 
   // @ViewChild('miFormulario') miFormulario!: NgForm;
 
@@ -74,4 +77,8 @@ export class FormIdeaComponent {
       console.error(error);
     }
   }
+
+  onOpenBar() {
+    this.open = onOpenBarFunction(this.open);
+}
 }
