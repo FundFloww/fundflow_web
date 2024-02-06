@@ -1,0 +1,85 @@
+<div *ngIf="usuario !== null" class="container-fluid root-element bg-light">
+    <div class="row">
+        <app-side-bar 
+            class="col-2 px-0 me-0 no-bootstrap-styles" id="side-bar" 
+            (click)="onOpenBar()" 
+            [open]="open"
+            [session]="session"
+        ></app-side-bar>
+        <div class="col-10 mx-0 bg-light h-100" id="content">
+            <div class="row bg-light">
+                <div class="banner bg-primary mx-0">
+                    <img src="" alt="banner_perfil">
+                </div>
+                <div class="col-md-4 col-12 bg-light-l mx-0">
+                    <div class="info-perfil d-grid gap-4">
+                        <div>
+                            <img src="https://png.pngtree.com/background/20230524/original/pngtree-sad-pictures-for-desktop-hd-backgrounds-picture-image_2705986.jpg"
+                                alt="foto_perfil" class="rounded-circle foto-perfil">
+                        </div>
+                        <div>
+                            <p class="h2"><strong>{{ this.usuario?.nombre }}</strong></p>
+                            <p class="h5 text-muted">{{ this.usuario?.profesion }}</p>
+                        </div>
+                        <div>
+                            <a href="#" class="btn btn-primary text-light">Enviar mensaje</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-12 bg-light-l pt-5">
+                    <div class="row mt-5 fila-vacia"></div>
+                    <div class="row justify-content-start mt-3 fila-datos">
+                        <div class="row justify-content-start inversores">
+                            <div class="col-2 text-center me-5">
+                                <p class="h2"><strong>1.208</strong></p>
+                                <p>Invertido</p>
+                            </div>
+                            <div class="col-2 text-center">
+                                <p class="h2"><strong>2</strong></p>
+                                <p>Proyectos</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-10">
+                                <p class="h4"><strong>Descripción</strong></p>
+                                <p>{{ this.usuario?.descripcion }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-light-l mt-4 mx-0">
+                    <div class="mb-3 selector">
+                        <div class="w-100 tabs mt-2">
+                            <input type="radio" name="tipoUsuario" id="radio-1" [value]="'EMPRENDEDOR'" [checked]="ver === 'Inversiones'" (change)="ver = 'Inversiones'" checked>
+                            <label for="radio-1" class="tab"><span class="h4">Inversiones</span></label>
+                            
+                            <input type="radio" name="tipoUsuario" id="radio-2" [value]="'INVERSOR'" [checked]="ver === 'Guardados'" (change)="ver = 'Guardados'">
+                            <label for="radio-2" class="tab"><span class="h4">Guardados</span></label>
+                            
+                        </div>
+                    </div>
+                    <hr>
+                    <div *ngIf="ver === 'Inversiones'; else elseInversiones" class="default-bar card-bar bg-light-l mt-1 mx-0">
+                        @if(inversiones.length != 0) {
+                            @for (idea of inversiones; track idea.id) {
+                                <app-idea-item [idea]="idea"></app-idea-item>
+                            }
+                        } @else {
+                            <p class="text-muted h2">No has realizado ninguna inversión.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template #elseInversiones>
+        @if(guardados.length != 0) {
+            @for (idea of guardados; track idea.id) {
+                <app-idea-item [idea]="idea"></app-idea-item>
+            }
+        } @else {
+            <p class="text-muted h2">No tienes ningún proyecto guardado.</p>
+        }
+    </ng-template>

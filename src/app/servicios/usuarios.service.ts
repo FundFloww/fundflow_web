@@ -11,7 +11,7 @@ export class UsuariosService {
 
     constructor(private router: Router) { }
 
-    urlBase = 'http://localhost:9000';
+    urlBase = 'http://10.100.11.1:9000';
 
     async addUsuario(nuevoUsuario: UsuarioRegistroDTO) {
         try {

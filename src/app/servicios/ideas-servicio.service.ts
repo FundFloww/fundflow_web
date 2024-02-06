@@ -14,7 +14,7 @@ export class IdeasServicioService {
     ) { }
 
     private ideas: Idea[] = [];
-    private apiURL = "http://localhost:9000";
+    private apiURL = "http://10.100.11.1:9000";
 
     async getIdeas(): Promise<IdeaDto[]> {
         try {

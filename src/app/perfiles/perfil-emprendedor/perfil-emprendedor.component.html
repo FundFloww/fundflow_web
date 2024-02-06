@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="default-bar card-bar bg-light-l mt-4 mx-0">
+                <div *ngIf="ideas.length != 0; else elseIdeas" class="default-bar card-bar bg-light-l mt-4 mx-0">
                     @for (idea of ideas; track idea.id) {
                     <app-idea-item [idea]="idea"></app-idea-item>
                     }
@@ -55,3 +55,7 @@
             </div>
         </div>
     </div>
+
+<ng-template #elseIdeas>
+    <p class="text-muted">No tienes ideas registradas.</p>
+</ng-template>

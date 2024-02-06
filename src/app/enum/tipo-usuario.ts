@@ -1,4 +1,4 @@
 export enum TipoUsuario {
-    Emprendedor = 'emprendedor',
-    Inversor = 'inversor'
+    Emprendedor = 'EMPRENDEDOR',
+    Inversor = 'INVERSOR'
 }
