@@ -6,10 +6,10 @@
             [open]="open"
             [session]="session"
         ></app-side-bar>
-        <div id="content" class="col-10 px-0 content">
+        <div id="content" class="col-10 px-0">
             <section class="section-content">
                 <app-header></app-header>
-                <div class="container bg-light-l">
+                <div id="form-idea" class="container-fluid bg-light-l mx-0 px-4 py-3">
                     <p class="h2 mb-4"><strong>Tu idea de negocio</strong></p>
                     <form (ngSubmit)="enviarIdea()" #miFormulario="ngForm">
                         <div class="mb-3">
