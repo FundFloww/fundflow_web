@@ -6,11 +6,12 @@ import { IdeasServicioService } from '../servicios/ideas-servicio.service';
 import { SideBarComponent } from '../side-bar/side-bar.component';
 import { UsuariosService } from '../servicios/usuarios.service';
 import { onOpenBarFunction } from '../functions/sideBarFunctions';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
     selector: 'app-inicio',
     standalone: true,
-    imports: [SideBarComponent, IdeaItemComponent],
+    imports: [SideBarComponent, IdeaItemComponent, HeaderComponent],
     templateUrl: './inicio.component.html',
     styleUrl: './inicio.component.scss'
 })
