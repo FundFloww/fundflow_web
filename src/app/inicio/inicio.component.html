@@ -8,13 +8,7 @@
         ></app-side-bar>
         <div id="content" class="col-10 h-100 pe-0 ps-0">
             <section class="section-content">
-                <div class="default-bar top-bar bg-light-l">
-                    <a class="img-profile bg-primary" href="perfil"></a>
-                    <div class="search bg-light">
-                        <img src="../../assets/icons/search.svg" alt="">
-                        <input type="search" placeholder="Buscar">
-                    </div>
-                </div>
+                <app-header></app-header>
                 <div class="default-bar filter-bar bg-light-l">
                     @for (campo of camposArray; track $index ) {
                         <button class="filter bg-primary text-light-l">{{campo}}</button>
