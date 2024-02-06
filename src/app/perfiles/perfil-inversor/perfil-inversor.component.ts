@@ -33,6 +33,7 @@ async ngOnInit() {
     // this.ideas = await this.ideaService.getIdeasUser();
     this.session = await this.usuariosService.initializeSession();
     this.usuario = await this.usuariosService.getUsuario();
+    this.inversiones = await this.ideaService.getIdeasInvertidas()
 }
 
 onOpenBar() {

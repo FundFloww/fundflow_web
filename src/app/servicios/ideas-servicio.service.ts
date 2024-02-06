@@ -40,6 +40,19 @@ export class IdeasServicioService {
         }
     }
 
+    async getIdeasInvertidas(): Promise<IdeaDto[]> {
+        const userId = this.usuariosService.getUserId();
+
+        try{
+            const response = await fetch(`${this.apiURL}/api/ideas/inversor/${userId}`);
+            const datos = await response.json();
+            return datos;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     async addIdea(idea: Idea) {
         try {
             const response = await fetch(`${this.apiURL}/api/ideas/nueva`, {
