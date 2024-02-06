@@ -19,7 +19,7 @@
                         </div>
                         <div>
                             <p class="h2"><strong>{{ this.usuario?.nombre }}</strong></p>
-                            <p class="h5 text-muted">Desarrolladora web</p>
+                            <p class="h5 text-muted">{{ this.usuario?.profesion }}</p>
                         </div>
                         <div>
                             <a href="#" class="btn btn-primary text-light">Enviar mensaje</a>
@@ -42,14 +42,7 @@
                         <div class="row">
                             <div class="col-10">
                                 <p class="h4"><strong>Descripción</strong></p>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt itaque laudantium
-                                    magnam
-                                    quidem dolorum possimus temporibus earum eveniet, repellat quae beatae autem labore
-                                    reprehenderit cupiditate vel repudiandae facilis aperiam fugit nam? Dolores eius
-                                    laborum
-                                    inventore quae labore expedita nisi accusantium quod. Ipsa saepe assumenda
-                                    reiciendis
-                                    nam numquam impedit, accusantium laudantium!</p>
+                                <p>{{ this.usuario?.descripcion }}</p>
                             </div>
                         </div>
                     </div>

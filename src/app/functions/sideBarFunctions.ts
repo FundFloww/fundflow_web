@@ -1,4 +1,4 @@
-export function onOpenBar(open: boolean) {
+export function onOpenBarFunction(open: boolean) {
     open = !open;
     const sideBar = document.getElementById('side-bar')!;
     const content = document.getElementById('content')!;

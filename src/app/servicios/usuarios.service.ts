@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { UsuarioRegistroDTO } from '../interfaces/usuario-registro-dto';
 import { UsuarioDTO } from '../interfaces/loginDto';
 import { jwtDecode } from "jwt-decode";
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UsuariosService {
 
-    constructor() { }
+    constructor(private router: Router) { }
 
     urlBase = 'http://localhost:9000';
 
@@ -63,19 +64,23 @@ export class UsuariosService {
         return false;
     }
 
-    async getUsuario() {
-        let token = localStorage.getItem('token');
-        if (token === null) {
-            return null;
+    async initializeSession() {
+        let session = await this.loggedIn();
+        if(!session) {
+            this.router.navigate(['/inicio']);    
         }
 
-        let userId = jwtDecode(token).sub;
+        return session;
+    }
+
+    async getUsuario() {
+        let userId = this.getUserId();
 
         try {
             const response = await fetch(`${this.urlBase}/api/usuarios/${userId}`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${this.getToken()}`
                 }
             });
 
@@ -87,6 +92,24 @@ export class UsuariosService {
         } catch (error) {
             throw error;
         }
+    }
+
+    getToken() {
+        let token = localStorage.getItem('token');
+        if (token === null) {
+            return null;
+        }
+
+        return token;
+    }
+
+    getUserId() {
+        let token = this.getToken();
+        if (token === null) {
+            return null;
+        }
+
+        return jwtDecode(token).sub;
     }
 
 }

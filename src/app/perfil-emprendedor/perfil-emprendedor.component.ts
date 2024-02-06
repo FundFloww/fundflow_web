@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { onOpenBar } from '../functions/sideBarFunctions';
+import { onOpenBarFunction } from '../functions/sideBarFunctions';
 import { IdeaItemComponent } from '../idea-item/idea-item.component';
 import { IdeaDto } from '../interfaces/ideaDto';
 import { IdeasServicioService } from '../servicios/ideas-servicio.service';
@@ -25,37 +25,17 @@ export class PerfilEmprendedorComponent {
 
     constructor(
         private ideaService: IdeasServicioService, 
-        private usuariosService: UsuariosService,
-        private router: Router
+        private usuariosService: UsuariosService
     ) { }
 
     async ngOnInit() {
-        await this.initializeIdeas();
-        await this.initializeSession();
-        await this.initializeUsuario();
-    }
-
-    async initializeIdeas() {
-        try {
-            this.ideas = await this.ideaService.getIdeas();
-        } catch (error) {
-            console.error("Ocurrió un error al obtener las ideas: ", error);
-        }
-    }
-
-    async initializeSession() {
-        this.session = await this.usuariosService.loggedIn();
-        if(!this.session) {
-            this.router.navigate(['/inicio']);    
-        }
-    }
-
-    async initializeUsuario() {
+        this.ideas = await this.ideaService.getIdeasUser();
+        this.session = await this.usuariosService.initializeSession();
         this.usuario = await this.usuariosService.getUsuario();
     }
 
     onOpenBar() {
-        this.open = onOpenBar(this.open);
+        this.open = onOpenBarFunction(this.open);
     }
 
 }
