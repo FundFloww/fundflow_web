@@ -20,14 +20,7 @@ import { HeaderComponent } from '../header/header.component';
 export class FormIdeaComponent {
     open: boolean = true;
     session: boolean | null = null;
-
-  // @ViewChild('miFormulario') miFormulario!: NgForm;
-
     camposArray: string[] = camposKeys;
-    open: boolean = true;
-    session: boolean | null = null;
-
-  // mapa: Map<string, string> = mapaCampos;
 
   constructor(private usuariosService: UsuariosService, private ideasServicio: IdeasServicioService, private router: Router) { }
 
@@ -89,5 +82,5 @@ export class FormIdeaComponent {
 
   onOpenBar() {
     this.open = onOpenBarFunction(this.open);
-}
+  }
 }
