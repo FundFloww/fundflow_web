@@ -3,14 +3,17 @@ import { SideBarComponent } from '../side-bar/side-bar.component';
 import { Idea } from '../interfaces/idea';
 import { Campos, camposKeys } from '../enum/campos';
 import { IdeasServicioService } from '../servicios/ideas-servicio.service';
+import { UsuariosService } from '../servicios/usuarios.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
+import { onOpenBar } from '../functions/sideBarFunctions';
 
 @Component({
   selector: 'app-form-idea',
   standalone: true,
 
-  imports: [SideBarComponent, FormsModule],
+  imports: [SideBarComponent, FormsModule, HeaderComponent],
   templateUrl: './form-idea.component.html',
   styleUrl: './form-idea.component.scss'
 })
@@ -18,11 +21,13 @@ export class FormIdeaComponent {
 
   // @ViewChild('miFormulario') miFormulario!: NgForm;
 
-  camposArray: string[] = camposKeys;
+    camposArray: string[] = camposKeys;
+    open: boolean = true;
+    session: boolean | null = null;
 
   // mapa: Map<string, string> = mapaCampos;
 
-  constructor(private ideasServicio: IdeasServicioService, private router: Router) { }
+  constructor(private usuariosService: UsuariosService, private ideasServicio: IdeasServicioService, private router: Router) { }
 
   nuevaIdea: Idea = {
     titulo: '',
@@ -32,6 +37,11 @@ export class FormIdeaComponent {
     emprendedor: [],
     inversor: [],
   }
+
+  async ngOnInit() {
+
+    this.session = await this.usuariosService.loggedIn();
+}
 
   imagenesVacias() {
     return this.nuevaIdea.imagenes.length === 1 && this.nuevaIdea.imagenes[0] === '';
@@ -74,4 +84,8 @@ export class FormIdeaComponent {
       console.error(error);
     }
   }
+
+  onOpenBar() {
+    this.open = onOpenBar(this.open);
+}
 }
