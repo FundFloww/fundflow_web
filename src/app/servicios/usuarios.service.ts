@@ -51,7 +51,8 @@ export class UsuariosService {
 
             return await response.json();
         } catch (error) {
-            throw error;
+            console.error('Error al realizar la operación:', error);
+            return null;
         }
     }
 

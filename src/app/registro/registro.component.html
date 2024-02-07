@@ -56,7 +56,7 @@
                                     [ngClass]="validClasses(email, 'is-valid', 'is-invalid')">
                                 <div class="invalid-feedback">
                                     <div *ngIf="!userExists">
-                                        Email requerido (debe cumplir con un formato válido de email)
+                                        Email requerido (formato no válido)
                                     </div>
                                     <div *ngIf="userExists">
                                         El usuario ya existe
