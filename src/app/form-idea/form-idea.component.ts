@@ -8,6 +8,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { onOpenBarFunction } from '../functions/sideBarFunctions';
 import { HeaderComponent } from '../header/header.component';
+import { IdeaNueva } from '../interfaces/ideaNueva';
 
 @Component({
   selector: 'app-form-idea',
@@ -24,13 +25,12 @@ export class FormIdeaComponent {
 
   constructor(private usuariosService: UsuariosService, private ideasServicio: IdeasServicioService, private router: Router) { }
 
-  nuevaIdea: Idea = {
+  nuevaIdea: IdeaNueva = {
     titulo: '',
     descripcion: '',
     imagenes: [''],
     campo: undefined,
     emprendedor: [],
-    inversor: [],
   }
 
   async ngOnInit() {
@@ -71,8 +71,9 @@ export class FormIdeaComponent {
   }
 
   async enviarIdea() {
-    console.log(this.nuevaIdea.imagenes);
     try {
+      this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
+      console.log(this.nuevaIdea);
       await this.ideasServicio.addIdea(this.nuevaIdea);
       this.router.navigate(['/inicio']);
     } catch (error) {
