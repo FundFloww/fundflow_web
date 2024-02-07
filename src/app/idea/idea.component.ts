@@ -26,8 +26,6 @@ export class IdeaComponent {
     session: boolean | null = null;
 
     async ngOnInit() {
-        this.session = await this.usuarioService.initializeSession();
-
         const ideas = await this.ideaRepository.getIdeas();
         const ideaId = parseInt(this.router.url.split('/')[2]);
 

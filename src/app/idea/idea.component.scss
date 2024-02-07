@@ -147,3 +147,52 @@ h4 {
 
     box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.1);
 }
+
+.linea-tiempo {
+    margin-bottom: 100px;
+    position: relative;
+}
+
+.hitos {
+    padding-left: 50px;
+    margin-top: 40px;
+    margin-left: 40px;
+    position: relative;
+    list-style: none;
+}
+
+.hito {
+    margin-bottom: 30px;
+}
+
+.hito {
+    .titulo-hito {
+        font-weight: 600;
+        font-size: 1.3rem;
+    }
+}
+
+.hito:before {
+    background-color: rgb(38, 38, 38);
+    width: 2px;
+    content: '';
+    position: absolute;
+    top: -15px;
+    bottom: 0px;
+    left: 12px;
+}
+
+.custom-bullet {
+    position: absolute;
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: rgb(38, 38, 38);
+    border-radius: 20px;
+    left: 1px;
+    margin-top: 1px;
+    padding: 10px;
+}
+
+
+ 
