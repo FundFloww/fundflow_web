@@ -71,4 +71,23 @@ export class IdeasServicioService {
             throw error;
         }
     }
+
+    async getIdeasGuardadas(): Promise<IdeaDto[]> {
+        let usuario = await this.usuariosService.getUsuario();
+        let ideasGuardadas: IdeaDto[] = [];
+        for (const idea of usuario.guardados)
+        {
+            try {
+                const response = await fetch(`$${this.apiURL}/api/ideas/dto/${idea.id}`);
+                const datos = await response.json();
+                ideasGuardadas.push(datos);
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        };
+        return ideasGuardadas;
+    }
+
+
 }
