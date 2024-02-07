@@ -1,14 +1,11 @@
 import { Campos } from "../enum/campos";
 import { Usuario } from "./usuario";
 
-export interface Idea {
+export interface IdeaNueva {
     id?: number;
     titulo: string;
     descripcion: string;
     imagenes: string[];
     campo?: Campos;
     emprendedor: Usuario[];
-    inversor: Usuario[];
-    // lineaTiempo
-    // inversiones
 }

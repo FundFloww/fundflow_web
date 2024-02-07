@@ -3,6 +3,7 @@ import { Idea } from '../interfaces/idea';
 import { Usuario } from '../interfaces/usuario';
 import { IdeaDto } from '../interfaces/ideaDto';
 import { UsuariosService } from './usuarios.service';
+import { IdeaNueva } from '../interfaces/ideaNueva';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,6 @@ export class IdeasServicioService {
         private usuariosService: UsuariosService
     ) { }
 
-    private ideas: Idea[] = [];
     private apiURL = "http://10.100.11.1:9000";
 
     async getIdeas(): Promise<IdeaDto[]> {
@@ -53,7 +53,7 @@ export class IdeasServicioService {
         }
     }
 
-    async addIdea(idea: Idea) {
+    async addIdea(idea: IdeaNueva) {
         try {
             const response = await fetch(`${this.apiURL}/api/ideas/nueva`, {
                 method: 'POST',
@@ -65,7 +65,6 @@ export class IdeasServicioService {
             if(!response.ok) {
                 throw new Error(`Error al enviar la idea a la base de datos. Código de estado: ${response.status}`);
             }
-            this.ideas.push(idea);
         } catch (error) {
             console.error(error);
             throw error;
@@ -78,7 +77,7 @@ export class IdeasServicioService {
         for (const idea of usuario.guardados)
         {
             try {
-                const response = await fetch(`$${this.apiURL}/api/ideas/dto/${idea.id}`);
+                const response = await fetch(`${this.apiURL}/api/ideas/dto/${idea.id}`);
                 const datos = await response.json();
                 ideasGuardadas.push(datos);
             } catch (error) {
