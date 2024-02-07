@@ -1,1 +1,81 @@
-<p>idea works!</p>
+<div class="container-fluid root-element bg-light">
+    <div class="row">
+        <app-side-bar 
+            class="col-2 px-0" id="side-bar" 
+            (click)="onOpenBar()" 
+            [open]="open"
+            [session]="session"
+        ></app-side-bar>
+        <div id="content" class="col-10 h-100 pe-0 ps-0">
+            <section class="section-content">
+                <div class="idea-info bg-light-l">
+                    <div class="titulo-idea">
+                        <div class="start">
+                            <img src="{{ this.idea?.imagen }}" alt="perfil">
+                            <div class="datos-titulo">
+                                <h1>{{ this.idea?.titulo }}</h1>
+                                <div>España</div>
+                                <div><img class="estrellas" src="../../assets/img/5-star-rating-review-star-transparent-free-png.png" alt=""></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary text-light-l">Guardar</button>
+                    </div>
+                    <h4>Descripción</h4>
+                    <p>{{ this.idea?.descripcion }}</p>
+                </div>
+                <div class="inversores-info bg-light-l">
+                    <div>
+                        <p>300</p>
+                        <p>Inversores</p>
+                    </div>
+                    <div>
+                        <p>20</p>
+                        <p>Hitos Terminados</p>
+                    </div>
+                    <div>
+                        <p>300</p>
+                        <p>Total Invertido</p>
+                    </div>
+                </div>
+                <div class="imagenes-idea bg-light-l">
+                    <h4>Imagenes</h4>
+                    <div class="imagenes">
+                        <img src="{{ this.idea?.imagen }}" alt="imagen">
+                    </div>
+                </div>
+                <div class="linea-tiempo bg-light-l">
+                    <h4>Linea de tiempo</h4>
+                    <ul class="hitos">
+                        <li class="hito">
+                            <div class="custom-bullet"></div>
+                            <h5 class="titulo-hito">Proyecto comenzado</h5>
+                            <div class="fecha-hito">12/12/2021</div>
+                            <div class="descripcion-hito">El dia 22 comenzamos el proyecto planeando los primeros sprints....</div>
+                        </li>
+                        <li class="hito">
+                            <div class="custom-bullet"></div>
+                            <h5 class="titulo-hito">Proyecto comenzado</h5>
+                            <div class="fecha-hito">12/12/2021</div>
+                            <div class="descripcion-hito">El dia 22 comenzamos el proyecto planeando los primeros sprints....</div>
+                        </li>
+                        <li class="hito">
+                            <div class="custom-bullet"></div>
+                            <h5 class="titulo-hito">Proyecto comenzado</h5>
+                            <div class="fecha-hito">12/12/2021</div>
+                            <div class="descripcion-hito">El dia 22 comenzamos el proyecto planeando los primeros sprints....</div>
+                        </li>
+                        <li class="hito">
+                            <div class="custom-bullet"></div>
+                            <h5 class="titulo-hito">Proyecto comenzado</h5>
+                            <div class="fecha-hito">12/12/2021</div>
+                            <div class="descripcion-hito">El dia 22 comenzamos el proyecto planeando los primeros sprints....</div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="invertir-section" class="invertir bg-light-l col-10">
+                    <button class="btn btn-primary text-light-l">Invertir</button>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
