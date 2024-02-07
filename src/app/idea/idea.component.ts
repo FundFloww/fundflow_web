@@ -33,6 +33,7 @@ export class IdeaComponent {
             this.router.navigate(['/']);
         }
 
+        this.session = await this.usuarioService.loggedIn();
         this.idea = ideas.filter(idea => idea.id === ideaId)[0];
     }
 
