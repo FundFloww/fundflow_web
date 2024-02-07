@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap');
+
+// Este selector debería estar en el main
+.bg-light-l {
+    background-color: #FFFFFF;
+}
+
+#side-bar, #content {
+    transition: 0.3s all;
+}
+
+.banner {
+    height: 170px;
+}
+
+.info-perfil {
+    transform: translate(20%, -25%);
+}
+
+.foto-perfil {
+    height: 170px;
+    width: 170px;
+    object-fit: cover;
+}
+
+.inversores {
+    transform: translateX(-2.5%);
+}
+
+@media (width < 900px) {
+    .fila-vacia {
+        display: none;
+    }
+    .fila-datos{
+        margin-top: 0;
+    }
+}
+
+.card-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 0.5fr);
+    justify-content: center;
+}
+
+.card-bar > .card {
+    background-color: #1E3D58;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    width: 420px;
+    height: 200px;
+}
+
+.col-1-p {
+    flex: 0 0 auto;
+    width: 8.33333333%;
+}
+
+.col-11-p {
+    flex: 0 0 auto;
+    width: 91.66666667%;
+}
+
+.nombre-completo {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+@media (width < 1850px) {
+    .card-bar {
+        grid-template-columns: repeat(3, 0.5fr);
+    }
+}
+
+@media (width < 1400px) {
+    .card-bar {
+        grid-template-columns: repeat(2, 0.5fr);
+    }
+}
+
+@media (width < 900px) {
+    .card-bar {
+        grid-template-columns: repeat(1, 0.5fr);
+    }
+}

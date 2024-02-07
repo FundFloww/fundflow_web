@@ -1,0 +1,42 @@
+<div *ngIf="usuario !== null" class="container-fluid root-element bg-light">
+    <div class="row">
+        <app-side-bar class="col-2 px-0 me-0 no-bootstrap-styles" id="side-bar" (click)="onOpenBar()" [open]="open"
+            [session]="session"></app-side-bar>
+        <div class="col-10 mx-0 bg-light h-100" id="content">
+            <form>
+                <div class="row bg-light">
+                    <div class="banner bg-primary mx-0">
+                        <img src="" alt="banner_perfil">
+                    </div>
+                    <div class="col-md-4 col-12 bg-light-l mx-0">
+                        <div class="info-perfil d-grid gap-4">
+                            <div>
+                                <img src="https://png.pngtree.com/background/20230524/original/pngtree-sad-pictures-for-desktop-hd-backgrounds-picture-image_2705986.jpg"
+                                    alt="foto_perfil" class="rounded-circle foto-perfil">
+                            </div>
+                            <div class="nombre-completo">
+                                <div class="nombre">
+                                    <label for="nombre" class="form-label h3"><strong>{{ this.usuario?.nombre }}</strong></label>
+                                    <input type="text" class="form-control" placeholder="{{this.usuario.nombre}}">
+                                </div>
+                                <div class="apellidos">
+                                    <label for="apellidos" class="form-label h3"><strong>{{ this.usuario?.apellidos }}</strong></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-12 bg-light-l pt-5">
+                        <div class="row mt-5 fila-vacia"></div>
+                        <div class="row justify-content-start mt-3 fila-datos">
+                            <div class="row">
+                                <div class="col-10">
+                                    <p class="h4"><strong>Descripción</strong></p>
+                                    <p>{{ this.usuario?.descripcion }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
