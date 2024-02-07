@@ -55,7 +55,12 @@
                                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                                     [ngClass]="validClasses(email, 'is-valid', 'is-invalid')">
                                 <div class="invalid-feedback">
-                                    Email requerido (debe cumplir con un formato válido de email)
+                                    <div *ngIf="!userExists">
+                                        Email requerido (debe cumplir con un formato válido de email)
+                                    </div>
+                                    <div *ngIf="userExists">
+                                        El usuario ya existe
+                                    </div>
                                 </div>
                             </div>
 
@@ -71,17 +76,17 @@
                             <div class="mb-3">
                                 <input id="confirmPassword" class="form-control w-100" type="password"
                                     name="confirmPassword" placeholder="Confirmar Contraseña"
-                                    [(ngModel)]="newUsuario.confirmarContrasena" required #passwordValidate="ngModel"
-                                    [ngClass]="validClasses(passwordValidate, 'is-valid', 'is-invalid')">
+                                    [(ngModel)]="newUsuario.confirmarContrasena" required #confirmPassword="ngModel"
+                                    [ngClass]="validPassword(confirmPassword, 'is-valid', 'is-invalid')">
                                 <div class="invalid-feedback">
-                                    Las contraseñas no coinciden
+                                    <div *ngIf="newUsuario.confirmarContrasena !== ''">
+                                        Las contraseñas no coinciden
+                                    </div>
+                                    <div *ngIf="newUsuario.confirmarContrasena === ''">
+                                        Confirmar Contraseña requerida
+                                    </div>
                                 </div>
-                                <!-- <div *ngIf="showError" class="text-danger mt-2" style="font-size: 14px;">{{
-                                    errorContrasena }}</div> -->
                             </div>
-
-                            <div *ngIf="userExists" class="text-danger mb-3" style="font-size: 14px;">El usuario ya
-                                existe</div>
 
                             <div class="d-flex align-items-center justify-content-center">
                                 <button type="submit" class="btn bg-primary w-100" [disabled]="registroForm.invalid">
