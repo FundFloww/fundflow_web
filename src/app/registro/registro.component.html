@@ -8,46 +8,88 @@
                             <img src="assets/img/logo_color.png" alt="logo" width="50">
                         </div>
                         <h1 class="fs-4 card-title fw-bold mb-3 text-center text-primary">Crear Cuenta</h1>
-                        <form (ngSubmit)="addNewUsuario()" class="needs-validation" novalidate="" autocomplete="off">
+                        <form (ngSubmit)="addNewUsuario()" novalidate autocomplete="off" #registroForm="ngForm">
                             <div class="mb-3 selector">
                                 <div class="w-100 tabs">
-                                    <input type="radio" name="tipoUsuario" id="radio-1" [value]="'EMPRENDEDOR'" [checked]="newUsuario.tipo === 'EMPRENDEDOR'" (change)="newUsuario.tipo='EMPRENDEDOR'">
+                                    <input type="radio" name="tipoUsuario" id="radio-1" [value]="'EMPRENDEDOR'"
+                                        [checked]="newUsuario.tipo === 'EMPRENDEDOR'"
+                                        (change)="newUsuario.tipo='EMPRENDEDOR'">
                                     <label for="radio-1" class="tab">Emprendedor</label>
 
-                                    <input type="radio" name="tipoUsuario" id="radio-2" [value]="'INVERSOR'" [checked]="newUsuario.tipo === 'INVERSOR'" (change)="newUsuario.tipo='INVERSOR'">
+                                    <input type="radio" name="tipoUsuario" id="radio-2" [value]="'INVERSOR'"
+                                        [checked]="newUsuario.tipo === 'INVERSOR'"
+                                        (change)="newUsuario.tipo='INVERSOR'">
                                     <label for="radio-2" class="tab">Inversor</label>
-                                
+
                                 </div>
                             </div>
-                            
-                            <div class="mb-3 gap-3 d-flex justify-content-center align-items-center">
-                                <input id="name" type="text" name="name" value="" placeholder="Nombre" class="w-100" 
-                                [(ngModel)]="newUsuario.nombre" required autofocus>
 
-                                <input id="name" type="text" name="apellidos" value="" placeholder="Apellidos" class="w-100" 
-                                [(ngModel)]="newUsuario.apellidos" required>
+                            <div class="mb-3 gap-3 d-flex justify-content-center">
+                                <div>
+                                    <div class="form-group">
+                                        <input id="nombre" type="text" class="form-control" name="name" value=""
+                                            placeholder="Nombre" [(ngModel)]="newUsuario.nombre" #nombre="ngModel"
+                                            required autofocus
+                                            [ngClass]="validClasses(nombre, 'is-valid', 'is-invalid')">
+                                        <div class="invalid-feedback">
+                                            Nombre requerido
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group">
+                                        <input id="apellidos" type="text" class="form-control" name="apellidos" value=""
+                                            placeholder="Apellidos" [(ngModel)]="newUsuario.apellidos" required
+                                            #apellidos="ngModel"
+                                            [ngClass]="validClasses(apellidos, 'is-valid', 'is-invalid')">
+                                        <div class="invalid-feedback">
+                                            Apellidos requeridos
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="mb-3">
-                                <input id="email" type="email" name="email" value="" placeholder="Email" class="w-100" 
-                                [(ngModel)]="newUsuario.correo" required>
+                                <input id="email" type="text" class="form-control w-100" name="email" value=""
+                                    placeholder="Email" [(ngModel)]="newUsuario.correo" #email="ngModel" required
+                                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                    [ngClass]="validClasses(email, 'is-valid', 'is-invalid')">
+                                <div class="invalid-feedback">
+                                    <div *ngIf="!userExists">
+                                        Email requerido (formato no válido)
+                                    </div>
+                                    <div *ngIf="userExists">
+                                        El usuario ya existe
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="mb-3">
-                                <input id="password" type="password" name="password" placeholder="Contraseña" class="w-100" 
-                                [(ngModel)]="newUsuario.contrasena" required>
+                                <input id="password" class="form-control w-100" type="password" name="password"
+                                    placeholder="Contraseña" [(ngModel)]="newUsuario.contrasena" required
+                                    #password="ngModel" [ngClass]="validClasses(password, 'is-valid', 'is-invalid')">
+                                <div class="invalid-feedback">
+                                    Contraseña requerida
+                                </div>
                             </div>
 
                             <div class="mb-3">
-                                <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirmar Contraseña" class="w-100" 
-                                [(ngModel)]="newUsuario.confirmarContrasena" required>
-                                <div *ngIf="showError" class="text-danger mt-2" style="font-size: 14px;">{{ errorContrasena }}</div>
+                                <input id="confirmPassword" class="form-control w-100" type="password"
+                                    name="confirmPassword" placeholder="Confirmar Contraseña"
+                                    [(ngModel)]="newUsuario.confirmarContrasena" required #confirmPassword="ngModel"
+                                    [ngClass]="validPassword(confirmPassword, 'is-valid', 'is-invalid')">
+                                <div class="invalid-feedback">
+                                    <div *ngIf="newUsuario.confirmarContrasena !== ''">
+                                        Las contraseñas no coinciden
+                                    </div>
+                                    <div *ngIf="newUsuario.confirmarContrasena === ''">
+                                        Confirmar Contraseña requerida
+                                    </div>
+                                </div>
                             </div>
-
-                            <div *ngIf="userExists" class="text-danger mb-3" style="font-size: 14px;">El usuario ya existe</div>
 
                             <div class="d-flex align-items-center justify-content-center">
-                                <button type="submit" class="btn bg-primary w-100">
+                                <button type="submit" class="btn bg-primary w-100" [disabled]="registroForm.invalid">
                                     Continuar
                                 </button>
                             </div>
