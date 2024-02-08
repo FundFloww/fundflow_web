@@ -4,6 +4,7 @@ import { Usuario } from '../interfaces/usuario';
 import { IdeaDto } from '../interfaces/ideaDto';
 import { UsuariosService } from './usuarios.service';
 import { IdeaNueva } from '../interfaces/ideaNueva';
+import { Campos } from '../enum/campos';
 
 @Injectable({
     providedIn: 'root'
@@ -88,5 +89,20 @@ export class IdeasServicioService {
         return ideasGuardadas;
     }
 
-
+    async getIdeasFiltradas(campos: Campos[]): Promise<IdeaDto[]> {
+        try {
+            const response = await fetch(`${this.apiURL}/api/ideas/filtradas`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(campos),
+            });
+            const datos = await response.json();
+            return datos;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }
