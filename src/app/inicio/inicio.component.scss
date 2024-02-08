@@ -128,6 +128,14 @@
     width: 91.66666667%;
 }
 
+.btnSelected{
+    background-color: #1E3D58 !important;
+}
+
+.btnSelected:hover{
+    background-color: #3c709b !important;
+}
+
 @media (width < 1850px) {
     .card-bar {
         grid-template-columns: repeat(3, 0.5fr);
