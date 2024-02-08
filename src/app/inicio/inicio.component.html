@@ -14,10 +14,14 @@
                         </button>
                     }
                 </div>
-                <div class="default-bar card-bar bg-light-l">
+                <div class="default-bar card-bar bg-light-l"
+                [ngClass]="{ 'd-flex justify-content-center align-items-center': ideasNotFound }">
                     @for (idea of ideas; track idea.id) {
                     <app-idea-item [idea]="idea"></app-idea-item>
                     }
+                    <div *ngIf="ideasNotFound" class="no-results-message" >
+                        No hay resultados para esta búsqueda
+                    </div>
                 </div>
             </section>
         </div>

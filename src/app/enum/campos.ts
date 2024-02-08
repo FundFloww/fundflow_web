@@ -1,16 +1,16 @@
 import { Injectable } from "@angular/core";
 
 export enum Campos {
-    Tecnologia = 'Tecnologia',
-    Educacion = 'Educacion',
-    Sostenibilidad = 'Sostenibilidad',
-    Salud = 'Salud',
-    Finanzas = 'Finanzas',
-    Otros = 'Otros'
+    Tecnologia = 'TECNOLOGIA',
+    Educacion = 'EDUCACION',
+    Sostenibilidad = 'SOSTENIBILIDAD',
+    Salud = 'SALUD',
+    Finanzas = 'FINANZAS',
+    Otros = 'OTROS'
 }
 
 
-// const camposValues: string[] = Object.values(Campos).filter(value => typeof value === 'string');
+export const camposValues: string[] = Object.values(Campos).filter(value => typeof value === 'string');
 export const camposKeys: string[] = Object.keys(Campos);
 
 // export const mapaCampos: Map<string,string> = new Map();

@@ -1,0 +1,8 @@
+export enum CamposApi {
+    TECNOLOGIA = 'TECNOLOGIA',
+    EDUCACION = 'EDUCACION',
+    SOSTENIBILIDAD = 'SOSTENIBILIDAD',
+    SALUD = 'SALUD',
+    FINANZAS = 'FINANZAS',
+    OTROS = 'OTROS'
+}
