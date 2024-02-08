@@ -1,0 +1,33 @@
+<div class="container-fluid root-element bg-light">
+    <div class="row">
+        <app-side-bar 
+            class="col-2 px-0 z-100" id="side-bar" 
+            (click)="onOpenBar()" 
+            [open]="open"
+            [session]="session"
+        ></app-side-bar>
+        <div id="content" class="col-10 h-100 pe-0 ps-0">
+            <section class="section-content">
+                <app-header></app-header>
+                <h1 class="news-item bg-light-l">Noticias - Novedades en el mundo de las inversiones</h1>
+                <div class="news-container bg-light-l">
+                    <div class="news-item bg-light-l">
+                        <h2><a href="#">Título de la Noticia 1</a></h2>
+                        <p>Este es un pequeño trozo de la noticia 1 relacionada con la inversión en startups y aceleradoras.</p>
+                    </div>
+                    
+                    <div class="news-item bg-light-l">
+                        <h2><a href="#">Título de la Noticia 2</a></h2>
+                        <p>Este es un pequeño trozo de la noticia 2 relacionada con la inversión en startups y aceleradoras.</p>
+                    </div>
+                    
+                    <div class="news-item bg-light-l">
+                        <h2><a href="#">Título de la Noticia 3</a></h2>
+                        <p>Este es un pequeño trozo de la noticia 3 relacionada con la inversión en startups y aceleradoras.</p>
+                    </div>
+                
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

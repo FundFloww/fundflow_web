@@ -1,9 +1,10 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-side-bar-elemento',
     standalone: true,
-    imports: [],
+    imports: [RouterLink],
     templateUrl: './side-bar-elemento.component.html',
     styleUrl: './side-bar-elemento.component.scss'
 })

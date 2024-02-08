@@ -35,32 +35,46 @@ export class SideBarComponent {
         },
         {
             id: 3,
+            nombre: 'Noticias',
+            icono: 'Noticias',
+            destino: '/noticias',
+            ruta: `${this.rutaIconos}/noticias.svg`
+        },
+        {
+            id: 4,
             nombre: 'Ayuda',
             icono: 'help',
             destino: '/',
             ruta: `${this.rutaIconos}/help.svg`
         },
         {
-            id: 4,
+            id: 5,
             nombre: 'Añadir Idea',
             icono: 'añadir',
-            destino: '/idea/anadir',
+            destino: '/idea/añadir',
             ruta: `${this.rutaIconos}/añadir.svg`
         },
         {
-            id: 5,
+            id: 6,
             nombre: 'Iniciar sesión',
             icono: 'login',
             destino: '/login',
             ruta: `${this.rutaIconos}/login.svg`
         },
         {
-            id: 6,
+            id: 7,
             nombre: 'Cerrar sesión',
             icono: 'logout',
             destino: '/logout',
             ruta: `${this.rutaIconos}/logout.svg`
         
+        },
+        {
+            id: 8,
+            nombre: 'Registrarse',
+            icono: 'registro',
+            destino: '/registro',
+            ruta: `${this.rutaIconos}/register.svg`
         }
     ];
 
@@ -75,11 +89,11 @@ export class SideBarComponent {
 
     validateSession() {
         if(this.session) {
-            this.elementos = this.elementos.filter(e => e.nombre !== "Iniciar sesión");
+            this.elementos = this.elementos.filter(e => e.nombre !== "Iniciar sesión" && e.nombre !== "Registrarse");
             return;
         }
 
-        this.elementos = this.elementos.filter(e => e.nombre !== "Cerrar sesión");
+        this.elementos = this.elementos.filter(e => e.nombre !== "Cerrar sesión" && e.nombre !== "Añadir Idea");
     }
 
     sideBarChange() {
