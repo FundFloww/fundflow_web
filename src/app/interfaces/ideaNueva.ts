@@ -7,5 +7,5 @@ export interface IdeaNueva {
     descripcion: string;
     imagenes: string[];
     campo?: Campos;
-    id_emprendedor?: string | null;
+    emprendedor: Usuario[];
 }
