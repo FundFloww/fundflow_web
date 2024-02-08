@@ -35,7 +35,7 @@ export class FormIdeaComponent {
 
   async ngOnInit() {
 
-    this.session = await this.usuariosService.loggedIn();
+    this.session = await this.usuariosService.initializeSession();
 }
 
   imagenesVacias() {
