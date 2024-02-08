@@ -30,7 +30,7 @@ export class FormIdeaComponent {
     descripcion: '',
     imagenes: [''],
     campo: undefined,
-    emprendedor: [],
+    id_emprendedor: null,
   }
 
   async ngOnInit() {
@@ -72,8 +72,9 @@ export class FormIdeaComponent {
 
   async enviarIdea() {
     try {
-      this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
-      console.log(this.nuevaIdea);
+      // this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
+      let id_emprendedor = this.usuariosService.getUserId();
+      this.nuevaIdea.id_emprendedor = id_emprendedor;
       await this.ideasServicio.addIdea(this.nuevaIdea);
       this.router.navigate(['/inicio']);
     } catch (error) {
