@@ -37,5 +37,4 @@ export class PerfilEmprendedorComponent {
     onOpenBar() {
         this.open = onOpenBarFunction(this.open);
     }
-
 }

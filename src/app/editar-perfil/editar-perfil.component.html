@@ -5,34 +5,55 @@
         <div class="col-10 mx-0 bg-light h-100" id="content">
             <form>
                 <div class="row bg-light">
-                    <div class="banner bg-primary mx-0">
-                        <img src="" alt="banner_perfil">
+                    <div class="banner bg-primary mx-0" (click)="openFileInput()">
+                        <img src="{{this.usuarioTemporal?.banner}}" alt="banner_perfil">
+                        <input class="foto-banner" type="file" #fileBanner (change)="onFileSelected($event)">
                     </div>
-                    <div class="col-md-4 col-12 bg-light-l mx-0">
-                        <div class="info-perfil d-grid gap-4">
+                    <div class="bg-light-l mx-0">
+                        <div class="info-perfil d-grid gap-4 ps-5">
                             <div>
-                                <img src="https://png.pngtree.com/background/20230524/original/pngtree-sad-pictures-for-desktop-hd-backgrounds-picture-image_2705986.jpg"
+                                <img src="{{this.usuarioTemporal?.imagen}}"
                                     alt="foto_perfil" class="rounded-circle foto-perfil">
                             </div>
                             <div class="nombre-completo">
                                 <div class="nombre">
                                     <label for="nombre" class="form-label h3"><strong>Nombre</strong></label>
-                                    <input type="text" class="form-control" value="{{this.usuario.nombre}}">
+                                    <input id="nombre" type="text" class="form-control" value="{{this.usuarioTemporal?.nombre}}">
                                 </div>
                                 <div class="apellidos">
                                     <label for="apellidos" class="form-label h3"><strong>Apellido</strong></label>
-                                    <input type="text" class="form-control" value="{{this.usuario.apellidos}}">
+                                    <input id="apellidos" type="text" class="form-control" value="{{this.usuarioTemporal?.apellidos}}">
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8 col-12 bg-light-l pt-5">
-                        <div class="row mt-5 fila-vacia"></div>
-                        <div class="row justify-content-start mt-3 fila-datos">
-                            <div class="row">
-                                <div class="col-10">
-                                    <p class="h4"><strong>Descripción</strong></p>
-                                    <p>{{ this.usuario?.descripcion }}</p>
+                            <div class="profesion input-box">
+                                <label for="profesion" class="form-label h3"><strong>Profesión</strong></label>
+                                <input id="profesion" type="text" class="form-control" value="{{this.usuarioTemporal?.profesion}}">
+                            </div>
+                            <div class="descripcion input-box">
+                                <label for="descripcion" class="form-label h3"><Strong>Descripción</Strong></label>
+                                <textarea id="descripcion" value="{{this.usuarioTemporal?.descripcion}}"
+                                class="form-control" name="descripcion"></textarea>
+                            </div>
+                            <div class="correo input-box">
+                                <label for="correo" class="form-label h3"><strong>Correo</strong></label>
+                                <input id="correo" type="email" class="form-control" value="{{this.usuarioTemporal?.correo}}">
+                            </div>
+                            <div class="contraseña input-box">
+                                <label for="contraseña" class="form-label h3"><strong>Cambiar contraseña</strong></label>
+                                <input id="contraseña" type="password" class="form-control" placeholder="Intoruce tu nueva contraseña...">
+                            </div>
+                            <div class="confirmarContraseña input-box">
+                                <label for="confirmarContraseña" class="form-label h3"><strong>Confirmar contraseña</strong></label>
+                                <input id="confirmarContraseña" type="password" class="form-control" placeholder="Confirma tu nueva contraseña...">
+                            </div>
+                            <div class="tipo">
+                                <label class="form-label h3"><strong>Tipo de usuario</strong></label>
+                                <div class="tipoUsuario btn-group input-box" role="group" aria-label="Basic radio toggle button group">
+                                    <input type="radio" class="btn-check" name="btnradio" id="emprendedor" autocomplete="off" [checked]="usuarioTemporal?.tipo == 'EMPRENDEDOR'">
+                                    <label for="emprendedor" class="btn btn-outline-primary">Emprendedor</label>
+                                    
+                                    <input type="radio" class="btn-check" name="btnradio" id="inversor" autocomplete="off" [checked]="usuarioTemporal?.tipo == 'INVERSOR'">
+                                    <label for="inversor" class="btn btn-outline-primary">Inversor</label>
                                 </div>
                             </div>
                         </div>
