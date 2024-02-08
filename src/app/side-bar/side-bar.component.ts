@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-side-bar',
@@ -9,6 +10,8 @@ import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento
     styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent {
+    constructor(private router: Router) {}
+
     @Input() session: boolean | null = null;
     @Input() open: boolean = false;
 
@@ -62,7 +65,7 @@ export class SideBarComponent {
     ];
 
     onHomeClick() {
-        window.location.href = '/';
+        this.router.navigate(['/']);
     }
 
     ngOnChanges() {

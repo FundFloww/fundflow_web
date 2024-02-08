@@ -18,9 +18,7 @@ export class IdeaItemComponent {
   constructor(private router: Router) { }
 
   detallesIdea() {
-    const ideaId = this.idea.id;
-
-    this.router.navigate(['/idea', ideaId]);
+    this.router.navigate(['/idea', this.idea.id]);
   }
 
   ideas: IdeaDto[] = [];

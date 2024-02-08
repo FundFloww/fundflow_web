@@ -48,7 +48,8 @@ div.tabs label{
 }
 
 input[type='radio']:checked + label{
-    color: #303236
+    color: #303236;
+    font-weight: 700;
 }
 
 div.card {
@@ -68,13 +69,17 @@ form div.mb-3 input {
     height: 43px;
     padding: 6px 12px;
     border-radius: .375rem;
-    border: 0px solid #057DCD;
+    border: 0;
     background-color: #ebefff;
     outline: none;
 }
 
 form div.mb-3 input:focus {
     border: 3px solid #057DCD;
+}
+
+.is-invalid{
+    border: 2px solid #DA1818 !important;
 }
 
 form div.mb-3 input::placeholder {

@@ -13,20 +13,25 @@
                         <form (ngSubmit)="onSubmit()" class="needs-validation" novalidate="">
 
                             <div class="mb-3">
-                                <input id="email" type="email" name="email" value="" placeholder="Email" class="w-100" required autofocus
-                                [(ngModel)]="usuario.correo">
+                                <input id="email" type="text" name="email" placeholder="Email" class="form-control w-100" required autofocus
+                                [(ngModel)]="usuario.correo" #email="ngModel"
+                                [ngClass]="validClasses(email, 'is-valid', 'is-invalid')">
                                 <div class="invalid-feedback">
-                                    Email is invalid
+                                    Introduce un email
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <input id="password" type="password" name="password" placeholder="Contraseña" class="w-100" required
-                                [(ngModel)]="usuario.contrasena"
-                                >
+                                <input id="password" type="password" name="password" placeholder="Contraseña" class="form-control w-100" required
+                                [(ngModel)]="usuario.contrasena" #password="ngModel"
+                                [ngClass]="validClasses(password, 'is-valid', 'is-invalid')">
                                 <div class="invalid-feedback">
-                                    Password is required
+                                    Introduce una contraseña
                                 </div>
+                            </div>
+
+                            <div *ngIf="userNotExist" class="text-danger" style="font-size: 14px;">
+                                Usuario o contraseña incorrectos
                             </div>
 
                             <div class="mb-3 text-end">

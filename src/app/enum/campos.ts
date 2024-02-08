@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 
 export enum Campos {
-    Tecnologia = 'tecnologia',
-    Ecucacion = 'educacion',
-    Sostenibilidad = 'sostenibilidad',
-    Salud = 'salud',
-    Finanzas = 'finanzas',
-    Otros = 'otros'
+    Tecnologia = 'Tecnologia',
+    Educacion = 'Educacion',
+    Sostenibilidad = 'Sostenibilidad',
+    Salud = 'Salud',
+    Finanzas = 'Finanzas',
+    Otros = 'Otros'
 }
 
 
