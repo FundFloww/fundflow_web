@@ -20,7 +20,7 @@ export const routes: Routes = [
     { 
         path: 'idea',
         children: [
-            { path: 'anadir', component: FormIdeaComponent },
+            { path: 'añadir', component: FormIdeaComponent },
             { path: ':id', component: IdeaComponent },
             { path: '', redirectTo: '/inicio', pathMatch: 'full' },
         ]

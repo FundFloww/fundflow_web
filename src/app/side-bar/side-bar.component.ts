@@ -51,7 +51,7 @@ export class SideBarComponent {
             id: 5,
             nombre: 'Añadir Idea',
             icono: 'añadir',
-            destino: '/idea/anadir',
+            destino: '/idea/añadir',
             ruta: `${this.rutaIconos}/añadir.svg`
         },
         {
