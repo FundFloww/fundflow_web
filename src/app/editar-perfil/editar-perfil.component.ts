@@ -34,8 +34,8 @@ export class EditarPerfilComponent {
     descripcion: '',
     imagen: '',
     banner: '',
-    contrasena: '',
-    confirmarContrasena: '',
+    // contrasena: '',
+    // confirmarContrasena: '',
     tipo: '',
   };
   tipoUsuario: string = '';
@@ -92,16 +92,17 @@ export class EditarPerfilComponent {
     }
   }
   
-  contraseñasCoinciden() {
-    return this.usuarioTemporal.contrasena === this.usuarioTemporal.contrasena;
-  }
+  // contraseñasCoinciden() {
+  //   return this.usuarioTemporal.contrasena === this.usuarioTemporal.contrasena;
+  // }
   
   async enviarPerfil() {
     try {
-      if(this.usuarioTemporal.contrasena === '') {
-        this.usuarioTemporal.contrasena = this.usuario?.contraseña || '';
-        this.usuarioTemporal.confirmarContrasena = this.usuario?.contraseña || '';
-      }
+      console.log(this.usuarioTemporal);
+      // if(this.usuarioTemporal.contrasena === '') {
+      //   this.usuarioTemporal.contrasena = this.usuario?.contraseña || '';
+      //   this.usuarioTemporal.confirmarContrasena = this.usuario?.contraseña || '';
+      // }
       await this.usuariosService.editUsuario(this.usuarioTemporal);
       this.router.navigate(['/perfil']);
     } catch (error) {

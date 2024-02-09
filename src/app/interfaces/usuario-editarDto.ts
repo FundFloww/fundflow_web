@@ -7,7 +7,7 @@ export interface UsuarioEditarDTO {
     descripcion: string;
     imagen: string;
     banner: string;
-    contrasena: string;
-    confirmarContrasena: string;
+    // contrasena: string;
+    // confirmarContrasena: string;
     tipo: string;
 }
