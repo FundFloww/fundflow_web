@@ -9,9 +9,12 @@ import { Router } from '@angular/router';
 import { onOpenBarFunction } from '../functions/sideBarFunctions';
 import { HeaderComponent } from '../header/header.component';
 import { IdeaNueva } from '../interfaces/ideaNueva';
+// import { StorageService } from '../servicios/storage.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
+    selector: 'app-form-idea',
+    standalone: true,
     selector: 'app-form-idea',
     standalone: true,
 
@@ -29,16 +32,23 @@ export class FormIdeaComponent {
     session: boolean | null = null;
     camposArray: string[] = camposKeys;
 
-    constructor(private usuariosService: UsuariosService, private ideasServicio: IdeasServicioService, private router: Router) { }
+    constructor(
+        private usuariosService: UsuariosService,
+        private ideasServicio: IdeasServicioService,
+        // private storageService: StorageService,
+        private router: Router
+    ) { }
 
     nuevaIdea: IdeaNueva = {
         titulo: '',
         descripcion: '',
         imagenes: [''],
+        imagenObject: [],
         campo: undefined,
         emprendedor: [],
     }
 
+    async ngOnInit() {
     async ngOnInit() {
 
         this.session = await this.usuariosService.initializeSession();
@@ -47,17 +57,25 @@ export class FormIdeaComponent {
     imagenesVacias() {
         return this.nuevaIdea.imagenes.length === 1 && this.nuevaIdea.imagenes[0] === '';
     }
+    imagenesVacias() {
+        return this.nuevaIdea.imagenes.length === 1 && this.nuevaIdea.imagenes[0] === '';
+    }
 
+    campoVacio() {
+        return this.nuevaIdea.campo === undefined;
+    }
     campoVacio() {
         return this.nuevaIdea.campo === undefined;
     }
 
     changeImage(fileInput: HTMLInputElement, index: number) {
         if (!fileInput.files || fileInput.files.length === 0) { return; }
+    changeImage(fileInput: HTMLInputElement, index: number) {
+        if (!fileInput.files || fileInput.files.length === 0) { return; }
 
         const file = fileInput.files[0];
 
-        this.nuevaIdea.imagenes[index] = URL.createObjectURL(file);
+        this.nuevaIdea.imagenObject[index] = file;
         // this.nuevaIdea.imagenes.push(URL.createObjectURL(file));
     }
 
@@ -76,9 +94,10 @@ export class FormIdeaComponent {
         // this.nuevaIdea.imagenes.splice(index, 1);
     }
 
+
     async enviarIdea() {
         try {
-            this.nuevaIdea.imagenes = this.nuevaIdea.imagenes.filter(img => img.trim() !== '');
+            await this.subirImagenes();
             this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
             console.log(this.nuevaIdea);
             await this.ideasServicio.addIdea(this.nuevaIdea);
@@ -86,6 +105,17 @@ export class FormIdeaComponent {
         } catch (error) {
             console.error(error);
         }
+    }
+
+    onOpenBar() {
+        this.open = onOpenBarFunction(this.open);
+    }
+
+    async subirImagenes() {
+        this.nuevaIdea.imagenObject.forEach(async (imagen) => {
+            // const response = await this.storageService.uploadImage('idea', imagen.name, imagen);
+            // console.log(response);
+        });
     }
 
     onOpenBar() {
