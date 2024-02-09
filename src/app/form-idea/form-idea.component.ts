@@ -1,23 +1,18 @@
-import { Component, ViewChild } from '@angular/core';
-import { SideBarComponent } from '../side-bar/side-bar.component';
-import { Idea } from '../interfaces/idea';
-import { Campos, camposKeys } from '../enum/campos';
-import { IdeasServicioService } from '../servicios/ideas-servicio.service';
-import { UsuariosService } from '../servicios/usuarios.service';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
+import { camposKeys } from '../enum/campos';
 import { onOpenBarFunction } from '../functions/sideBarFunctions';
 import { HeaderComponent } from '../header/header.component';
 import { IdeaNueva } from '../interfaces/ideaNueva';
-// import { StorageService } from '../servicios/storage.service';
-import { CommonModule } from '@angular/common';
+import { IdeasServicioService } from '../servicios/ideas-servicio.service';
+import { UsuariosService } from '../servicios/usuarios.service';
+import { SideBarComponent } from '../side-bar/side-bar.component';
 
 @Component({
     selector: 'app-form-idea',
     standalone: true,
-    selector: 'app-form-idea',
-    standalone: true,
-
     imports: [
         SideBarComponent,
         FormsModule,
@@ -35,7 +30,6 @@ export class FormIdeaComponent {
     constructor(
         private usuariosService: UsuariosService,
         private ideasServicio: IdeasServicioService,
-        // private storageService: StorageService,
         private router: Router
     ) { }
 
@@ -49,27 +43,17 @@ export class FormIdeaComponent {
     }
 
     async ngOnInit() {
-    async ngOnInit() {
-
         this.session = await this.usuariosService.initializeSession();
     }
 
     imagenesVacias() {
         return this.nuevaIdea.imagenes.length === 1 && this.nuevaIdea.imagenes[0] === '';
     }
-    imagenesVacias() {
-        return this.nuevaIdea.imagenes.length === 1 && this.nuevaIdea.imagenes[0] === '';
-    }
 
     campoVacio() {
         return this.nuevaIdea.campo === undefined;
     }
-    campoVacio() {
-        return this.nuevaIdea.campo === undefined;
-    }
 
-    changeImage(fileInput: HTMLInputElement, index: number) {
-        if (!fileInput.files || fileInput.files.length === 0) { return; }
     changeImage(fileInput: HTMLInputElement, index: number) {
         if (!fileInput.files || fileInput.files.length === 0) { return; }
 
@@ -113,13 +97,11 @@ export class FormIdeaComponent {
 
     async subirImagenes() {
         this.nuevaIdea.imagenObject.forEach(async (imagen) => {
-            // const response = await this.storageService.uploadImage('idea', imagen.name, imagen);
-            // console.log(response);
+            if (imagen === undefined) { return; }
+            const formData = new FormData();
+            formData.append('file', imagen);
+            // await this.ideasServicio.uploadImage(formData);
         });
-    }
-
-    onOpenBar() {
-        this.open = onOpenBarFunction(this.open);
     }
 
     validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
