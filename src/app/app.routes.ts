@@ -8,11 +8,13 @@ import { RegistroComponent } from './registro/registro.component';
 import { IdeaComponent } from './idea/idea.component';
 import { FormIdeaComponent } from './form-idea/form-idea.component';
 import { LogoutComponent } from './logout/logout.component';
+import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { NoticiasComponent } from './noticias/noticias.component';
 
 export const routes: Routes = [
     { path: 'inicio', component: InicioComponent },
     { path: 'perfil', component: PerfilesComponent },
+    { path: 'perfil/editar', component: EditarPerfilComponent },
     { path: 'login', component: LoginComponent },
     { path: 'logout', component: LogoutComponent },
     { path: 'registro', component: RegistroComponent },
