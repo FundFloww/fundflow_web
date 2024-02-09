@@ -3,6 +3,7 @@ import { UsuarioRegistroDTO } from '../interfaces/usuario-registro-dto';
 import { UsuarioDTO } from '../interfaces/loginDto';
 import { jwtDecode } from "jwt-decode";
 import { Router } from '@angular/router';
+import { UsuarioEditarDTO } from '../interfaces/usuario-editarDto';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,7 @@ export class UsuariosService {
 
     constructor(private router: Router) { }
 
-    urlBase = 'http://10.100.11.1:9000';
+    urlBase = 'http://10.100.14.1:9000';
 
     async addUsuario(nuevoUsuario: UsuarioRegistroDTO) {
         try {
@@ -34,6 +35,26 @@ export class UsuariosService {
         }
     }
 
+    async editUsuario(usuarioEditado: UsuarioEditarDTO) {
+        try {
+            const response = await fetch(`${this.urlBase}/api/usuarios/editar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(usuarioEditado),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al editar el usuario');
+            }
+
+            return false;
+        } catch (error) {
+            console.error('Error al realizar la operación:', error);
+            return true;
+        }
+    }
 
     async login(usuario: UsuarioDTO) {
         try {
