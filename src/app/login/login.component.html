@@ -1,14 +1,17 @@
 
 <section class="d-flex justify-content-center align-items-center bg-primary vh-100">
+    <a class="nav-link" [routerLink]="['/inicio']">
+        <div class="text-center mb-3 d-flex align-items-center logo gap-2">
+            <img src="assets/img/logo_claro.png" alt="logo" width="35" height="35">
+            <p>FundFlow</p>
+        </div>
+    </a>
     <div class="container">
         <div class="row justify-content-sm-center h-100">
             <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-8 col-sm-10">
                 <div class="card">
                     <div class="card-body px-5 py-4">
-                        <div class="text-center mb-3">
-                            <img src="assets/img/logo_color.png" alt="logo" width="50">
-                        </div>
-                        <h1 class="fs-4 card-title fw-bold mb-1 text-center text-primary">Iniciar Sesión</h1>
+                        <h1 class="fs-3 card-title fw-bold mb-1 text-center text-primary">Iniciar Sesión</h1>
                         <div class="mb-4 text-center text-welcome">¡Bienvenido/a de nuevo!</div>
                         <form (ngSubmit)="onSubmit()" class="needs-validation" novalidate="">
 
