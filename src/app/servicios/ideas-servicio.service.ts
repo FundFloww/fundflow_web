@@ -6,6 +6,7 @@ import { UsuariosService } from './usuarios.service';
 import { IdeaNueva } from '../interfaces/ideaNueva';
 import { Campos } from '../enum/campos';
 import { CamposApi } from '../enum/camposApi';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,7 @@ export class IdeasServicioService {
         private usuariosService: UsuariosService
     ) { }
 
-    private apiURL = "http://10.100.12.1:9000";
+    private apiURL = environment.baseUrl;
 
     async getIdeas(): Promise<IdeaDto[]> {
         try {

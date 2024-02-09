@@ -3,6 +3,7 @@ import { UsuarioRegistroDTO } from '../interfaces/usuario-registro-dto';
 import { UsuarioDTO } from '../interfaces/loginDto';
 import { jwtDecode } from "jwt-decode";
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,7 @@ export class UsuariosService {
 
     constructor(private router: Router) { }
 
-    urlBase = 'http://10.100.12.1:9000';
+    urlBase = environment.baseUrl;
 
     async addUsuario(nuevoUsuario: UsuarioRegistroDTO) {
         try {

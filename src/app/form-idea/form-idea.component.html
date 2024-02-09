@@ -15,13 +15,21 @@
                         <div class="mb-3">
                             <label for="titulo" class="form-label h4">Titulo</label>
                             <input type="text" class="form-control" id="titulo" [(ngModel)]="nuevaIdea.titulo"
-                                name="titulo" placeholder="Introduce el título de tu idea..." required>
+                                name="titulo" placeholder="Introduce el título de tu idea..." required autofocus minlength="5" #titulo="ngModel" 
+                                [ngClass]="validClasses(titulo, 'is-valid', 'is-invalid')">
+                                <div class="invalid-feedback">
+                                    Título requerido (mínimo 5 carácteres)
+                                </div>
                         </div>
                         <div class="mb-3">
                             <label for="descripción" class="form-label h4">Descripción</label>
                             <textarea id="textArea" placeholder="Introduce aquí la descripción de tu idea..."
                                 class="form-control" [(ngModel)]="nuevaIdea.descripcion" required
-                                name="descripcion"></textarea>
+                                name="descripcion" #descripcion="ngModel" minlength="5"
+                                [ngClass]="validClasses(descripcion, 'is-valid', 'is-invalid')"></textarea>
+                            <div class="invalid-feedback">
+                                Descripción requerida (mínimo 5 carácteres)
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="imagen" class="form-label h4">Imagen</label>
@@ -33,15 +41,21 @@
                             </div>
                             }
                         </div>
-                        <button class="btn btn-primary text-light mb-3" (click)="agregarOtraImagen($event)">Agregar otra
-                            imagen</button>
+                        <button class="btn btn-primary text-light mb-3" (click)="agregarOtraImagen($event)">
+                            Agregar otra imagen
+                        </button>
                         <div class="mb-3">
                             <label for="campo" class="form-label h4">Campo</label>
-                            <select class="form-select mb-3" [(ngModel)]="nuevaIdea.campo" name="campo" required>
+                            <select class="form-select" [(ngModel)]="nuevaIdea.campo" name="campo" required 
+                            #campo="ngModel" [ngClass]="validClasses(campo, 'is-valid', 'is-invalid')">
+                                <option value="" selected disabled>Selecciona un campo</option>
                                 @for (campo of camposArray; track $index ) {
                                 <option value={{campo.toUpperCase()}}>{{campo}}</option>
                                 }
                             </select>
+                            <div class="invalid-feedback">
+                                Campo requerido
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary text-light"
                             [disabled]="miFormulario.invalid || imagenesVacias() || campoVacio()">Enviar</button>

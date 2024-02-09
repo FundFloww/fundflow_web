@@ -4,18 +4,26 @@ import { Idea } from '../interfaces/idea';
 import { Campos, camposKeys } from '../enum/campos';
 import { IdeasServicioService } from '../servicios/ideas-servicio.service';
 import { UsuariosService } from '../servicios/usuarios.service';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { onOpenBarFunction } from '../functions/sideBarFunctions';
 import { HeaderComponent } from '../header/header.component';
 import { IdeaNueva } from '../interfaces/ideaNueva';
 // import { StorageService } from '../servicios/storage.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-form-idea',
     standalone: true,
+    selector: 'app-form-idea',
+    standalone: true,
 
-    imports: [SideBarComponent, FormsModule, HeaderComponent],
+    imports: [
+        SideBarComponent,
+        FormsModule,
+        HeaderComponent,
+        CommonModule
+    ],
     templateUrl: './form-idea.component.html',
     styleUrl: './form-idea.component.scss'
 })
@@ -41,6 +49,7 @@ export class FormIdeaComponent {
     }
 
     async ngOnInit() {
+    async ngOnInit() {
 
         this.session = await this.usuariosService.initializeSession();
     }
@@ -48,11 +57,19 @@ export class FormIdeaComponent {
     imagenesVacias() {
         return this.nuevaIdea.imagenes.length === 1 && this.nuevaIdea.imagenes[0] === '';
     }
+    imagenesVacias() {
+        return this.nuevaIdea.imagenes.length === 1 && this.nuevaIdea.imagenes[0] === '';
+    }
 
     campoVacio() {
         return this.nuevaIdea.campo === undefined;
     }
+    campoVacio() {
+        return this.nuevaIdea.campo === undefined;
+    }
 
+    changeImage(fileInput: HTMLInputElement, index: number) {
+        if (!fileInput.files || fileInput.files.length === 0) { return; }
     changeImage(fileInput: HTMLInputElement, index: number) {
         if (!fileInput.files || fileInput.files.length === 0) { return; }
 
@@ -77,6 +94,7 @@ export class FormIdeaComponent {
         // this.nuevaIdea.imagenes.splice(index, 1);
     }
 
+
     async enviarIdea() {
         try {
             await this.subirImagenes();
@@ -100,4 +118,14 @@ export class FormIdeaComponent {
         });
     }
 
+    onOpenBar() {
+        this.open = onOpenBarFunction(this.open);
+    }
+
+    validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
+        return {
+            [validClass]: ngModel.touched && ngModel.valid,
+            [errorClass]: ngModel.touched && ngModel.invalid
+        };
+    }
 }

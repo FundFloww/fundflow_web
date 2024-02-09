@@ -65,8 +65,12 @@ export class InicioComponent {
     async filtrarIdeas() {
         try {
             const camposEnum: CamposApi[] = this.camposSeleccionados.map(campo => CamposApi[campo as keyof typeof CamposApi]);
-            this.ideas = await this.ideaService.getIdeasFiltradas(camposEnum);
-            this.ideasNotFound = (this.ideas.length === 0) ? true : false;
+            if(camposEnum.length == 0) {
+                this.ngOnInit();
+            } else {
+                this.ideas = await this.ideaService.getIdeasFiltradas(camposEnum);
+                this.ideasNotFound = (this.ideas.length === 0) ? true : false;
+            }
         } catch (error) {
             console.error("Ocurrió un error al filtrar las ideas: ", error);
         }
