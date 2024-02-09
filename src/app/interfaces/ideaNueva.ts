@@ -5,8 +5,7 @@ export interface IdeaNueva {
     id?: number;
     titulo: string;
     descripcion: string;
-    imagenes: string[];
-    imagenObject: File[];
+    imagenes: File[];
     campo?: Campos;
     emprendedor: Usuario[];
 }

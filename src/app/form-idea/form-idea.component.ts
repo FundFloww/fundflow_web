@@ -36,8 +36,7 @@ export class FormIdeaComponent {
     nuevaIdea: IdeaNueva = {
         titulo: '',
         descripcion: '',
-        imagenes: [''],
-        imagenObject: [],
+        imagenes: [],
         campo: undefined,
         emprendedor: [],
     }
@@ -47,7 +46,7 @@ export class FormIdeaComponent {
     }
 
     imagenesVacias() {
-        return this.nuevaIdea.imagenes.length === 1 && this.nuevaIdea.imagenes[0] === '';
+        return this.nuevaIdea.imagenes.length === 1 && this.nuevaIdea.imagenes[0] === null;
     }
 
     campoVacio() {
@@ -59,20 +58,19 @@ export class FormIdeaComponent {
 
         const file = fileInput.files[0];
 
-        this.nuevaIdea.imagenObject[index] = file;
-        // this.nuevaIdea.imagenes.push(URL.createObjectURL(file));
+        this.nuevaIdea.imagenes[index] = file;
     }
 
     agregarOtraImagen(evento: Event) {
         evento.preventDefault();
-        this.nuevaIdea.imagenes.push('');
+        this.nuevaIdea.imagenes.push(new File([], ''));
     }
 
     borrarImagen(index: number) {
         let opcionEliminada: HTMLElement = document.getElementsByClassName("imagen")[index] as HTMLElement;
         console.log(opcionEliminada);
         opcionEliminada.style.display = "none";
-        // this.nuevaIdea.imagenes = this.nuevaIdea.imagenes.filter((_, i) => i !== index);
+        this.nuevaIdea.imagenes = this.nuevaIdea.imagenes.filter((_, i) => i !== index);
 
         // console.log(this.nuevaIdea.imagenes[index]);
         // this.nuevaIdea.imagenes.splice(index, 1);
@@ -81,11 +79,11 @@ export class FormIdeaComponent {
 
     async enviarIdea() {
         try {
-            await this.subirImagenes();
-            this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
-            console.log(this.nuevaIdea);
-            await this.ideasServicio.addIdea(this.nuevaIdea);
-            this.router.navigate(['/inicio']);
+            const urls = await this.subirImagenes();
+            // this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
+            // console.log(this.nuevaIdea);
+            // await this.ideasServicio.addIdea(this.nuevaIdea);
+            // this.router.navigate(['/inicio']);
         } catch (error) {
             console.error(error);
         }
@@ -96,12 +94,22 @@ export class FormIdeaComponent {
     }
 
     async subirImagenes() {
-        this.nuevaIdea.imagenObject.forEach(async (imagen) => {
-            if (imagen === undefined) { return; }
+        const urls: string[] = [];
+        const baseURL = 'https://fundflow.blob.core.windows.net/ideas/';
+
+        this.nuevaIdea.imagenes.forEach(async (imagen) => {
             const formData = new FormData();
-            formData.append('file', imagen);
-            // await this.ideasServicio.uploadImage(formData);
+            formData.append('imagen', imagen);
+    
+            await fetch('http://localhost:9000/api/blob/upload', {
+                method: 'POST',
+                body: formData
+            });
+            
+            urls.push(baseURL + imagen.name);
         });
+
+        return urls;
     }
 
     validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
