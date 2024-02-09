@@ -17,6 +17,21 @@
 section {
     background: rgb(56, 172, 250);
     background: linear-gradient(135deg, rgba(56, 172, 250, 1) 0%, rgba(47, 132, 192, 1) 43%, rgba(30, 61, 88, 1) 96%);
+    position: relative;
+}
+
+.logo{
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.logo p{
+    font-family: 'Sora', sans-serif;
+    color: white;
+    font-weight: 700;
+    font-size: 35px;
+    margin: 0 !important; 
 }
 
 div.card {
@@ -65,4 +80,8 @@ div.card-footer div a, form div a{
 
 .is-invalid{
     border: 2px solid #DA1818 !important;
+}
+
+.is-valid{
+    background-image: none !important;
 }

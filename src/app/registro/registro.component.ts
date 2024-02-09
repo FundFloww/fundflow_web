@@ -4,11 +4,17 @@ import { Router } from '@angular/router';
 import { UsuarioRegistroDTO } from "../interfaces/usuario-registro-dto";
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
     selector: 'app-registro',
     standalone: true,
-    imports: [FormsModule, CommonModule],
+    imports: [
+        FormsModule, 
+        CommonModule,
+        RouterModule
+    ],
     templateUrl: './registro.component.html',
     styleUrl: './registro.component.scss'
 })
