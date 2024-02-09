@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { onOpenBarFunction } from '../functions/sideBarFunctions';
 import { HeaderComponent } from '../header/header.component';
 import { IdeaNueva } from '../interfaces/ideaNueva';
-import { StorageService } from '../servicios/storage.service';
+// import { StorageService } from '../servicios/storage.service';
 
 @Component({
     selector: 'app-form-idea',
@@ -27,7 +27,7 @@ export class FormIdeaComponent {
     constructor(
         private usuariosService: UsuariosService,
         private ideasServicio: IdeasServicioService,
-        private storageService: StorageService,
+        // private storageService: StorageService,
         private router: Router
     ) { }
 
@@ -95,8 +95,8 @@ export class FormIdeaComponent {
 
     async subirImagenes() {
         this.nuevaIdea.imagenObject.forEach(async (imagen) => {
-            const response = await this.storageService.uploadImage('idea', imagen.name, imagen);
-            console.log(response);
+            // const response = await this.storageService.uploadImage('idea', imagen.name, imagen);
+            // console.log(response);
         });
     }
 
