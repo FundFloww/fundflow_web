@@ -58,13 +58,22 @@ input[type='radio']{
     transition: color 0.15s ease-in;
 }
 
-div.tabs label{
-    color: #b6b9be;
+// div.tabs label{
+//     color: #b6b9be;
+// }
+
+// input[type='radio']:checked + label{
+//     color: #303236;
+//     font-weight: 700;
+// }
+
+div.tabs label.btn{
+    font-size: 14px;
+    width: 100%;
 }
 
-input[type='radio']:checked + label{
-    color: #303236;
-    font-weight: 700;
+.btn-check:checked + .btn {
+    color: #FFFFFF !important;
 }
 
 div.card {

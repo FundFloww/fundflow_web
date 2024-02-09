@@ -43,7 +43,7 @@ export class RegistroComponent {
     async addNewUsuario() {
 
         this.userExists = await this.usuariosService.addUsuario(this.newUsuario);
-
+        
         if (!this.userExists) {
             this.goBack();
         }
