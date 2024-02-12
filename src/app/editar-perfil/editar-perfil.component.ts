@@ -12,6 +12,7 @@ import { TipoUsuario } from '../enum/tipo-usuario';
 import { ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UsuarioEditarDTO } from '../interfaces/usuario-editarDto';
+import { UsuarioEditarContraseñaDTO } from '../interfaces/usuario-editar-contraseñaDTO';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -34,11 +35,14 @@ export class EditarPerfilComponent {
     descripcion: '',
     imagen: '',
     banner: '',
-    // contrasena: '',
-    // confirmarContrasena: '',
     tipo: '',
   };
   tipoUsuario: string = '';
+  usuarioEditarContrasena: UsuarioEditarContraseñaDTO = {
+    correo: '',
+    nuevaContrasena: '',
+    confirmarContrasena:  '',
+  }
 
   constructor(private usuariosService: UsuariosService, private router: Router) { }
 
@@ -54,6 +58,8 @@ export class EditarPerfilComponent {
     this.usuarioTemporal.banner = this.usuario?.banner || 'https://as2.ftcdn.net/v2/jpg/04/31/86/03/1000_F_431860321_8JEaSC9UvONsxTWzxy4SvnsJklPbO7RM.jpg';
     this.usuarioTemporal.tipo = this.usuario?.tipo || '';
     this.tipoUsuario = this.usuario?.tipo || '';
+
+    this.usuarioEditarContrasena.correo = this.usuario?.correo || '';
   }
 
   ngOnChanges(changes: { [propName: string]: SimpleChange}) {
@@ -92,18 +98,26 @@ export class EditarPerfilComponent {
     }
   }
   
-  // contraseñasCoinciden() {
-  //   return this.usuarioTemporal.contrasena === this.usuarioTemporal.contrasena;
-  // }
+  contrasenasCoinciden() {
+    return this.usuarioEditarContrasena.nuevaContrasena === this.usuarioEditarContrasena.confirmarContrasena;
+  }
   
   async enviarPerfil() {
     try {
-      console.log(this.usuarioTemporal);
       // if(this.usuarioTemporal.contrasena === '') {
       //   this.usuarioTemporal.contrasena = this.usuario?.contraseña || '';
       //   this.usuarioTemporal.confirmarContrasena = this.usuario?.contraseña || '';
       // }
       await this.usuariosService.editUsuario(this.usuarioTemporal);
+      this.router.navigate(['/perfil']);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async enviarContrasena() {
+    try {
+      await this.usuariosService.editContrasena(this.usuarioEditarContrasena)
       this.router.navigate(['/perfil']);
     } catch (error) {
       console.error(error);
