@@ -33,7 +33,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="imagen" class="form-label h4">Imagen</label>
-                            @for (imagen of nuevaIdea.imagenes; track $index) {
+                            @for (imagen of nuevaIdea.imagenesFile; track $index) {
                             <div class="imagen">
                                 <input type="file" class="form-control mb-1" name="imagen" #fileImage
                                     (change)="changeImage(fileImage, $index)" required>

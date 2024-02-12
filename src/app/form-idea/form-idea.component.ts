@@ -9,6 +9,8 @@ import { IdeaNueva } from '../interfaces/ideaNueva';
 import { IdeasServicioService } from '../servicios/ideas-servicio.service';
 import { UsuariosService } from '../servicios/usuarios.service';
 import { SideBarComponent } from '../side-bar/side-bar.component';
+import { environment } from '../../environments/environment';
+import { ImagenesService } from '../servicios/imagenes.service';
 
 @Component({
     selector: 'app-form-idea',
@@ -30,6 +32,7 @@ export class FormIdeaComponent {
     constructor(
         private usuariosService: UsuariosService,
         private ideasServicio: IdeasServicioService,
+        private imagenesService: ImagenesService,
         private router: Router
     ) { }
 
@@ -37,6 +40,7 @@ export class FormIdeaComponent {
         titulo: '',
         descripcion: '',
         imagenes: [],
+        imagenesFile: [],
         campo: undefined,
         emprendedor: [],
     }
@@ -58,32 +62,26 @@ export class FormIdeaComponent {
 
         const file = fileInput.files[0];
 
-        this.nuevaIdea.imagenes[index] = file;
+        this.nuevaIdea.imagenesFile[index] = file;   
     }
 
     agregarOtraImagen(evento: Event) {
         evento.preventDefault();
-        this.nuevaIdea.imagenes.push(new File([], ''));
+        this.nuevaIdea.imagenesFile.push(new File([], ''));
     }
 
     borrarImagen(index: number) {
-        let opcionEliminada: HTMLElement = document.getElementsByClassName("imagen")[index] as HTMLElement;
-        console.log(opcionEliminada);
-        opcionEliminada.style.display = "none";
-        this.nuevaIdea.imagenes = this.nuevaIdea.imagenes.filter((_, i) => i !== index);
-
-        // console.log(this.nuevaIdea.imagenes[index]);
-        // this.nuevaIdea.imagenes.splice(index, 1);
+        // Eliminar imagen funciona pero la apariencia no es correcta, se muestra el nombre anterior
+        this.nuevaIdea.imagenesFile = this.nuevaIdea.imagenesFile.filter((_, i) => i !== index);
     }
 
 
     async enviarIdea() {
         try {
-            const urls = await this.subirImagenes();
-            // this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
-            // console.log(this.nuevaIdea);
-            // await this.ideasServicio.addIdea(this.nuevaIdea);
-            // this.router.navigate(['/inicio']);
+            this.nuevaIdea.imagenes = await this.imagenesService.subirImagenes(this.nuevaIdea.imagenesFile);
+            this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
+            await this.ideasServicio.addIdea(this.nuevaIdea);
+            this.router.navigate(['/inicio']);
         } catch (error) {
             console.error(error);
         }
@@ -91,25 +89,6 @@ export class FormIdeaComponent {
 
     onOpenBar() {
         this.open = onOpenBarFunction(this.open);
-    }
-
-    async subirImagenes() {
-        const urls: string[] = [];
-        const baseURL = 'https://fundflow.blob.core.windows.net/ideas/';
-
-        this.nuevaIdea.imagenes.forEach(async (imagen) => {
-            const formData = new FormData();
-            formData.append('imagen', imagen);
-    
-            await fetch('http://localhost:9000/api/blob/upload', {
-                method: 'POST',
-                body: formData
-            });
-            
-            urls.push(baseURL + imagen.name);
-        });
-
-        return urls;
     }
 
     validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
