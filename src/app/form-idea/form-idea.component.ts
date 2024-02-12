@@ -9,6 +9,8 @@ import { IdeaNueva } from '../interfaces/ideaNueva';
 import { IdeasServicioService } from '../servicios/ideas-servicio.service';
 import { UsuariosService } from '../servicios/usuarios.service';
 import { SideBarComponent } from '../side-bar/side-bar.component';
+import { environment } from '../../environments/environment';
+import { ImagenesService } from '../servicios/imagenes.service';
 
 @Component({
     selector: 'app-form-idea',
@@ -30,14 +32,15 @@ export class FormIdeaComponent {
     constructor(
         private usuariosService: UsuariosService,
         private ideasServicio: IdeasServicioService,
+        private imagenesService: ImagenesService,
         private router: Router
     ) { }
 
     nuevaIdea: IdeaNueva = {
         titulo: '',
         descripcion: '',
-        imagenes: [''],
-        imagenObject: [],
+        imagenes: [],
+        imagenesFile: [],
         campo: undefined,
         emprendedor: [],
     }
@@ -47,7 +50,7 @@ export class FormIdeaComponent {
     }
 
     imagenesVacias() {
-        return this.nuevaIdea.imagenes.length === 1 && this.nuevaIdea.imagenes[0] === '';
+        return this.nuevaIdea.imagenes.length === 1 && this.nuevaIdea.imagenes[0] === null;
     }
 
     campoVacio() {
@@ -59,31 +62,24 @@ export class FormIdeaComponent {
 
         const file = fileInput.files[0];
 
-        this.nuevaIdea.imagenObject[index] = file;
-        // this.nuevaIdea.imagenes.push(URL.createObjectURL(file));
+        this.nuevaIdea.imagenesFile[index] = file;   
     }
 
     agregarOtraImagen(evento: Event) {
         evento.preventDefault();
-        this.nuevaIdea.imagenes.push('');
+        this.nuevaIdea.imagenesFile.push(new File([], ''));
     }
 
     borrarImagen(index: number) {
-        let opcionEliminada: HTMLElement = document.getElementsByClassName("imagen")[index] as HTMLElement;
-        console.log(opcionEliminada);
-        opcionEliminada.style.display = "none";
-        // this.nuevaIdea.imagenes = this.nuevaIdea.imagenes.filter((_, i) => i !== index);
-
-        // console.log(this.nuevaIdea.imagenes[index]);
-        // this.nuevaIdea.imagenes.splice(index, 1);
+        // Eliminar imagen funciona pero la apariencia no es correcta, se muestra el nombre anterior
+        this.nuevaIdea.imagenesFile = this.nuevaIdea.imagenesFile.filter((_, i) => i !== index);
     }
 
 
     async enviarIdea() {
         try {
-            await this.subirImagenes();
+            this.nuevaIdea.imagenes = await this.imagenesService.subirImagenes(this.nuevaIdea.imagenesFile);
             this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
-            console.log(this.nuevaIdea);
             await this.ideasServicio.addIdea(this.nuevaIdea);
             this.router.navigate(['/inicio']);
         } catch (error) {
@@ -93,15 +89,6 @@ export class FormIdeaComponent {
 
     onOpenBar() {
         this.open = onOpenBarFunction(this.open);
-    }
-
-    async subirImagenes() {
-        this.nuevaIdea.imagenObject.forEach(async (imagen) => {
-            if (imagen === undefined) { return; }
-            const formData = new FormData();
-            formData.append('file', imagen);
-            // await this.ideasServicio.uploadImage(formData);
-        });
     }
 
     validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
