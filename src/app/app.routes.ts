@@ -13,8 +13,8 @@ import { NoticiasComponent } from './noticias/noticias.component';
 
 export const routes: Routes = [
     { path: 'inicio', component: InicioComponent },
-    { path: 'perfil', component: PerfilesComponent },
     { path: 'perfil/editar', component: EditarPerfilComponent },
+    { path: 'perfil/:id', component: PerfilesComponent },
     { path: 'login', component: LoginComponent },
     { path: 'logout', component: LogoutComponent },
     { path: 'registro', component: RegistroComponent },

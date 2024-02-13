@@ -24,6 +24,7 @@ export class PerfilesComponent {
   open: boolean = true;
   session: boolean | null = null;
   usuario!: Usuario | null;
+  idUsuarioIdentificado: number;
   tipo: TipoUsuario | undefined;
 
   constructor(

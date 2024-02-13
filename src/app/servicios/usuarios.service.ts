@@ -139,6 +139,26 @@ export class UsuariosService {
         }
     }
 
+    async getUsuarioPorId(id: number) {
+
+        try {
+            const response = await fetch(`${this.urlBase}/api/usuarios/${id}`, {
+                method: 'GET',
+                // headers: {
+                //     'Authorization': `Bearer ${this.getToken()}`
+                // }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al obtener usuario');
+            }
+
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
     getToken() {
         let token = localStorage.getItem('token');
         if (token === null) {
