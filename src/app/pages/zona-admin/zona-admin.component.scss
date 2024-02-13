@@ -1,0 +1,17 @@
+.root-element {
+    min-height: 100vh;
+}
+
+#side-bar, #content {
+    transition: 0.3s all;
+}
+
+.col-1-p {
+    flex: 0 0 auto;
+    width: 8.33333333%;
+}
+
+.col-11-p {
+    flex: 0 0 auto;
+    width: 91.66666667%;
+}

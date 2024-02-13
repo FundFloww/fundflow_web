@@ -3,7 +3,7 @@ import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-side-bar-admin',
+  selector: 'side-bar-admin',
   standalone: true,
   imports: [SideBarElementoComponent],
   templateUrl: './side-bar-admin.component.html',
@@ -22,14 +22,14 @@ export class SideBarAdminComponent {
         {
             id: 1,
             nombre: 'Usuarios',
-            icono: 'usuarios',
+            icono: '/admin/usuarios',
             destino: '/',
             ruta: `${this.rutaIconos}/usuarios.svg`
         },
         {
             id: 2,
             nombre: 'Ideas',
-            icono: 'ideas',
+            icono: '/admin/ideas',
             destino: '/',
             ruta: `${this.rutaIconos}/ideas.svg`
         },

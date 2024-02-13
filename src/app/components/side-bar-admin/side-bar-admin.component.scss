@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap');
+
+.bg-light-l {
+    background-color: #ffffff;
+}
+
+.bg-primary-d {
+    background-color: #1E3D58 !important;
+}
+
+.f-sora {
+    font-family: 'Sora', sans-serif;
+}
+
+.f-sora-bold {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700 !important;
+}
+
+.root {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    min-width: 50px;
+    min-height: 100vh;
+    border-right: 3px solid #b5b5b5;
+    transition: 0.3s all;
+    z-index: 100;
+}
+
+.root-element {
+    position: relative;
+}
+
+.default-bar {
+    min-height: 72px;
+}
+
+.title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+}
+
+.title-bar > * {
+    cursor: pointer;
+}
+
+.title-bar > img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-bottom: 8px;
+}
+
+.options {
+    padding: 20px;
+}
+
+.abrir-cerrar-bar {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5px;
+    background-color: white;
+    border: solid 1px #b5b5b5;
+    border-radius: 10px;
+    top: 80px;
+    right: -15px;
+    cursor: pointer;
+}
+
+.change-theme {
+    position: fixed;
+    bottom: 0;
+    transition: none !important;
+    min-height: 0 !important;
+    padding: 19px;
+    box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.1);
+    margin-right: 2px;
+}
+
+.col-1-p {
+    flex: 0 0 auto;
+    width: 8.33333333%;
+}
+
+.col-11-p {
+    flex: 0 0 auto;
+    width: 91.66666667%;
+}
+
+.small-bar {
+    .title-bar > h3 {
+        display: none;
+    }
+
+    .title-bar > img {
+        margin: 0px;
+    } 
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .side-element {
+        label {
+            display: none;
+        }
+    
+        img {
+            width: 30px;
+            height: 30px;
+        }
+    }
+}
+
+
+@media (max-width: 1300px) {
+    .options {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 1200px) {
+    .title-bar > h3 {
+        display: none;
+    }
+
+    .title-bar > img {
+        margin: 0px;
+    }
+
+
+}
+
+@media (max-width: 900px) {
+    .abrir-cerrar-bar {
+        display: none;
+    }
+}
