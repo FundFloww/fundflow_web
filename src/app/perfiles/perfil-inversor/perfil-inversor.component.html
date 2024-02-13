@@ -8,22 +8,27 @@
         ></app-side-bar>
         <div class="col-10 mx-0 bg-light h-100" id="content">
             <div class="row bg-light">
-                <div class="banner bg-primary mx-0">
-                    <img src="" alt="banner_perfil">
+                <div class="banner bg-primary mx-0 px-0">
+                    <img src="{{usuario.banner}}" class="foto-banner mx-0" alt="banner_perfil">
                 </div>
                 <div class="col-md-4 col-12 bg-light-l mx-0 ps-5">
                     <div class="info-perfil d-grid gap-4">
                         <div>
-                            <img src="https://png.pngtree.com/background/20230524/original/pngtree-sad-pictures-for-desktop-hd-backgrounds-picture-image_2705986.jpg"
+                            <img src="{{usuario.imagen}}"
                                 alt="foto_perfil" class="rounded-circle foto-perfil">
                         </div>
                         <div>
                             <p class="h2"><strong>{{ this.usuario?.nombre }} {{this.usuario?.apellidos}}</strong></p>
                             <p class="h5 text-muted">{{ this.usuario?.profesion }}</p>
                         </div>
-                        <div>
+                        <div *ngIf="!mismoId ; else elseID">
                             <a href="#" class="btn btn-primary text-light">Enviar mensaje</a>
                         </div>
+                        <ng-template #elseID>
+                            <div>
+                                <a class="btn btn-primary text-light" [routerLink]="['/perfil/editar']">Editar perfil</a>
+                            </div>
+                        </ng-template>
                     </div>
                 </div>
                 <div class="col-md-8 col-12 bg-light-l pt-5">

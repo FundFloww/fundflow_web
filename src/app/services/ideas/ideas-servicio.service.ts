@@ -41,11 +41,11 @@ export class IdeasServicioService {
         }
     }
 
-    async getIdeasUser(): Promise<IdeaDto[]> {
-        const userId = this.usuariosService.getUserId();
+    async getIdeasUser(id: number): Promise<IdeaDto[]> {
+        // const userId = this.usuariosService.getUserId();
 
         try {
-            const response = await fetch(`${this.apiURL}/api/ideas/usuario/${userId}`);
+            const response = await fetch(`${this.apiURL}/api/ideas/usuario/${id}`);
             const datos = await response.json();
             return datos;
         } catch (error) {
@@ -54,11 +54,11 @@ export class IdeasServicioService {
         }
     }
 
-    async getIdeasInvertidas(): Promise<IdeaDto[]> {
-        const userId = this.usuariosService.getUserId();
+    async getIdeasInvertidas(id: number): Promise<IdeaDto[]> {
+        // const userId = this.usuariosService.getUserId();
 
         try{
-            const response = await fetch(`${this.apiURL}/api/ideas/inversor/${userId}`);
+            const response = await fetch(`${this.apiURL}/api/ideas/inversor/${id}`);
             const datos = await response.json();
             return datos;
         } catch (error) {
@@ -85,8 +85,8 @@ export class IdeasServicioService {
         }
     }
 
-    async getIdeasGuardadas(): Promise<IdeaDto[]> {
-        let usuario = await this.usuariosService.getUsuario();
+    async getIdeasGuardadas(id: number): Promise<IdeaDto[]> {
+        let usuario = await this.usuariosService.getUsuarioPorId(id);
         let ideasGuardadas: IdeaDto[] = [];
         for (const idea of usuario.guardados)
         {

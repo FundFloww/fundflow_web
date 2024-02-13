@@ -8,6 +8,7 @@ import { UsuariosService } from '../services/usuarios/usuarios.service';
 import { Usuario } from '../interfaces/usuario';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PerfilEmprendedorComponent } from './perfil-emprendedor/perfil-emprendedor.component';
 import { PerfilInversorComponent } from './perfil-inversor/perfil-inversor.component';
 import { TipoUsuario } from '../enum/tipo-usuario';
@@ -24,17 +25,22 @@ export class PerfilesComponent {
   open: boolean = true;
   session: boolean | null = null;
   usuario!: Usuario | null;
+  idUsuario: number | undefined;
   tipo: TipoUsuario | undefined;
 
   constructor(
       private ideaService: IdeasServicioService, 
-      private usuariosService: UsuariosService
+      private usuariosService: UsuariosService,
+      private route: ActivatedRoute
   ) { }
 
   async ngOnInit() {
-      this.ideas = await this.ideaService.getIdeasUser();
+    this.route.params.subscribe(params => {
+      this.idUsuario = params['id'];
+    })
+      // this.ideas = await this.ideaService.getIdeasUser();
       this.session = await this.usuariosService.initializeSession();
-      this.usuario = await this.usuariosService.getUsuario();
+      this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario ?? 0);
   }
 
   onOpenBar() {

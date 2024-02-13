@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Usuario } from '../../interfaces/usuario';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-header',
@@ -9,4 +11,17 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  session: boolean | null = null;
+  usuario!: Usuario | null;
+  idUsuarioIdentificado: number | undefined;
+
+  constructor(
+    private usuariosService: UsuariosService
+) { }
+
+async ngOnInit() {
+  this.session = await this.usuariosService.initializeSession();
+  this.idUsuarioIdentificado = await Number(this.usuariosService.getUserId());
+  this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuarioIdentificado);
+}
 }
