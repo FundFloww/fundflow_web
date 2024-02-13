@@ -8,6 +8,7 @@ import { Usuario } from '../../interfaces/usuario';
 import { UsuarioEditarDTO } from '../../interfaces/usuario-editarDto';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { ImagenesService } from '../../services/imagenes/imagenes.service';
+import { UsuarioEditarContraseñaDTO } from '../../interfaces/usuario-editar-contraseñaDTO';
 
 @Component({
     selector: 'app-editar-perfil',
@@ -34,6 +35,11 @@ export class EditarPerfilComponent {
         // confirmarContrasena: '',
         tipo: '',
     };
+    usuarioEditarContrasena: UsuarioEditarContraseñaDTO = {
+        correo: '',
+        nuevaContrasena: '',
+        confirmarContrasena:  '',
+    };
 
     tipoUsuario: string = '';
     imagenPerfil: File = new File([""], "filename");
@@ -57,6 +63,8 @@ export class EditarPerfilComponent {
         this.usuarioTemporal.banner = this.usuario?.banner || 'https://as2.ftcdn.net/v2/jpg/04/31/86/03/1000_F_431860321_8JEaSC9UvONsxTWzxy4SvnsJklPbO7RM.jpg';
         this.usuarioTemporal.tipo = this.usuario?.tipo || '';
         this.tipoUsuario = this.usuario?.tipo || '';
+
+        this.usuarioEditarContrasena.correo = this.usuario?.correo || '';
     }
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
@@ -104,9 +112,9 @@ export class EditarPerfilComponent {
         return;
     }
 
-    // contraseñasCoinciden() {
-    //   return this.usuarioTemporal.contrasena === this.usuarioTemporal.contrasena;
-    // }
+    contrasenasCoinciden() {
+        return this.usuarioEditarContrasena.nuevaContrasena === this.usuarioEditarContrasena.confirmarContrasena;
+      }
 
     async enviarPerfil() {
         try {
@@ -137,4 +145,13 @@ export class EditarPerfilComponent {
 
         return imagenAntigua;
     }
+
+    async enviarContrasena() {
+        try {
+          await this.usuariosService.editContrasena(this.usuarioEditarContrasena)
+          this.router.navigate(['/perfil']);
+        } catch (error) {
+          console.error(error);
+        }
+      }
 }
