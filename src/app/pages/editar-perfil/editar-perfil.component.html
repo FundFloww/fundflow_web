@@ -6,11 +6,11 @@
             <form (ngSubmit)="enviarPerfil()" #registroForm="ngForm">
                 <div class="row bg-light-l">
                     <div class="banner foto-perfil-containerbg-primary mx-0 px-0" (click)="openFileInput()">
-                        <img src="{{this.usuarioTemporal?.banner}}" alt="banner_perfil" class="foto-banner mx-0">
+                        <img src="{{this.usuarioTemporal.banner}}" alt="banner_perfil" class="foto-banner mx-0">
                         <input class="foto-banner-cambio" type="file" #fileBanner (change)="onFileSelected($event, 'banner')">
                     </div>
                     <div class="foto-perfil-container">
-                        <img src="{{this.usuarioTemporal?.imagen}}" alt="foto_perfil" class="rounded-circle foto-perfil">
+                        <img src="{{this.usuarioTemporal.imagen}}" alt="foto_perfil" class="rounded-circle foto-perfil">
                         <input class="foto-perfil-cambio rounded-circle" type="file" #filePerfil (change)="onFileSelected($event, 'perfil')">
                     </div>
                     <div class="bg-light-l mx-0">
@@ -35,7 +35,7 @@
                             </div>
                             <div class="correo input-box">
                                 <label for="correo" class="form-label h3"><strong>Correo</strong></label>
-                                <input id="correo" type="email" class="form-control" value="{{this.usuario?.correo}}" [(ngModel)]="usuarioTemporal.correo" #correo="ngModel" name="correo">
+                                <input id="correo" type="email" class="form-control" value="{{this.usuario.correo}}" [(ngModel)]="usuarioTemporal.correo" #correo="ngModel" name="correo">
                             </div>
                             <!-- <div class="contraseña input-box">
                                 <label for="contraseña" class="form-label h3"><strong>Cambiar contraseña</strong></label>
@@ -48,10 +48,10 @@
                             <div class="tipo">
                                 <label class="form-label h3"><strong>Tipo de usuario</strong></label>
                                 <div class="tipoUsuario btn-group input-box" role="group" aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="btnradio" [value]="'EMPRENDEDOR'" id="emprendedor" autocomplete="off" [checked]="usuario?.tipo == 'EMPRENDEDOR'" (click)="usuarioTemporal.tipo = 'EMPRENDEDOR'" name="tipo">
+                                    <input type="radio" class="btn-check" name="btnradio" [value]="'EMPRENDEDOR'" id="emprendedor" autocomplete="off" [checked]="usuario.tipo == 'EMPRENDEDOR'" (click)="usuarioTemporal.tipo = 'EMPRENDEDOR'" name="tipo">
                                     <label for="emprendedor" class="btn btn-outline-primary">Emprendedor</label>
                                     
-                                    <input type="radio" class="btn-check" name="btnradio" [value]="'INVERSOR'" id="inversor" autocomplete="off" [checked]="usuario?.tipo == 'INVERSOR'" name="tipo">
+                                    <input type="radio" class="btn-check" name="btnradio" [value]="'INVERSOR'" id="inversor" autocomplete="off" [checked]="usuario.tipo == 'INVERSOR'" name="tipo">
                                     <label for="inversor" class="btn btn-outline-primary" (click)="usuarioTemporal.tipo = 'INVERSOR'">Inversor</label>
                                 </div>
                             </div>
