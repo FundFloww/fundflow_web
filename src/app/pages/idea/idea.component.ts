@@ -16,6 +16,7 @@ import { UsuarioDTO } from '../../interfaces/loginDto';
   styleUrl: './idea.component.scss'
 })
 export class IdeaComponent {
+
     constructor(
         private usuarioService: UsuariosService,
         private ideaService: IdeasServicioService,
@@ -61,5 +62,18 @@ export class IdeaComponent {
     onCloseImage() {
         const overlayContenedor = document.getElementById("overlay");
         overlayContenedor?.classList.toggle("overlay-visible");
+    }
+
+    onClickGuardar(event: Event) {
+        const button = event.target as HTMLElement;
+        const icon = document.getElementById("guardar-tick") as HTMLElement;
+        button.classList.toggle("button-guardar-activo");
+
+        if(button.textContent == "Guardar") {
+            button.textContent = "";
+            icon.style.display = "block";
+        } else {
+            button.textContent = "Guardar";
+        }
     }
 }
