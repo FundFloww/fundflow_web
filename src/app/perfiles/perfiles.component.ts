@@ -38,9 +38,9 @@ export class PerfilesComponent {
     this.route.params.subscribe(params => {
       this.idUsuario = params['id'];
     })
-      // this.ideas = await this.ideaService.getIdeasUser();
       this.session = await this.usuariosService.initializeSession();
       this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario ?? 0);
+      this.tipo = this.usuario?.tipo;
   }
 
   onOpenBar() {
@@ -50,13 +50,5 @@ export class PerfilesComponent {
         return;
     }
       this.open = onOpenBarFunction(this.open);
-  }
-
-  cambiarTipo() {
-    if(this.tipo == TipoUsuario.Emprendedor) {
-        this.tipo = TipoUsuario.Inversor;
-    } else {
-        this.tipo = TipoUsuario.Emprendedor;
-    }
   }
 }
