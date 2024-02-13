@@ -18,7 +18,10 @@
                                 <div><img class="estrellas" src="../../assets/img/5-star-rating-review-star-transparent-free-png.png" alt=""></div>
                             </div>
                         </div>
-                        <button class="btn btn-primary text-light-l">Guardar</button>
+                        <button (click)="onClickGuardar($event)" class="btn btn-primary text-light-l">
+                            Guardar
+                            <img id="guardar-tick" src="../../../assets/icons/guardado.svg" alt="guardado">
+                        </button>
                     </div>
                     <h4>Descripción</h4>
                     <p>{{ this.idea?.descripcion }}</p>

@@ -83,6 +83,18 @@ h4 {
             border-radius: 10px;
         }
 
+        button > img {
+            display: none;
+            width: 40px;
+            height: 40px;
+        }
+
+        .button-guardar-activo {
+            background-color: rgb(27, 184, 45);
+            color: white;
+            border: none;
+        }
+
         .estrellas {
             width: 120px;
             height: 20px;
