@@ -69,7 +69,6 @@
     border-radius: 10px;
     top: 80px;
     right: -15px;
-    transform: rotate(180deg);
     cursor: pointer;
 }
 
@@ -118,10 +117,6 @@
             height: 30px;
         }
     }
-
-    .abrir-cerrar-bar {
-        transform: rotate(0deg);
-    }
 }
 
 
@@ -140,5 +135,13 @@
 
     .title-bar > img {
         margin: 0px;
+    }
+
+
+}
+
+@media (max-width: 900px) {
+    .abrir-cerrar-bar {
+        display: none;
     }
 }

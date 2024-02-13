@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { UsuarioRegistroDTO } from '../interfaces/usuario-registro-dto';
-import { UsuarioDTO } from '../interfaces/loginDto';
+import { UsuarioRegistroDTO } from '../../interfaces/usuario-registro-dto';
+import { UsuarioDTO } from '../../interfaces/loginDto';
 import { jwtDecode } from "jwt-decode";
 import { Router } from '@angular/router';
-import { UsuarioEditarDTO } from '../interfaces/usuario-editarDto';
-import { UsuarioEditarContraseñaDTO } from '../interfaces/usuario-editar-contraseñaDTO';
-import { environment } from '../../environments/environment';
+import { UsuarioEditarDTO } from '../../interfaces/usuario-editarDto';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -54,27 +53,6 @@ export class UsuariosService {
             return false;
         } catch (error) {
             console.error('Error al realizar la operación:', error);
-            return true;
-        }
-    }
-
-    async editContrasena(editarContraseña: UsuarioEditarContraseñaDTO) {
-        try {
-            const response = await fetch(`${this.urlBase}/api/usuarios/editar/contrasena`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(editarContraseña),
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al cambiar la contraseña');
-            }
-
-            return false;
-        } catch (error) {
-            console.error('Error al realizar la operación: ', error)
             return true;
         }
     }

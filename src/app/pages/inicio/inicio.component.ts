@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { camposKeys, Campos, camposValues } from '../enum/campos';
-import { IdeaItemComponent } from '../idea-item/idea-item.component';
-import { IdeaDto } from '../interfaces/ideaDto';
-import { IdeasServicioService } from '../servicios/ideas-servicio.service';
-import { SideBarComponent } from '../side-bar/side-bar.component';
-import { UsuariosService } from '../servicios/usuarios.service';
-import { onOpenBarFunction } from '../functions/sideBarFunctions';
-import { HeaderComponent } from '../header/header.component';
-import { CamposApi } from '../enum/camposApi';
+import { camposKeys, Campos, camposValues } from '../../enum/campos';
+import { IdeaItemComponent } from '../../components/idea-item/idea-item.component';
+import { IdeaDto } from '../../interfaces/ideaDto';
+import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
+import { SideBarComponent } from '../../components/side-bar/side-bar.component';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
+import { onOpenBarFunction } from '../../functions/sideBarFunctions';
+import { HeaderComponent } from '../../components/header/header.component';
+import { CamposApi } from '../../enum/camposApi';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -49,6 +49,12 @@ export class InicioComponent {
     }
 
     onOpenBar() {
+        const cerrarBar = document.getElementById('cerrar-bar')!; 
+        
+        if(getComputedStyle(cerrarBar).display === 'none') {
+            return;
+        }
+
         this.open = onOpenBarFunction(this.open);
     }
 

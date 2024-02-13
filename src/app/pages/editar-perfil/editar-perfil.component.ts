@@ -1,18 +1,17 @@
 import { Component, SimpleChange } from '@angular/core';
-import { onOpenBarFunction } from '../functions/sideBarFunctions';
-import { IdeaItemComponent } from '../idea-item/idea-item.component';
-import { IdeaDto } from '../interfaces/ideaDto';
-import { IdeasServicioService } from '../servicios/ideas-servicio.service';
-import { SideBarComponent } from '../side-bar/side-bar.component';
-import { UsuariosService } from '../servicios/usuarios.service';
-import { Usuario } from '../interfaces/usuario';
+import { onOpenBarFunction } from '../../functions/sideBarFunctions';
+import { IdeaItemComponent } from '../../components/idea-item/idea-item.component';
+import { IdeaDto } from '../../interfaces/ideaDto';
+import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
+import { SideBarComponent } from '../../components/side-bar/side-bar.component';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
+import { Usuario } from '../../interfaces/usuario';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
-import { TipoUsuario } from '../enum/tipo-usuario';
+import { TipoUsuario } from '../../enum/tipo-usuario';
 import { ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UsuarioEditarDTO } from '../interfaces/usuario-editarDto';
-import { UsuarioEditarContraseñaDTO } from '../interfaces/usuario-editar-contraseñaDTO';
+import { UsuarioEditarDTO } from '../../interfaces/usuario-editarDto';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -35,14 +34,11 @@ export class EditarPerfilComponent {
     descripcion: '',
     imagen: '',
     banner: '',
+    // contrasena: '',
+    // confirmarContrasena: '',
     tipo: '',
   };
   tipoUsuario: string = '';
-  usuarioEditarContrasena: UsuarioEditarContraseñaDTO = {
-    correo: '',
-    nuevaContrasena: '',
-    confirmarContrasena:  '',
-  }
 
   constructor(private usuariosService: UsuariosService, private router: Router) { }
 
@@ -58,8 +54,6 @@ export class EditarPerfilComponent {
     this.usuarioTemporal.banner = this.usuario?.banner || 'https://as2.ftcdn.net/v2/jpg/04/31/86/03/1000_F_431860321_8JEaSC9UvONsxTWzxy4SvnsJklPbO7RM.jpg';
     this.usuarioTemporal.tipo = this.usuario?.tipo || '';
     this.tipoUsuario = this.usuario?.tipo || '';
-
-    this.usuarioEditarContrasena.correo = this.usuario?.correo || '';
   }
 
   ngOnChanges(changes: { [propName: string]: SimpleChange}) {
@@ -98,26 +92,18 @@ export class EditarPerfilComponent {
     }
   }
   
-  contrasenasCoinciden() {
-    return this.usuarioEditarContrasena.nuevaContrasena === this.usuarioEditarContrasena.confirmarContrasena;
-  }
+  // contraseñasCoinciden() {
+  //   return this.usuarioTemporal.contrasena === this.usuarioTemporal.contrasena;
+  // }
   
   async enviarPerfil() {
     try {
+      console.log(this.usuarioTemporal);
       // if(this.usuarioTemporal.contrasena === '') {
       //   this.usuarioTemporal.contrasena = this.usuario?.contraseña || '';
       //   this.usuarioTemporal.confirmarContrasena = this.usuario?.contraseña || '';
       // }
       await this.usuariosService.editUsuario(this.usuarioTemporal);
-      this.router.navigate(['/perfil']);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async enviarContrasena() {
-    try {
-      await this.usuariosService.editContrasena(this.usuarioEditarContrasena)
       this.router.navigate(['/perfil']);
     } catch (error) {
       console.error(error);

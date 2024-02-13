@@ -1,3 +1,7 @@
+h1 {
+    font-weight: 600;
+}
+
 .bg-light-l {
     background-color: #ffffff;
 }
@@ -25,6 +29,15 @@
     flex-direction: column;
     gap: 10px;
     position: relative;
+}
+
+.nombre-usuario {
+    cursor: pointer;
+}
+
+.nombre-usuario:hover {
+    color: rgb(0, 115, 255);
+    text-decoration: underline;
 }
 
 h4 {
@@ -122,8 +135,10 @@ h4 {
 
         img {
             width: 300px;
-            height: 100px;
+            height: 120px;
             border-radius: 5px;
+            cursor: pointer;
+            object-fit: cover;
         }
     }
 }
@@ -192,6 +207,44 @@ h4 {
     left: 1px;
     margin-top: 1px;
     padding: 10px;
+}
+
+.overlay {
+    visibility: hidden;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-visible {
+    visibility: visible;
+}
+
+.images-click {
+    width: 70%;
+    height: 90%;
+}
+
+.close-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    margin: 20px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 

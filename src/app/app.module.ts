@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IdeasServicioService } from './servicios/ideas-servicio.service';
+import { IdeasServicioService } from './services/ideas/ideas-servicio.service';
 
 
 
