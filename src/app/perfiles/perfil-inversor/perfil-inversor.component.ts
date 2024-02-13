@@ -7,7 +7,7 @@ import { SideBarComponent } from '../../side-bar/side-bar.component';
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { Usuario } from '../../interfaces/usuario';
 import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-inversor',
@@ -23,18 +23,29 @@ export class PerfilInversorComponent {
   session: boolean | null = null;
   usuario!: Usuario | null;
   ver: string = "Inversiones";
+  id: number = 0;
 
   constructor(
     private ideaService: IdeasServicioService, 
-    private usuariosService: UsuariosService
-) { }
+    private usuariosService: UsuariosService,
+    private route: ActivatedRoute,
+    private router: Router
+) {
+    this.route.paramMap.subscribe(params => {
+        const idString = params.get('id');
+        const nombre = params.get('nombre');
+        if (idString) {
+            this.id = parseInt(idString, 10);
+        }
+    })
+}
 
 async ngOnInit() {
     // this.ideas = await this.ideaService.getIdeasUser();
     this.session = await this.usuariosService.initializeSession();
-    this.usuario = await this.usuariosService.getUsuario();
-    this.inversiones = await this.ideaService.getIdeasInvertidas();
-    this.guardados = await this.ideaService.getIdeasGuardadas();
+    this.usuario = await this.usuariosService.getUsuario(this.id);
+    this.inversiones = await this.ideaService.getIdeasInvertidas(this.id);
+    this.guardados = await this.ideaService.getIdeasGuardadas(this.id);
 }
 
 onOpenBar() {

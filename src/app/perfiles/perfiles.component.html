@@ -1,11 +1,11 @@
-<div *ngIf="tipo == 'EMPRENDEDOR'; else elseBlock">
-<!-- <div *ngIf="usuario?.tipo == 'EMPRENDEDOR'"> -->
+<!-- <div *ngIf="tipo == 'EMPRENDEDOR'; else elseBlock"> -->
+<div *ngIf="usuario?.tipo == 'EMPRENDEDOR'; else elseBlock">
     <app-perfil-emprendedor></app-perfil-emprendedor>
 </div>
 <ng-template #elseBlock>
     <app-perfil-inversor></app-perfil-inversor>
 </ng-template>
-<button (click)="cambiarTipo()">Cambiar</button>
+<!-- <button (click)="cambiarTipo()">Cambiar</button> -->
 <!-- <div *ngIf="usuario?.tipo == 'INVERSOR'"> -->
     <!-- <div *ngIf="tipo == 'INVERSOR'">
     <app-perfil-inversor></app-perfil-inver>

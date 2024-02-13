@@ -30,8 +30,9 @@ export class IdeasServicioService {
         }
     }
 
-    async getIdeasUser(): Promise<IdeaDto[]> {
-        const userId = this.usuariosService.getUserId();
+    async getIdeasUser(id: number): Promise<IdeaDto[]> {
+        // const userId = this.usuariosService.getUserId();
+        const userId = id;
 
         try {
             const response = await fetch(`${this.apiURL}/api/ideas/usuario/${userId}`);
@@ -43,8 +44,9 @@ export class IdeasServicioService {
         }
     }
 
-    async getIdeasInvertidas(): Promise<IdeaDto[]> {
-        const userId = this.usuariosService.getUserId();
+    async getIdeasInvertidas(id: number): Promise<IdeaDto[]> {
+        // const userId = this.usuariosService.getUserId();
+        const userId = id;
 
         try{
             const response = await fetch(`${this.apiURL}/api/ideas/inversor/${userId}`);
@@ -74,8 +76,10 @@ export class IdeasServicioService {
         }
     }
 
-    async getIdeasGuardadas(): Promise<IdeaDto[]> {
-        let usuario = await this.usuariosService.getUsuario();
+    async getIdeasGuardadas(id: number): Promise<IdeaDto[]> {
+        const userId = id;
+        let usuario = await this.usuariosService.getUsuario(id);
+
         let ideasGuardadas: IdeaDto[] = [];
         for (const idea of usuario.guardados)
         {

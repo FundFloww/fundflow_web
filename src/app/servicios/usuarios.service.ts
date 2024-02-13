@@ -118,7 +118,29 @@ export class UsuariosService {
         return session;
     }
 
-    async getUsuario() {
+    async getUsuario(id: number) {
+        // let userId = this.getUserId();
+        let userId = id;
+
+        try {
+            const response = await fetch(`${this.urlBase}/api/usuarios/${userId}`, {
+                method: 'GET',
+                // headers: {
+                //     'Authorization': `Bearer ${this.getToken()}`
+                // }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al obtener usuario');
+            }
+
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getUsuarioLogged() {
         let userId = this.getUserId();
 
         try {
@@ -132,6 +154,9 @@ export class UsuariosService {
             if (!response.ok) {
                 throw new Error('Error al obtener usuario');
             }
+
+            console.log("user logged");
+            console.log(response.json());
 
             return await response.json();
         } catch (error) {

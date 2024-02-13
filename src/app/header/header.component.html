@@ -1,5 +1,7 @@
 <div class="default-bar top-bar bg-light-l">
-    <a class="img-profile bg-primary" [routerLink]="['/perfil']"></a>
+    <!-- <a class="img-profile bg-primary" [routerLink]="['/perfil', usuario?.id, nombreUsuario ? formatearNombre(nombreUsuario) : '']"></a> -->
+    <!-- <a class="img-profile bg-primary" [routerLink]="['/perfil', formatearNombre(nombreUsuario) + usuario?.id]"></a> -->
+    <button class="img-profile bg-primary" (click)="enviarParametros(usuarioLogged?.nombre ?? '', usuarioLogged?.apellidos ?? '', usuarioLogged?.id ?? 0)"></button>
     <div class="search bg-light">
         <img src="../../assets/icons/search.svg" alt="">
         <input type="search" placeholder="Buscar">

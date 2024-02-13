@@ -48,7 +48,7 @@ export class EditarPerfilComponent {
 
   async ngOnInit() {
     this.session = await this.usuariosService.initializeSession();
-    this.usuario = await this.usuariosService.getUsuario();
+    this.usuario = await this.usuariosService.getUsuarioLogged();
     this.usuarioTemporal.nombre = this.usuario?.nombre || '';
     this.usuarioTemporal.apellidos = this.usuario?.apellidos || '';
     this.usuarioTemporal.profesion = this.usuario?.profesion || '';

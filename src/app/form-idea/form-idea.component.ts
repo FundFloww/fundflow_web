@@ -79,7 +79,7 @@ export class FormIdeaComponent {
     async enviarIdea() {
         try {
             this.nuevaIdea.imagenes = await this.imagenesService.subirImagenes(this.nuevaIdea.imagenesFile);
-            this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
+            this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuarioLogged());
             await this.ideasServicio.addIdea(this.nuevaIdea);
             this.router.navigate(['/inicio']);
         } catch (error) {
