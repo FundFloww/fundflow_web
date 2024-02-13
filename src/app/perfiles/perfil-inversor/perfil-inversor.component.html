@@ -18,8 +18,8 @@
                                 alt="foto_perfil" class="rounded-circle foto-perfil">
                         </div>
                         <div>
-                            <p class="h2"><strong>{{ this.usuario.nombre }} {{this.usuario.apellidos}}</strong></p>
-                            <p class="h5 text-muted">{{ this.usuario.profesion }}</p>
+                            <p class="h2"><strong>{{ this.usuario?.nombre }} {{this.usuario?.apellidos}}</strong></p>
+                            <p class="h5 text-muted">{{ this.usuario?.profesion }}</p>
                         </div>
                         <div>
                             <a href="#" class="btn btn-primary text-light">Enviar mensaje</a>
@@ -42,7 +42,7 @@
                         <div class="row">
                             <div class="col-10">
                                 <p class="h4"><strong>Descripción</strong></p>
-                                <p>{{ this.usuario.descripcion }}</p>
+                                <p>{{ this.usuario?.descripcion }}</p>
                             </div>
                         </div>
                     </div>

@@ -18,24 +18,24 @@
                             <div class="nombre-completo">
                                 <div class="nombre">
                                     <label for="nombre" class="form-label h3"><strong>Nombre</strong></label>
-                                    <input id="nombre" type="text" class="form-control" value="{{this.usuario.nombre}}" [(ngModel)]="usuarioTemporal.nombre" #nombre="ngModel" name="nombre">
+                                    <input id="nombre" type="text" class="form-control" value="{{this.usuario?.nombre}}" [(ngModel)]="usuarioTemporal.nombre" #nombre="ngModel" name="nombre">
                                 </div>
                                 <div class="apellidos">
                                     <label for="apellidos" class="form-label h3"><strong>Apellido</strong></label>
-                                    <input id="apellidos" type="text" class="form-control" value="{{this.usuario.apellidos}}" [(ngModel)]="usuarioTemporal.apellidos" #apellidos="ngModel" name="apellidos">
+                                    <input id="apellidos" type="text" class="form-control" value="{{this.usuario?.apellidos}}" [(ngModel)]="usuarioTemporal.apellidos" #apellidos="ngModel" name="apellidos">
                                 </div>
                             </div>
                             <div class="profesion input-box">
                                 <label for="profesion" class="form-label h3"><strong>Profesión</strong></label>
-                                <input id="profesion" type="text" class="form-control" value="{{this.usuario.profesion}}" [(ngModel)]="usuarioTemporal.profesion" #profesion="ngModel" name="profesion">
+                                <input id="profesion" type="text" class="form-control" value="{{this.usuario?.profesion}}" [(ngModel)]="usuarioTemporal.profesion" #profesion="ngModel" name="profesion">
                             </div>
                             <div class="descripcion input-box">
                                 <label for="descripcion" class="form-label h3"><Strong>Descripción</Strong></label>
-                                <textarea id="descripcion" value="{{this.usuario.descripcion}}" class="form-control" name="descripcion" [(ngModel)]="usuarioTemporal.descripcion" #descripcion="ngModel" name="descripcion"></textarea>
+                                <textarea id="descripcion" value="{{this.usuario?.descripcion}}" class="form-control" name="descripcion" [(ngModel)]="usuarioTemporal.descripcion" #descripcion="ngModel" name="descripcion"></textarea>
                             </div>
                             <div class="correo input-box">
                                 <label for="correo" class="form-label h3"><strong>Correo</strong></label>
-                                <input id="correo" type="email" class="form-control" value="{{this.usuario.correo}}" [(ngModel)]="usuarioTemporal.correo" #correo="ngModel" name="correo">
+                                <input id="correo" type="email" class="form-control" value="{{this.usuario?.correo}}" [(ngModel)]="usuarioTemporal.correo" #correo="ngModel" name="correo">
                             </div>
                             <!-- <div class="contraseña input-box">
                                 <label for="contraseña" class="form-label h3"><strong>Cambiar contraseña</strong></label>
@@ -48,10 +48,10 @@
                             <div class="tipo">
                                 <label class="form-label h3"><strong>Tipo de usuario</strong></label>
                                 <div class="tipoUsuario btn-group input-box" role="group" aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="btnradio" [value]="'EMPRENDEDOR'" id="emprendedor" autocomplete="off" [checked]="usuario.tipo == 'EMPRENDEDOR'" (click)="usuarioTemporal.tipo = 'EMPRENDEDOR'" name="tipo">
+                                    <input type="radio" class="btn-check" name="btnradio" [value]="'EMPRENDEDOR'" id="emprendedor" autocomplete="off" [checked]="usuario?.tipo == 'EMPRENDEDOR'" (click)="usuarioTemporal.tipo = 'EMPRENDEDOR'" name="tipo">
                                     <label for="emprendedor" class="btn btn-outline-primary">Emprendedor</label>
                                     
-                                    <input type="radio" class="btn-check" name="btnradio" [value]="'INVERSOR'" id="inversor" autocomplete="off" [checked]="usuario.tipo == 'INVERSOR'" name="tipo">
+                                    <input type="radio" class="btn-check" name="btnradio" [value]="'INVERSOR'" id="inversor" autocomplete="off" [checked]="usuario?.tipo == 'INVERSOR'" name="tipo">
                                     <label for="inversor" class="btn btn-outline-primary" (click)="usuarioTemporal.tipo = 'INVERSOR'">Inversor</label>
                                 </div>
                             </div>
