@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { Router } from '@angular/router';
 import { UsuarioEditarDTO } from '../../interfaces/usuario-editarDto';
 import { environment } from '../../../environments/environment';
+import { GuardarIdea } from '../../interfaces/GuardarIdea';
 
 @Injectable({
     providedIn: 'root'
@@ -134,6 +135,28 @@ export class UsuariosService {
             return await response.json();
         } catch (error) {
             throw error;
+        }
+    }
+
+    async guardarIdea(datos: GuardarIdea) {
+        try {
+            const response = await fetch(`${this.urlBase}/api/usuarios/guardarIdea`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.getToken()}`
+                },
+                body: JSON.stringify(datos),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al guardar la idea');
+            }
+
+            return false;
+        } catch (error) {
+            console.error('Error al realizar la operación:', error);
+            return true;
         }
     }
 

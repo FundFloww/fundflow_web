@@ -36,7 +36,6 @@ export class LoginComponent {
 
     async onSubmit() {
         const userCorrectData = await this.usuariosService.login(this.usuario);
-        console.log(userCorrectData);
         if(userCorrectData !== null)
         {
             localStorage.setItem('token', userCorrectData.token);

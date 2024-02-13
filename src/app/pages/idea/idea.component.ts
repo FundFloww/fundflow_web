@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SideBarComponent } from '../../components/side-bar/side-bar.component';
 import { onOpenBarFunction } from '../../functions/sideBarFunctions';
-import { IdeaDto } from '../../interfaces/ideaDto';
+import { Idea } from '../../interfaces/idea';
 import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
-import { SideBarComponent } from '../../components/side-bar/side-bar.component';
-import { Idea } from '../../interfaces/idea';
-import { UsuarioDTO } from '../../interfaces/loginDto';
+import { GuardarIdea } from '../../interfaces/GuardarIdea';
 
 @Component({
   selector: 'app-idea',
@@ -64,16 +63,29 @@ export class IdeaComponent {
         overlayContenedor?.classList.toggle("overlay-visible");
     }
 
-    onClickGuardar(event: Event) {
-        const button = event.target as HTMLElement;
+    async onClickGuardar() {
+        const button = document.getElementById("boton-guardar") as HTMLElement;
+        const text = document.getElementById("texto-boton") as HTMLElement;
         const icon = document.getElementById("guardar-tick") as HTMLElement;
-        button.classList.toggle("button-guardar-activo");
 
-        if(button.textContent == "Guardar") {
-            button.textContent = "";
-            icon.style.display = "block";
-        } else {
-            button.textContent = "Guardar";
+        if(button.textContent !== "Guardar") {
+            text.textContent = "Guardar";
+            icon.style.display = "none";
+            button.style.backgroundColor = "";
+            return;
         }
+
+        text.textContent = "";
+        icon.style.display = "block";
+        button.style.backgroundColor = "rgb(18, 164, 18)";
+
+        const datosGuardar: GuardarIdea = {
+            idIdea: this.idea?.id!,
+            idUsuario: parseInt(this.usuarioService.getUserId()!)
+        };
+        
+        await this.usuarioService.guardarIdea(datosGuardar);
+
+        return;
     }
 }
