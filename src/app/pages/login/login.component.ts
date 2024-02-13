@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UsuariosService } from '../servicios/usuarios.service';
-import { UsuarioDTO } from '../interfaces/loginDto';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
+import { UsuarioDTO } from '../../interfaces/loginDto';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';

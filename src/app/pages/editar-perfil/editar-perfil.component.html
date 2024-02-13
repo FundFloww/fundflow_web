@@ -18,20 +18,20 @@
                             <div class="nombre-completo">
                                 <div class="nombre">
                                     <label for="nombre" class="form-label h3"><strong>Nombre</strong></label>
-                                    <input id="nombre" type="text" class="form-control" value="{{this.usuario?.nombre}}" [(ngModel)]="usuarioTemporal.nombre" #nombre="ngModel" name="nombre">
+                                    <input id="nombre" type="text" class="form-control" value="{{this.usuario.nombre}}" [(ngModel)]="usuarioTemporal.nombre" #nombre="ngModel" name="nombre">
                                 </div>
                                 <div class="apellidos">
                                     <label for="apellidos" class="form-label h3"><strong>Apellido</strong></label>
-                                    <input id="apellidos" type="text" class="form-control" value="{{this.usuario?.apellidos}}" [(ngModel)]="usuarioTemporal.apellidos" #apellidos="ngModel" name="apellidos">
+                                    <input id="apellidos" type="text" class="form-control" value="{{this.usuario.apellidos}}" [(ngModel)]="usuarioTemporal.apellidos" #apellidos="ngModel" name="apellidos">
                                 </div>
                             </div>
                             <div class="profesion input-box">
                                 <label for="profesion" class="form-label h3"><strong>Profesión</strong></label>
-                                <input id="profesion" type="text" class="form-control" value="{{this.usuario?.profesion}}" [(ngModel)]="usuarioTemporal.profesion" #profesion="ngModel" name="profesion">
+                                <input id="profesion" type="text" class="form-control" value="{{this.usuario.profesion}}" [(ngModel)]="usuarioTemporal.profesion" #profesion="ngModel" name="profesion">
                             </div>
                             <div class="descripcion input-box">
                                 <label for="descripcion" class="form-label h3"><Strong>Descripción</Strong></label>
-                                <textarea id="descripcion" value="{{this.usuario?.descripcion}}" class="form-control" name="descripcion" [(ngModel)]="usuarioTemporal.descripcion" #descripcion="ngModel" name="descripcion"></textarea>
+                                <textarea id="descripcion" value="{{this.usuario.descripcion}}" class="form-control" name="descripcion" [(ngModel)]="usuarioTemporal.descripcion" #descripcion="ngModel" name="descripcion"></textarea>
                             </div>
                             <div class="correo input-box">
                                 <label for="correo" class="form-label h3"><strong>Correo</strong></label>

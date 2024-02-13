@@ -1,4 +1,4 @@
-<div class="container-fluid root-element bg-light">
+<div class="container-fluid root-element bg-light relative">
     <div class="row">
         <app-side-bar 
             class="col-2 px-0" id="side-bar" 
@@ -11,10 +11,10 @@
                 <div class="idea-info bg-light-l">
                     <div class="titulo-idea">
                         <div class="start">
-                            <img src="{{ this.idea?.imagen }}" alt="perfil">
+                            <img src="{{ this.imagenMain }}" alt="perfil">
                             <div class="datos-titulo">
                                 <h1>{{ this.idea?.titulo }}</h1>
-                                <div>España</div>
+                                <div class="nombre-usuario">{{ this.nombreCompleto }}</div>
                                 <div><img class="estrellas" src="../../assets/img/5-star-rating-review-star-transparent-free-png.png" alt=""></div>
                             </div>
                         </div>
@@ -40,7 +40,9 @@
                 <div class="imagenes-idea bg-light-l">
                     <h4>Imagenes</h4>
                     <div class="imagenes">
-                        <img src="{{ this.idea?.imagen }}" alt="imagen">
+                        @for (imagen of this.idea?.imagenes; track $index) {
+                            <img (click)="onClickImage($event)" src="{{ imagen }}" alt="imagen">
+                        }
                     </div>
                 </div>
                 <div class="linea-tiempo bg-light-l">
@@ -77,5 +79,9 @@
                 </div>
             </section>
         </div>
+    </div>
+    <div id="overlay" class="overlay">
+        <img id="image-overlay" class="images-click" src="" alt="visualize-image">
+        <span class="close-image" (click)="onCloseImage()">X</span>
     </div>
 </div>

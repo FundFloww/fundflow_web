@@ -1,37 +1,30 @@
 import { Component } from '@angular/core';
-import { onOpenBarFunction } from '../../functions/sideBarFunctions';
+import { camposKeys } from '../../enum/campos';
 import { IdeaItemComponent } from '../../components/idea-item/idea-item.component';
 import { IdeaDto } from '../../interfaces/ideaDto';
 import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
 import { SideBarComponent } from '../../components/side-bar/side-bar.component';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
-import { Usuario } from '../../interfaces/usuario';
-import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { onOpenBarFunction } from '../../functions/sideBarFunctions';
+import { HeaderComponent } from '../../components/header/header.component';
 
 @Component({
-    selector: 'app-perfil-emprendedor',
-    standalone: true,
-    imports: [IdeaItemComponent, SideBarComponent, NgIf],
-    templateUrl: './perfil-emprendedor.component.html',
-    styleUrl: './perfil-emprendedor.component.scss'
+  selector: 'app-noticias',
+  standalone: true,
+  imports: [SideBarComponent, IdeaItemComponent, HeaderComponent],
+  templateUrl: './noticias.component.html',
+  styleUrl: './noticias.component.scss'
 })
-
-export class PerfilEmprendedorComponent {
-    ideas: IdeaDto[] = [];
+export class NoticiasComponent {
     open: boolean = true;
     session: boolean | null = null;
-    usuario!: Usuario | null;
 
     constructor(
-        private ideaService: IdeasServicioService, 
         private usuariosService: UsuariosService
     ) { }
 
     async ngOnInit() {
-        this.ideas = await this.ideaService.getIdeasUser();
-        this.session = await this.usuariosService.initializeSession();
-        this.usuario = await this.usuariosService.getUsuario();
+        this.session = await this.usuariosService.loggedIn();
     }
 
     onOpenBar() {

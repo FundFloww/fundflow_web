@@ -2,15 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
-import { camposKeys } from '../enum/campos';
-import { onOpenBarFunction } from '../functions/sideBarFunctions';
-import { HeaderComponent } from '../header/header.component';
-import { IdeaNueva } from '../interfaces/ideaNueva';
-import { IdeasServicioService } from '../servicios/ideas-servicio.service';
-import { UsuariosService } from '../servicios/usuarios.service';
-import { SideBarComponent } from '../side-bar/side-bar.component';
-import { environment } from '../../environments/environment';
-import { ImagenesService } from '../servicios/imagenes.service';
+import { camposKeys } from '../../enum/campos';
+import { onOpenBarFunction } from '../../functions/sideBarFunctions';
+import { HeaderComponent } from '../../components/header/header.component';
+import { IdeaNueva } from '../../interfaces/ideaNueva';
+import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
+import { SideBarComponent } from '../../components/side-bar/side-bar.component';
+import { environment } from '../../../environments/environment';
+import { ImagenesService } from '../../services/imagenes/imagenes.service';
 
 @Component({
     selector: 'app-form-idea',

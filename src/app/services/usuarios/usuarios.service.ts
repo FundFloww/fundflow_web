@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { UsuarioRegistroDTO } from '../interfaces/usuario-registro-dto';
-import { UsuarioDTO } from '../interfaces/loginDto';
+import { UsuarioRegistroDTO } from '../../interfaces/usuario-registro-dto';
+import { UsuarioDTO } from '../../interfaces/loginDto';
 import { jwtDecode } from "jwt-decode";
 import { Router } from '@angular/router';
-import { UsuarioEditarDTO } from '../interfaces/usuario-editarDto';
-import { environment } from '../../environments/environment';
+import { UsuarioEditarDTO } from '../../interfaces/usuario-editarDto';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

@@ -75,7 +75,15 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding-left: 20px;
+    padding: {
+        left: 20px;
+        right: 20px;
+    };
+    overflow: {
+        x: scroll;
+        y: hidden;
+    }
+    scrollbar-width: none;
 }
 
 .filter {

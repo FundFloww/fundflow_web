@@ -5,7 +5,7 @@ export interface Idea {
     id?: number;
     titulo: string;
     descripcion: string;
-    imagenes: File[];
+    imagenes: string[];
     campo?: Campos;
     emprendedor: Usuario[];
     inversor: Usuario[];
