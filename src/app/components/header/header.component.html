@@ -1,5 +1,7 @@
 <div class="default-bar top-bar bg-light-l">
-    <a *ngIf="session != null" class="img-profile bg-primary" [routerLink]="['/perfil', idUsuarioIdentificado]"></a>
+    <a *ngIf="session == true" class="img-profile bg-primary" [routerLink]="['/perfil', idUsuarioIdentificado]">
+        <img src="{{ usuario?.imagen }}" class="foto-mini-perfil" alt="">
+    </a>
     <div class="search bg-light">
         <img src="../../assets/icons/search.svg" alt="">
         <input type="search" placeholder="Buscar">
