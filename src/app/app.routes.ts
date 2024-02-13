@@ -10,6 +10,7 @@ import { FormIdeaComponent } from './pages/form-idea/form-idea.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
 import { NoticiasComponent } from './pages/noticias/noticias.component';
+import { SideBarAdminComponent } from './components/side-bar-admin/side-bar-admin.component';
 
 export const routes: Routes = [
     { path: 'inicio', component: InicioComponent },
@@ -19,6 +20,7 @@ export const routes: Routes = [
     { path: 'logout', component: LogoutComponent },
     { path: 'registro', component: RegistroComponent },
     { path: 'noticias', component: NoticiasComponent},
+    { path: 'admin', component: SideBarAdminComponent},
     { 
         path: 'idea',
         children: [
