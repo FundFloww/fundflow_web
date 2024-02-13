@@ -7,12 +7,12 @@ import { SideBarComponent } from '../../side-bar/side-bar.component';
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { Usuario } from '../../interfaces/usuario';
 import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-perfil-emprendedor',
     standalone: true,
-    imports: [IdeaItemComponent, SideBarComponent, NgIf],
+    imports: [IdeaItemComponent, SideBarComponent, NgIf, RouterLink],
     templateUrl: './perfil-emprendedor.component.html',
     styleUrl: './perfil-emprendedor.component.scss'
 })
@@ -22,16 +22,27 @@ export class PerfilEmprendedorComponent {
     open: boolean = true;
     session: boolean | null = null;
     usuario!: Usuario | null;
+    idUsuario: number | undefined;
+    idUsuarioIdentificado: number | undefined;
+    mismoId: boolean = false;
 
     constructor(
         private ideaService: IdeasServicioService, 
-        private usuariosService: UsuariosService
+        private usuariosService: UsuariosService,
+        private route: ActivatedRoute
     ) { }
 
     async ngOnInit() {
-        this.ideas = await this.ideaService.getIdeasUser();
+        this.route.params.subscribe(params => {
+          this.idUsuario = params['id'];
+        })
+        this.ideas = await this.ideaService.getIdeasUser(this.idUsuario ?? 0);
+        this.idUsuarioIdentificado = parseInt(await this.usuariosService.getUserId() ?? '0');
         this.session = await this.usuariosService.initializeSession();
-        this.usuario = await this.usuariosService.getUsuario();
+        this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario ?? 0);
+        if(this.idUsuario == this.idUsuarioIdentificado) {
+            this.mismoId = true;
+          }
     }
 
     onOpenBar() {
