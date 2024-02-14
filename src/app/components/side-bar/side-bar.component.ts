@@ -28,7 +28,7 @@ export class SideBarComponent {
         },
         {
             id: 2,
-            nombre: 'Configuración',
+            nombre: 'Ajustes',
             icono: 'settings',
             destino: '/',
             ruta: `${this.rutaIconos}/settings.svg`

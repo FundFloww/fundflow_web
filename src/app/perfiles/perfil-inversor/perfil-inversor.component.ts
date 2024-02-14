@@ -10,51 +10,51 @@ import { NgIf } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-perfil-inversor',
-  standalone: true,
-  imports: [IdeaItemComponent, SideBarComponent, NgIf, RouterLink],
-  templateUrl: './perfil-inversor.component.html',
-  styleUrl: './perfil-inversor.component.scss'
+    selector: 'app-perfil-inversor',
+    standalone: true,
+    imports: [IdeaItemComponent, SideBarComponent, NgIf, RouterLink],
+    templateUrl: './perfil-inversor.component.html',
+    styleUrl: './perfil-inversor.component.scss'
 })
 export class PerfilInversorComponent {
-  inversiones: IdeaDto[] = [];
-  guardados: IdeaDto[] = [];
-  open: boolean = true;
-  session: boolean | null = null;
-  usuario!: Usuario | null;
-  idUsuario: number | undefined;
-  idUsuarioIdentificado: number | undefined;
-  ver: string = "Inversiones";
-  mismoId: boolean = false;
+    inversiones: IdeaDto[] = [];
+    guardados: IdeaDto[] = [];
+    open: boolean = true;
+    session: boolean | null = null;
+    usuario!: Usuario | null;
+    idUsuario: number | undefined;
+    idUsuarioIdentificado: number | undefined;
+    ver: string = "Inversiones";
+    mismoId: boolean = false;
 
-  constructor(
-    private ideaService: IdeasServicioService, 
-    private usuariosService: UsuariosService,
-    private route: ActivatedRoute
-) { }
+    constructor(
+        private ideaService: IdeasServicioService,
+        private usuariosService: UsuariosService,
+        private route: ActivatedRoute
+    ) { }
 
-async ngOnInit() {
-  this.route.params.subscribe(params => {
-    this.idUsuario = params['id'];
-  })
-    // this.ideas = await this.ideaService.getIdeasUser();
-    this.session = await this.usuariosService.initializeSession();
-    this.idUsuarioIdentificado = parseInt(await this.usuariosService.getUserId() ?? '0');
-    this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario ?? 0);
-    this.inversiones = await this.ideaService.getIdeasInvertidas(this.usuario?.id ?? 0);
-    this.guardados = await this.ideaService.getIdeasGuardadas(this.usuario?.id ?? 0);
-    if(this.idUsuario == this.idUsuarioIdentificado) {
-      this.mismoId = true;
+    async ngOnInit() {
+        this.route.params.subscribe(params => {
+            this.idUsuario = params['id'];
+        })
+        // this.ideas = await this.ideaService.getIdeasUser();
+        this.session = await this.usuariosService.initializeSession();
+        this.idUsuarioIdentificado = parseInt(await this.usuariosService.getUserId() ?? '0');
+        this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario ?? 0);
+        this.inversiones = await this.ideaService.getIdeasInvertidas(this.usuario?.id ?? 0);
+        this.guardados = await this.ideaService.getIdeasGuardadas(this.usuario?.id ?? 0);
+        if (this.idUsuario == this.idUsuarioIdentificado) {
+            this.mismoId = true;
+        }
     }
-}
 
-onOpenBar() {
-    const cerrarBar = document.getElementById('cerrar-bar')!; 
-        
-    if(getComputedStyle(cerrarBar).display === 'none') {
-        return;
+    onOpenBar() {
+        const cerrarBar = document.getElementById('cerrar-bar')!;
+
+        if (getComputedStyle(cerrarBar).display === 'none') {
+            return;
+        }
+        this.open = onOpenBarFunction(this.open);
     }
-    this.open = onOpenBarFunction(this.open);
-}
 
 }

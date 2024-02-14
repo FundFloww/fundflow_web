@@ -22,7 +22,6 @@ export class HeaderComponent {
 
 async ngOnInit() {
   this.session = await this.usuariosService.initializeSession();
-  console.log(this.session);
   this.idUsuarioIdentificado = await Number(this.usuariosService.getUserId());
   this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuarioIdentificado);
 }

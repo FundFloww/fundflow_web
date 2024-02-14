@@ -1,6 +1,11 @@
 <div class="default-bar top-bar bg-light-l">
     <a *ngIf="session == true" class="img-profile bg-primary" [routerLink]="['/perfil', idUsuarioIdentificado]">
-        <img src="{{ usuario?.imagen }}" class="foto-mini-perfil" alt="">
+        @if(usuario?.imagen) {
+            <img src="{{ usuario?.imagen }}" class="foto-mini-perfil" alt="">
+        } @else {
+            <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Free-Download.png" class="foto-vacia-perfil" alt="">
+        }
+        
     </a>
     <div class="search bg-light">
         <img src="../../assets/icons/search.svg" alt="">

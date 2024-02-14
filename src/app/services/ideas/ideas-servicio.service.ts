@@ -86,20 +86,9 @@ export class IdeasServicioService {
     }
 
     async getIdeasGuardadas(id: number): Promise<IdeaDto[]> {
-        let usuario = await this.usuariosService.getUsuarioPorId(id);
-        let ideasGuardadas: IdeaDto[] = [];
-        for (const idea of usuario.guardados)
-        {
-            try {
-                const response = await fetch(`${this.apiURL}/api/ideas/dto/${idea.id}`);
-                const datos = await response.json();
-                ideasGuardadas.push(datos);
-            } catch (error) {
-                console.error(error);
-                throw error;
-            }
-        };
-        return ideasGuardadas;
+        const response = await fetch(`${this.apiURL}/api/usuarios/guardadas/${id}`);
+        const datos = await response.json();
+        return datos;
     }
 
     async getIdeasFiltradas(campos: CamposApi[]): Promise<IdeaDto[]> {

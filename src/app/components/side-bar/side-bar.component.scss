@@ -106,17 +106,6 @@
         flex-direction: column;
         align-items: center;
     }
-
-    .side-element {
-        label {
-            display: none;
-        }
-    
-        img {
-            width: 30px;
-            height: 30px;
-        }
-    }
 }
 
 
@@ -136,8 +125,6 @@
     .title-bar > img {
         margin: 0px;
     }
-
-
 }
 
 @media (max-width: 900px) {

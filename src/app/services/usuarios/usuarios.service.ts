@@ -182,6 +182,28 @@ export class UsuariosService {
         }
     }
 
+    async eliminarIdeaGuardada(datos: GuardarIdea) {
+        try {
+            const response = await fetch(`${this.urlBase}/api/usuarios/eliminarIdeaGuardada`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.getToken()}`
+                },
+                body: JSON.stringify(datos),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al eliminar la idea guardada');
+            }
+
+            return false;
+        } catch (error) {
+            console.error('Error al realizar la operación:', error);
+            return true;
+        }
+    }
+
     getToken() {
         let token = localStorage.getItem('token');
         if (token === null) {

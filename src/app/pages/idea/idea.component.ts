@@ -27,6 +27,7 @@ export class IdeaComponent {
     session: boolean | null = null;
     nombreCompleto: string | null = null;
     imagenMain: string | null = null;
+    guardada: boolean = false;
 
     async ngOnInit() {
         const ideas = await this.ideaService.getIdeasAll();
@@ -40,6 +41,13 @@ export class IdeaComponent {
         this.idea = ideas.filter(idea => idea.id === ideaId)[0];
         this.imagenMain = this.idea.imagenes[0];
         this.nombreCompleto = this.idea.emprendedor[0].nombre + " " + this.idea.emprendedor[0].apellidos;
+        if(this.session) {
+            const idUsuario = parseInt(this.usuarioService.getUserId()!);
+            const guardadas = await this.ideaService.getIdeasGuardadas(idUsuario);
+            this.guardada = guardadas.filter(guardada => guardada.id === ideaId).length > 0;
+        }
+
+        if(this.guardada) this.invertirStyleGuardar();
     }
 
     onOpenBar() {
@@ -63,11 +71,16 @@ export class IdeaComponent {
         overlayContenedor?.classList.toggle("overlay-visible");
     }
 
-    async onClickGuardar() {
+    onClickProfile() {
+        const id = this.idea?.emprendedor[0].id;
+        this.router.navigate(['/perfil', id]);
+    }
+
+    invertirStyleGuardar() {
         const button = document.getElementById("boton-guardar") as HTMLElement;
         const text = document.getElementById("texto-boton") as HTMLElement;
         const icon = document.getElementById("guardar-tick") as HTMLElement;
-
+        
         if(button.textContent !== "Guardar") {
             text.textContent = "Guardar";
             icon.style.display = "none";
@@ -78,14 +91,24 @@ export class IdeaComponent {
         text.textContent = "";
         icon.style.display = "block";
         button.style.backgroundColor = "rgb(18, 164, 18)";
+    }
 
+    async onClickGuardar() {
+    
+        this.invertirStyleGuardar();
+        
         const datosGuardar: GuardarIdea = {
             idIdea: this.idea?.id!,
             idUsuario: parseInt(this.usuarioService.getUserId()!)
         };
-        
-        await this.usuarioService.guardarIdea(datosGuardar);
 
+        if(!this.guardada) {
+            await this.usuarioService.guardarIdea(datosGuardar);
+            return;
+        }
+
+        await this.usuarioService.eliminarIdeaGuardada(datosGuardar);
+    
         return;
     }
 }

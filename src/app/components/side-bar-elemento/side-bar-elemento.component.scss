@@ -21,19 +21,22 @@ a > p {
 
 label {
     display: inline-block;
-    margin-left: 10px;
     cursor: inherit;
+    text-align: center;
+    user-select: none;
+    transition: none !important;
+}
+
+img {
+    user-select: none;
 }
 
 .small-bar-mode {
-    label {
-        display: none;
-    }
+    width: 80px;
+    flex-direction: column;
+    font-size: 0.8rem;
+    gap: 0px;
 
-    img {
-        width: 30px;
-        height: 30px;
-    }
 }
 
 @media (max-width: 1300px) {
