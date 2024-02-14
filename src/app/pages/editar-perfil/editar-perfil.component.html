@@ -47,8 +47,9 @@
                                     <label for="inversor" class="btn btn-outline-primary" (click)="usuarioTemporal.tipo = 'INVERSOR'">Inversor</label>
                                 </div>
                             </div>
-                            <div>
+                            <div class="d-flex gap-3">
                                 <button class="btn btn-primary text-light">Guardar cambios</button>
+                                <button (click)="onClickCancel()" class="btn btn-primary text-light">Cancelar</button>
                             </div>
                         </div>
                     </div>

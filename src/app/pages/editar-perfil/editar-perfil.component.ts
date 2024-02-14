@@ -84,6 +84,10 @@ export class EditarPerfilComponent {
         }
     }
 
+    onClickCancel() {
+        this.router.navigate([`/perfil/${this.usuario?.id}`]);
+    }
+
     onFileSelected(evento: Event, foto: string) {
         const inputElement = evento.target as HTMLInputElement;
         const file = inputElement.files?.[0]!;
@@ -131,7 +135,7 @@ export class EditarPerfilComponent {
             }
 
             await this.usuariosService.editUsuario(this.usuarioTemporal);
-            this.router.navigate(['/perfil']);
+            this.router.navigate([`/perfil/${this.usuario?.id}`]);
         } catch (error) {
             console.error(error);
         }

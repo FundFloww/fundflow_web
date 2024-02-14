@@ -49,7 +49,7 @@ export class SideBarComponent {
         },
         {
             id: 5,
-            nombre: 'Añadir Idea',
+            nombre: 'Crear Idea',
             icono: 'añadir',
             destino: '/idea/añadir',
             ruta: `${this.rutaIconos}/añadir.svg`
@@ -63,7 +63,7 @@ export class SideBarComponent {
         },
         {
             id: 7,
-            nombre: 'Cerrar sesión',
+            nombre: 'Cerrar Sesión',
             icono: 'logout',
             destino: '/logout',
             ruta: `${this.rutaIconos}/logout.svg`
@@ -89,11 +89,11 @@ export class SideBarComponent {
 
     validateSession() {
         if(this.session) {
-            this.elementos = this.elementos.filter(e => e.nombre !== "Iniciar sesión" && e.nombre !== "Registrarse");
+            this.elementos = this.elementos.filter(e => e.id !== 6 && e.id !== 8);
             return;
         }
 
-        this.elementos = this.elementos.filter(e => e.nombre !== "Cerrar sesión" && e.nombre !== "Añadir Idea");
+        this.elementos = this.elementos.filter(e => e.id !== 7 && e.id !== 5);
     }
 
     sideBarChange() {

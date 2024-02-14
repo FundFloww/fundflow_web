@@ -8,11 +8,12 @@ import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { Usuario } from '../../interfaces/usuario';
 import { NgIf } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-perfil-inversor',
     standalone: true,
-    imports: [IdeaItemComponent, SideBarComponent, NgIf, RouterLink],
+    imports: [IdeaItemComponent, SideBarComponent, NgIf, RouterLink, NgClass],
     templateUrl: './perfil-inversor.component.html',
     styleUrl: './perfil-inversor.component.scss'
 })

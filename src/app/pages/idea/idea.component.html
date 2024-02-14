@@ -11,7 +11,7 @@
                 <div class="idea-info bg-light-l">
                     <div class="titulo-idea">
                         <div class="start">
-                            <img src="{{ this.imagenMain }}" alt="perfil">
+                            <img class="border border-light" src="{{ this.imagenMain }}" alt="perfil">
                             <div class="datos-titulo">
                                 <h1>{{ this.idea?.titulo }}</h1>
                                 <div (click)="onClickProfile()" class="nombre-usuario">{{ this.nombreCompleto }}</div>
@@ -80,7 +80,11 @@
                     </ul>
                 </div>
                 <div id="invertir-section" class="invertir bg-light-l col-10">
-                    <button class="btn btn-primary text-light-l">Invertir</button>
+                    @if(this.propietario) {
+                        <button class="btn btn-primary text-light-l">Editar</button>
+                    } @else {
+                        <button [routerLink]="['/invertir/' + this.ideaId]" class="btn btn-primary text-light-l">Invertir</button>
+                    }
                 </div>
             </section>
         </div>

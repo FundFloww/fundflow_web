@@ -6,11 +6,12 @@ import { Idea } from '../../interfaces/idea';
 import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { GuardarIdea } from '../../interfaces/GuardarIdea';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-idea',
   standalone: true,
-  imports: [SideBarComponent],
+  imports: [SideBarComponent, RouterLink],
   templateUrl: './idea.component.html',
   styleUrl: './idea.component.scss'
 })
@@ -28,23 +29,29 @@ export class IdeaComponent {
     nombreCompleto: string | null = null;
     imagenMain: string | null = null;
     guardada: boolean = false;
+    propietario: boolean = false;
+    ideaId: number | null = null;
 
     async ngOnInit() {
         const ideas = await this.ideaService.getIdeasAll();
-        const ideaId = parseInt(this.router.url.split('/')[2]);
+        this.ideaId = parseInt(this.router.url.split('/')[2]);
 
-        if(ideas.filter(idea => idea.id === ideaId).length === 0) {
+        if(ideas.filter(idea => idea.id === this.ideaId).length === 0) {
             this.router.navigate(['/']);
         }
 
         this.session = await this.usuarioService.loggedIn();
-        this.idea = ideas.filter(idea => idea.id === ideaId)[0];
+        this.idea = ideas.filter(idea => idea.id === this.ideaId)[0];
         this.imagenMain = this.idea.imagenes[0];
         this.nombreCompleto = this.idea.emprendedor[0].nombre + " " + this.idea.emprendedor[0].apellidos;
         if(this.session) {
             const idUsuario = parseInt(this.usuarioService.getUserId()!);
             const guardadas = await this.ideaService.getIdeasGuardadas(idUsuario);
-            this.guardada = guardadas.filter(guardada => guardada.id === ideaId).length > 0;
+            this.guardada = guardadas.filter(guardada => guardada.id === this.ideaId).length > 0;
+
+            if(this.idea.emprendedor[0].id === idUsuario) {
+                this.propietario = true;
+            }
         }
 
         if(this.guardada) this.invertirStyleGuardar();
@@ -81,7 +88,7 @@ export class IdeaComponent {
         const text = document.getElementById("texto-boton") as HTMLElement;
         const icon = document.getElementById("guardar-tick") as HTMLElement;
         
-        if(button.textContent !== "Guardar") {
+        if(button.textContent !== "Añadir a favoritos!") {
             text.textContent = "Guardar";
             icon.style.display = "none";
             button.style.backgroundColor = "";

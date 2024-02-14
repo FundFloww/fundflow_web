@@ -15,11 +15,11 @@
                     <div class="info-perfil d-grid gap-4">
                         <div>
                             @if(usuario?.imagen) {
-                            <img src="{{usuario?.imagen}}"
-                                alt="foto_perfil" class="rounded-circle foto-perfil">
+                                <img src="{{usuario?.imagen}}"
+                                    alt="foto_perfil" class="rounded-circle foto-perfil">
                             } @else {
-                            <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Free-Download.png"
-                                alt="foto_perfil" class="rounded-circle foto-perfil">
+                                <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Free-Download.png"
+                                    alt="foto_perfil" class="rounded-circle foto-perfil bg-light">
                             }
                         </div>
                         <div>
@@ -50,10 +50,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-10">
-                                <p class="h4"><strong>Descripción</strong></p>
-                                <p>{{ this.usuario?.descripcion }}</p>
-                            </div>
+                            @if(this.usuario?.descripcion) {
+                                <div class="col-10">
+                                    <p class="h4"><strong>Descripción</strong></p>
+                                    <p>{{ this.usuario?.descripcion }}</p>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

@@ -5,24 +5,26 @@ import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [RouterLink, NgIf],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+    selector: 'app-header',
+    standalone: true,
+    imports: [RouterLink, NgIf],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  session: boolean | null = null;
-  usuario!: Usuario | null;
-  idUsuarioIdentificado: number | undefined;
+    session: boolean | null = null;
+    usuario!: Usuario | null;
+    idUsuarioIdentificado: number | undefined;
 
-  constructor(
-    private usuariosService: UsuariosService
-) { }
+    constructor(
+        private usuariosService: UsuariosService
+    ) { }
 
-async ngOnInit() {
-  this.session = await this.usuariosService.initializeSession();
-  this.idUsuarioIdentificado = await Number(this.usuariosService.getUserId());
-  this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuarioIdentificado);
-}
+    async ngOnInit() {
+        this.session = await this.usuariosService.initializeSession();
+        if(this.session) {
+            this.idUsuarioIdentificado = Number(this.usuariosService.getUserId());
+            this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuarioIdentificado);
+        }
+    }
 }

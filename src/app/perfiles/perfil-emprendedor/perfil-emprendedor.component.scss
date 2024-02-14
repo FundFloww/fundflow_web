@@ -19,6 +19,10 @@
     object-fit: cover;
 }
 
+.foto-banner::after {
+    content: '';
+}
+
 .info-perfil {
     transform: translate(0%, -25%);
 }
@@ -27,7 +31,6 @@
     height: 170px;
     width: 170px;
     object-fit: cover;
-    background-color: white;
 }
 
 .inversores {

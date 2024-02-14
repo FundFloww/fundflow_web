@@ -1,5 +1,5 @@
 <div class="default-bar top-bar bg-light-l">
-    <a *ngIf="session == true" class="img-profile bg-primary" [routerLink]="['/perfil', idUsuarioIdentificado]">
+    <a *ngIf="session == true" class="img-profile bg-light" [routerLink]="['/perfil', idUsuarioIdentificado]">
         @if(usuario?.imagen) {
             <img src="{{ usuario?.imagen }}" class="foto-mini-perfil" alt="">
         } @else {

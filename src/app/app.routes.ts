@@ -27,6 +27,13 @@ export const routes: Routes = [
             { path: '', redirectTo: '/inicio', pathMatch: 'full' },
         ]
     },
+    {
+        path: 'invertir',
+        children: [
+            { path: ':id', component: IdeaComponent },
+            { path: '', redirectTo: '/inicio', pathMatch: 'full' },
+        ]
+    },
     { path: '', redirectTo: '/inicio', pathMatch: 'full' },
     { path: '**', redirectTo: '/inicio', pathMatch: 'full' }
 ];

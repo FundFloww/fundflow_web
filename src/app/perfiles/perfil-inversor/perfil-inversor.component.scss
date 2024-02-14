@@ -42,6 +42,11 @@
     }
 }
 
+.empty-cards {
+    display: grid;
+    justify-content: center;
+}
+
 .card-bar {
     display: grid;
     grid-template-columns: repeat(4, 0.5fr);
@@ -85,7 +90,6 @@
     display: flex;
     align-items: center;
     justify-content:space-evenly;
-    // justify-content: center;
     padding-top: 1rem;
 }
 

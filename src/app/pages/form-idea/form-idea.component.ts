@@ -2,15 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../../components/header/header.component';
+import { SideBarComponent } from '../../components/side-bar/side-bar.component';
 import { camposKeys } from '../../enum/campos';
 import { onOpenBarFunction } from '../../functions/sideBarFunctions';
-import { HeaderComponent } from '../../components/header/header.component';
 import { IdeaNueva } from '../../interfaces/ideaNueva';
 import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
-import { UsuariosService } from '../../services/usuarios/usuarios.service';
-import { SideBarComponent } from '../../components/side-bar/side-bar.component';
-import { environment } from '../../../environments/environment';
 import { ImagenesService } from '../../services/imagenes/imagenes.service';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
 
 @Component({
     selector: 'app-form-idea',
@@ -40,7 +39,7 @@ export class FormIdeaComponent {
         titulo: '',
         descripcion: '',
         imagenes: [],
-        imagenesFile: [],
+        imagenesFile: [new File([], '')],
         campo: undefined,
         emprendedor: [],
     }
@@ -62,7 +61,9 @@ export class FormIdeaComponent {
 
         const file = fileInput.files[0];
 
-        this.nuevaIdea.imagenesFile[index] = file;   
+        this.nuevaIdea.imagenesFile[index] = file;
+        console.log(this.nuevaIdea.imagenesFile);
+         
     }
 
     agregarOtraImagen(evento: Event) {
@@ -72,7 +73,13 @@ export class FormIdeaComponent {
 
     borrarImagen(index: number) {
         // Eliminar imagen funciona pero la apariencia no es correcta, se muestra el nombre anterior
-        this.nuevaIdea.imagenesFile = this.nuevaIdea.imagenesFile.filter((_, i) => i !== index);
+        const newImagesFile = this.nuevaIdea.imagenesFile.filter((_, i) => i !== index);
+        this.nuevaIdea.imagenesFile = newImagesFile;
+
+        if(this.nuevaIdea.imagenesFile.length === 0) {
+            this.nuevaIdea.imagenesFile.push(new File([], ''));
+        }
+        console.log(this.nuevaIdea.imagenesFile);
     }
 
 

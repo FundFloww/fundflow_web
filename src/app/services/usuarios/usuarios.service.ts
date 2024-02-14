@@ -141,14 +141,17 @@ export class UsuariosService {
     }
 
     async getUsuarioPorId(id: number) {
-
         try {
             const response = await fetch(`${this.urlBase}/api/usuarios/${id}`, {
                 method: 'GET',
-                // headers: {
-                //     'Authorization': `Bearer ${this.getToken()}`
-                // }
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.getToken()}`
+                }
             });
+
+            console.log(response);
+            
 
             if (!response.ok) {
                 throw new Error('Error al obtener usuario');

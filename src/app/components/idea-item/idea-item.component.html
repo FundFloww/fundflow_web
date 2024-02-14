@@ -1,11 +1,13 @@
 <div class="card d-flex flex-column shadow ">
     <img src={{idea.imagen}}
+        (click)="detallesIdea()"
         alt="foto_idea" class="card-img-top foto-idea">
     <div class="card-body">
-        <h5 class="card-title mb-0">{{idea.titulo}}</h5>
-        <p class="card-text"><small class="text-body-secondary campo">Campo: {{idea.campo}}</small></p>
+        <h5 class="card-title mb-0">{{ idea.titulo }}</h5>
+        <span>{{ idea.emprendedor[0].nombre }} {{ idea.emprendedor[0].apellidos }}</span>
+        <p class="card-text"><small class="text-body-secondary campo">Campo: {{ idea.campo }}</small></p>
         <div class="caja-des">
-            <p class="card-text descripcion">{{idea.descripcion}}</p>
+            <p class="card-text descripcion">{{ idea.descripcion }}</p>
         </div>
         <div class="d-grid">
             <a (click)="detallesIdea()" class="btn btn-primary text-light-l">Ver más</a>
