@@ -10,6 +10,7 @@ import { FormIdeaComponent } from './pages/form-idea/form-idea.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
 import { NoticiasComponent } from './pages/noticias/noticias.component';
+import { InvertirComponent } from './pages/invertir/invertir.component';
 
 export const routes: Routes = [
     { path: 'inicio', component: InicioComponent },
@@ -19,17 +20,11 @@ export const routes: Routes = [
     { path: 'logout', component: LogoutComponent },
     { path: 'registro', component: RegistroComponent },
     { path: 'noticias', component: NoticiasComponent},
+    { path: 'invertir/:id', component: InvertirComponent },
     { 
         path: 'idea',
         children: [
             { path: 'añadir', component: FormIdeaComponent },
-            { path: ':id', component: IdeaComponent },
-            { path: '', redirectTo: '/inicio', pathMatch: 'full' },
-        ]
-    },
-    {
-        path: 'invertir',
-        children: [
             { path: ':id', component: IdeaComponent },
             { path: '', redirectTo: '/inicio', pathMatch: 'full' },
         ]

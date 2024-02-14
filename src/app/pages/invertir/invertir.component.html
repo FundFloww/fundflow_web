@@ -1,1 +1,55 @@
-<p>invertir works!</p>
+<div class="container-fluid root-element bg-light">
+    <div class="row">
+        <app-side-bar class="col-2 px-0 z-100" id="side-bar" (click)="onOpenBar()" [open]="open"
+            [session]="session"></app-side-bar>
+        <div id="content" class="col-10 h-100 pe-0 ps-0">
+            <section class="section-content">
+                <app-header></app-header>
+                <div class="default-bar card-bar bg-light-l">
+                    <div class="form-inversion shadow">
+                        <h2>Invertir en FundFlow</h2>
+                        <div class="pasos">
+                            <div class="paso">
+                                <div class="circle">1</div>
+                                <p class="text">Seleccionar la cantidad</p>
+                            </div>
+                            <div class="paso">
+                                <div class="circle">2</div>
+                                <p class="text">Completar tus datos</p>
+                            </div>
+                            <div class="paso">
+                                <div class="circle">3</div>
+                                <p class="text">Realizar el pago</p>
+                            </div>
+                        </div>
+                        <div class="inputs-cantidad">
+                            <label class="form-label" for="customRange1">Example range</label>
+                            <div class="range" data-mdb-range-init>
+                                <input type="range" class="form-range" id="customRange1" />
+                            </div>
+                        </div>
+                        <div class="inputs-datos">
+                            <label for="">Nombre</label>
+                            <input type="text">
+                            
+                            <label for="">Apellido</label>
+                            <input type="text">
+
+                            <label for="">Correo</label>
+                            <input type="text">
+
+                            <label for="">Teléfono</label>
+                            <input type="text">
+
+                            <label for="">Cantidad</label>
+                            <input type="text">
+                        </div>
+                        <div class="inputs-pago">
+                            <button class="btn btn-primary text-light">Realizar pago</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
