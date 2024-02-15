@@ -7,12 +7,12 @@ import { UsuarioFilterPipe } from '../../pipes/usuario-filter.pipe';
 
 @Component({
     selector: 'zona-admin-usuarios',
-    standalone: true,
-    imports: [
-        FormsModule,
-        CommonModule,
-        UsuarioFilterPipe
-    ],
+    // standalone: true,
+    // imports: [
+    //     FormsModule,
+    //     CommonModule,
+    //     UsuarioFilterPipe
+    // ],
     templateUrl: './zona-admin-usuarios.component.html',
     styleUrl: './zona-admin-usuarios.component.scss'
 })
