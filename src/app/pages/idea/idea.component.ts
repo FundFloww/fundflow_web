@@ -89,7 +89,7 @@ export class IdeaComponent {
         const icon = document.getElementById("guardar-tick") as HTMLElement;
         
         if(button.textContent !== "Añadir a favoritos!") {
-            text.textContent = "Guardar";
+            text.textContent = "Añadir a favoritos!";
             icon.style.display = "none";
             button.style.backgroundColor = "";
             return;

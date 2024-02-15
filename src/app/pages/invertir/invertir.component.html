@@ -7,46 +7,72 @@
                 <app-header></app-header>
                 <div class="default-bar card-bar bg-light-l">
                     <div class="form-inversion shadow">
-                        <h2>Invertir en FundFlow</h2>
+                        <h2>Invertir en <em>"{{ idea?.titulo }}"</em></h2>
                         <div class="pasos">
-                            <div class="paso">
+                            <div class="paso" (click)="onClickCantidad()">
                                 <div class="circle">1</div>
-                                <p class="text">Seleccionar la cantidad</p>
+                                <p class="text">Seleccionar cantidad</p>
                             </div>
-                            <div class="paso">
+                            <div class="paso" (click)="onClickDatos()">
                                 <div class="circle">2</div>
                                 <p class="text">Completar tus datos</p>
                             </div>
-                            <div class="paso">
+                            <div class="paso" (click)="onClickPago()">
                                 <div class="circle">3</div>
                                 <p class="text">Realizar el pago</p>
                             </div>
                         </div>
-                        <div class="inputs-cantidad">
-                            <label class="form-label" for="customRange1">Example range</label>
-                            <div class="range" data-mdb-range-init>
-                                <input type="range" class="form-range" id="customRange1" />
-                            </div>
+                        <div id="cantidad" class="inputs-cantidad">
+                            <p>Introduce la cantidad que quieres invertir:</p>
+                            <div class="slider-container">
+                                <input (input)="onCantidadInput()" type="text" for="moneyRange" id="moneyValue" class="cantidad-input" value="10€"/>
+                                <input (input)="onSliderInput($event)" type="range" min="0" max="100" value="50" class="slider" id="moneyRange" min="10" max="10000" value="100">
+                            </div>                          
                         </div>
-                        <div class="inputs-datos">
-                            <label for="">Nombre</label>
-                            <input type="text">
-                            
-                            <label for="">Apellido</label>
-                            <input type="text">
+                        <div id="datos" class="inputs-datos">
+                            <div class="d-flex gap-3">
+                                <div>
+                                    <label for="">Nombre</label>
+                                    <input type="text" value="{{ this.usuario?.nombre }}">
+                                </div>
+                                <div>
+                                    <label for="">Apellidos</label>
+                                    <input type="text" value="{{ this.usuario?.apellidos }}">
+                                </div>
+                            </div>
 
                             <label for="">Correo</label>
-                            <input type="text">
+                            <input type="text" value="{{ this.usuario?.correo }}">
 
                             <label for="">Teléfono</label>
                             <input type="text">
-
-                            <label for="">Cantidad</label>
-                            <input type="text">
                         </div>
-                        <div class="inputs-pago">
-                            <button class="btn btn-primary text-light">Realizar pago</button>
+                        <div id="pago" class="inputs-pago">
+                            <form class="formulario-pago">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+                            
+                                <label for="numero-tarjeta">Número de Tarjeta:</label>
+                                <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="Número de Tarjeta" required>
+                                
+                                <div class="ex-cv">
+                                    <div class="fecha-expiracion">
+                                        <label for="expiracion">Expiración:</label>
+                                        <input type="text" id="expiracion" name="expiracion" placeholder="MM/YY" required>
+                                    </div>
+                                
+                                    <div class="cvv">
+                                        <label for="cvv">CVV:</label>
+                                        <input type="text" id="cvv" name="cvv" placeholder="CVV" required>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary text-light pago">Realizar pago</button>
+                            </form>                            
                         </div>
+                        @if(this.tab < 3)
+                        {
+                            <button (click)="onSiguienteClick()" class="btn btn-primary text-light siguiente">Siguiente</button>
+                        }
                     </div>
                 </div>
             </section>
