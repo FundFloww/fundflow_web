@@ -90,7 +90,7 @@
 
 
     <ng-template #elseInversiones>
-        <div [ngClass]="inversiones.length !== 0 ? 'card-bar' : 'empty-cards'">
+        <div [ngClass]="inversiones.length !== 0 || guardados.length  ? 'card-bar' : 'empty-cards'">
             @if(guardados.length != 0) {
                 @for (idea of guardados; track idea.id) {
                     <app-idea-item [idea]="idea"></app-idea-item>

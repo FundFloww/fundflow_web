@@ -44,6 +44,7 @@ export class PerfilInversorComponent {
         this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario ?? 0);
         this.inversiones = await this.ideaService.getIdeasInvertidas(this.usuario?.id ?? 0);
         this.guardados = await this.ideaService.getIdeasGuardadas(this.usuario?.id ?? 0);
+        
         if (this.idUsuario == this.idUsuarioIdentificado) {
             this.mismoId = true;
         }

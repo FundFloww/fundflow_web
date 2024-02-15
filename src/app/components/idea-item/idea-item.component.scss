@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap');
+
 .text-light-l {
     color: #ffffff;
 }
@@ -6,6 +8,13 @@
     height: 170px;
     object-fit: cover;
     cursor: pointer;
+}
+
+.foto-emprendedor {
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .card {
@@ -32,6 +41,20 @@
 
 .campo {
     font-size: 12px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-pointer:hover {
+    text-decoration: underline;
+    color: #003cff;
+}
+
+.nombre-usuario {
+    font-family: 'sora', sans-serif;
+    font-size: 0.9rem;
 }
 
 @media (max-width: 500px) {

@@ -7,6 +7,7 @@ import { UsuarioEditarDTO } from '../../interfaces/usuario-editarDto';
 import { environment } from '../../../environments/environment';
 import { UsuarioEditarContraseñaDTO } from '../../interfaces/usuario-editar-contraseñaDTO';
 import { GuardarIdea } from '../../interfaces/GuardarIdea';
+import { Usuario } from '../../interfaces/usuario';
 
 @Injectable({
     providedIn: 'root'
@@ -140,7 +141,7 @@ export class UsuariosService {
         }
     }
 
-    async getUsuarioPorId(id: number) {
+    async getUsuarioPorId(id: number): Promise<Usuario> {
         try {
             const response = await fetch(`${this.urlBase}/api/usuarios/${id}`, {
                 method: 'GET',
