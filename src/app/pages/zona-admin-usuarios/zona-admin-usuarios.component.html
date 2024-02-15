@@ -1,1 +1,51 @@
-<p>zona-admin-usuarios works!</p>
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <div class="card mb-4 mt-4">
+                    <div class="card-header">
+                        <h2 class="mt-2 mb-2">Usuarios</h2>
+                    </div>
+                    <div class="search ms-auto me-3 mt-3">
+                        <img src="../../assets/icons/search.svg" alt="">
+                        <input type="search" placeholder="Buscar">
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Email</th>
+                                    <th>Tipo Usuario</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let usuario of usuarios | usuarioFilter:filterSearch">
+                                    <th>{{usuario.id}}</th>
+                                    <td>{{usuario.nombre}}</td>
+                                    <td>{{usuario.apellidos}}</td>
+                                    <td>{{usuario.correo}}</td>
+                                    <td>{{usuario.tipo}}</td>
+                                    <td width="166">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-primary text-white">Editar</button>
+                                            <button type="button" class="btn btn-danger">Borrar</button>
+                                        </div>
+                                    </td>
+                                    
+                                </tr>
+                                <tr *ngIf="usuariosNotFound">
+                                    <td colspan="6" class="text-center">Ningún resultado encontrado</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

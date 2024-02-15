@@ -22,15 +22,15 @@ export class SideBarAdminComponent {
         {
             id: 1,
             nombre: 'Usuarios',
-            icono: '/admin/usuarios',
-            destino: '/',
+            icono: 'usuarios',
+            destino: '/admin/usuarios',
             ruta: `${this.rutaIconos}/usuarios.svg`
         },
         {
             id: 2,
             nombre: 'Ideas',
-            icono: '/admin/ideas',
-            destino: '/',
+            icono: 'ideas',
+            destino: '/admin/ideas',
             ruta: `${this.rutaIconos}/ideas.svg`
         },
         {

@@ -135,4 +135,15 @@ export class UsuariosService {
         return jwtDecode(token).sub;
     }
 
+    async getUsuariosZonaAdmin() {
+        try {
+            const response = await fetch(`${this.urlBase}/api/usuarios/admin`);
+            const datos = await response.json();
+            return datos;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
 }
