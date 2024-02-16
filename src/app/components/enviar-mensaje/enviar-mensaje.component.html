@@ -1,0 +1,97 @@
+<div class="container-fluid root-element bg-light">
+    <div class="row">
+        <app-side-bar class="col-2 px-0 me-0 no-bootstrap-styles" id="side-bar" (click)="onOpenBar()" [open]="open"
+            [session]="session"></app-side-bar>
+        <div id="content" class="col-10 px-0">
+            <section class="section-content bg-light-l">
+                <app-header></app-header>
+                <div id="form-idea" class="row col-10 container-fluid mx-0 px-4 py-3">
+                    <p class="h2 mb-4"><strong>Enviar mensaje</strong></p>
+                    <form (ngSubmit)="enviarCorreo()" #miCorreo>
+                        <div class="mb-3">
+                            <label for="destinatario" class="form-label h4">Destinatario</label>
+                            <input type="text" class="form-control text-muted bg-light-l" id="destinatario"
+                            [value]="usuario?.nombre + ' ' + usuario?.apellidos" disabled>
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label for="asunto" class="form-label h4">Asunto</label>
+                            <input type="text" class="form-control" id="asunto" [(ngModel)]="asunto" name="asunto"
+                            placeholder="Asunto del mensaje..." required autofocus minlength="5">
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label for="descripción" class="form-label h4">Descripción</label>
+                            <textarea id="textArea" placeholder="Introduce aquí la descripción de tu idea..."
+                            class="form-control" [(ngModel)]="contenido" required name="descripcion"
+                            #descripcion="ngModel" minlength="5"></textarea>
+                        </div>
+                            
+                        <button type="submit" class="btn btn-primary text-light">Enviar</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- <form #miCorreo="ngForm">
+    <div class="mb-3">
+        <label for="titulo" class="form-label h4">Titulo</label>
+        <input type="text" class="form-control" id="titulo" [(ngModel)]="nuevaIdea.titulo"
+            name="titulo" placeholder="Introduce el título de tu idea..." required autofocus minlength="5" #titulo="ngModel" 
+            [ngClass]="validClasses(titulo, 'is-valid', 'is-invalid')">
+            <div class="invalid-feedback">
+                Título requerido (mínimo 5 carácteres)
+            </div>
+    </div>
+    <div class="mb-3">
+        <label for="descripción" class="form-label h4">Descripción</label>
+        <textarea id="textArea" placeholder="Introduce aquí la descripción de tu idea..."
+            class="form-control" [(ngModel)]="nuevaIdea.descripcion" required
+            name="descripcion" #descripcion="ngModel" minlength="5"
+            [ngClass]="validClasses(descripcion, 'is-valid', 'is-invalid')"></textarea>
+        <div class="invalid-feedback">
+            Descripción requerida (mínimo 5 carácteres)
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="imagen" class="form-label h4">Imagen</label>
+        @for (imagen of nuevaIdea.imagenesFile; track $index) {
+            <div class="imagen">
+                <input type="file" class="form-control mb-1" name="imagen" #fileImage
+                    (change)="changeImage(fileImage, $index)" required>
+                <div class="btn btn-danger ms-2" (click)="borrarImagen($index)">X</div>
+            </div>
+        }
+    </div>
+    <button class="btn btn-primary text-light mb-3" (click)="agregarOtraImagen($event)">
+        Agregar otra imagen
+    </button>
+    <div class="mb-3">
+        <label for="campo" class="form-label h4">Campo</label>
+        <select class="form-select" [(ngModel)]="nuevaIdea.campo" name="campo" required 
+        #campo="ngModel" [ngClass]="validClasses(campo, 'is-valid', 'is-invalid')">
+            <option value="" selected disabled>Selecciona un campo</option>
+            @for (campo of camposArray; track $index ) {
+                <option value={{campo.toUpperCase()}}>{{campo}}</option>
+            }
+        </select>
+        <div class="invalid-feedback">
+            Campo requerido
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary text-light"
+        [disabled]="miFormulario.invalid || imagenesVacias() || campoVacio()">Enviar</button>
+</form> -->
