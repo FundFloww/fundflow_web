@@ -7,6 +7,8 @@ import { IdeasServicioService } from '../../services/ideas/ideas-servicio.servic
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { GuardarIdea } from '../../interfaces/GuardarIdea';
 import { RouterLink } from '@angular/router';
+import { InversionesService } from '../../services/inversiones/inversiones.service';
+import { Inversion } from '../../interfaces/inversion';
 
 @Component({
   selector: 'app-idea',
@@ -20,6 +22,7 @@ export class IdeaComponent {
     constructor(
         private usuarioService: UsuariosService,
         private ideaService: IdeasServicioService,
+        private inversionesService: InversionesService,
         private router: Router
     ) {}
 
@@ -31,6 +34,8 @@ export class IdeaComponent {
     guardada: boolean = false;
     propietario: boolean = false;
     ideaId: number | null = null;
+    inversionesRecibidas: Inversion[] = [];
+    totalRecibido: number = 0;
 
     async ngOnInit() {
         const ideas = await this.ideaService.getIdeasAll();
@@ -44,6 +49,9 @@ export class IdeaComponent {
         this.idea = ideas.filter(idea => idea.id === this.ideaId)[0];
         this.imagenMain = this.idea.imagenes[0];
         this.nombreCompleto = this.idea.emprendedor[0].nombre + " " + this.idea.emprendedor[0].apellidos;
+        this.inversionesRecibidas = await this.inversionesService.getInversionesUsuario(this.ideaId ?? 0);
+        this.totalRecibido = this.inversionesRecibidas.reduce((acc, inv) => acc + inv.cantidad, 0);
+
         if(this.session) {
             const idUsuario = parseInt(this.usuarioService.getUserId()!);
             const guardadas = await this.ideaService.getIdeasGuardadas(idUsuario);
