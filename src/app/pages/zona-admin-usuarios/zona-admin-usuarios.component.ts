@@ -7,12 +7,12 @@ import { UsuarioFilterPipe } from '../../pipes/usuario-filter.pipe';
 
 @Component({
     selector: 'zona-admin-usuarios',
-    // standalone: true,
-    // imports: [
-    //     FormsModule,
-    //     CommonModule,
-    //     UsuarioFilterPipe
-    // ],
+    standalone: true,
+    imports: [
+        FormsModule,
+        CommonModule,
+        UsuarioFilterPipe
+    ],
     templateUrl: './zona-admin-usuarios.component.html',
     styleUrl: './zona-admin-usuarios.component.scss'
 })
@@ -27,10 +27,28 @@ export class ZonaAdminUsuariosComponent {
 
     async ngOnInit() {
         try {
-            this.usuarios = await this.usuariosService.getUsuariosZonaAdmin();
-            this.usuariosNotFound = (this.usuarios.length === 0) ? true : false;
+            const res = await this.usuariosService.getUsuariosZonaAdmin();
+            console.log(res);
+            this.usuarios = res.content;
+            this.updateUsuariosNotFound();
         } catch (error) {
             console.error("Ocurrió un error al obtener los usuarios: ", error);
+        }
+    }
+
+    updateUsuariosNotFound() {
+        this.usuariosNotFound = (this.usuarios.length === 0);
+    }
+
+    editarUsuario(id: number | undefined) {
+        console.log("Editar usuario con id:", id);
+    }
+
+    borrarUsuario(id: number | undefined) {
+        if (id !== undefined) {
+            this.usuariosService.deleteUsuario(id).then(() =>{
+                this.ngOnInit();
+            });
         }
     }
 }

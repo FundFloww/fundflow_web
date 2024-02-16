@@ -35,6 +35,7 @@ export class LoginComponent {
     }
 
     async onSubmit() {
+        this.usuario.correo = this.usuario.correo.toLowerCase();
         const userCorrectData = await this.usuariosService.login(this.usuario);
         console.log(userCorrectData);
         if(userCorrectData !== null)

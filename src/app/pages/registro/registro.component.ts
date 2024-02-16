@@ -41,6 +41,7 @@ export class RegistroComponent {
     }
 
     async addNewUsuario() {
+        this.newUsuario.correo = this.newUsuario.correo.toLowerCase();
 
         this.userExists = await this.usuariosService.addUsuario(this.newUsuario);
         

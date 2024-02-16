@@ -57,6 +57,24 @@ export class UsuariosService {
         }
     }
 
+    async deleteUsuario(userId: number) {
+        try {
+            const response = await fetch(`${this.urlBase}/api/usuarios/eliminar/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al eliminar el usuario');
+            }
+
+        } catch (error) {
+            console.error('Error al realizar la operación:', error);
+        }
+    }
+
     async login(usuario: UsuarioDTO) {
         try {
             const response = await fetch(`${this.urlBase}/api/auth/login`, {

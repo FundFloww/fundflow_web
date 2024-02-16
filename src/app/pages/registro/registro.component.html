@@ -14,15 +14,6 @@
                         <form (ngSubmit)="addNewUsuario()" novalidate autocomplete="off" #registroForm="ngForm">
                             <div class="mb-3 selector">
                                 <div class="w-100 tabs btn-group input-box">
-                                    <!-- <input type="radio" name="tipoUsuario" id="radio-1" [value]="'EMPRENDEDOR'"
-                                        [checked]="newUsuario.tipo === 'EMPRENDEDOR'"
-                                        (change)="newUsuario.tipo='EMPRENDEDOR'">
-                                    <label for="radio-1" class="tab">Emprendedor</label>
-
-                                    <input type="radio" name="tipoUsuario" id="radio-2" [value]="'INVERSOR'"
-                                        [checked]="newUsuario.tipo === 'INVERSOR'"
-                                        (change)="newUsuario.tipo='INVERSOR'">
-                                    <label for="radio-2" class="tab">Inversor</label> -->
                                     <input type="radio" class="btn-check" name="tipoUsuario" [value]="'EMPRENDEDOR'" id="emprendedor" 
                                         [checked]="newUsuario.tipo == 'EMPRENDEDOR'" 
                                         (click)="newUsuario.tipo = 'EMPRENDEDOR'">

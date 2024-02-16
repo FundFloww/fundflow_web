@@ -1,4 +1,3 @@
-
 <div id="layoutSidenav">
     <div id="layoutSidenav_content">
         <main>
@@ -7,16 +6,29 @@
                     <div class="card-header">
                         <h2 class="mt-2 mb-2">Usuarios</h2>
                     </div>
-                    <div class="search ms-auto me-3 mt-3">
-                        <img src="../../assets/icons/search.svg" alt="">
-                        <input type="search" placeholder="Buscar">
+                    <button type="button" class="btn btn-success text-white ms-3 mt-3">Nuevo</button>
+                    <div class="d-flex ms-3 me-3 mt-3">
+                        <label class="d-flex align-items-center justify-content-center">
+                            Mostrar
+                            <select name="dataTable_length" aria-controls="dataTable"
+                                class="ms-2 me-2 custom-select custom-select-sm form-control form-control-sm">
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                            registros
+                        </label>
+                        <div class="search ms-auto">
+                            <img src="../../assets/icons/search.svg" alt="">
+                            <input type="search" [(ngModel)]="filterSearch" placeholder="Buscar">
+                        </div>
                     </div>
                     <div class="card-body table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Nombre</th>
+                                    <th class="col-printer sorting">#</th>
+                                    <th class="col-printer sorting">Nombre</th>
                                     <th>Apellidos</th>
                                     <th>Email</th>
                                     <th>Tipo Usuario</th>
@@ -32,13 +44,15 @@
                                     <td>{{usuario.tipo}}</td>
                                     <td width="166">
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-primary text-white">Editar</button>
-                                            <button type="button" class="btn btn-danger">Borrar</button>
+                                            <button type="button" class="btn btn-primary text-white"
+                                                (click)="editarUsuario(usuario.id)">Editar</button>
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="borrarUsuario(usuario.id)">Borrar</button>
                                         </div>
                                     </td>
-                                    
+
                                 </tr>
-                                <tr *ngIf="usuariosNotFound">
+                                <tr *ngIf="usuariosNotFound || (usuarios | usuarioFilter:filterSearch).length === 0">
                                     <td colspan="6" class="text-center">Ningún resultado encontrado</td>
                                 </tr>
                             </tbody>
