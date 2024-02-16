@@ -79,6 +79,10 @@ h2 {
         margin: 20px;
         flex-direction: column;
         align-items: center;
+
+        p {
+            text-align: center;
+        }
     }
 
     .inputs-datos {
@@ -88,6 +92,10 @@ h2 {
     .inputs-datos,
     .inputs-pago {
         flex-direction: column;
+    }
+
+    .inputs-pago {
+        margin-top: 20px;
     }
 
     .inputs-cantidad,
@@ -160,15 +168,6 @@ output {
     margin-top: 10px;
 }
 
-.cantidad-elementos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    border: solid 1px #d3d3d3;
-    border-radius: 3px;
-}
-
 .cantidad-input {
     text-align: center;
     font-size: 0.9rem;
@@ -212,10 +211,16 @@ input[type="text"] {
 
 @media (max-width: 940px) {
     .form-inversion {
-        width: 75%;
+        width: 80%;
     }    
     
     .paso > .text {
         display: none;
+    }
+}
+
+@media (max-width: 550px) {
+    .form-inversion {
+        width: 85%;
     }
 }

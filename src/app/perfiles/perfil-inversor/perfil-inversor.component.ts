@@ -27,6 +27,7 @@ export class PerfilInversorComponent {
     idUsuarioIdentificado: number | undefined;
     ver: string = "Inversiones";
     mismoId: boolean = false;
+    totalInvertido: number = 0;
 
     constructor(
         private ideaService: IdeasServicioService,
@@ -37,13 +38,14 @@ export class PerfilInversorComponent {
     async ngOnInit() {
         this.route.params.subscribe(params => {
             this.idUsuario = params['id'];
-        })
-        // this.ideas = await this.ideaService.getIdeasUser();
+        });
+        
         this.session = await this.usuariosService.initializeSession();
         this.idUsuarioIdentificado = parseInt(await this.usuariosService.getUserId() ?? '0');
         this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario ?? 0);
         this.inversiones = await this.ideaService.getIdeasInvertidas(this.usuario?.id ?? 0);
         this.guardados = await this.ideaService.getIdeasGuardadas(this.usuario?.id ?? 0);
+        this.totalInvertido = this.usuario.inversiones.reduce((acc, inv) => acc + inv.cantidad, 0);
         
         if (this.idUsuario == this.idUsuarioIdentificado) {
             this.mismoId = true;

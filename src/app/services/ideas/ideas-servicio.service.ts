@@ -7,6 +7,7 @@ import { IdeaNueva } from '../../interfaces/ideaNueva';
 import { Campos } from '../../enum/campos';
 import { CamposApi } from '../../enum/camposApi';
 import { environment } from '../../../environments/environment';
+import { InversionEnviar } from '../../interfaces/InversionEnviar';
 
 @Injectable({
     providedIn: 'root'
@@ -55,10 +56,8 @@ export class IdeasServicioService {
     }
 
     async getIdeasInvertidas(id: number): Promise<IdeaDto[]> {
-        // const userId = this.usuariosService.getUserId();
-
-        try{
-            const response = await fetch(`${this.apiURL}/api/ideas/inversor/${id}`);
+        try {
+            const response = await fetch(`${this.apiURL}/api/ideas/invertidas/${id}`);
             const datos = await response.json();
             return datos;
         } catch (error) {
@@ -102,6 +101,25 @@ export class IdeasServicioService {
             });
             const datos = await response.json();
             return datos;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    async invertir(inversion: InversionEnviar) {
+        try {
+            const response = await fetch(`${this.apiURL}/api/ideas/invertir`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                body: JSON.stringify(inversion),
+            });
+            if(!response.ok) {
+                throw new Error(`Error al enviar la inversión a la base de datos. Código de estado: ${response.status}`);
+            }
         } catch (error) {
             console.error(error);
             throw error;

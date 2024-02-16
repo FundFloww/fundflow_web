@@ -7,8 +7,8 @@ import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
 import { Router } from '@angular/router';
 import { Idea } from '../../interfaces/idea';
-import { UsuarioDTO } from '../../interfaces/loginDto';
 import { UsuarioDatos } from '../../interfaces/UsuarioDatos';
+import { InversionEnviar } from '../../interfaces/InversionEnviar';
 
 @Component({
     selector: 'app-invertir',
@@ -30,6 +30,8 @@ export class InvertirComponent {
     session: boolean | null = null;
     usuario: UsuarioDatos | null = null;
     tab: number = 1;
+    cantidad: number = 10;
+    inversion: InversionEnviar | null = null;
 
     async ngOnInit() {
         this.session = await this.usuariosService.initializeSession();
@@ -37,6 +39,7 @@ export class InvertirComponent {
         const idIdea = parseInt(this.router.url.split('/')[2]);
         const ideas = await this.ideasService.getIdeasAll();
         this.idea = ideas.find(idea => idea.id === idIdea) || null;
+
         this.initInvertir();
     }
 
@@ -126,6 +129,7 @@ export class InvertirComponent {
         const cantidad = document.getElementById('moneyValue')! as HTMLInputElement;
 
         cantidad.value = target.value + '€';
+        this.cantidad = parseInt(cantidad.value);  
     }
 
     onCantidadInput() {
@@ -134,17 +138,36 @@ export class InvertirComponent {
 
         cantidad.value = cantidad.value.replace('€', '');
         slider.value = cantidad.value;
+        this.cantidad = parseInt(cantidad.value);
     }
 
-    onSiguienteClick() {
+    onSiguienteClick() {   
         this.tab++;
-
+        if(this.tab === 1) {
+            this.onClickDatos();
+        }
+        
         if(this.tab === 2) {
             this.onClickDatos();
         }
-
+        
         if(this.tab === 3) {
             this.onClickPago();
         }
+    }
+
+    onInvertirClick(evento: Event) {
+        evento.preventDefault();
+
+        this.inversion = {
+            cantidad: this.cantidad,
+            fecha: new Date(),
+            inversores: [this.usuario!],
+            idea: this.idea!
+        };
+        console.log(this.inversion);
+        
+        this.ideasService.invertir(this.inversion);
+        this.router.navigate(['/idea/' + this.idea!.id]);
     }
 }

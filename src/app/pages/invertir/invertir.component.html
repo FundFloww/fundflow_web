@@ -49,9 +49,6 @@
                         </div>
                         <div id="pago" class="inputs-pago">
                             <form class="formulario-pago">
-                                <label for="email">Email:</label>
-                                <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
-                            
                                 <label for="numero-tarjeta">Número de Tarjeta:</label>
                                 <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="Número de Tarjeta" required>
                                 
@@ -66,7 +63,7 @@
                                         <input type="text" id="cvv" name="cvv" placeholder="CVV" required>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary text-light pago">Realizar pago</button>
+                                <button (click)="onInvertirClick($event)" class="btn btn-primary text-light pago">Realizar pago</button>
                             </form>                            
                         </div>
                         @if(this.tab < 3)
