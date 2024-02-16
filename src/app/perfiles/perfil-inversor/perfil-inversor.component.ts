@@ -18,7 +18,7 @@ import { NgClass } from '@angular/common';
     styleUrl: './perfil-inversor.component.scss'
 })
 export class PerfilInversorComponent {
-    inversiones: IdeaDto[] = [];
+    inversionesIdea: IdeaDto[] = [];
     guardados: IdeaDto[] = [];
     open: boolean = true;
     session: boolean | null = null;
@@ -43,7 +43,7 @@ export class PerfilInversorComponent {
         this.session = await this.usuariosService.initializeSession();
         this.idUsuarioIdentificado = parseInt(await this.usuariosService.getUserId() ?? '0');
         this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario ?? 0);
-        this.inversiones = await this.ideaService.getIdeasInvertidas(this.usuario?.id ?? 0);
+        this.inversionesIdea = await this.ideaService.getIdeasInvertidas(this.usuario?.id ?? 0);
         this.guardados = await this.ideaService.getIdeasGuardadas(this.usuario?.id ?? 0);
         this.totalInvertido = this.usuario.inversiones.reduce((acc, inv) => acc + inv.cantidad, 0);
         

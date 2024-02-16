@@ -8,6 +8,8 @@ import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { Usuario } from '../../interfaces/usuario';
 import { NgIf } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
+import { InversionesService } from '../../services/inversiones/inversiones.service';
+import { Inversion } from '../../interfaces/inversion';
 
 @Component({
     selector: 'app-perfil-emprendedor',
@@ -25,33 +27,39 @@ export class PerfilEmprendedorComponent {
     idUsuario: number | undefined;
     idUsuarioIdentificado: number | undefined;
     mismoId: boolean = false;
+    inversionesRecibidas: Inversion[] = [];
+    totalRecibido: number = 0;
 
     constructor(
-        private ideaService: IdeasServicioService, 
+        private ideaService: IdeasServicioService,
         private usuariosService: UsuariosService,
+        private inversionesService: InversionesService,
         private route: ActivatedRoute
     ) { }
 
     async ngOnInit() {
         this.route.params.subscribe(params => {
-          this.idUsuario = params['id'];
+            this.idUsuario = params['id'];
         })
         this.ideas = await this.ideaService.getIdeasUser(this.idUsuario ?? 0);
-        this.idUsuarioIdentificado = parseInt(await this.usuariosService.getUserId() ?? '0');
+        this.idUsuarioIdentificado = parseInt(this.usuariosService.getUserId() ?? '0');
         this.session = await this.usuariosService.initializeSession();
         this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario ?? 0);
-        if(this.idUsuario == this.idUsuarioIdentificado) {
+        this.inversionesRecibidas = await this.inversionesService.getInversionesUsuario(this.idUsuario ?? 0);
+        this.totalRecibido = this.inversionesRecibidas.reduce((acc, inv) => acc + inv.cantidad, 0);
+        
+        if (this.idUsuario == this.idUsuarioIdentificado) {
             this.mismoId = true;
-          }
+        }
     }
 
     onOpenBar() {
-        const cerrarBar = document.getElementById('cerrar-bar')!; 
-        
-        if(getComputedStyle(cerrarBar).display === 'none') {
+        const cerrarBar = document.getElementById('cerrar-bar')!;
+
+        if (getComputedStyle(cerrarBar).display === 'none') {
             return;
         }
-        
+
         this.open = onOpenBarFunction(this.open);
     }
 }

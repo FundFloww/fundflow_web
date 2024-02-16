@@ -43,8 +43,6 @@ export class IdeasServicioService {
     }
 
     async getIdeasUser(id: number): Promise<IdeaDto[]> {
-        // const userId = this.usuariosService.getUserId();
-
         try {
             const response = await fetch(`${this.apiURL}/api/ideas/usuario/${id}`);
             const datos = await response.json();
