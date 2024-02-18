@@ -52,3 +52,12 @@ th{
 button.btn.btn-success{
     width: 90px;
 }
+
+select[name="dataTable_length"]{
+    width: auto;
+    appearance: revert;
+}
+
+.custom-button:focus:not(:focus-visible) {
+    outline: none !important;
+}
