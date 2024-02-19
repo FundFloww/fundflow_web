@@ -8,6 +8,7 @@ import { Campos } from '../../enum/campos';
 import { CamposApi } from '../../enum/camposApi';
 import { environment } from '../../../environments/environment';
 import { InversionEnviar } from '../../interfaces/InversionEnviar';
+import { Hito } from '../../interfaces/hito';
 
 @Injectable({
     providedIn: 'root'
@@ -117,6 +118,42 @@ export class IdeasServicioService {
             });
             if(!response.ok) {
                 throw new Error(`Error al enviar la inversión a la base de datos. Código de estado: ${response.status}`);
+            }
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    async guardarHito(idIdea: number, hito: Hito) {
+        try {
+            const response = await fetch(`${this.apiURL}/api/ideas/${idIdea}/hitos/nuevo`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(hito),
+            });
+            if(!response.ok) {
+                throw new Error(`Error al enviar el hito a la base de datos. Código de estado: ${response.status}`);
+            }
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    async eliminarHito(idIdea: number, hito: Hito) {
+        try {
+            const response = await fetch(`${this.apiURL}/api/ideas/${idIdea}/hitos/eliminar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(hito),
+            });
+            if(!response.ok) {
+                throw new Error(`Error al eliminar el hito de la base de datos. Código de estado: ${response.status}`);
             }
         } catch (error) {
             console.error(error);

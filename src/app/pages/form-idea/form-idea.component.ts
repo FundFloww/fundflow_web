@@ -62,8 +62,6 @@ export class FormIdeaComponent {
         const file = fileInput.files[0];
 
         this.nuevaIdea.imagenesFile[index] = file;
-        console.log(this.nuevaIdea.imagenesFile);
-         
     }
 
     agregarOtraImagen(evento: Event) {

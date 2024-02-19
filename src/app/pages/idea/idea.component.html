@@ -15,10 +15,9 @@
                             <div class="datos-titulo">
                                 <h1>{{ this.idea?.titulo }}</h1>
                                 <div (click)="onClickProfile()" class="nombre-usuario">{{ this.nombreCompleto }}</div>
-                                <div><img class="estrellas" src="../../assets/img/5-star-rating-review-star-transparent-free-png.png" alt=""></div>
                             </div>
                         </div>
-                        @if(this.session) {
+                        @if(this.session && !this.propietario) {
                             <button id="boton-guardar" (click)="onClickGuardar()" class="btn btn-primary text-light-l">
                                 <span id="texto-boton">Añadir a favoritos!</span>
                                 <img id="guardar-tick" src="../../../assets/icons/guardado.svg" alt="guardado">
@@ -34,7 +33,7 @@
                         <p>Inversiones</p>
                     </div>
                     <div>
-                        <p>4</p>
+                        <p>{{ this.idea?.hitos?.length }}</p>
                         <p>Hitos Terminados</p>
                     </div>
                     <div>
@@ -53,30 +52,41 @@
                 <div class="linea-tiempo bg-light-l">
                     <h4>Linea de tiempo</h4>
                     <ul class="hitos">
-                        <li class="hito">
-                            <div class="custom-bullet"></div>
-                            <h5 class="titulo-hito">Proyecto comenzado</h5>
-                            <div class="fecha-hito">12/12/2021</div>
-                            <div class="descripcion-hito">El dia 22 comenzamos el proyecto planeando los primeros sprints....</div>
-                        </li>
-                        <li class="hito">
-                            <div class="custom-bullet"></div>
-                            <h5 class="titulo-hito">Proyecto comenzado</h5>
-                            <div class="fecha-hito">12/12/2021</div>
-                            <div class="descripcion-hito">El dia 22 comenzamos el proyecto planeando los primeros sprints....</div>
-                        </li>
-                        <li class="hito">
-                            <div class="custom-bullet"></div>
-                            <h5 class="titulo-hito">Proyecto comenzado</h5>
-                            <div class="fecha-hito">12/12/2021</div>
-                            <div class="descripcion-hito">El dia 22 comenzamos el proyecto planeando los primeros sprints....</div>
-                        </li>
-                        <li class="hito">
-                            <div class="custom-bullet"></div>
-                            <h5 class="titulo-hito">Proyecto comenzado</h5>
-                            <div class="fecha-hito">12/12/2021</div>
-                            <div class="descripcion-hito">El dia 22 comenzamos el proyecto planeando los primeros sprints....</div>
-                        </li>
+                        @for(hito of this.idea?.hitos; track $index) {
+                            <li class="hito">
+                                <div class="custom-bullet"></div>
+                                <h5 class="titulo-hito d-flex align-items-center">
+                                    {{ hito.titulo }}
+                                    @if(this.propietario) {
+                                        <img (click)="onClickEliminarHito(hito)" role="button" class="ms-2 target" src="../../../assets/icons/trash.svg" alt="eliminar">
+                                    }
+                                </h5>
+                                <div class="fecha-hito">{{ hito.fecha.toString().split('T')[0].split('-').reverse().join('/') }}</div>
+                                <div class="descripcion-hito">{{ hito.texto }}</div>
+                            </li>
+                        }
+                        @if(this.idea?.hitos?.length === 0) {
+                            <li class="hito">
+                                <h5 class="titulo-hito">No hay hitos</h5>
+                            </li>
+                        }
+                        @if(this.propietario) {
+                            <li class="hito" [ngClass]="{'d-none' : !this.idea?.hitos || this.idea?.hitos?.length === 0 || nuevoHito}">
+                                <button (click)="onClickNuevoHito()" class="btn btn-primary text-light-l">Añadir Hito</button>
+                            </li>
+                            @if(!this.idea?.hitos || this.idea?.hitos?.length === 0 || this.nuevoHito) {
+                                <li class="hito">
+                                    <div class="custom-bullet"></div>
+                                    <h5 class="titulo-hito"><input [(ngModel)]="this.hito.titulo" name="titulo-hito" type="text" placeholder="Titulo"></h5>
+                                    <div class="fecha-hito">{{ this.fechaHoy }}</div>
+                                    <div class="descripcion-hito"><textarea [(ngModel)]="this.hito.texto" name="contenido-hito" class="texto-hito" placeholder="Contenido..."></textarea></div>
+                                    <div>
+                                        <button (click)="onClickGuardarHito()" class="btn btn-primary text-light-l mt-3">Guardar</button>
+                                        <button (click)="onClickCancelarHito()" class="btn btn-primary text-light-l mt-3 ms-2">Cancelar</button>
+                                    </div>
+                                </li>
+                            }
+                        }    
                     </ul>
                 </div>
                 <div id="invertir-section" class="invertir bg-light-l col-10">

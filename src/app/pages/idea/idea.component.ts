@@ -9,11 +9,14 @@ import { GuardarIdea } from '../../interfaces/GuardarIdea';
 import { RouterLink } from '@angular/router';
 import { InversionesService } from '../../services/inversiones/inversiones.service';
 import { Inversion } from '../../interfaces/inversion';
+import { NgClass } from '@angular/common';
+import { Hito } from '../../interfaces/hito';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-idea',
   standalone: true,
-  imports: [SideBarComponent, RouterLink],
+  imports: [SideBarComponent, RouterLink, NgClass, FormsModule],
   templateUrl: './idea.component.html',
   styleUrl: './idea.component.scss'
 })
@@ -36,6 +39,13 @@ export class IdeaComponent {
     ideaId: number | null = null;
     inversionesRecibidas: Inversion[] = [];
     totalRecibido: number = 0;
+    fechaHoy = new Date().toISOString().split('T')[0].split('-').reverse().join('/');
+    nuevoHito: boolean = false;
+    hito: Hito = {
+        titulo: "",
+        fecha: new Date(),
+        texto: ""
+    };
 
     async ngOnInit() {
         const ideas = await this.ideaService.getIdeasAll();
@@ -125,5 +135,29 @@ export class IdeaComponent {
         await this.usuarioService.eliminarIdeaGuardada(datosGuardar);
     
         return;
+    }
+
+    onClickNuevoHito() {
+        this.nuevoHito = true;
+    }
+
+    async onClickGuardarHito() {     
+        await this.ideaService.guardarHito(this.ideaId ?? 0, this.hito);
+        await this.updateIdea();
+    }
+
+    onClickCancelarHito() {
+        this.nuevoHito = false;
+    }
+
+    async onClickEliminarHito(hito: Hito) {
+        await this.ideaService.eliminarHito(this.ideaId ?? 0, hito);
+        await this.updateIdea();
+        
+    }
+
+    async updateIdea() {
+        const ideas = await this.ideaService.getIdeasAll();
+        this.idea = ideas.filter(idea => idea.id === this.ideaId)[0];
     }
 }

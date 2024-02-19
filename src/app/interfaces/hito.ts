@@ -1,7 +1,6 @@
 export interface Hito {
-    id: number;
+    id?: number;
     titulo: string;
     texto: string;
-    imagenes: string[];
     fecha: Date;
 }
