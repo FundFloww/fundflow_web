@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { UsuarioZonaAdminDTO } from '../../interfaces/usuario-zona-admin-dto';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { UsuarioFilterPipe } from '../../pipes/usuario-filter.pipe';
+import { UsuarioRegistroDTO } from '../../interfaces/usuario-registro-dto';
 
 @Component({
     selector: 'zona-admin-usuarios',
@@ -25,6 +26,19 @@ export class ZonaAdminUsuariosComponent {
     pageSize: number = 10;
     registrosTotales: number = 0;
 
+    newUsuario: UsuarioRegistroDTO = {
+        nombre: '',
+        apellidos: '',
+        correo: '',
+        contrasena: '',
+        confirmarContrasena: '',
+        tipo: 'EMPRENDEDOR'
+    };
+
+    errorContrasena: string = '';
+    showError: boolean = false;
+    userExists: boolean = false;
+
     constructor(
         private usuariosService: UsuariosService
     ) { }
@@ -36,7 +50,7 @@ export class ZonaAdminUsuariosComponent {
     async cargarUsuarios() {
         try {
             const res = await this.usuariosService.getUsuariosZonaAdmin(this.currentPage, this.pageSize);
-            console.log(res);
+            // console.log(res);
             this.usuarios = res.content;
             this.totalPages = res.totalPages;
             this.currentPage = res.pageable.pageNumber;
@@ -76,4 +90,30 @@ export class ZonaAdminUsuariosComponent {
             });
         }
     }
+
+    async addNewUsuario() {
+        this.newUsuario.correo = this.newUsuario.correo.toLowerCase();
+
+        this.userExists = await this.usuariosService.addUsuario(this.newUsuario);
+    }
+
+
+    contrasenasCoinciden(): boolean {
+        return this.newUsuario.contrasena === this.newUsuario.confirmarContrasena;
+    }
+
+    validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
+        return {
+            [validClass]: ngModel.touched && ngModel.valid && !this.userExists,
+            [errorClass]: ngModel.touched && (ngModel.invalid || (ngModel.name === 'email' && this.userExists))
+        };
+    }
+
+    validPassword(ngModel: NgModel, validClass: string, errorClass: string) {
+        return {
+            [validClass]: this.contrasenasCoinciden() && ngModel.touched && !this.userExists,
+            [errorClass]: (!this.contrasenasCoinciden() || ngModel.errors?.['required']) && ngModel.touched
+        };
+    }
+
 }
