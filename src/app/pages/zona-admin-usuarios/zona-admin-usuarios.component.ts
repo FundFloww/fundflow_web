@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { UsuarioZonaAdminDTO } from '../../interfaces/usuario-zona-admin-dto';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { UsuarioFilterPipe } from '../../pipes/usuario-filter.pipe';
 import { UsuarioRegistroDTO } from '../../interfaces/usuario-registro-dto';
@@ -39,6 +39,9 @@ export class ZonaAdminUsuariosComponent {
     showError: boolean = false;
     userExists: boolean = false;
 
+    @ViewChild('registroForm') registroForm!: NgForm;
+    // @ViewChild('myModal') myModal!: ElementRef;
+
     constructor(
         private usuariosService: UsuariosService
     ) { }
@@ -73,7 +76,7 @@ export class ZonaAdminUsuariosComponent {
     }
 
     actualizarPageSize() {
-        if(this.pageSize >= this.registrosTotales){
+        if (this.pageSize >= this.registrosTotales) {
             this.currentPage = 0;
         }
         this.cargarUsuarios();
@@ -85,16 +88,27 @@ export class ZonaAdminUsuariosComponent {
 
     borrarUsuario(id: number | undefined) {
         if (id !== undefined) {
-            this.usuariosService.deleteUsuario(id).then(() =>{
+            this.usuariosService.deleteUsuario(id).then(() => {
                 this.cargarUsuarios();
             });
         }
     }
 
-    async addNewUsuario() {
+    async addNewUsuario(boton: HTMLElement) {
         this.newUsuario.correo = this.newUsuario.correo.toLowerCase();
 
         this.userExists = await this.usuariosService.addUsuario(this.newUsuario);
+
+        if (!this.userExists) {
+            this.cargarUsuarios();
+            boton.setAttribute("data-bs-toggle", "modal");
+            boton.click();
+        }
+
+    }
+
+    cerrarModalYResetearFormulario() {
+        this.resetForm();
     }
 
 
@@ -114,6 +128,22 @@ export class ZonaAdminUsuariosComponent {
             [validClass]: this.contrasenasCoinciden() && ngModel.touched && !this.userExists,
             [errorClass]: (!this.contrasenasCoinciden() || ngModel.errors?.['required']) && ngModel.touched
         };
+    }
+
+
+    resetForm() {
+        if (this.registroForm) {
+            this.newUsuario.tipo = 'EMPRENDEDOR';
+            this.userExists = false;
+            this.registroForm.resetForm();
+        }
+    }
+
+    async submitForm(evento: Event) {
+        const boton = evento.target as HTMLElement;
+        if (this.registroForm && this.registroForm.valid && this.contrasenasCoinciden()) {
+            await this.addNewUsuario(boton);
+        }
     }
 
 }

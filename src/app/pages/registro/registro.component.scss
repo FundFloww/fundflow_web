@@ -28,12 +28,6 @@ section {
     margin: 0 !important; 
 }
 
-.selector{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .tabs{
     display: flex;
     align-items: center;
@@ -43,19 +37,6 @@ section {
 
 input[type='radio']{
     display: none;
-}
-
-.tab{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 20px;
-    width: 200px;
-    font-size: 13px;
-    font-weight: 500;
-    border-radius: 99px;
-    cursor: pointer;
-    transition: color 0.15s ease-in;
 }
 
 // div.tabs label{

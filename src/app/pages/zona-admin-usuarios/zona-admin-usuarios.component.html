@@ -1,13 +1,13 @@
-<div class="modal fade" id="myModal">
+<div class="modal fade" id="myModal" #myModal (hidden.bs.modal)="resetForm()">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-primary">Nuevo Usuario</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body px-5 py-3">
                 <form (ngSubmit)="addNewUsuario()" novalidate autocomplete="off" #registroForm="ngForm">
-                    <div class="mb-3 selector">
+                    <div class="mb-3">
                         <div class="w-100 tabs btn-group input-box">
                             <input type="radio" class="btn-check" name="tipoUsuario" [value]="'EMPRENDEDOR'" id="emprendedor" 
                                 [checked]="newUsuario.tipo == 'EMPRENDEDOR'" 
@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <input id="nombre" type="text" class="form-control" name="name" value=""
                                     placeholder="Nombre" [(ngModel)]="newUsuario.nombre" #nombre="ngModel"
-                                    required autofocus
+                                    required
                                     [ngClass]="validClasses(nombre, 'is-valid', 'is-invalid')">
                                 <div class="invalid-feedback">
                                     Nombre requerido
@@ -88,7 +88,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary text-white">Guardar</button>
+                <button type="button" class="btn btn-primary text-white" (click)="submitForm($event)" [disabled]="registroForm.invalid || !contrasenasCoinciden()">Guardar</button>
             </div>
         </div>
     </div>
