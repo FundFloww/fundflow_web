@@ -145,7 +145,7 @@ h4 {
         gap: 20px;
 
         img {
-            width: 300px;
+            min-width: 250px;
             height: 120px;
             border-radius: 5px;
             cursor: pointer;
@@ -241,6 +241,8 @@ h4 {
 .images-click {
     background-color: white;
     border-radius: 10px;
+    max-height: 80%;
+    max-width: 80%;
 }
 
 .close-image {
@@ -263,3 +265,21 @@ h4 {
     height: 70px;
     width: 480px;
 }
+
+@media (width < 550px) {
+    .inversores-info {
+        
+    }
+}
+
+
+// Contenedor de elementos
+// display: flex;
+// justify-content: center;
+// align-items: center;
+// gap: 26px;
+// padding: 20px;
+// text-align: center;
+
+// Elementos: Inversiones...
+// padding-rigth: 20px;

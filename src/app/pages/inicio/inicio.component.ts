@@ -48,8 +48,12 @@ export class InicioComponent {
         this.session = await this.usuariosService.loggedIn();
     }
 
-    onOpenBar() {
-        const cerrarBar = document.getElementById('cerrar-bar')!; 
+    onOpenBar(evento?: Event) {
+        const cerrarBar = document.getElementById('cerrar-bar')!;
+
+        if(evento?.target !== cerrarBar.children[0]) {
+            return;
+        }
         
         if(getComputedStyle(cerrarBar).display === 'none') {
             return;

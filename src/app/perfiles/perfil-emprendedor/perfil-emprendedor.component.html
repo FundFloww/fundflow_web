@@ -2,7 +2,7 @@
     <div class="row">
         <app-side-bar 
             class="col-2 px-0 me-0 no-bootstrap-styles" id="side-bar" 
-            (click)="onOpenBar()" 
+            (click)="onOpenBar($event)" 
             [open]="open"
             [session]="session"
         ></app-side-bar>
@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-2 text-center">
                                 <p class="h2"><strong>{{ this.ideas.length }}</strong></p>
-                                <p>Inversores</p>
+                                <p>Proyectos</p>
                             </div>
                         </div>
                         <div class="row">

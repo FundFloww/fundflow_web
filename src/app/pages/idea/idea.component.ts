@@ -41,6 +41,8 @@ export class IdeaComponent {
     totalRecibido: number = 0;
     fechaHoy = new Date().toISOString().split('T')[0].split('-').reverse().join('/');
     nuevoHito: boolean = false;
+    tipoUsuario: string | null = null;
+    guardandoIdea: boolean = false;
     hito: Hito = {
         titulo: "",
         fecha: new Date(),
@@ -64,8 +66,14 @@ export class IdeaComponent {
 
         if(this.session) {
             const idUsuario = parseInt(this.usuarioService.getUserId()!);
+            const usuario = await this.usuarioService.getUsuario();
             const guardadas = await this.ideaService.getIdeasGuardadas(idUsuario);
+            
             this.guardada = guardadas.filter(guardada => guardada.id === this.ideaId).length > 0;
+            this.tipoUsuario = usuario.tipo[0];
+
+            console.log(this.tipoUsuario);
+            
 
             if(this.idea.emprendedor[0].id === idUsuario) {
                 this.propietario = true;
@@ -75,11 +83,18 @@ export class IdeaComponent {
         if(this.guardada) this.invertirStyleGuardar();
     }
 
-    onOpenBar() {
-        this.open = onOpenBarFunction(this.open);
+    onOpenBar(evento?: Event) {
+        const cerrarBar = document.getElementById('cerrar-bar')!;
 
-        const invertirSection = document.getElementById('invertir-section');
-        invertirSection?.classList.toggle('col-11-p');
+        if(evento?.target !== cerrarBar.children[0]) {
+            return;
+        }
+        
+        if(getComputedStyle(cerrarBar).display === 'none') {
+            return;
+        }
+
+        this.open = onOpenBarFunction(this.open);
     }
 
     onClickImage(event: Event) {
@@ -119,22 +134,38 @@ export class IdeaComponent {
     }
 
     async onClickGuardar() {
+        this.disableButton();
     
         this.invertirStyleGuardar();
-        
+    
         const datosGuardar: GuardarIdea = {
             idIdea: this.idea?.id!,
             idUsuario: parseInt(this.usuarioService.getUserId()!)
         };
-
-        if(!this.guardada) {
-            await this.usuarioService.guardarIdea(datosGuardar);
-            return;
-        }
-
-        await this.usuarioService.eliminarIdeaGuardada(datosGuardar);
     
-        return;
+        try {
+            if(!this.guardada) {
+                await this.usuarioService.guardarIdea(datosGuardar);
+                this.guardada = true;
+            } else {
+                await this.usuarioService.eliminarIdeaGuardada(datosGuardar);
+                this.guardada = false;
+            }
+        } catch (error) {
+            console.error('Error al procesar la acción:', error);
+        } finally {
+            this.enableButton();
+        }
+    }
+
+    disableButton() {
+        const button = document.getElementById("boton-guardar") as HTMLButtonElement;
+        button.disabled = true;
+    }
+
+    enableButton() {
+        const button = document.getElementById("boton-guardar") as HTMLButtonElement;
+        button.disabled = false;
     }
 
     onClickNuevoHito() {

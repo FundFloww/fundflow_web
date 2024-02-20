@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { camposKeys } from '../../enum/campos';
-import { IdeaItemComponent } from '../../components/idea-item/idea-item.component';
-import { IdeaDto } from '../../interfaces/ideaDto';
-import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
-import { SideBarComponent } from '../../components/side-bar/side-bar.component';
-import { UsuariosService } from '../../services/usuarios/usuarios.service';
-import { onOpenBarFunction } from '../../functions/sideBarFunctions';
 import { HeaderComponent } from '../../components/header/header.component';
+import { IdeaItemComponent } from '../../components/idea-item/idea-item.component';
+import { SideBarComponent } from '../../components/side-bar/side-bar.component';
+import { onOpenBarFunction } from '../../functions/sideBarFunctions';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-noticias',
@@ -27,13 +24,17 @@ export class NoticiasComponent {
         this.session = await this.usuariosService.loggedIn();
     }
 
-    onOpenBar() {
-        const cerrarBar = document.getElementById('cerrar-bar')!; 
+    onOpenBar(evento?: Event) {
+        const cerrarBar = document.getElementById('cerrar-bar')!;
+
+        if(evento?.target !== cerrarBar.children[0]) {
+            return;
+        }
         
         if(getComputedStyle(cerrarBar).display === 'none') {
             return;
         }
-        
+
         this.open = onOpenBarFunction(this.open);
     }
 }

@@ -37,7 +37,7 @@ export class RegistroComponent {
     userExists: boolean = false;
 
     goBack() {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login'], { queryParams: { registroExitoso: true } });
     }
 
     async addNewUsuario() {

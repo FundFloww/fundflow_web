@@ -2,7 +2,7 @@
     <div class="row">
         <app-side-bar 
             class="col-2 px-0" id="side-bar" 
-            (click)="onOpenBar()" 
+            (click)="onOpenBar($event)" 
             [open]="open"
             [session]="session"
         ></app-side-bar>
@@ -45,7 +45,7 @@
                     <h4>Imagenes</h4>
                     <div class="imagenes">
                         @for (imagen of this.idea?.imagenes; track $index) {
-                            <img (click)="onClickImage($event)" src="{{ imagen }}" alt="imagen">
+                            <img class="border border-light" (click)="onClickImage($event)" src="{{ imagen }}" alt="imagen">
                         }
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                         }    
                     </ul>
                 </div>
-                @if(this.session) {
+                @if(this.session && this.tipoUsuario === "INVERSOR") {
                     <div id="invertir-section" class="invertir bg-light-l col-10">
                         @if(this.propietario) {
                             <button class="btn btn-primary text-light-l">Editar</button>

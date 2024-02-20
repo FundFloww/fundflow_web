@@ -1,6 +1,6 @@
 import { NgClass, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { IdeaItemComponent } from '../../components/idea-item/idea-item.component';
 import { SideBarComponent } from '../../components/side-bar/side-bar.component';
 import { onOpenBarFunction } from '../../functions/sideBarFunctions';
@@ -47,12 +47,17 @@ export class PerfilInversorComponent {
         }
     }
 
-    onOpenBar() {
+    onOpenBar(evento?: Event) {
         const cerrarBar = document.getElementById('cerrar-bar')!;
 
-        if (getComputedStyle(cerrarBar).display === 'none') {
+        if(evento?.target !== cerrarBar.children[0]) {
             return;
         }
+        
+        if(getComputedStyle(cerrarBar).display === 'none') {
+            return;
+        }
+
         this.open = onOpenBarFunction(this.open);
     }
 
