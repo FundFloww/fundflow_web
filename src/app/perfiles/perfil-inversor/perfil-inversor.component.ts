@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
-import { onOpenBarFunction } from '../../functions/sideBarFunctions';
+import { NgClass, NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IdeaItemComponent } from '../../components/idea-item/idea-item.component';
-import { IdeaDto } from '../../interfaces/ideaDto';
-import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
 import { SideBarComponent } from '../../components/side-bar/side-bar.component';
-import { UsuariosService } from '../../services/usuarios/usuarios.service';
+import { onOpenBarFunction } from '../../functions/sideBarFunctions';
+import { IdeaDto } from '../../interfaces/ideaDto';
 import { Usuario } from '../../interfaces/usuario';
-import { NgIf } from '@angular/common';
-import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { NgClass } from '@angular/common';
+import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
 
 @Component({
     selector: 'app-perfil-inversor',
@@ -18,12 +17,13 @@ import { NgClass } from '@angular/common';
     styleUrl: './perfil-inversor.component.scss'
 })
 export class PerfilInversorComponent {
+    @Input() idUsuario: number | undefined;
+
     inversionesIdea: IdeaDto[] = [];
     guardados: IdeaDto[] = [];
     open: boolean = true;
     session: boolean | null = null;
     usuario!: Usuario | null;
-    idUsuario: number | undefined;
     idUsuarioIdentificado: number | undefined;
     ver: string = "Inversiones";
     mismoId: boolean = false;
@@ -31,18 +31,13 @@ export class PerfilInversorComponent {
 
     constructor(
         private ideaService: IdeasServicioService,
-        private usuariosService: UsuariosService,
-        private route: ActivatedRoute
+        private usuariosService: UsuariosService
     ) { }
 
     async ngOnInit() {
-        this.route.params.subscribe(params => {
-            this.idUsuario = params['id'];
-        });
-        
-        this.session = await this.usuariosService.initializeSession();
-        this.idUsuarioIdentificado = parseInt(await this.usuariosService.getUserId() ?? '0');
-        this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario ?? 0);
+        this.session = await this.usuariosService.loggedIn();
+        this.idUsuarioIdentificado = parseInt(this.usuariosService.getUserId() ?? '0');
+        this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario!);
         this.inversionesIdea = await this.ideaService.getIdeasInvertidas(this.usuario?.id ?? 0);
         this.guardados = await this.ideaService.getIdeasGuardadas(this.usuario?.id ?? 0);
         this.totalInvertido = this.usuario.inversiones.reduce((acc, inv) => acc + inv.cantidad, 0);

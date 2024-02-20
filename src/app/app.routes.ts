@@ -26,7 +26,7 @@ export const routes: Routes = [
                     { path: 'correo', component: EnviarMensajeComponent }
                 ]
              },
-        ]
+        ],
     },
     { path: 'login', component: LoginComponent },
     { path: 'logout', component: LogoutComponent },

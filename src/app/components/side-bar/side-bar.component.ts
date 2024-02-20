@@ -28,10 +28,10 @@ export class SideBarComponent {
         },
         {
             id: 2,
-            nombre: 'Ajustes',
-            icono: 'settings',
-            destino: '/',
-            ruta: `${this.rutaIconos}/settings.svg`
+            nombre: 'Perfil',
+            icono: 'profile',
+            destino: '/perfil/0',
+            ruta: `${this.rutaIconos}/profile.svg`
         },
         {
             id: 3,
@@ -40,13 +40,13 @@ export class SideBarComponent {
             destino: '/noticias',
             ruta: `${this.rutaIconos}/noticias.svg`
         },
-        {
-            id: 4,
-            nombre: 'Ayuda',
-            icono: 'help',
-            destino: '/',
-            ruta: `${this.rutaIconos}/help.svg`
-        },
+        // {
+        //     id: 4,
+        //     nombre: 'Ayuda',
+        //     icono: 'help',
+        //     destino: '/',
+        //     ruta: `${this.rutaIconos}/help.svg`
+        // },
         {
             id: 5,
             nombre: 'Crear Idea',

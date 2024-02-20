@@ -89,13 +89,15 @@
                         }    
                     </ul>
                 </div>
-                <div id="invertir-section" class="invertir bg-light-l col-10">
-                    @if(this.propietario) {
-                        <button class="btn btn-primary text-light-l">Editar</button>
-                    } @else {
-                        <button [routerLink]="['/invertir/' + this.ideaId]" class="btn btn-primary text-light-l">Invertir</button>
-                    }
-                </div>
+                @if(this.session) {
+                    <div id="invertir-section" class="invertir bg-light-l col-10">
+                        @if(this.propietario) {
+                            <button class="btn btn-primary text-light-l">Editar</button>
+                        } @else {
+                            <button [routerLink]="['/invertir/' + this.ideaId]" class="btn btn-primary text-light-l">Invertir</button>
+                        }
+                    </div>
+                }
             </section>
         </div>
     </div>

@@ -1,6 +1,8 @@
-<div *ngIf="tipo == 'EMPRENDEDOR'; else elseBlock">
-    <app-perfil-emprendedor></app-perfil-emprendedor>
-</div>
+@if(this.idUsuario != 0) {
+    <div *ngIf="tipo == 'EMPRENDEDOR'; else elseBlock">
+        <app-perfil-emprendedor [idUsuario]="idUsuario"></app-perfil-emprendedor>
+    </div>
+}
 <ng-template #elseBlock>
-    <app-perfil-inversor></app-perfil-inversor>
+    <app-perfil-inversor [idUsuario]="idUsuario"></app-perfil-inversor>
 </ng-template>

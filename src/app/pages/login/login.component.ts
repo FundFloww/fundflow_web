@@ -28,8 +28,8 @@ export class LoginComponent {
     };
 
     async ngOnInit() {
-        const token = localStorage.getItem('token');
-        if (token !== null) {
+        if(await this.usuariosService.loggedIn())
+        {
             this.router.navigate(['/home']);
         }
     }
