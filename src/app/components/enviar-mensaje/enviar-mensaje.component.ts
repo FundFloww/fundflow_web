@@ -5,7 +5,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { onOpenBarFunction } from '../../functions/sideBarFunctions';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../../interfaces/usuario';
 import { CorreoService } from '../../services/correo/correo.service';
 
@@ -34,7 +34,8 @@ export class EnviarMensajeComponent {
   constructor(
     private usuariosService: UsuariosService,
     private correoService: CorreoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   async ngOnInit() {
@@ -47,7 +48,8 @@ export class EnviarMensajeComponent {
 
   async enviarCorreo() {
     this.destinatario = this.usuario?.correo;
-    this.correoService.enviarCorreo(this.destinatario ?? '', this.asunto, this.contenido);
+    await this.correoService.enviarCorreo(this.destinatario ?? '', this.asunto, this.contenido);
+    this.router.navigate(['/inicio']);
   }
 
   onOpenBar() {

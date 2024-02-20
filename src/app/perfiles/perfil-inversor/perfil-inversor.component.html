@@ -27,7 +27,7 @@
                             <p class="h5 text-muted">{{ this.usuario?.profesion }}</p>
                         </div>
                         <div *ngIf="!mismoId ; else elseID">
-                            <a href="#" class="btn btn-primary text-light">Enviar mensaje</a>
+                            <a [routerLink]="['/perfil', idUsuario ,'correo']" class="btn btn-primary text-light">Enviar mensaje</a>
                         </div>
                         <ng-template #elseID>
                             <div>
