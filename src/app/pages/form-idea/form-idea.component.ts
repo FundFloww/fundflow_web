@@ -67,6 +67,10 @@ export class FormIdeaComponent {
 
     agregarOtraImagen(evento: Event) {
         evento.preventDefault();
+        if(this.nuevaIdea.imagenesFile.length >= 5) { 
+            // mensaje de aviso
+            return; 
+        }
         this.nuevaIdea.imagenesFile.push(new File([], ''));
     }
 

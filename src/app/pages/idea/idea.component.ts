@@ -12,11 +12,12 @@ import { Inversion } from '../../interfaces/inversion';
 import { NgClass } from '@angular/common';
 import { Hito } from '../../interfaces/hito';
 import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-idea',
   standalone: true,
-  imports: [SideBarComponent, RouterLink, NgClass, FormsModule],
+  imports: [SideBarComponent, RouterLink, NgClass, FormsModule, NgIf],
   templateUrl: './idea.component.html',
   styleUrl: './idea.component.scss'
 })
@@ -71,9 +72,6 @@ export class IdeaComponent {
             
             this.guardada = guardadas.filter(guardada => guardada.id === this.ideaId).length > 0;
             this.tipoUsuario = usuario.tipo[0];
-
-            console.log(this.tipoUsuario);
-            
 
             if(this.idea.emprendedor[0].id === idUsuario) {
                 this.propietario = true;
@@ -191,4 +189,36 @@ export class IdeaComponent {
         const ideas = await this.ideaService.getIdeasAll();
         this.idea = ideas.filter(idea => idea.id === this.ideaId)[0];
     }
+
+    onClickAvanzar() {
+        const imagenes = document.getElementById("imagenes-container") as HTMLElement;
+        imagenes.scrollLeft += 300;
+    }
+
+    onClickRetroceder() {
+        const imagenes = document.getElementById("imagenes-container") as HTMLElement;
+        imagenes.scrollLeft -= 300;
+    }
+
+    onScrollMove() {
+        const imagenes = document.getElementById("imagenes-container") as HTMLElement;
+        const botonRetroceder = document.getElementsByClassName("retroceder")[0] as HTMLElement;
+        const botonAvanzar = document.getElementsByClassName("avanzar")[0] as HTMLElement;
+
+        if(imagenes.scrollLeft < 20) {
+            botonRetroceder.classList.add("ocultar");
+        } else {
+            botonRetroceder.classList.remove("ocultar");
+        }
+
+        console.log(imagenes.scrollWidth < 40);
+        
+
+        if(imagenes.scrollWidth - imagenes.scrollLeft - imagenes.clientWidth < 40) {
+            botonAvanzar.classList.add("ocultar");
+        } else {
+            botonAvanzar.classList.remove("ocultar");
+        }
+    }
+
 }

@@ -143,13 +143,46 @@ h4 {
     .imagenes {
         display: flex;
         gap: 20px;
+        overflow-x: scroll;
+        scrollbar-width: none;
+        position: relative;
+        scroll-behavior: smooth;
 
-        img {
+        & > img {
             min-width: 250px;
             height: 120px;
             border-radius: 5px;
             cursor: pointer;
             object-fit: cover;
+        }
+
+        .avanzar, .retroceder {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            background-color: rgba(0, 0, 0, 0.281);
+            backdrop-filter: blur(1px);
+            min-width: 35px;
+            border: none;
+
+            img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .avanzar {
+            right: 0;
+        }
+
+        .retroceder {
+            left: 0;
+            margin-right: -55px;
+        }
+
+        .ocultar {
+            visibility: hidden;
         }
     }
 }
@@ -195,6 +228,18 @@ h4 {
     .titulo-hito {
         font-weight: 600;
         font-size: 1.3rem;
+        
+        & > input {
+            width: 100%;
+            max-width: 280px;
+        }
+    }
+
+    .texto-hito {
+        resize: none;
+        height: 70px;
+        width: 100%;
+        max-width: 480px;
     }
 }
 
@@ -260,26 +305,23 @@ h4 {
     cursor: pointer;
 }
 
-.texto-hito {
-    resize: none;
-    height: 70px;
-    width: 480px;
-}
-
-@media (width < 550px) {
+@media (width < 950px) {
     .inversores-info {
-        
+        gap: 26px;
+        text-align: center;
+
+        & > div {
+            padding-right: 20px;
+        }
+    }
+
+    .imagenes {
+        .avanzar {
+            display: flex !important;
+        }
+
+        .retroceder {
+            display: flex !important;
+        }
     }
 }
-
-
-// Contenedor de elementos
-// display: flex;
-// justify-content: center;
-// align-items: center;
-// gap: 26px;
-// padding: 20px;
-// text-align: center;
-
-// Elementos: Inversiones...
-// padding-rigth: 20px;

@@ -43,10 +43,12 @@
                 </div>
                 <div class="imagenes-idea bg-light-l">
                     <h4>Imagenes</h4>
-                    <div class="imagenes">
+                    <div (scroll)="onScrollMove()" id="imagenes-container" class="imagenes">
+                        <button *ngIf="this.idea?.imagenes?.length! > 1" (click)="onClickRetroceder()" class="retroceder"><img src="../../../assets/icons/retroceder.svg" alt="retroceder"></button>
                         @for (imagen of this.idea?.imagenes; track $index) {
                             <img class="border border-light" (click)="onClickImage($event)" src="{{ imagen }}" alt="imagen">
                         }
+                        <button *ngIf="this.idea?.imagenes?.length! > 1" (click)="onClickAvanzar()" class="avanzar"><img src="../../../assets/icons/avanzar.svg" alt="retroceder"></button>
                     </div>
                 </div>
                 <div class="linea-tiempo bg-light-l">
@@ -89,12 +91,12 @@
                         }    
                     </ul>
                 </div>
-                @if(this.session && this.tipoUsuario === "INVERSOR") {
+                @if(this.session) {
                     <div id="invertir-section" class="invertir bg-light-l col-10">
-                        @if(this.propietario) {
-                            <button class="btn btn-primary text-light-l">Editar</button>
-                        } @else {
+                        @if(this.tipoUsuario === "INVERSOR" && !this.propietario) {
                             <button [routerLink]="['/invertir/' + this.ideaId]" class="btn btn-primary text-light-l">Invertir</button>
+                        } @else {
+                            <button class="btn btn-primary text-light-l">Editar</button>
                         }
                     </div>
                 }
