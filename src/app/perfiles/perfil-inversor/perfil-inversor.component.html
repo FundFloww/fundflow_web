@@ -9,7 +9,12 @@
         <div class="col-10 mx-0 bg-light h-100" id="content">
             <div class="row bg-light">
                 <div class="banner bg-primary mx-0 px-0">
-                    <img src="{{usuario?.banner}}" class="foto-banner mx-0" alt="banner_perfil">
+                    @if(usuario?.banner) {
+                        <img src="{{usuario?.banner}}" class="foto-banner mx-0" alt="banner_perfil">
+                    } @else {
+                        <img src="../../../../assets/img/banner.jpg"
+                            class="foto-banner mx-0" alt="banner_perfil">
+                    }
                 </div>
                 <div class="col-md-4 col-12 bg-light-l mx-0 ps-5">
                     <div class="info-perfil d-grid gap-4">

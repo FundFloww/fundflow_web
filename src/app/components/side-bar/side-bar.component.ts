@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento.component';
 import { Router } from '@angular/router';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
+import { Usuario } from '../../interfaces/usuario';
 
 @Component({
     selector: 'app-side-bar',
@@ -10,7 +12,10 @@ import { Router } from '@angular/router';
     styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent {
-    constructor(private router: Router) {}
+    constructor(
+        private usuarioService: UsuariosService,
+        private router: Router
+    ) {}
 
     @Input() session: boolean | null = null;
     @Input() open: boolean = false;
@@ -22,31 +27,31 @@ export class SideBarComponent {
         {
             id: 1,
             nombre: 'Inicio',
-            icono: 'home',
+            icono: 'inicio',
             destino: '/',
             ruta: `${this.rutaIconos}/home.svg`
         },
         {
             id: 2,
-            nombre: 'Perfil',
-            icono: 'profile',
-            destino: '/perfil/0',
-            ruta: `${this.rutaIconos}/profile.svg`
-        },
-        {
-            id: 3,
             nombre: 'Noticias',
-            icono: 'Noticias',
+            icono: 'noticias',
             destino: '/noticias',
             ruta: `${this.rutaIconos}/noticias.svg`
         },
-        // {
-        //     id: 4,
-        //     nombre: 'Ayuda',
-        //     icono: 'help',
-        //     destino: '/',
-        //     ruta: `${this.rutaIconos}/help.svg`
-        // },
+        {
+            id: 3,
+            nombre: 'Mis Ideas',
+            icono: 'ideas',
+            destino: '/perfil/0',
+            ruta: `${this.rutaIconos}/emprendedor.svg`
+        },
+        {
+            id: 4,
+            nombre: 'Mis Inversiones',
+            icono: 'inversiones',
+            destino: '/perfil/0',
+            ruta: `${this.rutaIconos}/inversor.svg`
+        },
         {
             id: 5,
             nombre: 'Crear Idea',
@@ -56,10 +61,10 @@ export class SideBarComponent {
         },
         {
             id: 6,
-            nombre: 'Iniciar sesión',
-            icono: 'login',
-            destino: '/login',
-            ruta: `${this.rutaIconos}/login.svg`
+            nombre: 'Guardados',
+            icono: 'guardados',
+            destino: '/perfil/0',
+            ruta: `${this.rutaIconos}/guardados.svg`
         },
         {
             id: 7,
@@ -67,33 +72,56 @@ export class SideBarComponent {
             icono: 'logout',
             destino: '/logout',
             ruta: `${this.rutaIconos}/logout.svg`
-        
         },
         {
             id: 8,
+            nombre: 'Iniciar sesión',
+            icono: 'login',
+            destino: '/login',
+            ruta: `${this.rutaIconos}/login.svg`
+        },
+        {
+            id: 9,
             nombre: 'Registrarse',
             icono: 'registro',
             destino: '/registro',
             ruta: `${this.rutaIconos}/register.svg`
-        }
+        }, 
     ];
 
     onHomeClick() {
         this.router.navigate(['/']);
     }
 
-    ngOnChanges() {
-        if(this.session != null) this.validateSession();
+    async ngOnChanges() {
+        if(this.session != null) {
+            this.validateSession();
+            await this.validateTipoUsuario();
+        }
+
         this.sideBarChange();
     }
 
     validateSession() {
         if(this.session) {
-            this.elementos = this.elementos.filter(e => e.id !== 6 && e.id !== 8);
+            this.elementos = this.elementos.filter(e => e.id < 8);
             return;
         }
 
-        this.elementos = this.elementos.filter(e => e.id !== 7 && e.id !== 5);
+        this.elementos = this.elementos.filter(e => e.id < 3 || e.id > 7);
+    }
+
+    async validateTipoUsuario() {
+        const usuario: Usuario = await this.usuarioService.getUsuario();
+
+        if(usuario.tipo[0] === 'INVERSOR') {
+            this.elementos = this.elementos.filter(e => e.id !== 3 && e.id !== 5);
+        }
+
+        if(usuario.tipo[0] === 'EMPRENDEDOR') {
+            this.elementos = this.elementos.filter(e => e.id !== 4 && e.id !== 5 && e.id !== 6);
+        }
+
     }
 
     sideBarChange() {

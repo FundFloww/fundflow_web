@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap');
+
 a {
     display: flex;
     align-items: center;
@@ -8,6 +10,9 @@ a {
     padding: 10px;
     border-radius: 10px;
     margin: 10px;
+    font-size: 1.1rem;
+    font-family: 'sora', sans-serif;
+    white-space: nowrap;
 }
 
 a:hover {
@@ -39,7 +44,7 @@ img {
 
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1355px) {
     label {
         display: none;
     }

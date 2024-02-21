@@ -32,15 +32,15 @@
     position: relative;
 }
 
-.default-bar {
-    min-height: 72px;
-}
-
 .title-bar {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 75px;
+    height: 90px;
+
+    h3 {
+        font-size: 2rem;
+    }
 }
 
 .title-bar > * {
@@ -109,19 +109,17 @@
 }
 
 
-@media (max-width: 1300px) {
+@media (max-width: 1355px) {
     .options {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-}
 
-@media (max-width: 1200px) {
     .title-bar > h3 {
         display: none;
     }
-
+    
     .title-bar > img {
         margin: 0px;
     }

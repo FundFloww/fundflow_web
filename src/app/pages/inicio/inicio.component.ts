@@ -112,9 +112,6 @@ export class InicioComponent {
             botonRetroceder.classList.remove("ocultar");
         }
 
-        console.log(imagenes.scrollWidth < 40);
-        
-
         if(imagenes.scrollWidth - imagenes.scrollLeft - imagenes.clientWidth < 40) {
             botonAvanzar.classList.add("ocultar");
         } else {
