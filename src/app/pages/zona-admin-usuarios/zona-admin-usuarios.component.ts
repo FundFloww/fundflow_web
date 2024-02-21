@@ -28,22 +28,6 @@ export class ZonaAdminUsuariosComponent {
     pageSize: number = 10;
     registrosTotales: number = 0;
 
-    newUsuario: UsuarioRegistroDTO = {
-        nombre: '',
-        apellidos: '',
-        correo: '',
-        contrasena: '',
-        confirmarContrasena: '',
-        tipo: 'EMPRENDEDOR'
-    };
-
-    errorContrasena: string = '';
-    showError: boolean = false;
-    userExists: boolean = false;
-
-    @ViewChild('registroForm') registroForm!: NgForm;
-    // @ViewChild('myModal') myModal!: ElementRef;
-
     constructor(
         private usuariosService: UsuariosService
     ) { }
@@ -96,55 +80,9 @@ export class ZonaAdminUsuariosComponent {
         }
     }
 
-    async addNewUsuario(evento: Event) {
-        const boton = evento.target as HTMLElement;
-
-        this.newUsuario.correo = this.newUsuario.correo.toLowerCase();
-
-        this.usuariosService.addUsuario(this.newUsuario).then(response => {
-            this.userExists = response;
-
-            if(!response) {
-                this.cargarUsuarios();
-                boton.setAttribute("data-bs-toggle", "modal");
-                boton.click();
-            }
-        });
+    cargarUsuarioAgregado() {
+        this.cargarUsuarios();
     }
-
-
-    cerrarModalYResetearFormulario() {
-        this.resetForm();
-    }
-
-
-    contrasenasCoinciden(): boolean {
-        return this.newUsuario.contrasena === this.newUsuario.confirmarContrasena;
-    }
-
-    validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
-        return {
-            [validClass]: ngModel.touched && ngModel.valid && !this.userExists,
-            [errorClass]: ngModel.touched && (ngModel.invalid || (ngModel.name === 'email' && this.userExists))
-        };
-    }
-
-    validPassword(ngModel: NgModel, validClass: string, errorClass: string) {
-        return {
-            [validClass]: this.contrasenasCoinciden() && ngModel.touched && !this.userExists,
-            [errorClass]: (!this.contrasenasCoinciden() || ngModel.errors?.['required']) && ngModel.touched
-        };
-    }
-
-
-    resetForm() {
-        if (this.registroForm) {
-            this.newUsuario.tipo = 'EMPRENDEDOR';
-            this.userExists = false;
-            this.registroForm.resetForm();
-        }
-    }
-
     
 
 }

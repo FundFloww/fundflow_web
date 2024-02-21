@@ -1,4 +1,4 @@
-<nuevo-usuario-modal></nuevo-usuario-modal>
+<nuevo-usuario-modal (usuarioAgregado)="cargarUsuarioAgregado()"></nuevo-usuario-modal>
 
 <div id="layoutSidenav">
     <div id="layoutSidenav_content">
@@ -52,7 +52,7 @@
                                     <td width="166">
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <button type="button" class="btn btn-primary text-white"
-                                                (click)="editarUsuario(usuario.id)">Editar</button>
+                                            data-bs-toggle="modal" data-bs-target="#myModal" (click)="editarUsuario(usuario.id)">Editar</button>
                                             <button type="button" class="btn btn-danger"
                                                 (click)="borrarUsuario(usuario.id)">Borrar</button>
                                         </div>
