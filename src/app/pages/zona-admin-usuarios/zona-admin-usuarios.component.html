@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body px-5 py-3">
-                <form (ngSubmit)="addNewUsuario()" novalidate autocomplete="off" #registroForm="ngForm">
+                <form (ngSubmit)="addNewUsuario($event)" novalidate autocomplete="off" #registroForm="ngForm">
                     <div class="mb-3">
                         <div class="w-100 tabs btn-group input-box">
                             <input type="radio" class="btn-check" name="tipoUsuario" [value]="'EMPRENDEDOR'" id="emprendedor" 

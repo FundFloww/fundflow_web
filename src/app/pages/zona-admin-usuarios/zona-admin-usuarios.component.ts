@@ -94,17 +94,24 @@ export class ZonaAdminUsuariosComponent {
         }
     }
 
-    async addNewUsuario(boton: HTMLElement) {
+    async addNewUsuario(evento: Event) {
+        const boton = evento.target as HTMLElement;
+
         this.newUsuario.correo = this.newUsuario.correo.toLowerCase();
 
-        this.userExists = await this.usuariosService.addUsuario(this.newUsuario);
+        this.usuariosService.addUsuario(this.newUsuario).then(response => {
+            this.userExists = response;
 
-        if (!this.userExists) {
-            this.cargarUsuarios();
-            boton.setAttribute("data-bs-toggle", "modal");
-            boton.click();
-        }
+            if(!response) {
+                this.cargarUsuarios();
+                boton.setAttribute("data-bs-toggle", "modal");
+                boton.click();
+            }
+        });
+    }
 
+    async submitForm(evento: Event) {
+        await this.addNewUsuario(evento);
     }
 
     cerrarModalYResetearFormulario() {
@@ -139,11 +146,6 @@ export class ZonaAdminUsuariosComponent {
         }
     }
 
-    async submitForm(evento: Event) {
-        const boton = evento.target as HTMLElement;
-        if (this.registroForm && this.registroForm.valid && this.contrasenasCoinciden()) {
-            await this.addNewUsuario(boton);
-        }
-    }
+    
 
 }

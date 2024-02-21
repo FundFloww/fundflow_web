@@ -31,7 +31,6 @@ export class UsuariosService {
 
             return false;
         } catch (error) {
-            console.error('Error al realizar la operación:', error);
             return true;
         }
     }
