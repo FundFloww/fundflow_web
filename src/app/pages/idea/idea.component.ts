@@ -62,7 +62,7 @@ export class IdeaComponent {
         this.idea = ideas.filter(idea => idea.id === this.ideaId)[0];
         this.imagenMain = this.idea.imagenes[0];
         this.nombreCompleto = this.idea.emprendedor[0].nombre + " " + this.idea.emprendedor[0].apellidos;
-        this.inversionesRecibidas = await this.inversionesService.getInversionesUsuario(this.ideaId ?? 0);
+        this.inversionesRecibidas = this.idea.inversiones;
         this.totalRecibido = this.inversionesRecibidas.reduce((acc, inv) => acc + inv.cantidad, 0);
 
         if(this.session) {
@@ -79,6 +79,7 @@ export class IdeaComponent {
         }
 
         if(this.guardada) this.invertirStyleGuardar();
+        if(this.idea.imagenes.length > 1) this.onScrollMove();
     }
 
     onOpenBar(evento?: Event) {
@@ -210,9 +211,6 @@ export class IdeaComponent {
         } else {
             botonRetroceder.classList.remove("ocultar");
         }
-
-        console.log(imagenes.scrollWidth < 40);
-        
 
         if(imagenes.scrollWidth - imagenes.scrollLeft - imagenes.clientWidth < 40) {
             botonAvanzar.classList.add("ocultar");

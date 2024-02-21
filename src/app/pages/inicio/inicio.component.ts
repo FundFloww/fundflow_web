@@ -46,6 +46,7 @@ export class InicioComponent {
         }
 
         this.session = await this.usuariosService.loggedIn();
+        this.onScrollMove();
     }
 
     onOpenBar(evento?: Event) {
@@ -88,5 +89,36 @@ export class InicioComponent {
 
     isSelected(campo: string): boolean {
         return this.camposSeleccionados.includes(campo.toLocaleUpperCase());
+    }
+
+    onClickAvanzar() {
+        const imagenes = document.getElementById("filters") as HTMLElement;
+        imagenes.scrollLeft += 300;
+    }
+
+    onClickRetroceder() {
+        const imagenes = document.getElementById("filters") as HTMLElement;
+        imagenes.scrollLeft -= 300;
+    }
+
+    onScrollMove() {
+        const imagenes = document.getElementById("filters") as HTMLElement;
+        const botonRetroceder = document.getElementsByClassName("retroceder")[0] as HTMLElement;
+        const botonAvanzar = document.getElementsByClassName("avanzar")[0] as HTMLElement;
+
+        if(imagenes.scrollLeft < 20) {
+            botonRetroceder.classList.add("ocultar");
+        } else {
+            botonRetroceder.classList.remove("ocultar");
+        }
+
+        console.log(imagenes.scrollWidth < 40);
+        
+
+        if(imagenes.scrollWidth - imagenes.scrollLeft - imagenes.clientWidth < 40) {
+            botonAvanzar.classList.add("ocultar");
+        } else {
+            botonAvanzar.classList.remove("ocultar");
+        }
     }
 }
