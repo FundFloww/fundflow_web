@@ -5,6 +5,7 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { UsuarioFilterPipe } from '../../pipes/usuario-filter.pipe';
 import { UsuarioRegistroDTO } from '../../interfaces/usuario-registro-dto';
+import { NuevoUsuarioModalComponent } from '../../components/nuevo-usuario-modal/nuevo-usuario-modal.component';
 
 @Component({
     selector: 'zona-admin-usuarios',
@@ -12,7 +13,8 @@ import { UsuarioRegistroDTO } from '../../interfaces/usuario-registro-dto';
     imports: [
         FormsModule,
         CommonModule,
-        UsuarioFilterPipe
+        UsuarioFilterPipe,
+        NuevoUsuarioModalComponent
     ],
     templateUrl: './zona-admin-usuarios.component.html',
     styleUrl: './zona-admin-usuarios.component.scss'
@@ -110,9 +112,6 @@ export class ZonaAdminUsuariosComponent {
         });
     }
 
-    async submitForm(evento: Event) {
-        await this.addNewUsuario(evento);
-    }
 
     cerrarModalYResetearFormulario() {
         this.resetForm();

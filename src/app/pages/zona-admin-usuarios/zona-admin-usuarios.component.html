@@ -1,98 +1,4 @@
-<div class="modal fade" id="myModal" #myModal (hidden.bs.modal)="resetForm()">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-primary">Nuevo Usuario</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body px-5 py-3">
-                <form (ngSubmit)="addNewUsuario($event)" novalidate autocomplete="off" #registroForm="ngForm">
-                    <div class="mb-3">
-                        <div class="w-100 tabs btn-group input-box">
-                            <input type="radio" class="btn-check" name="tipoUsuario" [value]="'EMPRENDEDOR'" id="emprendedor" 
-                                [checked]="newUsuario.tipo == 'EMPRENDEDOR'" 
-                                (click)="newUsuario.tipo = 'EMPRENDEDOR'">
-                            <label for="emprendedor" class="btn btn-outline-primary">Emprendedor</label>
-                            
-                            <input type="radio" class="btn-check" name="tipoUsuario" [value]="'INVERSOR'" id="inversor" 
-                                [checked]="newUsuario.tipo == 'INVERSOR'"
-                                (click)="newUsuario.tipo = 'INVERSOR'">
-                            <label for="inversor" class="btn btn-outline-primary">Inversor</label>
-                        </div>
-                    </div>
-
-                    <div class="mb-3 gap-3 d-flex justify-content-center">
-                        <div>
-                            <div class="form-group">
-                                <input id="nombre" type="text" class="form-control" name="name" value=""
-                                    placeholder="Nombre" [(ngModel)]="newUsuario.nombre" #nombre="ngModel"
-                                    required
-                                    [ngClass]="validClasses(nombre, 'is-valid', 'is-invalid')">
-                                <div class="invalid-feedback">
-                                    Nombre requerido
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="form-group">
-                                <input id="apellidos" type="text" class="form-control" name="apellidos" value=""
-                                    placeholder="Apellidos" [(ngModel)]="newUsuario.apellidos" required
-                                    #apellidos="ngModel"
-                                    [ngClass]="validClasses(apellidos, 'is-valid', 'is-invalid')">
-                                <div class="invalid-feedback">
-                                    Apellidos requeridos
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <input id="email" type="text" class="form-control w-100" name="email" value=""
-                            placeholder="Email" [(ngModel)]="newUsuario.correo" #email="ngModel" required
-                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                            [ngClass]="validClasses(email, 'is-valid', 'is-invalid')">
-                        <div class="invalid-feedback">
-                            <div *ngIf="!userExists">
-                                Email requerido (formato no válido)
-                            </div>
-                            <div *ngIf="userExists">
-                                El usuario ya existe
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <input id="password" class="form-control w-100" type="password" name="password"
-                            placeholder="Contraseña" [(ngModel)]="newUsuario.contrasena" required
-                            #password="ngModel" [ngClass]="validClasses(password, 'is-valid', 'is-invalid')">
-                        <div class="invalid-feedback">
-                            Contraseña requerida
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <input id="confirmPassword" class="form-control w-100" type="password"
-                            name="confirmPassword" placeholder="Confirmar Contraseña"
-                            [(ngModel)]="newUsuario.confirmarContrasena" required #confirmPassword="ngModel"
-                            [ngClass]="validPassword(confirmPassword, 'is-valid', 'is-invalid')">
-                        <div class="invalid-feedback">
-                            <div *ngIf="newUsuario.confirmarContrasena !== ''">
-                                Las contraseñas no coinciden
-                            </div>
-                            <div *ngIf="newUsuario.confirmarContrasena === ''">
-                                Confirmar Contraseña requerida
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary text-white" (click)="submitForm($event)" [disabled]="registroForm.invalid || !contrasenasCoinciden()">Guardar</button>
-            </div>
-        </div>
-    </div>
-</div>
+<nuevo-usuario-modal></nuevo-usuario-modal>
 
 <div id="layoutSidenav">
     <div id="layoutSidenav_content">
@@ -100,7 +6,7 @@
             <div class="container-fluid px-4">
                 <div class="card mb-4 mt-4">
                     <div class="card-header">
-                        <h3 class="mt-2 mb-2">Usuarios</h3>
+                        <h3 class="mt-2 mb-2">Gestión de usuarios</h3>
                     </div>
                     <div class="ms-3">
                         <button type="button" class="btn btn-success text-white ms-3 mt-4" data-bs-toggle="modal" data-bs-target="#myModal">
