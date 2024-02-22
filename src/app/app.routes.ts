@@ -16,6 +16,7 @@ import { SideBarAdminComponent } from './components/side-bar-admin/side-bar-admi
 import { ZonaAdminComponent } from './pages/zona-admin/zona-admin.component';
 import { ZonaAdminUsuariosComponent } from './pages/zona-admin-usuarios/zona-admin-usuarios.component';
 import { ZonaAdminIdeasComponent } from './pages/zona-admin-ideas/zona-admin-ideas.component';
+import { RecuperarComponent } from './pages/recuperar/recuperar.component';
 
 export const routes: Routes = [
     { path: 'inicio', component: InicioComponent },
@@ -32,7 +33,9 @@ export const routes: Routes = [
              },
         ],
     },
+    { path: 'invertir/:id', component: InvertirComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'login/recuperar', component: RecuperarComponent },
     { path: 'logout', component: LogoutComponent },
     { path: 'registro', component: RegistroComponent },
     { path: 'noticias', component: NoticiasComponent},

@@ -44,6 +44,7 @@ export class EditarPerfilComponent {
     tipoUsuario: string = '';
     imagenPerfil: File = new File([""], "filename");
     imagenBanner: File = new File([""], "filename");
+    guardandoCambios: boolean = false;
 
     constructor(
         private usuariosService: UsuariosService,
@@ -59,8 +60,8 @@ export class EditarPerfilComponent {
         this.usuarioTemporal.profesion = this.usuario?.profesion || '';
         this.usuarioTemporal.correo = this.usuario?.correo || '';
         this.usuarioTemporal.descripcion = this.usuario?.descripcion || '';
-        this.usuarioTemporal.imagen = this.usuario?.imagen || 'https://png.pngtree.com/background/20230524/original/pngtree-sad-pictures-for-desktop-hd-backgrounds-picture-image_2705986.jpg';
-        this.usuarioTemporal.banner = this.usuario?.banner || 'https://as2.ftcdn.net/v2/jpg/04/31/86/03/1000_F_431860321_8JEaSC9UvONsxTWzxy4SvnsJklPbO7RM.jpg';
+        this.usuarioTemporal.imagen = this.usuario?.imagen || '';
+        this.usuarioTemporal.banner = this.usuario?.banner || '';
         this.usuarioTemporal.tipo = this.usuario?.tipo || '';
         this.tipoUsuario = this.usuario?.tipo || '';
 
@@ -78,7 +79,6 @@ export class EditarPerfilComponent {
     }
 
     openFileInput() {
-        console.log("hola");
         if (this.fileInputRef?.nativeElement) {
             this.fileInputRef.nativeElement.click();
         }
@@ -126,18 +126,21 @@ export class EditarPerfilComponent {
             //   this.usuarioTemporal.contrasena = this.usuario?.contraseña || '';
             //   this.usuarioTemporal.confirmarContrasena = this.usuario?.contraseña || '';
             // }
-
+            this.guardandoCambios = true;
             this.usuarioTemporal.imagen = await this.validarYSubirImagenes(this.imagenPerfil, this.usuarioTemporal.imagen);
             this.usuarioTemporal.banner = await this.validarYSubirImagenes(this.imagenBanner, this.usuarioTemporal.banner);
 
             if (Array.isArray(this.usuarioTemporal.tipo)) {
                 this.usuarioTemporal.tipo = this.usuarioTemporal.tipo.toString();
             }
-
+            
             await this.usuariosService.editUsuario(this.usuarioTemporal);
-            this.router.navigate([`/perfil/${this.usuario?.id}`]);
+            
         } catch (error) {
             console.error(error);
+        } finally {
+            this.guardandoCambios = false;
+            this.router.navigate([`/perfil/${this.usuario?.id}`]);
         }
     }
 
@@ -153,7 +156,7 @@ export class EditarPerfilComponent {
     async enviarContrasena() {
         try {
           await this.usuariosService.editContrasena(this.usuarioEditarContrasena)
-          this.router.navigate(['/perfil']);
+          this.router.navigate(['/perfil/' + this.usuario?.id]);
         } catch (error) {
           console.error(error);
         }

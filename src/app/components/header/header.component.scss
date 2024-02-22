@@ -9,7 +9,7 @@
     flex-direction: row-reverse;
     align-items: center;
     padding: 20px;
-    z-index: 1;
+    z-index: 200;
     -webkit-box-shadow: 0px 14px 38px -15px rgba(0, 0, 0, 0.47);
     -moz-box-shadow: 0px 14px 38px -15px rgba(0, 0, 0, 0.47);
     box-shadow: 0px 14px 38px -15px rgba(0, 0, 0, 0.20);
@@ -22,13 +22,13 @@
 .search {
     display: flex;
     width: 216px;
-    height: 35px;
+    height: 50px;
     border-radius: 10px;
 }
 
 .search>img {
     height: 100%;
-    width: 12%;
+    width: 30px;
     padding-left: 10px;
 }
 
@@ -44,7 +44,6 @@
     height: 35px;
     width: 35px;
     border-radius: 50%;
-    margin-left: 40px;
 }
 
 .foto-mini-perfil {
@@ -57,4 +56,38 @@
     height: 35px;
     width: 35px;
     border-radius: 50%;
+}
+
+.tipo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    margin: {
+        left: 10px;
+        right: 10px;
+    };
+
+    input {
+        pointer-events: none;
+    }
+
+    label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.profile-user {
+    min-width: 120px;
+
+    div {
+        gap: 10px
+    }
+
+    div > span {
+        font-weight: 600;
+    }
 }

@@ -1,6 +1,6 @@
 import { NgClass, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { IdeaItemComponent } from '../../components/idea-item/idea-item.component';
 import { SideBarComponent } from '../../components/side-bar/side-bar.component';
 import { onOpenBarFunction } from '../../functions/sideBarFunctions';
@@ -28,6 +28,7 @@ export class PerfilInversorComponent {
     ver: string = "Inversiones";
     mismoId: boolean = false;
     totalInvertido: number = 0;
+    cargandoIdea: boolean = false;
 
     constructor(
         private ideaService: IdeasServicioService,
@@ -35,6 +36,8 @@ export class PerfilInversorComponent {
     ) { }
 
     async ngOnInit() {
+        this.cargandoIdea = true;
+        
         this.session = await this.usuariosService.loggedIn();
         this.idUsuarioIdentificado = parseInt(this.usuariosService.getUserId() ?? '0');
         this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario!);
@@ -45,14 +48,21 @@ export class PerfilInversorComponent {
         if (this.idUsuario == this.idUsuarioIdentificado) {
             this.mismoId = true;
         }
+
+        this.cargandoIdea = false;
     }
 
-    onOpenBar() {
+    onOpenBar(evento?: Event) {
         const cerrarBar = document.getElementById('cerrar-bar')!;
 
-        if (getComputedStyle(cerrarBar).display === 'none') {
+        if(evento?.target !== cerrarBar.children[0]) {
             return;
         }
+        
+        if(getComputedStyle(cerrarBar).display === 'none') {
+            return;
+        }
+
         this.open = onOpenBarFunction(this.open);
     }
 

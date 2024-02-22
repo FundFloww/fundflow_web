@@ -1,14 +1,33 @@
 <div class="default-bar top-bar bg-light-l">
-    <a *ngIf="session == true" class="img-profile bg-light" [routerLink]="['/perfil', idUsuarioIdentificado]">
-        @if(usuario?.imagen) {
-            <img src="{{ usuario?.imagen }}" class="foto-mini-perfil" alt="">
+    <a *ngIf="session === true" class="btn btn-secondary profile-user" [routerLink]="['/perfil', idUsuarioIdentificado]">
+        <div class="user d-flex align-items-center justify-content-between">
+            <span>{{ this.usuario?.nombre }}</span>
+            <div class="img-profile bg-light">
+                @if(usuario?.imagen) {
+                    <img src="{{ usuario?.imagen }}" class="foto-mini-perfil" alt="perfil" loading="lazy">
+                } @else {
+                    <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Free-Download.png" class="foto-vacia-perfil" alt="perfil" loading="lazy">
+                }
+                
+            </div>
+        </div>
+    </a>
+    <div *ngIf="session === true" class="tipo tabs btn-group input-box bg-light">
+        @if (this.usuario?.tipo == 'EMPRENDEDOR') {
+            <input type="radio" class="btn-check" name="tipoUsuario" [value]="'EMPRENDEDOR'" id="emprendedor" 
+                [checked]="usuario?.tipo == 'EMPRENDEDOR'" 
+                (click)="usuario.tipo = 'EMPRENDEDOR'">
+            <label for="emprendedor"><img src="../../../assets/icons/emprendedor.svg" alt="emprendedor"></label>
         } @else {
-            <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Free-Download.png" class="foto-vacia-perfil" alt="">
+            <input type="radio" class="btn-check" name="tipoUsuario" [value]="'INVERSOR'" id="inversor" 
+                [checked]="usuario?.tipo == 'INVERSOR'"
+                (click)="usuario.tipo = 'INVERSOR'">
+            <label for="inversor"><img src="../../../assets/icons/inversor.svg" alt="inversor"></label>
         }
         
-    </a>
+    </div>
     <div class="search bg-light">
-        <img src="../../assets/icons/search.svg" alt="">
-        <input type="search" placeholder="Buscar">
+        <img src="../../assets/icons/search.svg" alt="buscar" loading="lazy">
+        <input type="search" placeholder="Buscar" (input)="onFilterChange($event)" [value]="filterIdeas">
     </div>
 </div>

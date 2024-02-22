@@ -5,19 +5,20 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { re } from 'mathjs';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-recuperar',
   standalone: true,
   imports: [
     FormsModule, 
     CommonModule, 
     RouterModule
 ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './recuperar.component.html',
+  styleUrl: './recuperar.component.scss'
 })
-export class LoginComponent {
+export class RecuperarComponent {
     constructor(
         private usuariosService: UsuariosService, 
         private router: Router,
@@ -26,6 +27,7 @@ export class LoginComponent {
 
     userNotExist: boolean = false;
     registroExitoso: boolean = false;
+    cargandoRecuperar: boolean = false;
 
     usuario: UsuarioDTO = {
         correo: '',
@@ -49,15 +51,18 @@ export class LoginComponent {
     }
 
     async onSubmit() {
+        this.cargandoRecuperar = true;
         this.usuario.correo = this.usuario.correo.toLowerCase();
-        const userCorrectData = await this.usuariosService.login(this.usuario);
-        if(userCorrectData !== null)
-        {
-            localStorage.setItem('token', userCorrectData.token);
-            this.router.navigate(['/home']);
-        } else {
+        const response = await this.usuariosService.recuperarContrasena(this.usuario.correo)
+        
+        if(!response) {
             this.userNotExist = true;
+            this.cargandoRecuperar = false;
+            return;
         }
+
+        this.cargandoRecuperar = false;
+        this.router.navigate(['/login']);
     }
 
     validClasses(ngModel: NgModel, validClass: string, errorClass: string) {

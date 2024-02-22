@@ -51,10 +51,14 @@ export class PerfilEmprendedorComponent {
         }
     }
 
-    onOpenBar() {
+    onOpenBar(evento?: Event) {
         const cerrarBar = document.getElementById('cerrar-bar')!;
 
-        if (getComputedStyle(cerrarBar).display === 'none') {
+        if(evento?.target !== cerrarBar.children[0]) {
+            return;
+        }
+        
+        if(getComputedStyle(cerrarBar).display === 'none') {
             return;
         }
 

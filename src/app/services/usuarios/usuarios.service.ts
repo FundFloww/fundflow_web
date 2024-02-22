@@ -251,4 +251,25 @@ export class UsuariosService {
         }
     }
 
+    async recuperarContrasena(correo: String) {
+        try {
+            const response = await fetch(`${this.urlBase}/api/usuarios/recuperar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(correo),
+            });
+            
+            if (!response.ok) {
+                throw new Error('Error al recuperar la contraseña');
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error al realizar la operación:', error);
+            return false;
+        }
+    }
+
 }

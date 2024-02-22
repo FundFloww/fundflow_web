@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { UsuarioZonaAdminDTO } from '../interfaces/usuario-zona-admin-dto';
+import { UsuarioZonaAdminDTO } from '../../interfaces/usuario-zona-admin-dto';
 
 @Pipe({
     name: 'usuarioFilter',

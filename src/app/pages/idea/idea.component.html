@@ -2,7 +2,7 @@
     <div class="row">
         <app-side-bar 
             class="col-2 px-0" id="side-bar" 
-            (click)="onOpenBar()" 
+            (click)="onOpenBar($event)" 
             [open]="open"
             [session]="session"
         ></app-side-bar>
@@ -11,7 +11,7 @@
                 <div class="idea-info bg-light-l">
                     <div class="titulo-idea">
                         <div class="start">
-                            <img class="border border-light" src="{{ this.imagenMain }}" alt="perfil">
+                            <img class="border border-light" src="{{ this.imagenMain }}" alt="perfil" loading="lazy">
                             <div class="datos-titulo">
                                 <h1>{{ this.idea?.titulo }}</h1>
                                 <div (click)="onClickProfile()" class="nombre-usuario">{{ this.nombreCompleto }}</div>
@@ -20,7 +20,8 @@
                         @if(this.session && !this.propietario) {
                             <button id="boton-guardar" (click)="onClickGuardar()" class="btn btn-primary text-light-l">
                                 <span id="texto-boton">Añadir a favoritos!</span>
-                                <img id="guardar-tick" src="../../../assets/icons/guardado.svg" alt="guardado">
+                                <img id="no-guardado-tick" class="no-guardado" src="../../../assets/icons/no_guardado.svg" alt="guardado" loading="lazy">
+                                <img id="guardar-tick" class="guardado" src="../../../assets/icons/guardado.svg" alt="guardado" loading="lazy">
                             </button>
                         }
                     </div>
@@ -43,10 +44,12 @@
                 </div>
                 <div class="imagenes-idea bg-light-l">
                     <h4>Imagenes</h4>
-                    <div class="imagenes">
+                    <div (scroll)="onScrollMove()" id="imagenes-container" class="imagenes">
+                        <button *ngIf="this.idea?.imagenes?.length! > 1" (click)="onClickRetroceder()" class="retroceder"><img src="../../../assets/icons/retroceder.svg" alt="retroceder" loading="lazy"></button>
                         @for (imagen of this.idea?.imagenes; track $index) {
-                            <img (click)="onClickImage($event)" src="{{ imagen }}" alt="imagen">
+                            <img class="border border-light" (click)="onClickImage($event)" src="{{ imagen }}" alt="imagen" loading="lazy">
                         }
+                        <button *ngIf="this.idea?.imagenes?.length! > 1" (click)="onClickAvanzar()" class="avanzar"><img src="../../../assets/icons/avanzar.svg" alt="retroceder" loading="lazy"></button>
                     </div>
                 </div>
                 <div class="linea-tiempo bg-light-l">
@@ -58,7 +61,7 @@
                                 <h5 class="titulo-hito d-flex align-items-center">
                                     {{ hito.titulo }}
                                     @if(this.propietario) {
-                                        <img (click)="onClickEliminarHito(hito)" role="button" class="ms-2 target" src="../../../assets/icons/trash.svg" alt="eliminar">
+                                        <img (click)="onClickEliminarHito(hito)" role="button" class="ms-2 target" src="../../../assets/icons/trash.svg" alt="eliminar" loading="lazy">
                                     }
                                 </h5>
                                 <div class="fecha-hito">{{ hito.fecha.toString().split('T')[0].split('-').reverse().join('/') }}</div>
@@ -89,20 +92,24 @@
                         }    
                     </ul>
                 </div>
-                @if(this.session) {
+                @if(this.session ) {
                     <div id="invertir-section" class="invertir bg-light-l col-10">
-                        @if(this.propietario) {
-                            <button class="btn btn-primary text-light-l">Editar</button>
-                        } @else {
+                        @if(!this.propietario) {
                             <button [routerLink]="['/invertir/' + this.ideaId]" class="btn btn-primary text-light-l">Invertir</button>
                         }
+                        <!-- } @else {
+                            <button class="btn btn-primary text-light-l">Editar</button>
+                        } -->
                     </div>
                 }
             </section>
         </div>
     </div>
     <div id="overlay" class="overlay">
-        <img id="image-overlay" class="images-click" src="" alt="visualize-image">
+        <img id="image-overlay" class="images-click" src="" alt="visualize-image" loading="lazy">
         <span class="close-image" (click)="onCloseImage()">X</span>
     </div>
+    <div class="loader-wrapper" *ngIf="cargandoIdeas">
+        <div class="loader"></div>
+    </div>   
 </div>

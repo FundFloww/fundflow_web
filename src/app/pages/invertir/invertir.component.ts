@@ -1,19 +1,19 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { IdeaDto } from '../../interfaces/ideaDto';
+import { Router } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header.component';
 import { SideBarComponent } from '../../components/side-bar/side-bar.component';
 import { onOpenBarFunction } from '../../functions/sideBarFunctions';
-import { UsuariosService } from '../../services/usuarios/usuarios.service';
-import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
-import { Router } from '@angular/router';
-import { Idea } from '../../interfaces/idea';
-import { UsuarioDatos } from '../../interfaces/UsuarioDatos';
 import { InversionEnviar } from '../../interfaces/InversionEnviar';
+import { UsuarioDatos } from '../../interfaces/UsuarioDatos';
+import { Idea } from '../../interfaces/idea';
+import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
 
 @Component({
     selector: 'app-invertir',
     standalone: true,
-    imports: [HeaderComponent, SideBarComponent],
+    imports: [HeaderComponent, SideBarComponent, NgIf],
     templateUrl: './invertir.component.html',
     styleUrl: './invertir.component.scss'
 })
@@ -32,8 +32,11 @@ export class InvertirComponent {
     tab: number = 1;
     cantidad: number = 10;
     inversion: InversionEnviar | null = null;
+    enviandoInversion: boolean = false;
+    cargandoInversion: boolean = false;
 
     async ngOnInit() {
+        this.cargandoInversion = true;
         this.session = await this.usuariosService.initializeSession();
         this.usuario = await this.usuariosService.getUsuario();     
         const idIdea = parseInt(this.router.url.split('/')[2]);
@@ -41,6 +44,7 @@ export class InvertirComponent {
         this.idea = ideas.find(idea => idea.id === idIdea) || null;
 
         this.initInvertir();
+        this.cargandoInversion = false;
     }
 
     onOpenBar() {
@@ -156,7 +160,7 @@ export class InvertirComponent {
         }
     }
 
-    onInvertirClick(evento: Event) {
+    async onInvertirClick(evento: Event) {
         evento.preventDefault();
 
         this.inversion = {
@@ -165,9 +169,16 @@ export class InvertirComponent {
             inversores: [this.usuario!],
             idea: this.idea!
         };
-        console.log(this.inversion);
         
-        this.ideasService.invertir(this.inversion);
-        this.router.navigate(['/idea/' + this.idea!.id]);
+        try {
+            this.enviandoInversion = true;
+            await this.ideasService.invertir(this.inversion);
+
+        } catch (error) {
+            console.error(error);
+        } finally {
+            this.enviandoInversion = false;
+            this.router.navigate(['/idea/' + this.idea!.id]);
+        }
     }
 }

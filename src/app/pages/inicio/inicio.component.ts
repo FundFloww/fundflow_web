@@ -10,6 +10,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { CamposApi } from '../../enum/camposApi';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { IdeasFilterPipe } from '../../pipes/ideas/ideas-filter.pipe';
 
 @Component({
     selector: 'app-inicio',
@@ -19,7 +20,8 @@ import { CommonModule } from '@angular/common';
         IdeaItemComponent, 
         HeaderComponent,
         FormsModule, 
-        CommonModule
+        CommonModule,
+        IdeasFilterPipe
     ],
     templateUrl: './inicio.component.html',
     styleUrl: './inicio.component.scss'
@@ -31,6 +33,7 @@ export class InicioComponent {
     session: boolean | null = null;
     camposSeleccionados: string[] = [];
     ideasNotFound: boolean = false;
+    filterIdeas: string = '';
 
     constructor(
         private ideaService: IdeasServicioService, 
@@ -46,10 +49,15 @@ export class InicioComponent {
         }
 
         this.session = await this.usuariosService.loggedIn();
+        this.onScrollMove();
     }
 
-    onOpenBar() {
-        const cerrarBar = document.getElementById('cerrar-bar')!; 
+    onOpenBar(evento?: Event) {
+        const cerrarBar = document.getElementById('cerrar-bar')!;
+
+        if(evento?.target !== cerrarBar.children[0]) {
+            return;
+        }
         
         if(getComputedStyle(cerrarBar).display === 'none') {
             return;
@@ -84,5 +92,37 @@ export class InicioComponent {
 
     isSelected(campo: string): boolean {
         return this.camposSeleccionados.includes(campo.toLocaleUpperCase());
+    }
+
+    onClickAvanzar() {
+        const imagenes = document.getElementById("filters") as HTMLElement;
+        imagenes.scrollLeft += 300;
+    }
+
+    onClickRetroceder() {
+        const imagenes = document.getElementById("filters") as HTMLElement;
+        imagenes.scrollLeft -= 300;
+    }
+
+    onScrollMove() {
+        const imagenes = document.getElementById("filters") as HTMLElement;
+        const botonRetroceder = document.getElementsByClassName("retroceder")[0] as HTMLElement;
+        const botonAvanzar = document.getElementsByClassName("avanzar")[0] as HTMLElement;
+
+        if(imagenes.scrollLeft < 20) {
+            botonRetroceder.classList.add("ocultar");
+        } else {
+            botonRetroceder.classList.remove("ocultar");
+        }
+
+        if(imagenes.scrollWidth - imagenes.scrollLeft - imagenes.clientWidth < 40) {
+            botonAvanzar.classList.add("ocultar");
+        } else {
+            botonAvanzar.classList.remove("ocultar");
+        }
+    }
+
+    onFilterIdeasChange(filterValue: string) {
+        this.filterIdeas = filterValue;
     }
 }

@@ -93,6 +93,23 @@
 
 @media (width < 900px) {
     .card-bar {
-        grid-template-columns: repeat(1, 0.5fr);
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .fila-info {
+        height: 250px;
+    }
+
+    .fila-vacia {
+        display: none;
+    }
+
+    .cotenedor-datos {
+        padding-top: 5px !important;
+        padding-left: 3rem !important;
+    }
+
+    .fila-datos {
+        margin-top: 0 !important;
     }
 }

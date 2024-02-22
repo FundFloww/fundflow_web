@@ -2,16 +2,21 @@
     <div class="row">
         <app-side-bar 
             class="col-2 px-0 me-0 no-bootstrap-styles" id="side-bar" 
-            (click)="onOpenBar()" 
+            (click)="onOpenBar($event)" 
             [open]="open"
             [session]="session"
         ></app-side-bar>
         <div class="col-10 mx-0 bg-light h-100" id="content">
             <div class="row bg-light">
                 <div class="banner bg-primary mx-0 px-0">
-                    <img src="{{usuario?.banner}}" class="foto-banner mx-0" alt="banner_perfil">
+                    @if(usuario?.banner) {
+                        <img src="{{usuario?.banner}}" class="foto-banner mx-0" alt="banner_perfil">
+                    } @else {
+                        <img src="../../../../assets/img/banner.jpg"
+                            class="foto-banner mx-0" alt="banner_perfil">
+                    }
                 </div>
-                <div class="col-md-4 col-12 bg-light-l mx-0 ps-5">
+                <div class="col-md-4 col-12 bg-light-l mx-0 ps-5 fila-info">
                     <div class="info-perfil d-grid gap-4">
                         <div>
                             @if(usuario?.imagen) {
@@ -36,8 +41,8 @@
                         </ng-template>
                     </div>
                 </div>
-                <div class="col-md-8 col-12 bg-light-l pt-5">
-                    <div class="row mt-5 fila-vacia"></div>
+                <div class="col-md-8 col-12 bg-light-l pt-5 cotenedor-datos">
+                    <div class="row mt-4 fila-vacia"></div>
                     <div class="row justify-content-start mt-3 fila-datos">
                         <div class="row justify-content-start inversores">
                             <div class="col-2 text-center me-5">
@@ -86,6 +91,9 @@
                 </div>
             </div>
         </div>
+        <div class="loader-wrapper" *ngIf="cargandoIdea">
+            <div class="loader"></div>
+        </div>  
     </div>
 
 
