@@ -6,7 +6,7 @@
           <h5 class="modal-title text-primary" id="exampleModalToggleLabel">Modificar datos del usuario</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body px-5 py-3">
             <form novalidate autocomplete="off" #editForm="ngForm">
                 <div class="mb-3">
                     <div class="w-100 tabs btn-group input-box">
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="text-muted" data-bs-toggle="modal" href="#myModal3" role="button">Cambiar contraseña</a>
+                <p class="text-end"><a class="link-underline link-underline-opacity-0" data-bs-toggle="modal" href="#myModal3" role="button">Cambiar contraseña</a></p>
             </form>
         </div>
         <div class="modal-footer">
@@ -78,7 +78,7 @@
           <h5 class="modal-title text-primary" id="myModal3">Cambiar contraseña</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body px-5 py-3">
             <form novalidate autocomplete="off" #editPasswordForm="ngForm">
                 <div class="mb-3">
                     <input id="password" class="form-control w-100" type="password" name="password"
@@ -104,7 +104,7 @@
                     </div>
                 </div>
             </form>
-          <a class="text-muted" data-bs-toggle="modal" href="#myModal2" role="button">Volver</a>
+          <p class="text-end"><a class="link-underline link-underline-opacity-0" data-bs-toggle="modal" href="#myModal2" role="button">Volver</a></p>
         </div>
         <div class="modal-footer">
           <button class="btn btn-light" data-bs-target="#myModal2" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
@@ -167,7 +167,7 @@
                                     <td width="166">
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <button type="button" class="btn btn-primary text-white"
-                                            data-bs-toggle="modal" data-bs-target="#myModal2" (click)="editarUsuario(usuario.id)">Editar</button>
+                                            data-bs-toggle="modal" data-bs-target="#myModal2" (click)="obtenerUsuarioAModificar(usuario.id)">Editar</button>
                                             <button type="button" class="btn btn-danger"
                                                 (click)="borrarUsuario(usuario.id)">Borrar</button>
                                         </div>

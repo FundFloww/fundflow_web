@@ -52,7 +52,7 @@ export class ZonaAdminUsuariosComponent {
     async cargarUsuarios() {
         try {
             const res = await this.usuariosService.getUsuariosZonaAdmin(this.currentPage, this.pageSize);
-            // console.log(res);
+            console.log(res);
             this.usuarios = res.content;
             this.totalPages = res.totalPages;
             this.currentPage = res.pageable.pageNumber;
@@ -81,8 +81,8 @@ export class ZonaAdminUsuariosComponent {
         this.cargarUsuarios();
     }
 
-    editarUsuario(id: number | undefined) {
-        console.log("Editar usuario con id:", id);
+    async obtenerUsuarioAModificar(id: number | undefined) {
+        
     }
 
     borrarUsuario(id: number | undefined) {
