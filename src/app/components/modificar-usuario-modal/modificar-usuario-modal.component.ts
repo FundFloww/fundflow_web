@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { UsuarioEditarContraseñaDTO } from '../../interfaces/usuario-editar-contraseñaDTO';
 import { UsuarioEditarDTO } from '../../interfaces/usuario-editarDto';
@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 export class ModificarUsuarioModalComponent {
 
     @Input() usuario!: Usuario | null;
+    @Output() usuarioModificado = new EventEmitter<boolean>();
 
     usuarioTemporal: UsuarioEditarDTO = {
         nombre: '',
@@ -39,6 +40,7 @@ export class ModificarUsuarioModalComponent {
         confirmarContrasena: '',
     };
 
+
     errorContrasena: string = '';
     showError: boolean = false;
     userExists: boolean = false;
@@ -50,20 +52,27 @@ export class ModificarUsuarioModalComponent {
         private usuariosService: UsuariosService
     ) { }
 
-    // ngOnChanges(changes: SimpleChanges): void {
-    //     if (changes['usuario'] && this.usuario) {
-    //         console.log(this.usuario);
-    //         this.usuarioTemporal = Object.assign({}, this.usuario);
-    //         console.log(this.usuarioTemporal);
-    //     }
-    // }
-
     ngOnInit(){
         this.usuarioTemporal = Object.assign({}, this.usuario);
     }
 
     editUsuario(){
+        this.usuarioTemporal.correo = this.usuarioTemporal.correo.toLowerCase();
 
+        if (Array.isArray(this.usuarioTemporal.tipo)) {
+            this.usuarioTemporal.tipo = this.usuarioTemporal.tipo.toString();
+        }
+
+        console.log(this.usuarioTemporal);
+    
+
+		this.usuariosService.editUsuario(this.usuarioTemporal).then(response => {
+			this.userExists = response;
+
+			// if (!response) {
+			// 	this.usuarioModificado.emit(!this.userExists);
+			// }
+		});
     }
 
     cambioRealizado(){
@@ -73,8 +82,9 @@ export class ModificarUsuarioModalComponent {
     resetForm() {
         if (this.editForm) {
             this.userExists = false;
-            this.editForm.resetForm();
-            this.usuarioTemporal = Object.assign({}, this.usuario);
+            // this.editForm.resetForm();
+            // this.usuarioTemporal = Object.assign({}, this.usuario);
+            this.ngOnInit();
         }
     }
 

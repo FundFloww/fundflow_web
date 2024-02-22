@@ -5,7 +5,6 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { re } from 'mathjs';
 
 @Component({
   selector: 'app-recuperar',

@@ -9,14 +9,23 @@
                 <form novalidate autocomplete="off" #editForm="ngForm">
                     <div class="mb-3">
                         <div class="w-100 tabs btn-group input-box">
-                            <input type="radio" class="btn-check" name="tipoUsuario" [value]="'EMPRENDEDOR'"
+                            <!-- <input type="radio" class="btn-check" name="tipoUsuario" [value]="'EMPRENDEDOR'"
                                 id="emprendedor" [checked]="usuario?.tipo == 'EMPRENDEDOR'"
                                 (click)="usuarioTemporal.tipo = 'EMPRENDEDOR'">
                             <label for="emprendedor" class="btn btn-outline-primary">Emprendedor</label>
 
                             <input type="radio" class="btn-check" name="tipoUsuario" [value]="'INVERSOR'" id="inversor"
                                 [checked]="usuario?.tipo == 'INVERSOR'" (click)="usuarioTemporal.tipo = 'INVERSOR'">
-                            <label for="inversor" class="btn btn-outline-primary">Inversor</label>
+                            <label for="inversor" class="btn btn-outline-primary">Inversor</label> -->
+                            <input type="radio" class="btn-check" name="btnradio" [value]="'EMPRENDEDOR'"
+                                id="emprendedor" autocomplete="off" [checked]="usuario?.tipo == 'EMPRENDEDOR'"
+                                (click)="usuarioTemporal.tipo = 'EMPRENDEDOR'" name="tipo">
+                            <label for="emprendedor" class="btn btn-outline-primary">Emprendedor</label>
+
+                            <input type="radio" class="btn-check" name="btnradio" [value]="'INVERSOR'" id="inversor"
+                                autocomplete="off" [checked]="usuario?.tipo == 'INVERSOR'" name="tipo">
+                            <label for="inversor" class="btn btn-outline-primary"
+                                (click)="usuarioTemporal.tipo = 'INVERSOR'">Inversor</label>
                         </div>
                     </div>
 
@@ -26,7 +35,8 @@
                                 <input id="nombre" type="text" class="form-control" name="name" value=""
                                     placeholder="Nombre" value="{{this.usuario?.nombre}}"
                                     [(ngModel)]="usuarioTemporal.nombre" #nombre="ngModel" required
-                                    [ngClass]="validClasses(nombre, 'is-valid', 'is-invalid')" (input)="cambioRealizado()">
+                                    [ngClass]="validClasses(nombre, 'is-valid', 'is-invalid')"
+                                    (input)="cambioRealizado()">
                                 <div class="invalid-feedback">
                                     Nombre requerido
                                 </div>
@@ -37,7 +47,8 @@
                                 <input id="apellidos" type="text" class="form-control" name="apellidos" value=""
                                     placeholder="Apellidos" value="{{this.usuario?.apellidos}}"
                                     [(ngModel)]="usuarioTemporal.apellidos" #apellidos="ngModel" required
-                                    [ngClass]="validClasses(apellidos, 'is-valid', 'is-invalid')" (input)="cambioRealizado()">
+                                    [ngClass]="validClasses(apellidos, 'is-valid', 'is-invalid')"
+                                    (input)="cambioRealizado()">
                                 <div class="invalid-feedback">
                                     Apellidos requeridos
                                 </div>
@@ -55,7 +66,7 @@
                                 Email requerido (formato no válido)
                             </div>
                             <div *ngIf="userExists">
-                                El usuario ya existe
+                                Ya existe un usuario con este email
                             </div>
                         </div>
                     </div>
@@ -66,7 +77,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary text-white"
-                    [attr.data-bs-toggle]="!userExists ? 'modal' : ''" (click)="editUsuario()"
+                    [attr.data-bs-toggle]="userExists ? 'modal' : ''" (click)="editUsuario()"
                     [disabled]="editForm.invalid || !cambio">
                     Guardar cambios
                 </button>

@@ -35,6 +35,10 @@ form div.mb-3 input:focus {
     border: 2px solid #DA1818 !important;
 }
 
+.is-valid{
+    background-image: none !important;
+}
+
 form div.mb-3 input::placeholder {
     font-size: 0.8em;
     color: #626262;
