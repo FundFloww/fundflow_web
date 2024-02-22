@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    font-family: 'Sora', sans-serif;
+}
+
+table{
+    width: 100%;
+    font-size: 14px;
+}
+
+thead,
+tbody,
+tr,
+td,
+th {
+    border-color: #dee2e6;
+    border-style: solid;
+    border-width: 1px;
+}
+
+th{
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    padding-left: 0.5rem;
+    // color: #6c757d;
+}
+
+.search {
+    display: flex;
+    width: 216px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    border: 1px solid #dee2e6;
+}
+
+.search>img {
+    height: 100%;
+    width: 12%;
+    padding-left: 10px;
+}
+
+.search>input {
+    all: unset;
+    width: 75%;
+    height: 100%;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+button.btn.btn-success{
+    width: 90px;
+}
+
+select[name="dataTable_length"]{
+    width: auto;
+    appearance: revert;
+}
+
+
+
+
+
+
+
+.tabs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .75rem;
+}
+
+input[type='radio']{
+    display: none;
+}
+
+div.tabs label.btn{
+    font-size: 14px;
+    width: 100%;
+}
+
+.btn-check:checked + .btn {
+    color: #FFFFFF !important;
+}
+
+form div.mb-3 input {
+    height: 43px;
+    padding: 6px 12px;
+    border-radius: .375rem;
+    border: 0;
+    background-color: #ebefff;
+    outline: none;
+}
+
+form div.mb-3 input:focus {
+    border: 3px solid #057DCD;
+}
+
+.is-invalid{
+    border: 2px solid #DA1818 !important;
+}
+
+form div.mb-3 input::placeholder {
+    font-size: 0.8em;
+    color: #626262;
+    font-size: 13px;
+}

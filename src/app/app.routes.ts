@@ -12,6 +12,10 @@ import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.compo
 import { NoticiasComponent } from './pages/noticias/noticias.component';
 import { EnviarMensajeComponent } from './components/enviar-mensaje/enviar-mensaje.component';
 import { InvertirComponent } from './pages/invertir/invertir.component';
+import { SideBarAdminComponent } from './components/side-bar-admin/side-bar-admin.component';
+import { ZonaAdminComponent } from './pages/zona-admin/zona-admin.component';
+import { ZonaAdminUsuariosComponent } from './pages/zona-admin-usuarios/zona-admin-usuarios.component';
+import { ZonaAdminIdeasComponent } from './pages/zona-admin-ideas/zona-admin-ideas.component';
 
 export const routes: Routes = [
     { path: 'inicio', component: InicioComponent },
@@ -32,7 +36,6 @@ export const routes: Routes = [
     { path: 'logout', component: LogoutComponent },
     { path: 'registro', component: RegistroComponent },
     { path: 'noticias', component: NoticiasComponent},
-    { path: 'invertir/:id', component: InvertirComponent },
     { 
         path: 'idea',
         children: [

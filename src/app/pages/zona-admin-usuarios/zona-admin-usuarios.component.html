@@ -1,0 +1,203 @@
+<nuevo-usuario-modal (usuarioAgregado)="cargarUsuarioAgregado()"></nuevo-usuario-modal>
+<div class="modal fade" id="myModal2" aria-hidden="true" aria-labelledby="myModal2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary" id="exampleModalToggleLabel">Modificar datos del usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-5 py-3">
+            <form novalidate autocomplete="off" #editForm="ngForm">
+                <div class="mb-3">
+                    <div class="w-100 tabs btn-group input-box">
+                        <input type="radio" class="btn-check" name="tipoUsuario" [value]="'EMPRENDEDOR'" id="emprendedor" 
+                            [checked]="newUsuario.tipo == 'EMPRENDEDOR'" 
+                            (click)="newUsuario.tipo = 'EMPRENDEDOR'">
+                        <label for="emprendedor" class="btn btn-outline-primary">Emprendedor</label>
+                        
+                        <input type="radio" class="btn-check" name="tipoUsuario" [value]="'INVERSOR'" id="inversor" 
+                            [checked]="newUsuario.tipo == 'INVERSOR'"
+                            (click)="newUsuario.tipo = 'INVERSOR'">
+                        <label for="inversor" class="btn btn-outline-primary">Inversor</label>
+                    </div>
+                </div>
+
+                <div class="mb-3 gap-3 d-flex justify-content-center">
+                    <div>
+                        <div class="form-group">
+                            <input id="nombre" type="text" class="form-control" name="name" value=""
+                                placeholder="Nombre" [(ngModel)]="newUsuario.nombre" #nombre="ngModel"
+                                required
+                                [ngClass]="validClasses(nombre, 'is-valid', 'is-invalid')">
+                            <div class="invalid-feedback">
+                                Nombre requerido
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <input id="apellidos" type="text" class="form-control" name="apellidos" value=""
+                                placeholder="Apellidos" [(ngModel)]="newUsuario.apellidos" required
+                                #apellidos="ngModel"
+                                [ngClass]="validClasses(apellidos, 'is-valid', 'is-invalid')">
+                            <div class="invalid-feedback">
+                                Apellidos requeridos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input id="email" type="text" class="form-control w-100" name="email" value=""
+                        placeholder="Email" [(ngModel)]="newUsuario.correo" #email="ngModel" required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        [ngClass]="validClasses(email, 'is-valid', 'is-invalid')">
+                    <div class="invalid-feedback">
+                        <div *ngIf="!userExists">
+                            Email requerido (formato no válido)
+                        </div>
+                        <div *ngIf="userExists">
+                            El usuario ya existe
+                        </div>
+                    </div>
+                </div>
+                <p class="text-end"><a class="link-underline link-underline-opacity-0" data-bs-toggle="modal" href="#myModal3" role="button">Cambiar contraseña</a></p>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary text-white" data-bs-target="#myModal3" data-bs-toggle="modal" data-bs-dismiss="modal">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal3" aria-hidden="true" aria-labelledby="myModal3" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary" id="myModal3">Cambiar contraseña</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-5 py-3">
+            <form novalidate autocomplete="off" #editPasswordForm="ngForm">
+                <div class="mb-3">
+                    <input id="password" class="form-control w-100" type="password" name="password"
+                        placeholder="Contraseña" [(ngModel)]="newUsuario.contrasena" required
+                        #password="ngModel" [ngClass]="validClasses(password, 'is-valid', 'is-invalid')">
+                    <div class="invalid-feedback">
+                        Contraseña requerida
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input id="confirmPassword" class="form-control w-100" type="password"
+                        name="confirmPassword" placeholder="Confirmar Contraseña"
+                        [(ngModel)]="newUsuario.confirmarContrasena" required #confirmPassword="ngModel"
+                        [ngClass]="validPassword(confirmPassword, 'is-valid', 'is-invalid')">
+                    <div class="invalid-feedback">
+                        <div *ngIf="newUsuario.confirmarContrasena !== ''">
+                            Las contraseñas no coinciden
+                        </div>
+                        <div *ngIf="newUsuario.confirmarContrasena === ''">
+                            Confirmar Contraseña requerida
+                        </div>
+                    </div>
+                </div>
+            </form>
+          <p class="text-end"><a class="link-underline link-underline-opacity-0" data-bs-toggle="modal" href="#myModal2" role="button">Volver</a></p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-light" data-bs-target="#myModal2" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary text-white" data-bs-dismiss="modal">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <div class="card mb-4 mt-4">
+                    <div class="card-header">
+                        <h3 class="mt-2 mb-2">Gestión de usuarios</h3>
+                    </div>
+                    <div class="ms-3">
+                        <button type="button" class="btn btn-success text-white ms-3 mt-4" data-bs-toggle="modal" data-bs-target="#myModal">
+                            Nuevo
+                        </button>
+                    </div>
+                    <div class="d-flex ms-3 me-3 mt-3 justify-content-between">
+                        <label class="d-flex align-items-center justify-content-center ms-3">
+                            Mostrar
+                            <select name="dataTable_length" aria-controls="dataTable"
+                                class="ms-2 me-2 custom-select custom-select-sm form-control form-control-sm"
+                                [(ngModel)]="pageSize" (change)="actualizarPageSize()">
+                                <option [ngValue]="10" [selected]="pageSize === 10">10</option>
+                                <option [ngValue]="25" [selected]="pageSize === 25">25</option>
+                                <option [ngValue]="50" [selected]="pageSize === 50">50</option>
+                            </select>
+                            registros
+                        </label>
+                        <div class="search me-3">
+                            <img src="../../assets/icons/search.svg" alt="">
+                            <input type="search" [(ngModel)]="filterSearch" placeholder="Buscar">
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive ms-3 me-3">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="col-printer sorting">#</th>
+                                    <th class="col-printer sorting">Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Email</th>
+                                    <th>Tipo Usuario</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let usuario of usuarios | usuarioFilter:filterSearch">
+                                    <th>{{usuario.id}}</th>
+                                    <td>{{usuario.nombre}}</td>
+                                    <td>{{usuario.apellidos}}</td>
+                                    <td>{{usuario.correo}}</td>
+                                    <td>{{usuario.tipo}}</td>
+                                    <td width="166">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-primary text-white"
+                                            data-bs-toggle="modal" data-bs-target="#myModal2" (click)="obtenerUsuarioAModificar(usuario.id)">Editar</button>
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="borrarUsuario(usuario.id)">Borrar</button>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr *ngIf="usuariosNotFound || (usuarios | usuarioFilter:filterSearch).length === 0">
+                                    <td colspan="6" class="text-center">Ningún resultado encontrado</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex ms-3 me-3 mb-3 align-items-center justify-content-between">
+                        <div class="text-muted ms-3" *ngIf="totalPages > 1">Página {{currentPage + 1}} de {{totalPages}}</div>
+                        <nav class="me-3" *ngIf="totalPages > 1">
+                            <ul class="pagination mb-0">
+                                <li class="page-item" [ngClass]="{ 'disabled': currentPage === 0 }">
+                                    <button (click)="cambiarPagina(currentPage - 1)" class="page-link">&laquo;</button>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link disabled bg-white">{{currentPage + 1}}</a>
+                                </li>
+                                <li class="page-item" [ngClass]="{ 'disabled': currentPage + 1 === totalPages}">
+                                    <button (click)="cambiarPagina(currentPage + 1)" class="page-link">&raquo;</button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

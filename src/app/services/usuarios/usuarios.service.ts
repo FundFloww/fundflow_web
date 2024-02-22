@@ -34,7 +34,6 @@ export class UsuariosService {
 
             return false;
         } catch (error) {
-            console.error('Error al realizar la operación:', error);
             return true;
         }
     }
@@ -78,6 +77,24 @@ export class UsuariosService {
         } catch (error) {
             console.error('Error al realizar la operación: ', error)
             return true;
+        }
+    }
+
+    async deleteUsuario(userId: number) {
+        try {
+            const response = await fetch(`${this.urlBase}/api/usuarios/eliminar/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al eliminar el usuario');
+            }
+
+        } catch (error) {
+            console.error('Error al realizar la operación:', error);
         }
     }
 
@@ -221,6 +238,17 @@ export class UsuariosService {
         }
 
         return jwtDecode(token).sub;
+    }
+
+    async getUsuariosZonaAdmin(page: number, size: number) {
+        try {
+            const response = await fetch(`${this.urlBase}/api/usuarios/admin?page=${page}&size=${size}`);
+            const datos = await response.json();
+            return datos;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 
 }

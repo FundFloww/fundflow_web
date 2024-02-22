@@ -7,7 +7,7 @@ $light: #E8EEF1;
 
 $font-family-sans-serif:Roboto, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-
+$focus-ring-opacity: 0;
 @import "../node_modules/bootstrap/scss/mixins/banner";
 @include bsBanner("");
 
