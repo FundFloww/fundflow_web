@@ -27,6 +27,7 @@ export class FormIdeaComponent {
     open: boolean = true;
     session: boolean | null = null;
     camposArray: string[] = camposKeys;
+    enviandoIdea: boolean = false;
 
     constructor(
         private usuariosService: UsuariosService,
@@ -46,6 +47,10 @@ export class FormIdeaComponent {
 
     async ngOnInit() {
         this.session = await this.usuariosService.initializeSession();
+        const usuario = await this.usuariosService.getUsuario();
+        if(usuario.tipo[0] !== 'EMPRENDEDOR') {
+            this.router.navigate(['/inicio']);
+        }
     }
 
     imagenesVacias() {
@@ -66,6 +71,10 @@ export class FormIdeaComponent {
 
     agregarOtraImagen(evento: Event) {
         evento.preventDefault();
+        if(this.nuevaIdea.imagenesFile.length >= 5) { 
+            // mensaje de aviso
+            return; 
+        }
         this.nuevaIdea.imagenesFile.push(new File([], ''));
     }
 
@@ -83,16 +92,29 @@ export class FormIdeaComponent {
 
     async enviarIdea() {
         try {
+            this.enviandoIdea = true;
             this.nuevaIdea.imagenes = await this.imagenesService.subirImagenes(this.nuevaIdea.imagenesFile);
             this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
             await this.ideasServicio.addIdea(this.nuevaIdea);
             this.router.navigate(['/inicio']);
         } catch (error) {
             console.error(error);
+        } finally {
+            this.enviandoIdea = false;
         }
     }
 
-    onOpenBar() {
+    onOpenBar(evento?: Event) {
+        const cerrarBar = document.getElementById('cerrar-bar')!;
+
+        if(evento?.target !== cerrarBar.children[0]) {
+            return;
+        }
+        
+        if(getComputedStyle(cerrarBar).display === 'none') {
+            return;
+        }
+
         this.open = onOpenBarFunction(this.open);
     }
 

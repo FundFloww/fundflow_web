@@ -1,8 +1,8 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Usuario } from '../../interfaces/usuario';
+import { UsuarioEditarDTO } from '../../interfaces/usuario-editarDto';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
-import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-header',
@@ -13,7 +13,7 @@ import { NgIf } from '@angular/common';
 })
 export class HeaderComponent {
     session: boolean | null = null;
-    usuario!: Usuario | null;
+    usuario!: UsuarioEditarDTO;
     idUsuarioIdentificado: number | undefined;
 
     constructor(
@@ -22,6 +22,7 @@ export class HeaderComponent {
 
     async ngOnInit() {
         this.session = await this.usuariosService.loggedIn();
+
         if(this.session) {
             this.idUsuarioIdentificado = Number(this.usuariosService.getUserId());
             this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuarioIdentificado);

@@ -85,3 +85,30 @@ div.card-footer div a, form div a{
 .is-valid{
     background-image: none !important;
 }
+
+.registro-correcto {
+    position: absolute;
+    width: 430px;
+    left: calc(50vw - 215px);
+    font-size: 0.85rem;
+    text-align: center;
+    animation: aparecerAbajo 0.5s ease;
+}
+
+@keyframes aparecerAbajo {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (width < 568px){
+    .registro-correcto {
+        width: 400px;
+        left: calc(50vw - 200px);
+    }
+}

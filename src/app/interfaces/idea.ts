@@ -1,5 +1,6 @@
 import { Campos } from "../enum/campos";
 import { Hito } from "./hito";
+import { Inversion } from "./inversion";
 import { Usuario } from "./usuario";
 
 export interface Idea {
@@ -10,5 +11,6 @@ export interface Idea {
     campo?: Campos;
     emprendedor: Usuario[];
     inversor: Usuario[];
+    inversiones: Inversion[];
     hitos: Hito[];
 }

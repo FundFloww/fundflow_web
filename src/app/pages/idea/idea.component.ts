@@ -12,11 +12,12 @@ import { Inversion } from '../../interfaces/inversion';
 import { NgClass } from '@angular/common';
 import { Hito } from '../../interfaces/hito';
 import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-idea',
   standalone: true,
-  imports: [SideBarComponent, RouterLink, NgClass, FormsModule],
+  imports: [SideBarComponent, RouterLink, NgClass, FormsModule, NgIf],
   templateUrl: './idea.component.html',
   styleUrl: './idea.component.scss'
 })
@@ -41,6 +42,9 @@ export class IdeaComponent {
     totalRecibido: number = 0;
     fechaHoy = new Date().toISOString().split('T')[0].split('-').reverse().join('/');
     nuevoHito: boolean = false;
+    tipoUsuario: string | null = null;
+    guardandoIdea: boolean = false;
+    cargandoIdeas: boolean = false;
     hito: Hito = {
         titulo: "",
         fecha: new Date(),
@@ -48,6 +52,7 @@ export class IdeaComponent {
     };
 
     async ngOnInit() {
+        this.cargandoIdeas = true;
         const ideas = await this.ideaService.getIdeasAll();
         this.ideaId = parseInt(this.router.url.split('/')[2]);
 
@@ -59,13 +64,16 @@ export class IdeaComponent {
         this.idea = ideas.filter(idea => idea.id === this.ideaId)[0];
         this.imagenMain = this.idea.imagenes[0];
         this.nombreCompleto = this.idea.emprendedor[0].nombre + " " + this.idea.emprendedor[0].apellidos;
-        this.inversionesRecibidas = await this.inversionesService.getInversionesUsuario(this.ideaId ?? 0);
+        this.inversionesRecibidas = this.idea.inversiones;
         this.totalRecibido = this.inversionesRecibidas.reduce((acc, inv) => acc + inv.cantidad, 0);
 
         if(this.session) {
             const idUsuario = parseInt(this.usuarioService.getUserId()!);
+            const usuario = await this.usuarioService.getUsuario();
             const guardadas = await this.ideaService.getIdeasGuardadas(idUsuario);
+            
             this.guardada = guardadas.filter(guardada => guardada.id === this.ideaId).length > 0;
+            this.tipoUsuario = usuario.tipo[0];
 
             if(this.idea.emprendedor[0].id === idUsuario) {
                 this.propietario = true;
@@ -73,13 +81,23 @@ export class IdeaComponent {
         }
 
         if(this.guardada) this.invertirStyleGuardar();
+        if(this.idea.imagenes.length > 1) this.onScrollMove();
+
+        this.cargandoIdeas = false;
     }
 
-    onOpenBar() {
-        this.open = onOpenBarFunction(this.open);
+    onOpenBar(evento?: Event) {
+        const cerrarBar = document.getElementById('cerrar-bar')!;
 
-        const invertirSection = document.getElementById('invertir-section');
-        invertirSection?.classList.toggle('col-11-p');
+        if(evento?.target !== cerrarBar.children[0]) {
+            return;
+        }
+        
+        if(getComputedStyle(cerrarBar).display === 'none') {
+            return;
+        }
+
+        this.open = onOpenBarFunction(this.open);
     }
 
     onClickImage(event: Event) {
@@ -119,22 +137,38 @@ export class IdeaComponent {
     }
 
     async onClickGuardar() {
+        this.disableButton();
     
         this.invertirStyleGuardar();
-        
+    
         const datosGuardar: GuardarIdea = {
             idIdea: this.idea?.id!,
             idUsuario: parseInt(this.usuarioService.getUserId()!)
         };
-
-        if(!this.guardada) {
-            await this.usuarioService.guardarIdea(datosGuardar);
-            return;
-        }
-
-        await this.usuarioService.eliminarIdeaGuardada(datosGuardar);
     
-        return;
+        try {
+            if(!this.guardada) {
+                await this.usuarioService.guardarIdea(datosGuardar);
+                this.guardada = true;
+            } else {
+                await this.usuarioService.eliminarIdeaGuardada(datosGuardar);
+                this.guardada = false;
+            }
+        } catch (error) {
+            console.error('Error al procesar la acción:', error);
+        } finally {
+            this.enableButton();
+        }
+    }
+
+    disableButton() {
+        const button = document.getElementById("boton-guardar") as HTMLButtonElement;
+        button.disabled = true;
+    }
+
+    enableButton() {
+        const button = document.getElementById("boton-guardar") as HTMLButtonElement;
+        button.disabled = false;
     }
 
     onClickNuevoHito() {
@@ -160,4 +194,33 @@ export class IdeaComponent {
         const ideas = await this.ideaService.getIdeasAll();
         this.idea = ideas.filter(idea => idea.id === this.ideaId)[0];
     }
+
+    onClickAvanzar() {
+        const imagenes = document.getElementById("imagenes-container") as HTMLElement;
+        imagenes.scrollLeft += 300;
+    }
+
+    onClickRetroceder() {
+        const imagenes = document.getElementById("imagenes-container") as HTMLElement;
+        imagenes.scrollLeft -= 300;
+    }
+
+    onScrollMove() {
+        const imagenes = document.getElementById("imagenes-container") as HTMLElement;
+        const botonRetroceder = document.getElementsByClassName("retroceder")[0] as HTMLElement;
+        const botonAvanzar = document.getElementsByClassName("avanzar")[0] as HTMLElement;
+
+        if(imagenes.scrollLeft < 20) {
+            botonRetroceder.classList.add("ocultar");
+        } else {
+            botonRetroceder.classList.remove("ocultar");
+        }
+
+        if(imagenes.scrollWidth - imagenes.scrollLeft - imagenes.clientWidth < 40) {
+            botonAvanzar.classList.add("ocultar");
+        } else {
+            botonAvanzar.classList.remove("ocultar");
+        }
+    }
+
 }

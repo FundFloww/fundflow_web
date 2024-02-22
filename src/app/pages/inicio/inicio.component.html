@@ -1,11 +1,20 @@
 <div class="container-fluid root-element bg-light">
     <div class="row">
-        <app-side-bar class="col-2 px-0 z-100" id="side-bar" (click)="onOpenBar()" [open]="open"
+        <app-side-bar class="col-2 px-0 z-100" id="side-bar" (click)="onOpenBar($event)" [open]="open"
             [session]="session"></app-side-bar>
         <div id="content" class="col-10 h-100 pe-0 ps-0">
+            <app-header></app-header>
+            <section id="hero-section" class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">¡Bienvenido a la comunidad de FundFlow!</h1>
+                    <p class="hero-text">Invierte en el futuro: Descubre, crea y 
+                        respalda ideas que impulsarán un mañana más prometedor y sostenible.</p>
+                </div>
+                <img loading="eager" class="hero-image" src="../../../assets/img/hero.jpg" alt="hero-section">
+            </section>
             <section class="section-content">
-                <app-header></app-header>
-                <div class="default-bar filter-bar bg-light-l">
+                <div id="filters" (scroll)="onScrollMove()" class="default-bar filter-bar bg-light-l">
+                    <button (click)="onClickRetroceder()" class="retroceder"><img src="../../../assets/icons/retroceder.svg" alt="retroceder" loading="lazy"></button>
                     @for (campo of camposArray; track $index ) {
                         <button value="{{campo}}" class="filter bg-primary text-light-l"
                                 (click)="toggleCampo(campo)"
@@ -13,6 +22,7 @@
                             {{campo}}
                         </button>
                     }
+                    <button (click)="onClickAvanzar()" class="avanzar"><img src="../../../assets/icons/avanzar.svg" alt="retroceder" loading="lazy"></button>
                 </div>
                 <div class="default-bar card-bar bg-light-l"
                 [ngClass]="{ 'd-flex justify-content-center align-items-center': ideasNotFound }">

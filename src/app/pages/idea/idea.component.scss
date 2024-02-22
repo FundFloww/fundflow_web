@@ -143,13 +143,46 @@ h4 {
     .imagenes {
         display: flex;
         gap: 20px;
+        overflow-x: scroll;
+        scrollbar-width: none;
+        position: relative;
+        scroll-behavior: smooth;
 
-        img {
-            width: 300px;
-            height: 120px;
+        & > img {
+            min-width: 220px;
+            height: 100px;
             border-radius: 5px;
             cursor: pointer;
             object-fit: cover;
+        }
+
+        .avanzar, .retroceder {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            background-color: rgba(0, 0, 0, 0.281);
+            backdrop-filter: blur(1px);
+            min-width: 35px;
+            border: none;
+
+            img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .avanzar {
+            right: 0;
+        }
+
+        .retroceder {
+            left: 0;
+            margin-right: -55px;
+        }
+
+        .ocultar {
+            visibility: hidden;
         }
     }
 }
@@ -195,6 +228,18 @@ h4 {
     .titulo-hito {
         font-weight: 600;
         font-size: 1.3rem;
+        
+        & > input {
+            width: 100%;
+            max-width: 280px;
+        }
+    }
+
+    .texto-hito {
+        resize: none;
+        height: 70px;
+        width: 100%;
+        max-width: 480px;
     }
 }
 
@@ -241,6 +286,8 @@ h4 {
 .images-click {
     background-color: white;
     border-radius: 10px;
+    max-height: 80%;
+    max-width: 80%;
 }
 
 .close-image {
@@ -258,8 +305,55 @@ h4 {
     cursor: pointer;
 }
 
-.texto-hito {
-    resize: none;
-    height: 70px;
-    width: 480px;
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid #3498db;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (width < 950px) {
+    .inversores-info {
+        gap: 26px;
+        text-align: center;
+
+        & > div {
+            padding-right: 20px;
+        }
+    }
+
+    .imagenes {
+        .avanzar {
+            display: flex !important;
+        }
+
+        .retroceder {
+            display: flex !important;
+        }
+    }
 }
