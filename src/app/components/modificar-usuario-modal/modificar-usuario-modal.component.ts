@@ -45,6 +45,7 @@ export class ModificarUsuarioModalComponent {
     showError: boolean = false;
     userExists: boolean = false;
     cambio: boolean = false;
+    pswCambiada: boolean = false;
 
     @ViewChild('editForm') editForm!: NgForm;
 
@@ -56,22 +57,25 @@ export class ModificarUsuarioModalComponent {
         this.usuarioTemporal = Object.assign({}, this.usuario);
     }
 
-    editUsuario(){
+    actualizarTipoUsuario() {
+        this.usuarioTemporal.tipo = (this.usuarioTemporal.tipo == "EMPRENDEDOR") ? "INVERSOR" : "EMPRENDEDOR";
+        this.cambioRealizado();
+    }
+
+    async editUsuario(){
         this.usuarioTemporal.correo = this.usuarioTemporal.correo.toLowerCase();
 
         if (Array.isArray(this.usuarioTemporal.tipo)) {
             this.usuarioTemporal.tipo = this.usuarioTemporal.tipo.toString();
         }
-
-        console.log(this.usuarioTemporal);
     
-
 		this.usuariosService.editUsuario(this.usuarioTemporal).then(response => {
 			this.userExists = response;
 
-			// if (!response) {
-			// 	this.usuarioModificado.emit(!this.userExists);
-			// }
+			if (!response) {
+				this.usuarioModificado.emit(!this.userExists);
+                this.cambio = false;
+			}
 		});
     }
 
@@ -82,15 +86,26 @@ export class ModificarUsuarioModalComponent {
     resetForm() {
         if (this.editForm) {
             this.userExists = false;
-            // this.editForm.resetForm();
-            // this.usuarioTemporal = Object.assign({}, this.usuario);
+            this.cambio = false;
+            this.pswCambiada = false;
             this.ngOnInit();
         }
     }
 
-    // contrasenasCoinciden(): boolean {
-    //     return this.newUsuario.contrasena === this.newUsuario.confirmarContrasena;
-    // }
+    async editPassword(){
+        try {
+            if(this.usuario){
+                this.usuarioEditarContrasena.correo = this.usuario?.correo;
+                this.pswCambiada = await this.usuariosService.editContrasena(this.usuarioEditarContrasena);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    contrasenasCoinciden(): boolean {
+        return this.usuarioEditarContrasena.nuevaContrasena === this.usuarioEditarContrasena.confirmarContrasena;
+    }
 
     validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
         return {
@@ -99,10 +114,10 @@ export class ModificarUsuarioModalComponent {
         };
     }
 
-    // validPassword(ngModel: NgModel, validClass: string, errorClass: string) {
-    //     return {
-    //         [validClass]: this.contrasenasCoinciden() && ngModel.touched && !this.userExists,
-    //         [errorClass]: (!this.contrasenasCoinciden() || ngModel.errors?.['required']) && ngModel.touched
-    //     };
-    // }
+    validPassword(ngModel: NgModel, validClass: string, errorClass: string) {
+        return {
+            [validClass]: this.contrasenasCoinciden() && ngModel.touched && !this.userExists,
+            [errorClass]: (!this.contrasenasCoinciden() || ngModel.errors?.['required']) && ngModel.touched
+        };
+    }
 }

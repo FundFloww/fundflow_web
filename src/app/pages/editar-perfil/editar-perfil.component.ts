@@ -38,7 +38,7 @@ export class EditarPerfilComponent {
     usuarioEditarContrasena: UsuarioEditarContraseñaDTO = {
         correo: '',
         nuevaContrasena: '',
-        confirmarContrasena:  '',
+        confirmarContrasena: '',
     };
 
     tipoUsuario: string = '';
@@ -93,20 +93,20 @@ export class EditarPerfilComponent {
         const file = inputElement.files?.[0]!;
 
         if (file && this.usuarioTemporal !== null) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            const imageUrl = e.target?.result as string;
-            if (this.usuarioTemporal) {
-              if (foto === 'banner') {
-                this.usuarioTemporal.banner = imageUrl;
-              } else if (foto === 'perfil') {
-                this.usuarioTemporal.imagen = imageUrl;
-              }
-            }
-          };
-          reader.readAsDataURL(file);
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const imageUrl = e.target?.result as string;
+                if (this.usuarioTemporal) {
+                    if (foto === 'banner') {
+                        this.usuarioTemporal.banner = imageUrl;
+                    } else if (foto === 'perfil') {
+                        this.usuarioTemporal.imagen = imageUrl;
+                    }
+                }
+            };
+            reader.readAsDataURL(file);
         }
-        
+
         if (foto === 'banner') {
             this.imagenBanner = file;
             return;
@@ -118,7 +118,7 @@ export class EditarPerfilComponent {
 
     contrasenasCoinciden() {
         return this.usuarioEditarContrasena.nuevaContrasena === this.usuarioEditarContrasena.confirmarContrasena;
-      }
+    }
 
     async enviarPerfil() {
         try {
@@ -133,9 +133,9 @@ export class EditarPerfilComponent {
             if (Array.isArray(this.usuarioTemporal.tipo)) {
                 this.usuarioTemporal.tipo = this.usuarioTemporal.tipo.toString();
             }
-            
+
             await this.usuariosService.editUsuario(this.usuarioTemporal);
-            
+
         } catch (error) {
             console.error(error);
         } finally {
@@ -155,10 +155,10 @@ export class EditarPerfilComponent {
 
     async enviarContrasena() {
         try {
-          await this.usuariosService.editContrasena(this.usuarioEditarContrasena)
-          this.router.navigate(['/perfil/' + this.usuario?.id]);
+            await this.usuariosService.editContrasena(this.usuarioEditarContrasena)
+            this.router.navigate(['/perfil/' + this.usuario?.id]);
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      }
+    }
 }
