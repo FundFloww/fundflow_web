@@ -1,0 +1,42 @@
+.tabs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .75rem;
+}
+
+input[type='radio']{
+    display: none;
+}
+
+div.tabs label.btn{
+    font-size: 14px;
+    width: 100%;
+}
+
+.btn-check:checked + .btn {
+    color: #FFFFFF !important;
+}
+
+form div.mb-3 input {
+    height: 43px;
+    padding: 6px 12px;
+    border-radius: .375rem;
+    border: 0;
+    background-color: #ebefff;
+    outline: none;
+}
+
+form div.mb-3 input:focus {
+    border: 3px solid #057DCD;
+}
+
+.is-invalid{
+    border: 2px solid #DA1818 !important;
+}
+
+form div.mb-3 input::placeholder {
+    font-size: 0.8em;
+    color: #626262;
+    font-size: 13px;
+}

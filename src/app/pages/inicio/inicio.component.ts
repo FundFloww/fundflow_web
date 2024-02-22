@@ -10,6 +10,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { CamposApi } from '../../enum/camposApi';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { IdeasFilterPipe } from '../../pipes/ideas/ideas-filter.pipe';
 
 @Component({
     selector: 'app-inicio',
@@ -19,7 +20,8 @@ import { CommonModule } from '@angular/common';
         IdeaItemComponent, 
         HeaderComponent,
         FormsModule, 
-        CommonModule
+        CommonModule,
+        IdeasFilterPipe
     ],
     templateUrl: './inicio.component.html',
     styleUrl: './inicio.component.scss'
@@ -31,6 +33,7 @@ export class InicioComponent {
     session: boolean | null = null;
     camposSeleccionados: string[] = [];
     ideasNotFound: boolean = false;
+    filterIdeas: string = '';
 
     constructor(
         private ideaService: IdeasServicioService, 
@@ -117,5 +120,9 @@ export class InicioComponent {
         } else {
             botonAvanzar.classList.remove("ocultar");
         }
+    }
+
+    onFilterIdeasChange(filterValue: string) {
+        this.filterIdeas = filterValue;
     }
 }

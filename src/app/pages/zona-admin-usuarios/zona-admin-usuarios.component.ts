@@ -3,9 +3,11 @@ import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { UsuarioZonaAdminDTO } from '../../interfaces/usuario-zona-admin-dto';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { CommonModule, registerLocaleData } from '@angular/common';
-import { UsuarioFilterPipe } from '../../pipes/usuario-filter.pipe';
+import { UsuarioFilterPipe } from '../../pipes/usuario/usuario-filter.pipe';
 import { UsuarioRegistroDTO } from '../../interfaces/usuario-registro-dto';
 import { NuevoUsuarioModalComponent } from '../../components/nuevo-usuario-modal/nuevo-usuario-modal.component';
+import { ModificarUsuarioModalComponent } from '../../components/modificar-usuario-modal/modificar-usuario-modal.component';
+import { Usuario } from '../../interfaces/usuario';
 
 @Component({
     selector: 'zona-admin-usuarios',
@@ -14,7 +16,8 @@ import { NuevoUsuarioModalComponent } from '../../components/nuevo-usuario-modal
         FormsModule,
         CommonModule,
         UsuarioFilterPipe,
-        NuevoUsuarioModalComponent
+        NuevoUsuarioModalComponent,
+        ModificarUsuarioModalComponent
     ],
     templateUrl: './zona-admin-usuarios.component.html',
     styleUrl: './zona-admin-usuarios.component.scss'
@@ -28,18 +31,7 @@ export class ZonaAdminUsuariosComponent {
     pageSize: number = 10;
     registrosTotales: number = 0;
 
-    newUsuario: UsuarioRegistroDTO = {
-		nombre: '',
-		apellidos: '',
-		correo: '',
-		contrasena: '',
-		confirmarContrasena: '',
-		tipo: 'EMPRENDEDOR'
-	};
-
-	errorContrasena: string = '';
-    showError: boolean = false;
-	userExists: boolean = false;
+    usuario!: Usuario | null;
 
     constructor(
         private usuariosService: UsuariosService
@@ -52,12 +44,14 @@ export class ZonaAdminUsuariosComponent {
     async cargarUsuarios() {
         try {
             const res = await this.usuariosService.getUsuariosZonaAdmin(this.currentPage, this.pageSize);
-            console.log(res);
-            this.usuarios = res.content;
-            this.totalPages = res.totalPages;
-            this.currentPage = res.pageable.pageNumber;
-            this.registrosTotales = res.totalElements;
+            if (res.status != 404) {
+                this.usuarios = res.content;
+                this.totalPages = res.totalPages;
+                this.currentPage = res.pageable.pageNumber;
+                this.registrosTotales = res.totalElements;
+            }
             this.updateUsuariosNotFound();
+
         } catch (error) {
             console.error("Ocurrió un error al obtener los usuarios: ", error);
         }
@@ -82,7 +76,9 @@ export class ZonaAdminUsuariosComponent {
     }
 
     async obtenerUsuarioAModificar(id: number | undefined) {
-        
+        if (id != null) {
+            this.usuario = await this.usuariosService.getUsuarioPorId(id);
+        }
     }
 
     borrarUsuario(id: number | undefined) {
@@ -93,26 +89,10 @@ export class ZonaAdminUsuariosComponent {
         }
     }
 
-    cargarUsuarioAgregado() {
+    cargarModificaciones() {
         this.cargarUsuarios();
     }
-    
-    contrasenasCoinciden(): boolean {
-        return this.newUsuario.contrasena === this.newUsuario.confirmarContrasena;
-    }
 
-    validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
-        return {
-            [validClass]: ngModel.touched && ngModel.valid && !this.userExists,
-            [errorClass]: ngModel.touched && (ngModel.invalid || (ngModel.name === 'email' && this.userExists))
-        };
-    }
 
-    validPassword(ngModel: NgModel, validClass: string, errorClass: string) {
-        return {
-            [validClass]: this.contrasenasCoinciden() && ngModel.touched && !this.userExists,
-            [errorClass]: (!this.contrasenasCoinciden() || ngModel.errors?.['required']) && ngModel.touched
-        };
-    }
 
 }

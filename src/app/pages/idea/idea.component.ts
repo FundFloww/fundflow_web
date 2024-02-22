@@ -80,7 +80,12 @@ export class IdeaComponent {
             }
         }
 
-        if(this.guardada) this.invertirStyleGuardar();
+        if(this.guardada) {
+            this.invertirStyleGuardar();
+        } else {
+            this.validarAncho();
+        }
+        
         if(this.idea.imagenes.length > 1) this.onScrollMove();
 
         this.cargandoIdeas = false;
@@ -123,17 +128,32 @@ export class IdeaComponent {
         const button = document.getElementById("boton-guardar") as HTMLElement;
         const text = document.getElementById("texto-boton") as HTMLElement;
         const icon = document.getElementById("guardar-tick") as HTMLElement;
+        const smallNoGuardado = document.getElementById("no-guardado-tick") as HTMLElement;
         
         if(button.textContent !== "Añadir a favoritos!") {
             text.textContent = "Añadir a favoritos!";
             icon.style.display = "none";
             button.style.backgroundColor = "";
+            console.log("No guardado");
+            
+            if(window.innerWidth < 800) {
+                smallNoGuardado.style.display = "block";
+            } 
             return;
         }
 
+        smallNoGuardado.style.display = "none";
         text.textContent = "";
         icon.style.display = "block";
         button.style.backgroundColor = "rgb(18, 164, 18)";
+    }
+
+    validarAncho() { 
+        const smallNoGuardado = document.getElementById("no-guardado-tick") as HTMLElement;
+
+        if(window.innerWidth < 800) {
+            smallNoGuardado.style.display = "block";
+        } 
     }
 
     async onClickGuardar() {
@@ -222,5 +242,4 @@ export class IdeaComponent {
             botonAvanzar.classList.remove("ocultar");
         }
     }
-
 }

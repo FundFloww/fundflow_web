@@ -30,12 +30,11 @@ export class NuevoUsuarioModalComponent {
 
 	@Output() usuarioAgregado = new EventEmitter<boolean>();
 
+    @ViewChild('registroForm') registroForm!: NgForm;
+
 	constructor(private usuariosService: UsuariosService) { }
 
-	@ViewChild('registroForm') registroForm!: NgForm;
-
-	async addNewUsuario(evento: Event) {
-		const boton = evento.target as HTMLElement;
+	async addNewUsuario() {
 
 		this.newUsuario.correo = this.newUsuario.correo.toLowerCase();
 
@@ -44,8 +43,6 @@ export class NuevoUsuarioModalComponent {
 
 			if (!response) {
 				this.usuarioAgregado.emit(!this.userExists);
-				boton.setAttribute("data-bs-toggle", "modal");
-                boton.click();
 			}
 		});
 	}

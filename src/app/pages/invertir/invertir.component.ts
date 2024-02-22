@@ -33,8 +33,10 @@ export class InvertirComponent {
     cantidad: number = 10;
     inversion: InversionEnviar | null = null;
     enviandoInversion: boolean = false;
+    cargandoInversion: boolean = false;
 
     async ngOnInit() {
+        this.cargandoInversion = true;
         this.session = await this.usuariosService.initializeSession();
         this.usuario = await this.usuariosService.getUsuario();     
         const idIdea = parseInt(this.router.url.split('/')[2]);
@@ -42,6 +44,7 @@ export class InvertirComponent {
         this.idea = ideas.find(idea => idea.id === idIdea) || null;
 
         this.initInvertir();
+        this.cargandoInversion = false;
     }
 
     onOpenBar() {

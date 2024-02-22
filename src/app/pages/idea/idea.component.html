@@ -20,7 +20,8 @@
                         @if(this.session && !this.propietario) {
                             <button id="boton-guardar" (click)="onClickGuardar()" class="btn btn-primary text-light-l">
                                 <span id="texto-boton">Añadir a favoritos!</span>
-                                <img id="guardar-tick" src="../../../assets/icons/guardado.svg" alt="guardado" loading="lazy">
+                                <img id="no-guardado-tick" class="no-guardado" src="../../../assets/icons/no_guardado.svg" alt="guardado" loading="lazy">
+                                <img id="guardar-tick" class="guardado" src="../../../assets/icons/guardado.svg" alt="guardado" loading="lazy">
                             </button>
                         }
                     </div>

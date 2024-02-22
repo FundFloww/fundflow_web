@@ -156,7 +156,7 @@ export class EditarPerfilComponent {
     async enviarContrasena() {
         try {
           await this.usuariosService.editContrasena(this.usuarioEditarContrasena)
-          this.router.navigate(['/perfil']);
+          this.router.navigate(['/perfil/' + this.usuario?.id]);
         } catch (error) {
           console.error(error);
         }
