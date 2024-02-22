@@ -40,6 +40,15 @@ export const routes: Routes = [
     { path: 'registro', component: RegistroComponent },
     { path: 'noticias', component: NoticiasComponent},
     { 
+        path: 'admin',
+        component: ZonaAdminComponent,
+        children: [
+            { path: 'usuarios', component: ZonaAdminUsuariosComponent },
+            { path: 'ideas', component: ZonaAdminIdeasComponent },
+            { path: '', redirectTo: 'usuarios', pathMatch: 'full' },
+        ]
+    },
+    { 
         path: 'idea',
         children: [
             { path: 'añadir', component: FormIdeaComponent },
