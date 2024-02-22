@@ -1,0 +1,119 @@
+<div class="modal fade" id="myModal2" aria-hidden="true" aria-labelledby="myModal2" (hidden.bs.modal)="resetForm()">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary" id="exampleModalToggleLabel">Modificar datos del usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-5 py-3">
+                <form novalidate autocomplete="off" #editForm="ngForm">
+                    <div class="mb-3">
+                        <div class="w-100 tabs btn-group input-box">
+                            <input type="radio" class="btn-check" name="tipoUsuario" [value]="'EMPRENDEDOR'"
+                                id="emprendedor" [checked]="usuario?.tipo == 'EMPRENDEDOR'"
+                                (click)="usuarioTemporal.tipo = 'EMPRENDEDOR'">
+                            <label for="emprendedor" class="btn btn-outline-primary">Emprendedor</label>
+
+                            <input type="radio" class="btn-check" name="tipoUsuario" [value]="'INVERSOR'" id="inversor"
+                                [checked]="usuario?.tipo == 'INVERSOR'" (click)="usuarioTemporal.tipo = 'INVERSOR'">
+                            <label for="inversor" class="btn btn-outline-primary">Inversor</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 gap-3 d-flex justify-content-center">
+                        <div>
+                            <div class="form-group">
+                                <input id="nombre" type="text" class="form-control" name="name" value=""
+                                    placeholder="Nombre" value="{{this.usuario?.nombre}}"
+                                    [(ngModel)]="usuarioTemporal.nombre" #nombre="ngModel" required
+                                    [ngClass]="validClasses(nombre, 'is-valid', 'is-invalid')" (input)="cambioRealizado()">
+                                <div class="invalid-feedback">
+                                    Nombre requerido
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <input id="apellidos" type="text" class="form-control" name="apellidos" value=""
+                                    placeholder="Apellidos" value="{{this.usuario?.apellidos}}"
+                                    [(ngModel)]="usuarioTemporal.apellidos" #apellidos="ngModel" required
+                                    [ngClass]="validClasses(apellidos, 'is-valid', 'is-invalid')" (input)="cambioRealizado()">
+                                <div class="invalid-feedback">
+                                    Apellidos requeridos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input id="email" type="text" class="form-control w-100" name="email" value=""
+                            placeholder="Email" value="{{this.usuario?.correo}}" [(ngModel)]="usuarioTemporal.correo"
+                            #email="ngModel" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                            [ngClass]="validClasses(email, 'is-valid', 'is-invalid')" (input)="cambioRealizado()">
+                        <div class="invalid-feedback">
+                            <div *ngIf="!userExists">
+                                Email requerido (formato no válido)
+                            </div>
+                            <div *ngIf="userExists">
+                                El usuario ya existe
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-end"><a class="link-underline link-underline-opacity-0" data-bs-toggle="modal"
+                            href="#myModal3" role="button">Cambiar contraseña</a></p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary text-white"
+                    [attr.data-bs-toggle]="!userExists ? 'modal' : ''" (click)="editUsuario()"
+                    [disabled]="editForm.invalid || !cambio">
+                    Guardar cambios
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal3" aria-hidden="true" aria-labelledby="myModal3" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary" id="myModal3">Cambiar contraseña</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-5 py-3">
+                <!-- <form novalidate autocomplete="off" #editPasswordForm="ngForm">
+                <div class="mb-3">
+                    <input id="password" class="form-control w-100" type="password" name="password"
+                        placeholder="Contraseña" [(ngModel)]="newUsuario.contrasena" required
+                        #password="ngModel" [ngClass]="validClasses(password, 'is-valid', 'is-invalid')">
+                    <div class="invalid-feedback">
+                        Contraseña requerida
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input id="confirmPassword" class="form-control w-100" type="password"
+                        name="confirmPassword" placeholder="Confirmar Contraseña"
+                        [(ngModel)]="newUsuario.confirmarContrasena" required #confirmPassword="ngModel"
+                        [ngClass]="validPassword(confirmPassword, 'is-valid', 'is-invalid')">
+                    <div class="invalid-feedback">
+                        <div *ngIf="newUsuario.confirmarContrasena !== ''">
+                            Las contraseñas no coinciden
+                        </div>
+                        <div *ngIf="newUsuario.confirmarContrasena === ''">
+                            Confirmar Contraseña requerida
+                        </div>
+                    </div>
+                </div>
+            </form> -->
+                <p class="text-end"><a class="link-underline link-underline-opacity-0" data-bs-toggle="modal"
+                        href="#myModal2" role="button">Volver</a></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary text-white" data-bs-dismiss="modal">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
