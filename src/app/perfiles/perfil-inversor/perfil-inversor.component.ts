@@ -28,6 +28,7 @@ export class PerfilInversorComponent {
     ver: string = "Inversiones";
     mismoId: boolean = false;
     totalInvertido: number = 0;
+    cargandoIdea: boolean = false;
 
     constructor(
         private ideaService: IdeasServicioService,
@@ -35,6 +36,8 @@ export class PerfilInversorComponent {
     ) { }
 
     async ngOnInit() {
+        this.cargandoIdea = true;
+        
         this.session = await this.usuariosService.loggedIn();
         this.idUsuarioIdentificado = parseInt(this.usuariosService.getUserId() ?? '0');
         this.usuario = await this.usuariosService.getUsuarioPorId(this.idUsuario!);
@@ -45,6 +48,8 @@ export class PerfilInversorComponent {
         if (this.idUsuario == this.idUsuarioIdentificado) {
             this.mismoId = true;
         }
+
+        this.cargandoIdea = false;
     }
 
     onOpenBar(evento?: Event) {

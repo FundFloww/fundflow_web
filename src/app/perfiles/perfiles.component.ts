@@ -36,6 +36,10 @@ export class PerfilesComponent {
             const session = await this.usuariosService.loggedIn();
             if(session) {
                 this.idUsuario = parseInt(this.usuariosService.getUserId()!);
+                console.log(this.idUsuario);
+                
+                this.router.navigate(['/perfil', this.idUsuario]);
+                return;
                 
             } else {
                 this.router.navigate(['/login']);

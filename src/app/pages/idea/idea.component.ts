@@ -44,6 +44,7 @@ export class IdeaComponent {
     nuevoHito: boolean = false;
     tipoUsuario: string | null = null;
     guardandoIdea: boolean = false;
+    cargandoIdeas: boolean = false;
     hito: Hito = {
         titulo: "",
         fecha: new Date(),
@@ -51,6 +52,7 @@ export class IdeaComponent {
     };
 
     async ngOnInit() {
+        this.cargandoIdeas = true;
         const ideas = await this.ideaService.getIdeasAll();
         this.ideaId = parseInt(this.router.url.split('/')[2]);
 
@@ -80,6 +82,8 @@ export class IdeaComponent {
 
         if(this.guardada) this.invertirStyleGuardar();
         if(this.idea.imagenes.length > 1) this.onScrollMove();
+
+        this.cargandoIdeas = false;
     }
 
     onOpenBar(evento?: Event) {

@@ -93,11 +93,12 @@
                 </div>
                 @if(this.session ) {
                     <div id="invertir-section" class="invertir bg-light-l col-10">
-                        @if(this.propietario) {
-                            <button class="btn btn-primary text-light-l">Editar</button>
-                        } @else {
+                        @if(!this.propietario) {
                             <button [routerLink]="['/invertir/' + this.ideaId]" class="btn btn-primary text-light-l">Invertir</button>
                         }
+                        <!-- } @else {
+                            <button class="btn btn-primary text-light-l">Editar</button>
+                        } -->
                     </div>
                 }
             </section>
@@ -107,4 +108,7 @@
         <img id="image-overlay" class="images-click" src="" alt="visualize-image" loading="lazy">
         <span class="close-image" (click)="onCloseImage()">X</span>
     </div>
+    <div class="loader-wrapper" *ngIf="cargandoIdeas">
+        <div class="loader"></div>
+    </div>   
 </div>

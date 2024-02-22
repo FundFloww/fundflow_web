@@ -96,15 +96,15 @@ export class SideBarComponent {
     async ngOnChanges() {
         if(this.session != null) {
             this.validateSession();
-            await this.validateTipoUsuario();
         }
 
         this.sideBarChange();
     }
 
-    validateSession() {
+    async validateSession() {
         if(this.session) {
             this.elementos = this.elementos.filter(e => e.id < 8);
+            await this.validateTipoUsuario();
             return;
         }
 
@@ -119,7 +119,7 @@ export class SideBarComponent {
         }
 
         if(usuario.tipo[0] === 'EMPRENDEDOR') {
-            this.elementos = this.elementos.filter(e => e.id !== 4 && e.id !== 5 && e.id !== 6);
+            this.elementos = this.elementos.filter(e => e.id !== 4 && e.id !== 6);
         }
 
     }

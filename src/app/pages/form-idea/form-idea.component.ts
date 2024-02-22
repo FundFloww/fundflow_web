@@ -47,6 +47,10 @@ export class FormIdeaComponent {
 
     async ngOnInit() {
         this.session = await this.usuariosService.initializeSession();
+        const usuario = await this.usuariosService.getUsuario();
+        if(usuario.tipo[0] !== 'EMPRENDEDOR') {
+            this.router.navigate(['/inicio']);
+        }
     }
 
     imagenesVacias() {
