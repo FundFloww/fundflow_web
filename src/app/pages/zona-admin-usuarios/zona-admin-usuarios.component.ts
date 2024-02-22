@@ -3,7 +3,7 @@ import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { UsuarioZonaAdminDTO } from '../../interfaces/usuario-zona-admin-dto';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { CommonModule, registerLocaleData } from '@angular/common';
-import { UsuarioFilterPipe } from '../../pipes/usuario-filter.pipe';
+import { UsuarioFilterPipe } from '../../pipes/usuario/usuario-filter.pipe';
 import { UsuarioRegistroDTO } from '../../interfaces/usuario-registro-dto';
 import { NuevoUsuarioModalComponent } from '../../components/nuevo-usuario-modal/nuevo-usuario-modal.component';
 

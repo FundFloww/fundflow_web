@@ -166,4 +166,21 @@ input[type='radio']:checked + label{
     .card-bar {
         grid-template-columns: repeat(1, 1fr);
     }
+
+    .fila-info {
+        height: 250px;
+    }
+
+    .fila-vacia {
+        display: none;
+    }
+
+    .cotenedor-datos {
+        padding-top: 0 !important;
+        padding-left: 3rem !important;
+    }
+
+    .fila-datos {
+        margin-top: 0 !important;
+    }
 }
