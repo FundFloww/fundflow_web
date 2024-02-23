@@ -35,6 +35,13 @@ export class SideBarAdminComponent {
         },
         {
             id: 3,
+            nombre: 'Noticias',
+            icono: 'noticias',
+            destino: '/admin/noticias',
+            ruta: `${this.rutaIconos}/noticias.svg`
+        },
+        {
+            id: 4,
             nombre: 'Cerrar sesión',
             icono: 'logout',
             destino: '/logout',
