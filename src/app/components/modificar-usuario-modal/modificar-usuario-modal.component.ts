@@ -53,8 +53,12 @@ export class ModificarUsuarioModalComponent {
         private usuariosService: UsuariosService
     ) { }
 
-    ngOnInit(){
-        this.usuarioTemporal = Object.assign({}, this.usuario);
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['usuario'] && this.usuario) {
+            this.usuarioTemporal = Object.assign({}, this.usuario);
+            console.log("ngOnChangessssssss");
+            console.log(this.usuarioTemporal);
+        }
     }
 
     actualizarTipoUsuario() {
@@ -88,7 +92,7 @@ export class ModificarUsuarioModalComponent {
             this.userExists = false;
             this.cambio = false;
             this.pswCambiada = false;
-            this.ngOnInit();
+            // this.ngOnInit();
         }
     }
 
