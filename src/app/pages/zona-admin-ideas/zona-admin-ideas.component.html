@@ -1,1 +1,81 @@
-<p>zona-admin-ideas works!</p>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <div class="card mb-4 mt-4">
+                    <div class="card-header">
+                        <h3 class="mt-2 mb-2">Gestión de ideas</h3>
+                    </div>
+                    <!-- <div class="d-flex ms-3 me-3 mt-3 justify-content-between">
+                        <label class="d-flex align-items-center justify-content-center ms-3">
+                            Mostrar
+                            <select name="dataTable_length" aria-controls="dataTable"
+                                class="ms-2 me-2 custom-select custom-select-sm form-control form-control-sm"
+                                [(ngModel)]="pageSize" (change)="actualizarPageSize()">
+                                <option [ngValue]="10" [selected]="pageSize === 10">10</option>
+                                <option [ngValue]="25" [selected]="pageSize === 25">25</option>
+                                <option [ngValue]="50" [selected]="pageSize === 50">50</option>
+                            </select>
+                            registros
+                        </label>
+                        <div class="search me-3">
+                            <img src="../../assets/icons/search.svg" alt="">
+                            <input type="search" [(ngModel)]="filterSearch" placeholder="Buscar">
+                        </div>
+                    </div> -->
+                    <!-- <div class="card-body table-responsive ms-3 me-3">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="col-printer sorting">#</th>
+                                    <th class="col-printer sorting">Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Email</th>
+                                    <th>Tipo Usuario</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let usuario of usuarios | usuarioFilter:filterSearch">
+                                    <th>{{usuario.id}}</th>
+                                    <td>{{usuario.nombre}}</td>
+                                    <td>{{usuario.apellidos}}</td>
+                                    <td>{{usuario.correo}}</td>
+                                    <td>{{usuario.tipo}}</td>
+                                    <td width="166">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-primary text-white"
+                                            data-bs-toggle="modal" data-bs-target="#myModal2" (click)="obtenerUsuarioAModificar(usuario.id)">Editar</button>
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="borrarUsuario(usuario.id)">Borrar</button>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr *ngIf="usuariosNotFound || (usuarios | usuarioFilter:filterSearch).length === 0">
+                                    <td colspan="6" class="text-center">Ningún resultado encontrado</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> -->
+                    <!-- <div class="d-flex ms-3 me-3 mb-3 align-items-center justify-content-between">
+                        <div class="text-muted ms-3" *ngIf="totalPages > 1">Página {{currentPage + 1}} de {{totalPages}}</div>
+                        <nav class="me-3" *ngIf="totalPages > 1">
+                            <ul class="pagination mb-0">
+                                <li class="page-item" [ngClass]="{ 'disabled': currentPage === 0 }">
+                                    <button (click)="cambiarPagina(currentPage - 1)" class="page-link">&laquo;</button>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link disabled bg-white">{{currentPage + 1}}</a>
+                                </li>
+                                <li class="page-item" [ngClass]="{ 'disabled': currentPage + 1 === totalPages}">
+                                    <button (click)="cambiarPagina(currentPage + 1)" class="page-link">&raquo;</button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div> -->
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
