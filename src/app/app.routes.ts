@@ -17,6 +17,7 @@ import { ZonaAdminComponent } from './pages/zona-admin/zona-admin.component';
 import { ZonaAdminUsuariosComponent } from './pages/zona-admin-usuarios/zona-admin-usuarios.component';
 import { ZonaAdminIdeasComponent } from './pages/zona-admin-ideas/zona-admin-ideas.component';
 import { RecuperarComponent } from './pages/recuperar/recuperar.component';
+import { ZonaAdminNoticiasComponent } from './pages/zona-admin-noticias/zona-admin-noticias.component';
 
 export const routes: Routes = [
     { path: 'inicio', component: InicioComponent },
@@ -45,6 +46,7 @@ export const routes: Routes = [
         children: [
             { path: 'usuarios', component: ZonaAdminUsuariosComponent },
             { path: 'ideas', component: ZonaAdminIdeasComponent },
+            { path: 'noticias', component: ZonaAdminNoticiasComponent },
             { path: '', redirectTo: 'usuarios', pathMatch: 'full' },
         ]
     },
