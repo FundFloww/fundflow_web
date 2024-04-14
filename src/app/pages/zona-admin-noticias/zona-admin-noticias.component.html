@@ -28,42 +28,42 @@
                             <input type="search" [(ngModel)]="filterSearch" placeholder="Buscar">
                         </div>
                     </div>
-                    <!-- <div class="card-body table-responsive ms-3 me-3">
+                    <div class="card-body table-responsive ms-3 me-3">
                         <table class="table table-striped mb-0">
                             <thead>
                                 <tr>
-                                    <th class="col-printer sorting">#</th>
-                                    <th class="col-printer sorting">Nombre</th>
-                                    <th>Apellidos</th>
-                                    <th>Email</th>
-                                    <th>Tipo Usuario</th>
+                                    <th>#</th>
+                                    <th>Título</th>
+                                    <th>Descripción</th>
+                                    <th>Link</th>
+                                    <th>Fecha creación</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let usuario of usuarios | usuarioFilter:filterSearch">
-                                    <th>{{usuario.id}}</th>
-                                    <td>{{usuario.nombre}}</td>
-                                    <td>{{usuario.apellidos}}</td>
-                                    <td>{{usuario.correo}}</td>
-                                    <td>{{usuario.tipo}}</td>
+                                <tr *ngFor="let noticia of noticias | noticiaFilter:filterSearch">
+                                    <th>{{noticia.id}}</th>
+                                    <td>{{noticia.titulo}}</td>
+                                    <td>{{noticia.descripcion}}</td>
+                                    <td>{{noticia.link}}</td>
+                                    <td>{{noticia.fecha | date: 'dd/MM/yyyy'}}</td>
                                     <td width="166">
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <button type="button" class="btn btn-primary text-white"
-                                            data-bs-toggle="modal" data-bs-target="#myModal2" (click)="obtenerUsuarioAModificar(usuario.id)">Editar</button>
+                                            data-bs-toggle="modal" data-bs-target="#myModal2" (click)="obtenerNoticiaAModificar(noticia.id)">Editar</button>
                                             <button type="button" class="btn btn-danger"
-                                                (click)="borrarUsuario(usuario.id)">Borrar</button>
+                                                (click)="borrarNoticia(noticia.id)">Borrar</button>
                                         </div>
                                     </td>
 
                                 </tr>
-                                <tr *ngIf="usuariosNotFound || (usuarios | usuarioFilter:filterSearch).length === 0">
+                                <tr *ngIf="noticiasNotFound || (noticias | noticiaFilter:filterSearch).length === 0">
                                     <td colspan="6" class="text-center">Ningún resultado encontrado</td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div> -->
-                    <!-- <div class="d-flex ms-3 me-3 mb-3 align-items-center justify-content-between">
+                    </div>
+                    <div class="d-flex ms-3 me-3 mb-3 align-items-center justify-content-between">
                         <div class="text-muted ms-3" *ngIf="totalPages > 1">Página {{currentPage + 1}} de {{totalPages}}</div>
                         <nav class="me-3" *ngIf="totalPages > 1">
                             <ul class="pagination mb-0">
@@ -78,7 +78,7 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </main>
