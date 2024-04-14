@@ -1,3 +1,5 @@
+<nueva-noticia-modal (noticiaAgregada)="cargarModificaciones()"></nueva-noticia-modal>
+
 <div id="layoutSidenav">
     <div id="layoutSidenav_content">
         <main>
@@ -46,7 +48,7 @@
                                     <td>{{noticia.titulo}}</td>
                                     <td>{{noticia.descripcion}}</td>
                                     <td>{{noticia.link}}</td>
-                                    <td>{{noticia.fecha | date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{noticia.fecha | date: 'dd-MM-yyyy'}}</td>
                                     <td width="166">
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <button type="button" class="btn btn-primary text-white"

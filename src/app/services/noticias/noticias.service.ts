@@ -71,6 +71,7 @@ export class NoticiasService {
             if(!response.ok) {
                 throw new Error(`Error al enviar la noticia a la base de datos. Código de estado: ${response.status}`);
             }
+            return true;
         } catch (error) {
             console.error(error);
             throw error;

@@ -1,1 +1,47 @@
-<p>nueva-noticia-modal works!</p>
+<div class="modal fade" id="myModal" #myModal (hidden.bs.modal)="resetForm()">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-primary">Añadir nueva noticia</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body px-5 py-3">
+                <form novalidate autocomplete="off" #registroForm="ngForm">
+
+                    <div class="mb-3">
+                        <input id="titulo" type="text" class="form-control" name="titulo" value=""
+                            placeholder="Titular de la noticia" [(ngModel)]="newNoticia.titulo" #titulo="ngModel"
+                            required [ngClass]="validClasses(titulo, 'is-valid', 'is-invalid')">
+                        <div class="invalid-feedback">
+                            Titular requerido
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <textarea id="descripcion" class="form-control" name="descripcion" value=""
+                            placeholder="Breve descripción de la noticia..." [(ngModel)]="newNoticia.descripcion"
+                            required maxlength="200" #descripcion="ngModel"
+                            [ngClass]="validClasses(descripcion, 'is-valid', 'is-invalid')"></textarea>
+                        <div class="invalid-feedback">
+                            Descripción requerida
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input id="link" type="text" class="form-control w-100" name="link" value=""
+                            placeholder="Enlace a la noticia" [(ngModel)]="newNoticia.link" #link="ngModel" required
+                            [ngClass]="validClasses(link, 'is-valid', 'is-invalid')">
+                        <div class="invalid-feedback">
+                            Enlace requerido
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary text-white"
+                    [attr.data-bs-toggle]="noticiaRegister ? 'modal' : ''" (click)="addNewNoticia()"
+                    [disabled]="registroForm.invalid">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

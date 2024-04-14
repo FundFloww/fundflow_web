@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NoticiasService } from '../../services/noticias/noticias.service';
 import { NoticiaFilterPipe } from '../../pipes/noticias/noticia-filter.pipe';
 import { Noticia } from '../../interfaces/noticia';
+import { NuevaNoticiaModalComponent } from '../../components/nueva-noticia-modal/nueva-noticia-modal.component';
 
 @Component({
 	selector: 'app-zona-admin-noticias',
@@ -11,7 +12,8 @@ import { Noticia } from '../../interfaces/noticia';
 	imports: [
 		FormsModule,
 		CommonModule,
-        NoticiaFilterPipe
+        NoticiaFilterPipe,
+        NuevaNoticiaModalComponent
 	],
 	templateUrl: './zona-admin-noticias.component.html',
 	styleUrl: './zona-admin-noticias.component.scss'
@@ -84,5 +86,9 @@ export class ZonaAdminNoticiasComponent {
                 this.cargarNoticias();
             });
         }
+    }
+
+    cargarModificaciones() {
+        this.cargarNoticias();
     }
 }
