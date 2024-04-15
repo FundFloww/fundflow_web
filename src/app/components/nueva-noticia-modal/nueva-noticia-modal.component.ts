@@ -34,6 +34,7 @@ export class NuevaNoticiaModalComponent {
 		this.noticiasService.addNoticia(this.newNoticia).then(response => {
             if (response) {
 				this.noticiaRegister = response;
+				console.log(this.noticiaRegister);
 				this.noticiaAgregada.emit();
 			}
 		});
@@ -48,6 +49,7 @@ export class NuevaNoticiaModalComponent {
 
 	resetForm() {
         if (this.registroForm) {
+			this.noticiaRegister = false;
             this.registroForm.resetForm();
         }
     }
