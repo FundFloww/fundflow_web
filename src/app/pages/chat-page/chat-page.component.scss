@@ -1,0 +1,118 @@
+.bg-light-l {
+    background-color: #ffffff;
+}
+
+.chat-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 87.5vh;
+}
+
+.chat-history {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+
+    h3 {
+        font-size: 3rem;
+        font-weight: bolder;
+        align-self: flex-start;
+        margin: 30px;
+        margin-left: 60px;
+    }
+
+    .chats {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 15px;
+    }
+}
+
+.chat-recent {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    width: 80%;
+    box-shadow: 
+        0px 5px 5px -5px rgba(0, 0, 0, 0.2), 
+        0px -5px 5px -5px rgba(0, 0, 0, 0.2),
+        5px 0px 5px -5px rgba(0, 0, 0, 0.2), 
+        -5px 0px 5px -5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(214, 214, 214);
+    }
+
+    .circle {
+        height: 50px;
+        width: 50px;
+        margin: 10px;
+        border-radius: 50%;
+        background-color: rgb(0, 60, 139);
+    }
+
+    .chat-content {
+        display: flex;
+        flex-direction: column;
+
+        p {
+            margin: 0;
+        }
+
+        .username {
+            font-weight: bold;
+        }
+    }
+}
+
+.chat-zone {
+    width: 60%;
+    position: relative;
+
+    .message-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        position: sticky;
+        width: 100%;
+        top: 100%;
+        padding: 15px;
+        background-color: #cfcfcf;
+
+        .text {
+            display: flex;
+            align-items: center;
+            width: 80%;
+        }
+
+        .text > input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .emoji > img, .send > img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+    }
+
+    .message-zone {
+        display: flex;
+        flex-direction: column;
+        margin: 30px;
+
+        .foreing {
+            align-self: flex-end;
+        }
+    }
+}

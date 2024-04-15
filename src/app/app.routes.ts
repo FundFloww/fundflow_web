@@ -1,22 +1,20 @@
 import { Routes } from '@angular/router';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { PerfilesComponent } from './perfiles/perfiles.component';
-// import { PerfilEmprendedorComponent } from './perfiles/perfil-emprendedor/perfil-emprendedor.component';
-// import { PerfilInversorComponent } from './perfiles/perfil-inversor/perfil-inversor.component';}
-import { LoginComponent } from './pages/login/login.component';
-import { RegistroComponent } from './pages/registro/registro.component';
-import { IdeaComponent } from './pages/idea/idea.component';
-import { FormIdeaComponent } from './pages/form-idea/form-idea.component';
-import { LogoutComponent } from './components/logout/logout.component';
-import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
-import { NoticiasComponent } from './pages/noticias/noticias.component';
 import { EnviarMensajeComponent } from './components/enviar-mensaje/enviar-mensaje.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { ChatPageComponent } from './pages/chat-page/chat-page.component';
+import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
+import { FormIdeaComponent } from './pages/form-idea/form-idea.component';
+import { IdeaComponent } from './pages/idea/idea.component';
 import { InvertirComponent } from './pages/invertir/invertir.component';
-import { SideBarAdminComponent } from './components/side-bar-admin/side-bar-admin.component';
-import { ZonaAdminComponent } from './pages/zona-admin/zona-admin.component';
-import { ZonaAdminUsuariosComponent } from './pages/zona-admin-usuarios/zona-admin-usuarios.component';
-import { ZonaAdminIdeasComponent } from './pages/zona-admin-ideas/zona-admin-ideas.component';
+import { LoginComponent } from './pages/login/login.component';
+import { NoticiasComponent } from './pages/noticias/noticias.component';
 import { RecuperarComponent } from './pages/recuperar/recuperar.component';
+import { RegistroComponent } from './pages/registro/registro.component';
+import { ZonaAdminIdeasComponent } from './pages/zona-admin-ideas/zona-admin-ideas.component';
+import { ZonaAdminUsuariosComponent } from './pages/zona-admin-usuarios/zona-admin-usuarios.component';
+import { ZonaAdminComponent } from './pages/zona-admin/zona-admin.component';
 
 export const routes: Routes = [
     { path: 'inicio', component: InicioComponent },
@@ -39,6 +37,7 @@ export const routes: Routes = [
     { path: 'logout', component: LogoutComponent },
     { path: 'registro', component: RegistroComponent },
     { path: 'noticias', component: NoticiasComponent},
+    { path: 'chat', component: ChatPageComponent},
     { 
         path: 'admin',
         component: ZonaAdminComponent,

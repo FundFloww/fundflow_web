@@ -86,7 +86,14 @@ export class SideBarComponent {
             icono: 'registro',
             destino: '/registro',
             ruta: `${this.rutaIconos}/register.svg`
-        }, 
+        },
+        {
+            id: 10,
+            nombre: 'Chat',
+            icono: 'chat',
+            destino: '/chat',
+            ruta: `${this.rutaIconos}/chat.svg`
+        }
     ];
 
     onHomeClick() {
