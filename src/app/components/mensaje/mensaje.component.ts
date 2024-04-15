@@ -3,13 +3,13 @@ import { Message } from '../../interfaces/message';
 import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-mensaje',
-  standalone: true,
-  imports: [NgClass],
-  template: '<p class="message" [ngClass]="{ foreing : message.from !== me}"><span class="from">{{message.from}}:</span> {{message.text}}</p>',
-  styleUrls: ['./mensaje.component.scss']
+    selector: 'app-mensaje',
+    standalone: true,
+    imports: [NgClass],
+    template: '<div class="message" [ngClass]="{ foreing : message.from !== reciver}"><p class="message-text">{{ message.text }}</p> <span class="time">{{ message.time }}</span></div>',
+    styleUrls: ['./mensaje.component.scss']
 })
 export class MensajeComponent {
     @Input() message: Message = { from: '', text: '' };
-    me = 'me';
+    @Input() reciver: string = '';
 }

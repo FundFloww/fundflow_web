@@ -3,6 +3,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { StompSubscription } from '@stomp/stompjs/src/stomp-subscription';
 import { Message } from '../../interfaces/message';
+import { environment } from '../../../environments/environment';
 
 export type ListenerCallBack = (message: Message) => void;
 
@@ -15,7 +16,7 @@ export class WebSocketsService implements OnDestroy {
     private subscription: StompSubscription | undefined;
 
     constructor() { 
-        this.connection = Stomp.client('ws://localhost:8080/websocket');
+        this.connection = Stomp.client(`ws://${environment.ip}/websocket`);
         this.connection.connect({}, () => { });
     }
 
@@ -27,7 +28,7 @@ export class WebSocketsService implements OnDestroy {
 
     public listen(fun: ListenerCallBack): void {
         if (this.connection) {
-            this.connection.connect({}, () => {
+            this.connection.connect({}, () => {                
                 this.subscription = this.connection!.subscribe('/topic/messages', message => fun(JSON.parse(message.body)));
             });
         }
