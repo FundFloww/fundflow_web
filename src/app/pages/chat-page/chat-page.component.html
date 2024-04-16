@@ -13,53 +13,44 @@
                 <article class="bg-light-l chat-history">
                     <h3>Chats Recientes</h3>
                     <div class="chats">
-                        <div class="chat-recent">
-                            <div>
-                                <div class="circle"></div>
+                        @for (user of usersTest; track $index) {
+                            <div class="chat-recent" (click)="onClickChat(user?.id || 0)">
+                                <div>
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="chat-content">
+                                    <p class="username">{{ user.nombre }}</p>
+                                    <p class="last-message">Test</p>
+                                </div>
                             </div>
-                            <div class="chat-content">
-                                <p class="username">Mario Esparza Pérez</p>
-                                <p class="last-message">Encantado! Me encanta tu idea</p>
-                            </div>
-                        </div>
-                        <div class="chat-recent">
-                            <div>
-                                <div class="circle"></div>
-                            </div>
-                            <div class="chat-content">
-                                <p class="username">Mario Esparza Pérez</p>
-                                <p class="last-message">Encantado! Me encanta tu idea</p>
-                            </div>
-                        </div>
-                        <div class="chat-recent">
-                            <div>
-                                <div class="circle"></div>
-                            </div>
-                            <div class="chat-content">
-                                <p class="username">Mario Esparza Pérez</p>
-                                <p class="last-message">Encantado! Me encanta tu idea</p>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </article>
                 <article class="chat-zone">
-                    <section class="message-bar">
-                        <div class="emoji">
-                            <img src="../../../assets/icons/emoji.svg" alt="emoji-selector">
+                    @if(reciverId === null) {
+                        <div class="chat-zone-empty">
+                            <img src="../../../assets/icons/chat.svg" alt="chat-icon">
+                            <p>Selecciona un chat para comenzar a chatear</p>
                         </div>
-                        <div class="text">
-                            <input type="text" name="text-message" id="message" placeholder="Escribe tu mensaje..."
-                                (keypress)="onClickEnter($event)">
-                        </div>
-                        <div class="send">
-                            <img src="../../../assets/icons/send.svg" alt="send-button" (click)="onClickSend()">
-                        </div>
-                    </section>
-                    <section class="message-zone">
-                        @for(message of messages; track $index) {
-                            <app-mensaje [ngClass]="{ self : message.from === this.user?.nombre}" [reciver]=user!.nombre [message]="message"/>
-                        }
-                    </section>
+                    } @else {
+                        <section class="message-bar">
+                            <div class="emoji">
+                                <img src="../../../assets/icons/emoji.svg" alt="emoji-selector">
+                            </div>
+                            <div class="text">
+                                <input type="text" name="text-message" id="message" placeholder="Escribe tu mensaje..."
+                                    (keypress)="onClickEnter($event)">
+                            </div>
+                            <div class="send">
+                                <img src="../../../assets/icons/send.svg" alt="send-button" (click)="onClickSend()">
+                            </div>
+                        </section>
+                        <section class="message-zone">
+                            @for(message of messages; track $index) {
+                                <app-mensaje [ngClass]="{ self : message.from === this.user?.nombre}" [reciver]=user!.nombre [message]="message"/>
+                            }
+                        </section>
+                    }
                 </article>
             </section>
         </div>

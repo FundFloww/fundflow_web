@@ -1,4 +1,4 @@
-const ip = "localhost:9000"
+const ip = "192.168.1.21:9000"
 
 export const environment = {
     production: true,

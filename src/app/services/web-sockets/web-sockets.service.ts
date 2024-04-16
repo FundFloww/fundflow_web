@@ -20,18 +20,28 @@ export class WebSocketsService implements OnDestroy {
         this.connection.connect({}, () => { });
     }
 
-    public send(task: Message): void {
+    public send(message: Message, idSender: string, idReceiver: string): void {
         if (this.connection && this.connection.connected) {
-            this.connection.send('/app/chat', {}, JSON.stringify(task));
+            const endpoint = this.generateEndpoint("/app/chat" ,idSender, idReceiver);
+            this.connection.send(endpoint, {}, JSON.stringify(message));
+        } else {
+            console.error('La conexión WebSocket no está establecida.');
         }
     }
 
-    public listen(fun: ListenerCallBack): void {
+    public listen(fun: ListenerCallBack, idSender: string, idReceiver: string): void {
         if (this.connection) {
-            this.connection.connect({}, () => {                
-                this.subscription = this.connection!.subscribe('/topic/messages', message => fun(JSON.parse(message.body)));
+            this.connection.disconnect();
+            this.connection.connect({}, () => {   
+                const endpoint = this.generateEndpoint("/topic/messages" ,idSender, idReceiver);
+                this.subscription = this.connection!.subscribe(endpoint, message => fun(JSON.parse(message.body)));
             });
         }
+    }
+
+    generateEndpoint(route: string, idSender: string, idReceiver: string): string {
+        const [idA, idB] = [idSender, idReceiver].sort();
+        return `${route}/${idA}/${idB}`;
     }
 
     ngOnDestroy(): void {

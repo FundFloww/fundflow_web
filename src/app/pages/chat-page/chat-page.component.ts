@@ -21,6 +21,8 @@ export class ChatPageComponent {
     messages: Message[] = [];
     user: Usuario | null = null;
     session: boolean | null = null;
+    usersTest: Usuario[] = [];
+    reciverId: number | null = null;
 
     constructor(
         private usuariosService: UsuariosService,
@@ -28,15 +30,47 @@ export class ChatPageComponent {
     ) { }
 
     async ngOnInit() {
-        this.initializeSocketConnection();
+        this.inizializeTestUsers();
+
         this.user = await this.usuariosService.getUsuario();
         this.session = await this.usuariosService.loggedIn();
+    }
+
+    inizializeTestUsers() {
+        this.usuariosService.getUsuarioPorId(2)
+            .then(usuario => {
+                this.usersTest.push(usuario);
+            });
+        this.usuariosService.getUsuarioPorId(3)
+            .then(usuario => {
+                this.usersTest.push(usuario);
+            });
+        this.usuariosService.getUsuarioPorId(4)
+            .then(usuario => {
+                this.usersTest.push(usuario);
+            });
+        this.usuariosService.getUsuarioPorId(1)
+            .then(usuario => {
+                this.usersTest.push(usuario);
+            });
+    }
+
+    onClickChat(idReceiver: number) {
+        this.reciverId = idReceiver;
+        this.messages = [];
+        this.initializeSocketConnection();
+
+        if (this.user && this.user.id) {
+            this.webSocketService.listen(message => {
+                this.messages.push(message)
+            }, this.user.id.toString(), this.reciverId.toString());
+        }
     }
 
     initializeSocketConnection() {
         this.webSocketService.listen(message => {
             this.messages.push(message)
-        });
+        }, this.user!.id!.toString(), this.reciverId!.toString());
     }
 
     onOpenBar(evento?: Event) {
@@ -63,12 +97,12 @@ export class ChatPageComponent {
             text: message
         }
 
-        this.webSocketService.send(newMessage)
+        this.webSocketService.send(newMessage, this.user!.id!.toString(), this.reciverId!.toString());
     }
 
     onClickEnter(e: KeyboardEvent) {
-        if(e.key === 'Enter') {
+        if (e.key === 'Enter') {
             this.onClickSend();
-        }   
+        }
     }
 }
