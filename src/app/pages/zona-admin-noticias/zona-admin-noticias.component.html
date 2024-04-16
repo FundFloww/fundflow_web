@@ -35,7 +35,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Título</th>
+                                    <th>Titular</th>
                                     <th>Descripción</th>
                                     <th>Link</th>
                                     <th>Fecha creación</th>
@@ -47,8 +47,8 @@
                                     <th>{{noticia.id}}</th>
                                     <td>{{noticia.titulo}}</td>
                                     <td>{{noticia.descripcion}}</td>
-                                    <td>{{noticia.link}}</td>
-                                    <td>{{noticia.fecha | date: 'dd-MM-yyyy'}}</td>
+                                    <td><a href={{noticia.link}}>{{noticia.link}}</a></td>
+                                    <td>{{noticia.fecha | date: 'dd/MM/yyyy, h:mm a'}}</td>
                                     <td width="166">
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <button type="button" class="btn btn-primary text-white"

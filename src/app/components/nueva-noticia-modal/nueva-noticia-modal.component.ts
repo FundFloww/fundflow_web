@@ -34,7 +34,6 @@ export class NuevaNoticiaModalComponent {
 		this.noticiasService.addNoticia(this.newNoticia).then(response => {
             if (response) {
 				this.noticiaRegister = response;
-				console.log(this.noticiaRegister);
 				this.noticiaAgregada.emit();
 			}
 		});

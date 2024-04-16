@@ -41,7 +41,7 @@ export class ZonaAdminNoticiasComponent {
 	async cargarNoticias() {
         try {
             const res = await this.noticiasService.getNoticias(this.currentPage, this.pageSize);
-            if (res.status != 404) {
+            if (res != null) {
                 this.noticias = res.content;
                 this.totalPages = res.totalPages;
                 this.currentPage = res.pageable.pageNumber;
@@ -50,7 +50,7 @@ export class ZonaAdminNoticiasComponent {
             this.updateNoticiasNotFound();
 
         } catch (error) {
-            console.error("Ocurrió un error al obtener los usuarios: ", error);
+            console.error("Ocurrió un error al obtener las noticias: ", error);
         }
     }
 
@@ -83,7 +83,11 @@ export class ZonaAdminNoticiasComponent {
     borrarNoticia(id: number | undefined) {
         if (id !== undefined) {
             this.noticiasService.deleteNoticia(id).then(() => {
-                this.cargarNoticias();
+                if(this.noticias.length == 1){
+                    this.noticias = [];
+                } else {
+                    this.cargarNoticias();
+                }
             });
         }
     }

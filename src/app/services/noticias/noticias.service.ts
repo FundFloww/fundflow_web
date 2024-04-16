@@ -15,7 +15,7 @@ export class NoticiasService {
         try {
             const response = await fetch(`${this.urlBase}/api/noticias?page=${page}&size=${size}`);
             const datos = await response.json();
-            return datos;
+            return (datos.status != 404) ? datos : null;
         } catch (error) {
             console.error(error);
             throw error;

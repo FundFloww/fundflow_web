@@ -8,13 +8,17 @@ import { UsuariosService } from '../../services/usuarios/usuarios.service';
 @Component({
   selector: 'app-noticias',
   standalone: true,
-  imports: [SideBarComponent, IdeaItemComponent, HeaderComponent],
+  imports: [
+    SideBarComponent, 
+    IdeaItemComponent, 
+    HeaderComponent],
   templateUrl: './noticias.component.html',
   styleUrl: './noticias.component.scss'
 })
 export class NoticiasComponent {
     open: boolean = true;
     session: boolean | null = null;
+    filterSearch: string = '';
 
     constructor(
         private usuariosService: UsuariosService
@@ -36,5 +40,9 @@ export class NoticiasComponent {
         }
 
         this.open = onOpenBarFunction(this.open);
+    }
+
+    onFilterIdeasChange(filterValue: string) {
+        this.filterSearch = filterValue;
     }
 }

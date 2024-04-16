@@ -13,8 +13,8 @@ import { FormsModule } from '@angular/forms';
     styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-    @Input() filterIdeas!: string;
-    @Output() filterIdeasChange: EventEmitter<string> = new EventEmitter<string>();
+    @Input() filterSearch!: string;
+    @Output() filterSearchChange: EventEmitter<string> = new EventEmitter<string>();
 
     session: boolean | null = null;
     usuario!: UsuarioEditarDTO;
@@ -34,6 +34,6 @@ export class HeaderComponent {
     }
 
     onFilterChange(event: any) {
-      this.filterIdeasChange.emit(event.target.value);
+      this.filterSearchChange.emit(event.target.value);
     }
 }

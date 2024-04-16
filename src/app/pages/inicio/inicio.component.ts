@@ -33,7 +33,7 @@ export class InicioComponent {
     session: boolean | null = null;
     camposSeleccionados: string[] = [];
     ideasNotFound: boolean = false;
-    filterIdeas: string = '';
+    filterSearch: string = '';
 
     constructor(
         private ideaService: IdeasServicioService, 
@@ -123,6 +123,6 @@ export class InicioComponent {
     }
 
     onFilterIdeasChange(filterValue: string) {
-        this.filterIdeas = filterValue;
+        this.filterSearch = filterValue;
     }
 }

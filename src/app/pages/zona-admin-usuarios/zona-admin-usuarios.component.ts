@@ -44,7 +44,7 @@ export class ZonaAdminUsuariosComponent {
     async cargarUsuarios() {
         try {
             const res = await this.usuariosService.getUsuariosZonaAdmin(this.currentPage, this.pageSize);
-            if (res.status != 404) {
+            if (res != null) {
                 this.usuarios = res.content;
                 this.totalPages = res.totalPages;
                 this.currentPage = res.pageable.pageNumber;
@@ -86,7 +86,11 @@ export class ZonaAdminUsuariosComponent {
     borrarUsuario(id: number | undefined) {
         if (id !== undefined) {
             this.usuariosService.deleteUsuario(id).then(() => {
-                this.cargarUsuarios();
+                if(this.usuarios.length == 1) {
+                    this.usuarios = [];
+                } else {
+                    this.cargarUsuarios();
+                }
             });
         }
     }

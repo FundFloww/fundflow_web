@@ -4,7 +4,7 @@
             [session]="session"></app-side-bar>
         <div id="content" class="col-10 h-100 pe-0 ps-0">
             <section class="section-content">
-                <app-header></app-header>
+                <app-header [filterSearch]="filterSearch" (filterSearchChange)="onFilterIdeasChange($event)"></app-header>
                 <h1 class="news-item bg-light-l">Noticias - Novedades en el mundo de las inversiones</h1>
                 <div class="news-container bg-light-l">
                     <div class="news-item bg-light-l">
