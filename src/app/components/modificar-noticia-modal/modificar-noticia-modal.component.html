@@ -8,6 +8,7 @@
             <div class="modal-body px-5 py-3">
                 <form novalidate autocomplete="off" #editForm="ngForm">
                     <div class="mb-3">
+                        <label for="tiutlo">Titular</label>
                         <input id="titulo" type="text" class="form-control" name="titulo" value="{{this.noticia?.titulo}}"
                             placeholder="Titular de la noticia" [(ngModel)]="noticiaTemporal.titulo" #titulo="ngModel"
                             required [ngClass]="validClasses(titulo, 'is-valid', 'is-invalid')"
@@ -17,18 +18,19 @@
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label for="descripcion">Descripción <small>(max {{200 - (noticiaTemporal.descripcion?.length || 0)}})</small></label>
                         <textarea id="descripcion" class="form-control" name="descripcion" value="{{this.noticia?.descripcion}}"
                             placeholder="Breve descripción de la noticia..." [(ngModel)]="noticiaTemporal.descripcion"
                             required maxlength="200" #descripcion="ngModel"
                             [ngClass]="validClasses(descripcion, 'is-valid', 'is-invalid')"
                             (input)="cambioRealizado()"></textarea>
-                            <p *ngIf="cambio" class="text-muted text-end"><small>(max {{200 - noticiaTemporal.descripcion.length}})</small></p>
                         <div class="invalid-feedback">
                             Descripción requerida
                         </div>
                     </div>
 
                     <div class="mb-3">
+                        <label for="link">Enlace</label>
                         <input id="link" type="text" class="form-control w-100" name="link" value="{{this.noticia?.link}}"
                             placeholder="Enlace a la noticia" [(ngModel)]="noticiaTemporal.link" #link="ngModel" required
                             [ngClass]="validClasses(link, 'is-valid', 'is-invalid')"

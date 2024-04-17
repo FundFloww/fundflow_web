@@ -8,6 +8,7 @@ import { UsuarioRegistroDTO } from '../../interfaces/usuario-registro-dto';
 import { NuevoUsuarioModalComponent } from '../../components/nuevo-usuario-modal/nuevo-usuario-modal.component';
 import { ModificarUsuarioModalComponent } from '../../components/modificar-usuario-modal/modificar-usuario-modal.component';
 import { Usuario } from '../../interfaces/usuario';
+import { TipoUsuario } from '../../enum/tipo-usuario';
 
 @Component({
     selector: 'zona-admin-usuarios',
@@ -31,7 +32,21 @@ export class ZonaAdminUsuariosComponent {
     pageSize: number = 10;
     registrosTotales: number = 0;
 
-    usuario!: Usuario | null;
+    usuario: Usuario = {
+        nombre: '',
+        apellidos: '',
+        correo: '',
+        contraseña: '',
+        imagen: '',
+        banner: '',
+        descripcion: '',
+        profesion: '',
+        tipo: TipoUsuario.Emprendedor,
+        ideas: [],
+        guardados: [],
+        inversiones: []
+
+    };
 
     constructor(
         private usuariosService: UsuariosService

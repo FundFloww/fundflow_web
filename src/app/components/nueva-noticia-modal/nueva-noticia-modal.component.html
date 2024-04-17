@@ -29,6 +29,7 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="link">Enlace</label>
                         <input id="link" type="text" class="form-control w-100" name="link" value=""
                             placeholder="Enlace a la noticia" [(ngModel)]="newNoticia.link" #link="ngModel" required
                             [ngClass]="validClasses(link, 'is-valid', 'is-invalid')">

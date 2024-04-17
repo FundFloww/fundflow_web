@@ -40,7 +40,6 @@ export class ModificarNoticiaModalComponent {
     }
 
 	async editNoticia(){
-		console.log(this.noticiaTemporal.fecha);
     
 		this.noticiasService.editNoticia(this.noticiaTemporal).then(response => {
 
