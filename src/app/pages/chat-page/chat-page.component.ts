@@ -37,6 +37,10 @@ export class ChatPageComponent {
     }
 
     inizializeTestUsers() {
+        this.usuariosService.getUsuarioPorId(1)
+            .then(usuario => {
+                this.usersTest.push(usuario);
+            });
         this.usuariosService.getUsuarioPorId(2)
             .then(usuario => {
                 this.usersTest.push(usuario);
@@ -49,10 +53,6 @@ export class ChatPageComponent {
             .then(usuario => {
                 this.usersTest.push(usuario);
             });
-        this.usuariosService.getUsuarioPorId(1)
-            .then(usuario => {
-                this.usersTest.push(usuario);
-            });
     }
 
     onClickChat(idReceiver: number) {
@@ -62,13 +62,14 @@ export class ChatPageComponent {
 
         if (this.user && this.user.id) {
             this.webSocketService.listen(message => {
+                console.log(message);
                 this.messages.push(message)
             }, this.user.id.toString(), this.reciverId.toString());
         }
     }
 
     initializeSocketConnection() {
-        this.webSocketService.listen(message => {
+        this.webSocketService.listen(message => {            
             this.messages.push(message)
         }, this.user!.id!.toString(), this.reciverId!.toString());
     }
@@ -93,7 +94,7 @@ export class ChatPageComponent {
         inputMessage.value = "";
 
         const newMessage: Message = {
-            from: this.user!.nombre,
+            sender: this.user!.nombre,
             text: message
         }
 

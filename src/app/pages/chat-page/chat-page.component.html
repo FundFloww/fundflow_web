@@ -30,7 +30,7 @@
                     @if(reciverId === null) {
                         <div class="chat-zone-empty">
                             <img src="../../../assets/icons/chat.svg" alt="chat-icon">
-                            <p>Selecciona un chat para comenzar a chatear</p>
+                            <p>Selecciona un chat para comenzar a enviar mensajes</p>
                         </div>
                     } @else {
                         <section class="message-bar">
@@ -47,7 +47,7 @@
                         </section>
                         <section class="message-zone">
                             @for(message of messages; track $index) {
-                                <app-mensaje [ngClass]="{ self : message.from === this.user?.nombre}" [reciver]=user!.nombre [message]="message"/>
+                                <app-mensaje [ngClass]="{ self : message.sender === this.user?.nombre}" [reciver]=user!.nombre [message]="message"/>
                             }
                         </section>
                     }

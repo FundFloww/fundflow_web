@@ -17,7 +17,7 @@
     width: 40%;
 
     h3 {
-        font-size: 3rem;
+        font-size: 2rem;
         font-weight: bolder;
         align-self: flex-start;
         margin: 30px;
@@ -119,6 +119,20 @@
 
         .self {
             align-self: flex-end !important;
+        }
+    }
+
+    .chat-zone-empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        gap: 10px;
+
+        p {
+            margin: 0;
+            padding: 0;
         }
     }
 }
