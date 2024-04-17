@@ -9,6 +9,7 @@
                 <form novalidate autocomplete="off" #registroForm="ngForm">
 
                     <div class="mb-3">
+                        <label for="tiutlo">Titular</label>
                         <input id="titulo" type="text" class="form-control" name="titulo" value=""
                             placeholder="Titular de la noticia" [(ngModel)]="newNoticia.titulo" #titulo="ngModel"
                             required [ngClass]="validClasses(titulo, 'is-valid', 'is-invalid')">
@@ -17,11 +18,11 @@
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label for="descripcion">Descripción <small>(max {{200 - (newNoticia.descripcion?.length || 0)}})</small></label>
                         <textarea id="descripcion" class="form-control" name="descripcion" value=""
                             placeholder="Breve descripción de la noticia..." [(ngModel)]="newNoticia.descripcion"
                             required maxlength="200" #descripcion="ngModel"
                             [ngClass]="validClasses(descripcion, 'is-valid', 'is-invalid')"></textarea>
-                            <p class="text-muted text-end"><small>(max {{200 - newNoticia.descripcion.length}})</small></p>
                         <div class="invalid-feedback">
                             Descripción requerida
                         </div>

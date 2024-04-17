@@ -50,6 +50,12 @@ export class NuevaNoticiaModalComponent {
 	resetForm() {
         if (this.registroForm) {
 			this.noticiaRegister = false;
+			this.newNoticia = {
+				titulo: '',
+				link: '',
+				descripcion: '',
+				fecha: null
+			};
             this.registroForm.resetForm();
         }
     }
