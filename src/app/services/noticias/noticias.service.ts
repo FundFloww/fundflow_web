@@ -25,7 +25,7 @@ export class NoticiasService {
 	async deleteNoticia(noticiaId: number) {
         try {
             const response = await fetch(`${this.urlBase}/api/noticias/eliminar/${noticiaId}`, {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -75,6 +75,27 @@ export class NoticiasService {
         } catch (error) {
             console.error(error);
             throw error;
+        }
+    }
+
+    async editNoticia(noticiaEditada: Noticia) {
+        try {
+            const response = await fetch(`${this.urlBase}/api/noticias/editar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(noticiaEditada),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al editar la noticia');
+            }
+
+            return false;
+        } catch (error) {
+            console.error('Error al realizar la operación:', error);
+            return true;
         }
     }
 

@@ -5,6 +5,7 @@ import { NoticiasService } from '../../services/noticias/noticias.service';
 import { NoticiaFilterPipe } from '../../pipes/noticias/noticia-filter.pipe';
 import { Noticia } from '../../interfaces/noticia';
 import { NuevaNoticiaModalComponent } from '../../components/nueva-noticia-modal/nueva-noticia-modal.component';
+import { ModificarNoticiaModalComponent } from '../../components/modificar-noticia-modal/modificar-noticia-modal.component';
 
 @Component({
 	selector: 'app-zona-admin-noticias',
@@ -13,7 +14,8 @@ import { NuevaNoticiaModalComponent } from '../../components/nueva-noticia-modal
 		FormsModule,
 		CommonModule,
         NoticiaFilterPipe,
-        NuevaNoticiaModalComponent
+        NuevaNoticiaModalComponent,
+        ModificarNoticiaModalComponent
 	],
 	templateUrl: './zona-admin-noticias.component.html',
 	styleUrl: './zona-admin-noticias.component.scss'
@@ -28,7 +30,12 @@ export class ZonaAdminNoticiasComponent {
 	pageSize: number = 10;
 	registrosTotales: number = 0;
 
-    noticia!: Noticia | null;
+    noticia: Noticia = {
+        titulo: '',
+		link: '',
+		descripcion: '',
+		fecha: null
+    };
 
 	constructor(
         private noticiasService: NoticiasService
@@ -75,8 +82,6 @@ export class ZonaAdminNoticiasComponent {
     async obtenerNoticiaAModificar(id: number | undefined) {
         if (id != null) {
             this.noticia = await this.noticiasService.getNoticiaPorId(id);
-            console.log("obtener usuario");
-            console.log(this.noticia);
         }
     }
 

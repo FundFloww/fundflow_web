@@ -19,7 +19,7 @@ export class NuevaNoticiaModalComponent {
 		titulo: '',
 		link: '',
 		descripcion: '',
-		fecha: new Date()
+		fecha: null
 	};
 
 	noticiaRegister: boolean = false;
@@ -31,6 +31,7 @@ export class NuevaNoticiaModalComponent {
 	constructor(private noticiasService: NoticiasService) { }
 
 	async addNewNoticia() {
+		this.newNoticia.fecha = new Date();
 		this.noticiasService.addNoticia(this.newNoticia).then(response => {
             if (response) {
 				this.noticiaRegister = response;

@@ -1,0 +1,52 @@
+<div class="modal fade" id="myModal2" aria-hidden="true" aria-labelledby="myModal2" data-bs-backdrop="static" (hidden.bs.modal)="resetForm()">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary" id="exampleModalToggleLabel">Modificar datos de la noticia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-5 py-3">
+                <form novalidate autocomplete="off" #editForm="ngForm">
+                    <div class="mb-3">
+                        <input id="titulo" type="text" class="form-control" name="titulo" value="{{this.noticia?.titulo}}"
+                            placeholder="Titular de la noticia" [(ngModel)]="noticiaTemporal.titulo" #titulo="ngModel"
+                            required [ngClass]="validClasses(titulo, 'is-valid', 'is-invalid')"
+                            (input)="cambioRealizado()">
+                        <div class="invalid-feedback">
+                            Titular requerido
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <textarea id="descripcion" class="form-control" name="descripcion" value="{{this.noticia?.descripcion}}"
+                            placeholder="Breve descripción de la noticia..." [(ngModel)]="noticiaTemporal.descripcion"
+                            required maxlength="200" #descripcion="ngModel"
+                            [ngClass]="validClasses(descripcion, 'is-valid', 'is-invalid')"
+                            (input)="cambioRealizado()"></textarea>
+                            <p *ngIf="cambio" class="text-muted text-end"><small>(max {{200 - noticiaTemporal.descripcion.length}})</small></p>
+                        <div class="invalid-feedback">
+                            Descripción requerida
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input id="link" type="text" class="form-control w-100" name="link" value="{{this.noticia?.link}}"
+                            placeholder="Enlace a la noticia" [(ngModel)]="noticiaTemporal.link" #link="ngModel" required
+                            [ngClass]="validClasses(link, 'is-valid', 'is-invalid')"
+                            (input)="cambioRealizado()">
+                        <div class="invalid-feedback">
+                            Enlace requerido
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="fecha" value="{{this.noticia?.fecha}}" [(ngModel)]="noticiaTemporal.fecha">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary text-white"
+                    data-bs-toggle="modal" (click)="editNoticia()"
+                    [disabled]="editForm.invalid || !cambio">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-<div class="modal fade" id="myModal" #myModal (hidden.bs.modal)="resetForm()">
+<div class="modal fade" id="myModal" data-bs-backdrop="static" #myModal (hidden.bs.modal)="resetForm()">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -21,6 +21,7 @@
                             placeholder="Breve descripción de la noticia..." [(ngModel)]="newNoticia.descripcion"
                             required maxlength="200" #descripcion="ngModel"
                             [ngClass]="validClasses(descripcion, 'is-valid', 'is-invalid')"></textarea>
+                            <p class="text-muted text-end"><small>(max {{200 - newNoticia.descripcion.length}})</small></p>
                         <div class="invalid-feedback">
                             Descripción requerida
                         </div>

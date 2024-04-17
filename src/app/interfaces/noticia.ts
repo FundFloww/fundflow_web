@@ -3,5 +3,5 @@ export interface Noticia {
     titulo: string;
     link: string;
     descripcion: string;
-    fecha: Date;
+    fecha: Date | null;
 }
