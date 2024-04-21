@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
 
-*{
+* {
     font-family: 'Sora', sans-serif;
 }
 
-table{
+table {
     width: 100%;
     font-size: 14px;
 }
@@ -19,11 +19,28 @@ th {
     border-width: 1px;
 }
 
-th{
+th {
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
     padding-left: 0.5rem;
 }
+
+.datepicker {
+    padding: 5px 10px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    border: 1px solid #dee2e6;
+    font-size: 15px;
+}
+
+input.datepicker:focus {
+    outline: 0;
+}
+
+::-webkit-calendar-picker-indicator{
+    cursor: pointer;
+} 
 
 .search {
     display: flex;
@@ -48,28 +65,28 @@ th{
     font-size: 14px;
 }
 
-button.btn.btn-success{
+button.btn.btn-success {
     width: 90px;
 }
 
-select[name="dataTable_length"]{
+select[name="dataTable_length"] {
     width: auto;
     appearance: revert;
 }
 
-.col-fecha{
+.col-fecha {
     min-width: 120px;
 }
 
-.col-titulo-descripcion{
+.col-titulo-descripcion {
     min-width: 100px;
     max-width: 500px;
 }
 
-.col-enlace{
+.col-enlace {
     max-width: 150px;
 }
 
-a.page-link:hover{
+a.page-link:hover {
     cursor: pointer;
 }

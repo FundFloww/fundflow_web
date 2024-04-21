@@ -23,7 +23,7 @@ export class ZonaAdminNoticiasComponent {
 
     filterSearch = '';
     noticias: Noticia[] = [];
-    noticiasNotFound: boolean = false;
+    noticiasNotFound: boolean = true;
     currentPage: number = 0;
     totalPages: number = 0;
     pageSize: number = 10;
