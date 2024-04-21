@@ -71,13 +71,19 @@
                         <nav class="me-3" *ngIf="totalPages > 1">
                             <ul class="pagination mb-0">
                                 <li class="page-item" [ngClass]="{ 'disabled': currentPage === 0 }">
-                                    <button (click)="cambiarPagina(currentPage - 1)" class="page-link">&laquo;</button>
+                                    <a (click)="cambiarPagina(0)" class="page-link">Primera</a>
+                                </li>
+                                <li class="page-item" [ngClass]="{ 'disabled': currentPage === 0 }">
+                                    <a (click)="cambiarPagina(currentPage - 1)" class="page-link">&laquo;</a>
                                 </li>
                                 <li class="page-item">
                                     <a class="page-link disabled bg-white">{{currentPage + 1}}</a>
                                 </li>
-                                <li class="page-item" [ngClass]="{ 'disabled': currentPage + 1 === totalPages}">
-                                    <button (click)="cambiarPagina(currentPage + 1)" class="page-link">&raquo;</button>
+                                <li class="page-item" [ngClass]="{ 'disabled': currentPage + 1 === totalPages }">
+                                    <a (click)="cambiarPagina(currentPage + 1)" class="page-link">&raquo;</a>
+                                </li>
+                                <li class="page-item" [ngClass]="{ 'disabled': currentPage + 1 === totalPages }">
+                                    <a (click)="cambiarPagina(totalPages - 1)" class="page-link">Última</a>
                                 </li>
                             </ul>
                         </nav>

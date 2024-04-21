@@ -2,61 +2,67 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NoticiasService } from '../../services/noticias/noticias.service';
-import { NoticiaFilterPipe } from '../../pipes/noticias/noticia-filter.pipe';
 import { Noticia } from '../../interfaces/noticia';
 import { NuevaNoticiaModalComponent } from '../../components/nueva-noticia-modal/nueva-noticia-modal.component';
 import { ModificarNoticiaModalComponent } from '../../components/modificar-noticia-modal/modificar-noticia-modal.component';
 
 @Component({
-	selector: 'app-zona-admin-noticias',
-	standalone: true,
-	imports: [
-		FormsModule,
-		CommonModule,
-        NoticiaFilterPipe,
+    selector: 'app-zona-admin-noticias',
+    standalone: true,
+    imports: [
+        FormsModule,
+        CommonModule,
         NuevaNoticiaModalComponent,
         ModificarNoticiaModalComponent
-	],
-	templateUrl: './zona-admin-noticias.component.html',
-	styleUrl: './zona-admin-noticias.component.scss'
+        
+    ],
+    templateUrl: './zona-admin-noticias.component.html',
+    styleUrl: './zona-admin-noticias.component.scss'
 })
 export class ZonaAdminNoticiasComponent {
 
-	filterSearch = '';
+    filterSearch = '';
     noticias: Noticia[] = [];
     noticiasNotFound: boolean = false;
-	currentPage: number = 0;
+    currentPage: number = 0;
     totalPages: number = 0;
-	pageSize: number = 10;
-	registrosTotales: number = 0;
+    pageSize: number = 10;
+    registrosTotales: number = 0;
+    fechaCreacion: Date | null = null;
 
     noticia: Noticia = {
         titulo: '',
-		link: '',
-		descripcion: '',
-		fecha: null
+        link: '',
+        descripcion: '',
+        fecha: null
     };
 
-	constructor(
+    constructor(
         private noticiasService: NoticiasService
     ) { }
 
-	ngOnInit() {
+    ngOnInit() {
         this.cargarNoticias();
     }
 
-	async cargarNoticias() {
+    async cargarNoticias() {
         try {
-            const res = await this.noticiasService.getNoticias(this.currentPage, this.pageSize);
+            const res = await this.noticiasService.getNoticias(this.currentPage, this.pageSize, this.filterSearch);
             if (res != null) {
                 this.noticias = res.content;
                 this.totalPages = res.totalPages;
                 this.currentPage = res.pageable.pageNumber;
                 this.registrosTotales = res.totalElements;
+            } else {
+                this.noticias = [];
+                this.totalPages = 0;
+                this.currentPage = 0;
+                this.registrosTotales = 0;
             }
             this.updateNoticiasNotFound();
 
         } catch (error) {
+            this.updateNoticiasNotFound();
             console.error("Ocurrió un error al obtener las noticias: ", error);
         }
     }
@@ -72,7 +78,7 @@ export class ZonaAdminNoticiasComponent {
         }
     }
 
-	actualizarPageSize() {
+    actualizarPageSize() {
         if (this.pageSize >= this.registrosTotales) {
             this.currentPage = 0;
         }
@@ -88,7 +94,7 @@ export class ZonaAdminNoticiasComponent {
     borrarNoticia(id: number | undefined) {
         if (id !== undefined) {
             this.noticiasService.deleteNoticia(id).then(() => {
-                if(this.noticias.length == 1){
+                if (this.noticias.length == 1) {
                     this.noticias = [];
                 } else {
                     this.cargarNoticias();
@@ -100,4 +106,5 @@ export class ZonaAdminNoticiasComponent {
     cargarModificaciones() {
         this.cargarNoticias();
     }
+
 }

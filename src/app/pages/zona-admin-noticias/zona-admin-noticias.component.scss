@@ -56,3 +56,20 @@ select[name="dataTable_length"]{
     width: auto;
     appearance: revert;
 }
+
+.col-fecha{
+    min-width: 120px;
+}
+
+.col-titulo-descripcion{
+    min-width: 100px;
+    max-width: 500px;
+}
+
+.col-enlace{
+    max-width: 150px;
+}
+
+a.page-link:hover{
+    cursor: pointer;
+}

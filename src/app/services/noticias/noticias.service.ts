@@ -11,9 +11,14 @@ export class NoticiasService {
 
 	urlBase = environment.baseUrl;
 
-    async getNoticias(page: number, size: number) {
+    async getNoticias(page: number, size: number, searchString: string) {
         try {
-            const response = await fetch(`${this.urlBase}/api/noticias?page=${page}&size=${size}`);
+            let url = `${this.urlBase}/api/noticias?page=${page}&size=${size}`;
+            if (searchString.trim() !== '') {
+                url += `&search=${searchString}`;
+            }
+            
+            const response = await fetch(url);
             const datos = await response.json();
             return (datos.status != 404) ? datos : null;
         } catch (error) {
