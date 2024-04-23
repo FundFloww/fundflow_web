@@ -78,8 +78,6 @@ export class ZonaAdminUsuariosComponent {
     async obtenerUsuarioAModificar(id: number | undefined) {
         if (id != null) {
             this.usuario = await this.usuariosService.getUsuarioPorId(id);
-            console.log("obtener usuario");
-            console.log(this.usuario);
         }
     }
 

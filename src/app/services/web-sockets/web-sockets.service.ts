@@ -39,7 +39,7 @@ export class WebSocketsService implements OnDestroy {
         }
     }
 
-    generateEndpoint(route: string, idSender: string, idReceiver: string): string {
+    public generateEndpoint(route: string, idSender: string, idReceiver: string): string {
         const [idA, idB] = [idSender, idReceiver].sort();
         return `${route}/${idA}/${idB}`;
     }

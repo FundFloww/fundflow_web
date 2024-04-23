@@ -8,6 +8,7 @@ import { Message } from '../../interfaces/message';
 import { Usuario } from '../../interfaces/usuario';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { WebSocketsService } from '../../services/web-sockets/web-sockets.service';
+import { MessagesService } from '../../services/messages/messages.service';
 
 @Component({
     selector: 'app-chat-page',
@@ -26,7 +27,8 @@ export class ChatPageComponent {
 
     constructor(
         private usuariosService: UsuariosService,
-        private webSocketService: WebSocketsService
+        private webSocketService: WebSocketsService,
+        private messagesService: MessagesService
     ) { }
 
     async ngOnInit() {
@@ -55,14 +57,13 @@ export class ChatPageComponent {
             });
     }
 
-    onClickChat(idReceiver: number) {
+    async onClickChat(idReceiver: number) {
         this.reciverId = idReceiver;
-        this.messages = [];
+        this.messages = await this.messagesService.getChatMessages(this.user!.id!.toString(), idReceiver.toString());
         this.initializeSocketConnection();
 
         if (this.user && this.user.id) {
             this.webSocketService.listen(message => {
-                console.log(message);
                 this.messages.push(message)
             }, this.user.id.toString(), this.reciverId.toString());
         }
@@ -95,7 +96,8 @@ export class ChatPageComponent {
 
         const newMessage: Message = {
             sender: this.user!.nombre,
-            text: message
+            text: message,
+            time: new Date()
         }
 
         this.webSocketService.send(newMessage, this.user!.id!.toString(), this.reciverId!.toString());

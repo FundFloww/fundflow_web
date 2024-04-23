@@ -110,7 +110,7 @@ export class SideBarComponent {
 
     async validateSession() {
         if(this.session) {
-            this.elementos = this.elementos.filter(e => e.id < 8);
+            this.elementos = this.elementos.filter(e => e.id < 8 || e.id === 10);
             await this.validateTipoUsuario();
             return;
         }

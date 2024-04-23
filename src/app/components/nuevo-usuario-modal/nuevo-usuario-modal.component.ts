@@ -40,7 +40,6 @@ export class NuevoUsuarioModalComponent {
 
 		this.usuariosService.addUsuario(this.newUsuario).then(response => {
 			this.userExists = response;
-            console.log(this.userExists)
 
 			if (!response) {
 				this.usuarioAgregado.emit(!this.userExists);

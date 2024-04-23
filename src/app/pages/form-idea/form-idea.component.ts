@@ -86,7 +86,6 @@ export class FormIdeaComponent {
         if(this.nuevaIdea.imagenesFile.length === 0) {
             this.nuevaIdea.imagenesFile.push(new File([], ''));
         }
-        console.log(this.nuevaIdea.imagenesFile);
     }
 
 

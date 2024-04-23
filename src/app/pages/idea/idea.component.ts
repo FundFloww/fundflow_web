@@ -134,7 +134,6 @@ export class IdeaComponent {
             text.textContent = "Añadir a favoritos!";
             icon.style.display = "none";
             button.style.backgroundColor = "";
-            console.log("No guardado");
             
             if(window.innerWidth < 800) {
                 smallNoGuardado.style.display = "block";

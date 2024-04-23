@@ -56,8 +56,6 @@ export class ModificarUsuarioModalComponent {
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['usuario'] && this.usuario) {
             this.usuarioTemporal = Object.assign({}, this.usuario);
-            console.log("ngOnChangessssssss");
-            console.log(this.usuarioTemporal);
         }
     }
 
