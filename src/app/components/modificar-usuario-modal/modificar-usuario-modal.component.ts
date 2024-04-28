@@ -53,6 +53,10 @@ export class ModificarUsuarioModalComponent {
         private usuariosService: UsuariosService
     ) { }
 
+    // ngOnInit(){
+    //     this.userExists = false;
+    // }
+
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['usuario'] && this.usuario) {
             this.usuarioTemporal = Object.assign({}, this.usuario);
@@ -73,6 +77,7 @@ export class ModificarUsuarioModalComponent {
     
 		this.usuariosService.editUsuario(this.usuarioTemporal).then(response => {
 			this.userExists = response;
+            console.log(response);
 
 			if (!response) {
 				this.usuarioModificado.emit(!this.userExists);

@@ -1,5 +1,5 @@
 export interface UsuarioEditarDTO {
-    // id?: number;
+    id?: number;
     nombre: string;
     apellidos: string;
     profesion: string;
