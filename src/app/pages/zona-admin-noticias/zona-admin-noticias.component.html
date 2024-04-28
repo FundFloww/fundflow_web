@@ -28,13 +28,13 @@
                             </select>
                             registros
                         </label>
-                        <div class="d-flex">
-                            <input type="date" class="datepicker text-muted">
-                        </div>
-                        <div class="search me-3">
-                            <img src="../../assets/icons/search.svg" alt="">
-                            <input type="search" [(ngModel)]="filterSearch" (input)="cargarNoticias()"
-                                placeholder="Buscar">
+                        <div class="d-flex gap-2 me-3">
+                            <input type="date" class="datepicker text-muted" [(ngModel)]="dateSearch" (input)="onInputFechaOBusqueda()">
+                            <div class="search">
+                                <img src="../../assets/icons/search.svg" alt="">
+                                <input type="search" [(ngModel)]="filterSearch" (input)="onInputFechaOBusqueda()"
+                                    placeholder="Buscar">
+                            </div>
                         </div>
                     </div>
                     <div class="card-body table-responsive ms-3 me-3">

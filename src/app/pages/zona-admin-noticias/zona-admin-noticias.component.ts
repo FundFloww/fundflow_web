@@ -14,7 +14,6 @@ import { ModificarNoticiaModalComponent } from '../../components/modificar-notic
         CommonModule,
         NuevaNoticiaModalComponent,
         ModificarNoticiaModalComponent
-        
     ],
     templateUrl: './zona-admin-noticias.component.html',
     styleUrl: './zona-admin-noticias.component.scss'
@@ -22,6 +21,8 @@ import { ModificarNoticiaModalComponent } from '../../components/modificar-notic
 export class ZonaAdminNoticiasComponent {
 
     filterSearch = '';
+    dateSearch: string = '';
+    dateSearchString: string = '';
     noticias: Noticia[] = [];
     noticiasNotFound: boolean = true;
     currentPage: number = 0;
@@ -47,7 +48,8 @@ export class ZonaAdminNoticiasComponent {
 
     async cargarNoticias() {
         try {
-            const res = await this.noticiasService.getNoticias(this.currentPage, this.pageSize, this.filterSearch);
+
+            const res = await this.noticiasService.getNoticias(this.currentPage, this.pageSize, this.filterSearch.trim(), this.dateSearch);
             if (res != null) {
                 this.noticias = res.content;
                 this.totalPages = res.totalPages;
@@ -69,6 +71,11 @@ export class ZonaAdminNoticiasComponent {
 
     updateNoticiasNotFound() {
         this.noticiasNotFound = (this.noticias.length === 0);
+    }
+
+    onInputFechaOBusqueda() {
+        this.currentPage = 0;
+        this.cargarNoticias();
     }
 
     async cambiarPagina(pagina: number) {

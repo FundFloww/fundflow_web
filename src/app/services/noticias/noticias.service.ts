@@ -2,22 +2,29 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Noticia } from '../../interfaces/noticia';
 
+
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 export class NoticiasService {
 
-	constructor() { }
+    constructor() { }
 
-	urlBase = environment.baseUrl;
+    urlBase = environment.baseUrl;
 
-    async getNoticias(page: number, size: number, searchString: string) {
+    async getNoticias(page: number, size: number, searchString: string, date: string) {
         try {
             let url = `${this.urlBase}/api/noticias?page=${page}&size=${size}`;
-            if (searchString.trim() !== '') {
+            if (searchString !== '') {
                 url += `&search=${searchString}`;
+                console.log(url);
             }
-            
+
+            if (date !== '') {
+                url += `&date=${date}`;
+                console.log(url);
+            }
+
             const response = await fetch(url);
             const datos = await response.json();
             return (datos.status != 404) ? datos : null;
@@ -27,7 +34,7 @@ export class NoticiasService {
         }
     }
 
-	async deleteNoticia(noticiaId: number) {
+    async deleteNoticia(noticiaId: number) {
         try {
             const response = await fetch(`${this.urlBase}/api/noticias/eliminar/${noticiaId}`, {
                 method: 'POST',
@@ -45,7 +52,7 @@ export class NoticiasService {
         }
     }
 
-	async getNoticiaPorId(id: number): Promise<Noticia> {
+    async getNoticiaPorId(id: number): Promise<Noticia> {
         try {
             const response = await fetch(`${this.urlBase}/api/noticias/${id}`, {
                 method: 'GET',
@@ -64,7 +71,7 @@ export class NoticiasService {
         }
     }
 
-	async addNoticia(noticia: Noticia) {
+    async addNoticia(noticia: Noticia) {
         try {
             const response = await fetch(`${this.urlBase}/api/noticias/nueva`, {
                 method: 'POST',
@@ -73,7 +80,7 @@ export class NoticiasService {
                 },
                 body: JSON.stringify(noticia),
             });
-            if(!response.ok) {
+            if (!response.ok) {
                 throw new Error(`Error al enviar la noticia a la base de datos. Código de estado: ${response.status}`);
             }
             return true;
