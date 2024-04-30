@@ -93,20 +93,21 @@ export class ZonaAdminUsuariosComponent {
     async obtenerUsuarioAModificar(id: number | undefined) {
         if (id != null) {
             this.usuario = await this.usuariosService.getUsuarioPorId(id);
-            console.log("obtener usuario");
-            console.log(this.usuario);
         }
     }
 
     borrarUsuario(id: number | undefined) {
         if (id !== undefined) {
-            this.usuariosService.deleteUsuario(id).then(() => {
-                if(this.usuarios.length == 1) {
-                    this.usuarios = [];
-                } else {
-                    this.cargarUsuarios();
-                }
-            });
+            const resp = confirm("Seguro que quiere eliminar el usuario con ID: " + id + "?");
+            if(resp){
+                this.usuariosService.deleteUsuario(id).then(() => {
+                    if(this.usuarios.length == 1) {
+                        this.usuarios = [];
+                    } else {
+                        this.cargarUsuarios();
+                    }
+                });
+            }
         }
     }
 

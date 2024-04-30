@@ -48,14 +48,11 @@ export class ModificarUsuarioModalComponent {
     pswCambiada: boolean = false;
 
     @ViewChild('editForm') editForm!: NgForm;
+    @ViewChild('editPasswordForm') editPasswordForm!: NgForm;
 
     constructor(
         private usuariosService: UsuariosService
     ) { }
-
-    // ngOnInit(){
-    //     this.userExists = false;
-    // }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['usuario'] && this.usuario) {
@@ -74,14 +71,17 @@ export class ModificarUsuarioModalComponent {
         if (Array.isArray(this.usuarioTemporal.tipo)) {
             this.usuarioTemporal.tipo = this.usuarioTemporal.tipo.toString();
         }
+
+        const btnGuardarCambios = document.getElementById('btnGuardarCambios') as HTMLElement;
     
 		this.usuariosService.editUsuario(this.usuarioTemporal).then(response => {
 			this.userExists = response;
-            console.log(response);
 
 			if (!response) {
-				this.usuarioModificado.emit(!this.userExists);
+                btnGuardarCambios.setAttribute('data-bs-toggle', 'modal');
+				btnGuardarCambios.click();
                 this.cambio = false;
+				this.usuarioModificado.emit();
 			}
 		});
     }
@@ -95,7 +95,13 @@ export class ModificarUsuarioModalComponent {
             this.userExists = false;
             this.cambio = false;
             this.pswCambiada = false;
-            // this.ngOnInit();
+
+            const btnGuardarCambios = document.getElementById('btnGuardarCambios') as HTMLElement;
+            btnGuardarCambios.removeAttribute('data-bs-toggle');
+        }
+
+        if(this.editPasswordForm) {
+            this.editPasswordForm.resetForm();
         }
     }
 
@@ -104,6 +110,7 @@ export class ModificarUsuarioModalComponent {
             if(this.usuario){
                 this.usuarioEditarContrasena.correo = this.usuario?.correo;
                 this.pswCambiada = await this.usuariosService.editContrasena(this.usuarioEditarContrasena);
+                alert("Contraseña cambiada.");
             }
         } catch (error) {
             console.error(error);

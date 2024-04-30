@@ -38,11 +38,16 @@ export class NuevoUsuarioModalComponent {
 
 		this.newUsuario.correo = this.newUsuario.correo.toLowerCase();
 
+		const btnGuardar = document.getElementById('btnGuardar') as HTMLElement;
+
 		this.usuariosService.addUsuario(this.newUsuario).then(response => {
 			this.userExists = response;
 
 			if (!response) {
-				this.usuarioAgregado.emit(!this.userExists);
+				btnGuardar.setAttribute('data-bs-toggle', 'modal');
+				btnGuardar.click();
+				alert("Nuevo usuario añadido con éxito.");
+				this.usuarioAgregado.emit();
 			}
 		});
 	}
@@ -69,6 +74,10 @@ export class NuevoUsuarioModalComponent {
         if (this.registroForm) {
             this.newUsuario.tipo = 'EMPRENDEDOR';
             this.userExists = false;
+
+			const btnGuardar = document.getElementById('btnGuardar') as HTMLElement;
+			btnGuardar.removeAttribute('data-bs-toggle');
+
             this.registroForm.resetForm();
         }
     }

@@ -70,7 +70,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary text-white"
-                    [attr.data-bs-toggle]="!userExists ? 'modal' : ''" (click)="editUsuario()"
+                    id="btnGuardarCambios" (click)="editUsuario()"
                     [disabled]="editForm.invalid || !cambio">
                     Guardar cambios
                 </button>
@@ -78,7 +78,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModal3" aria-hidden="true" aria-labelledby="myModal3" tabindex="-1">
+<div class="modal fade" id="myModal3" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="myModal3" tabindex="-1" (hidden.bs.modal)="resetForm()">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">

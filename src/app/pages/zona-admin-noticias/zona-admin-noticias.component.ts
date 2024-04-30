@@ -100,13 +100,16 @@ export class ZonaAdminNoticiasComponent {
 
     borrarNoticia(id: number | undefined) {
         if (id !== undefined) {
-            this.noticiasService.deleteNoticia(id).then(() => {
-                if (this.noticias.length == 1) {
-                    this.noticias = [];
-                } else {
-                    this.cargarNoticias();
-                }
-            });
+            const resp = confirm("Seguro que quiere eliminar la noticia con ID: " + id + "?");
+            if (resp) {
+                this.noticiasService.deleteNoticia(id).then(() => {
+                    if (this.noticias.length == 1) {
+                        this.noticias = [];
+                    } else {
+                        this.cargarNoticias();
+                    }
+                });
+            }
         }
     }
 
