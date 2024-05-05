@@ -22,14 +22,12 @@ export class ZonaAdminNoticiasComponent {
 
     filterSearch = '';
     dateSearch: string = '';
-    dateSearchString: string = '';
     noticias: Noticia[] = [];
     noticiasNotFound: boolean = true;
     currentPage: number = 0;
     totalPages: number = 0;
     pageSize: number = 10;
     registrosTotales: number = 0;
-    fechaCreacion: Date | null = null;
 
     noticia: Noticia = {
         titulo: '',
