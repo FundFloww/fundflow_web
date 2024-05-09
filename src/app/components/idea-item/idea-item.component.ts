@@ -23,6 +23,8 @@ export class IdeaItemComponent {
         private router: Router
     ) { }
 
+    cantidadODS: number = 0;
+
     detallesIdea() {
         this.router.navigate(['/idea', this.idea.id]);
     }
@@ -31,6 +33,10 @@ export class IdeaItemComponent {
 
     async ngOnInit() {
         this.usuario = await this.usuariosService.getUsuarioPorId(this.idea.emprendedor[0].id ?? 0);
+        
+        var odsAux = this.idea.ods.split(',');
+        this.cantidadODS = odsAux.length;
+        console.log(this.cantidadODS);
     }
 
     onClickProfile() {        

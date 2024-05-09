@@ -17,6 +17,12 @@
     border-radius: 50%;
 }
 
+.titulo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .card {
     width: 350px;
     margin: 20px;

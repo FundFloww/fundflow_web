@@ -10,4 +10,5 @@ export interface IdeaDto {
     emprendedor: Usuario[];
     inversiones: Inversion[];
     campo: Campos
+    ods: string;
 }

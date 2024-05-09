@@ -27,6 +27,14 @@
                     </div>
                     <h4>Descripción</h4>
                     <p>{{ this.idea?.descripcion }}</p>
+                    @if(this.idea?.ods != null && this.idea?.ods != '') {
+                    <div>
+                        <h4>Objetivos de Desarrollo Sostenible</h4>
+                        @for (imagen of this.ods; track imagen) {
+                            <img src="../../../assets/img/ods/ods{{imagen}}.jpg" alt="{{$index}}" class="border border-light ods">
+                        }
+                    </div>
+                }
                 </div>
                 <div class="inversores-info bg-light-l">
                     <div>

@@ -50,6 +50,7 @@ export class IdeaComponent {
         fecha: new Date(),
         texto: ""
     };
+    ods: string[] = [];
 
     async ngOnInit() {
         this.cargandoIdeas = true;
@@ -89,6 +90,10 @@ export class IdeaComponent {
         if(this.idea.imagenes.length > 1) this.onScrollMove();
 
         this.cargandoIdeas = false;
+
+        if(this.idea.ods != null && this.idea.ods != '') {
+            this.ods = this.idea.ods.split(',');
+        }
     }
 
     onOpenBar(evento?: Event) {

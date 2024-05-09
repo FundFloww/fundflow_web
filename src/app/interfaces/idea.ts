@@ -13,4 +13,5 @@ export interface Idea {
     inversor: Usuario[];
     inversiones: Inversion[];
     hitos: Hito[];
+    ods: string;
 }
