@@ -3,13 +3,15 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
 import { IdeaDto } from '../../interfaces/ideaDto';
+import { IdeaItemAdminComponent } from '../../components/idea-item-admin/idea-item-admin.component';
 
 @Component({
 	selector: 'zona-admin-ideas',
 	standalone: true,
 	imports: [
 		FormsModule,
-		CommonModule
+		CommonModule,
+        IdeaItemAdminComponent
 	],
 	templateUrl: './zona-admin-ideas.component.html',
 	styleUrl: './zona-admin-ideas.component.scss'
@@ -34,18 +36,18 @@ export class ZonaAdminIdeasComponent {
 
     async cargarIdeas() {
         try {
-            // const res = await this.ideasService.getNoticias(this.currentPage, this.pageSize, this.filterSearch.trim());
-            // if (res != null) {
-            //     this.ideas = res.content;
-            //     this.totalPages = res.totalPages;
-            //     this.currentPage = res.pageable.pageNumber;
-            //     this.registrosTotales = res.totalElements;
-            // } else {
-            //     this.ideas = [];
-            //     this.totalPages = 0;
-            //     this.currentPage = 0;
-            //     this.registrosTotales = 0;
-            // }
+            const res = await this.ideasService.getIdeasAdmin(this.currentPage, this.pageSize, this.filterSearch.trim());
+            if (res != null) {
+                this.ideas = res.content;
+                this.totalPages = res.totalPages;
+                this.currentPage = res.pageable.pageNumber;
+                this.registrosTotales = res.totalElements;
+            } else {
+                this.ideas = [];
+                this.totalPages = 0;
+                this.currentPage = 0;
+                this.registrosTotales = 0;
+            }
             this.updateIdeasNotFound();
 
         } catch (error) {

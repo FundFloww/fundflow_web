@@ -1,0 +1,24 @@
+<div class="card d-flex flex-column shadow ">
+    <div>
+        <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center gap-2 p-2 cursor-pointer">
+                <img src="{{usuario?.imagen  || 'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Free-Download.png'}}"
+                    alt="foto_emprendedor" class="foto-emprendedor" loading="lazy">
+                <p class="card-text mb-0 nombre-usuario">{{ usuario?.nombre }} {{ usuario?.apellidos }}</p>
+            </div>
+        </div>
+    </div>
+    <img src="{{idea.imagen}}"
+        alt="foto_idea" class="foto-idea" loading="lazy">
+    <div class="card-body">
+        <h5 class="card-title mb-0">{{ idea.titulo }}</h5>
+        <p class="card-text"><small class="text-body-secondary campo">Campo: {{ idea.campo }}</small></p>
+        <div class="caja-des">
+            <p class="card-text descripcion">{{ idea.descripcion }}</p>
+        </div>
+        <div class="d-grid">
+            <a class="btn btn-primary text-light-l">Editar</a>
+            <a class="btn btn-primary text-light-l">Borrar</a>
+        </div>
+    </div>
+</div>

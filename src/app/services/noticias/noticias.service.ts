@@ -17,12 +17,10 @@ export class NoticiasService {
             let url = `${this.urlBase}/api/noticias?page=${page}&size=${size}`;
             if (searchString !== '') {
                 url += `&search=${searchString}`;
-                console.log(url);
             }
 
             if (date !== '') {
                 url += `&date=${date}`;
-                console.log(url);
             }
 
             const response = await fetch(url);

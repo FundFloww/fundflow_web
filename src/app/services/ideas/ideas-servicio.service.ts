@@ -160,4 +160,20 @@ export class IdeasServicioService {
             throw error;
         }
     }
+
+    async getIdeasAdmin(page: number, size: number, searchString: string) {
+        try {
+            let url = `${this.apiURL}/api/ideas/admin?page=${page}&size=${size}`;
+            if (searchString !== '') {
+                url += `&search=${searchString}`;
+            }
+
+            const response = await fetch(url);
+            const datos = await response.json();
+            return (datos.status != 404) ? datos : null;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }
