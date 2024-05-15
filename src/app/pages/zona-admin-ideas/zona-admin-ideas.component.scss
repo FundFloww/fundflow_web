@@ -31,3 +31,30 @@ select[name="dataTable_length"] {
     width: auto;
     appearance: revert;
 }
+
+.card-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 0.5fr);
+    justify-content: center;
+}
+
+.card-bar>.card-idea {
+    background-color: #1E3D58;
+}
+
+.card-idea {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    width: 420px;
+    height: 200px;
+}
+
+a.page-link:hover {
+    cursor: pointer;
+}

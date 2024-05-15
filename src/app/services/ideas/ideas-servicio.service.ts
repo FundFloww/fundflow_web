@@ -9,6 +9,7 @@ import { CamposApi } from '../../enum/camposApi';
 import { environment } from '../../../environments/environment';
 import { InversionEnviar } from '../../interfaces/InversionEnviar';
 import { Hito } from '../../interfaces/hito';
+import { IdeaItemAdminComponent } from '../../components/idea-item-admin/idea-item-admin.component';
 
 @Injectable({
     providedIn: 'root'
@@ -80,6 +81,24 @@ export class IdeasServicioService {
         } catch (error) {
             console.error(error);
             throw error;
+        }
+    }
+
+    async deleteIdea(ideaId: number) {
+        try {
+            const response = await fetch(`${this.apiURL}/api/ideas/eliminar/${ideaId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al eliminar la idea.');
+            }
+
+        } catch (error) {
+            console.error('Error al realizar la operación:', error);
         }
     }
 

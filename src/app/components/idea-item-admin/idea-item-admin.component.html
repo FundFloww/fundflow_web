@@ -1,4 +1,4 @@
-<div class="card d-flex flex-column shadow ">
+<div class="card d-flex flex-column shadow card-idea">
     <div>
         <div class="d-flex justify-content-between px-2">
             <div class="d-flex align-items-center justify-content-between w-100 p-2">
@@ -17,7 +17,7 @@
         </div>
         <div class="d-grid gap-2">
             <button type="button" class="btn btn-primary text-white">Editar</button>
-            <button type="button" class="btn btn-danger">Borrar</button>
+            <button type="button" (click)="borrarIdea(idea.id)" class="btn btn-danger">Borrar</button>
         </div>
     </div>
 </div>

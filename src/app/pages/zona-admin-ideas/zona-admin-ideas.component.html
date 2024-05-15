@@ -12,22 +12,22 @@
                             <select name="dataTable_length" aria-controls="dataTable"
                                 class="ms-2 me-2 custom-select custom-select-sm form-control form-control-sm"
                                 [(ngModel)]="pageSize" (change)="actualizarPageSize()">
-                                <option [ngValue]="10" [selected]="pageSize === 10">10</option>
-                                <option [ngValue]="25" [selected]="pageSize === 25">25</option>
-                                <option [ngValue]="50" [selected]="pageSize === 50">50</option>
+                                <option [ngValue]="8" [selected]="pageSize === 8">8</option>
+                                <option [ngValue]="16" [selected]="pageSize === 16">16</option>
+                                <option [ngValue]="30" [selected]="pageSize === 32">30</option>
                             </select>
                             registros
                         </label>
                         <div class="search me-3">
                             <img src="../../assets/icons/search.svg" alt="">
-                            <input type="search" [(ngModel)]="filterSearch" placeholder="Buscar">
+                            <input type="search" [(ngModel)]="filterSearch" placeholder="Buscar" (input)="onInputBusqueda()">
                         </div>
                     </div>
                     <div class="card-body table-responsive ms-3 me-3">
                         <div class="default-bar card-bar bg-light-l"
                             [ngClass]="{ 'd-flex justify-content-center align-items-center': ideasNotFound }">
                             <ng-container *ngFor="let idea of ideas">
-                                <idea-item-admin [idea]="idea"></idea-item-admin>
+                                <idea-item-admin [idea]="idea" (ideaEliminada)="cargarModificaciones()"></idea-item-admin>
                             </ng-container>
                             <div *ngIf="ideasNotFound" class="no-results-message">
                                 No hay resultados para esta búsqueda
@@ -40,13 +40,19 @@
                         <nav class="me-3" *ngIf="totalPages > 1">
                             <ul class="pagination mb-0">
                                 <li class="page-item" [ngClass]="{ 'disabled': currentPage === 0 }">
-                                    <button (click)="cambiarPagina(currentPage - 1)" class="page-link">&laquo;</button>
+                                    <a (click)="cambiarPagina(0)" class="page-link">Primera</a>
+                                </li>
+                                <li class="page-item" [ngClass]="{ 'disabled': currentPage === 0 }">
+                                    <a (click)="cambiarPagina(currentPage - 1)" class="page-link">&laquo;</a>
                                 </li>
                                 <li class="page-item">
                                     <a class="page-link disabled bg-white">{{currentPage + 1}}</a>
                                 </li>
-                                <li class="page-item" [ngClass]="{ 'disabled': currentPage + 1 === totalPages}">
-                                    <button (click)="cambiarPagina(currentPage + 1)" class="page-link">&raquo;</button>
+                                <li class="page-item" [ngClass]="{ 'disabled': currentPage + 1 === totalPages }">
+                                    <a (click)="cambiarPagina(currentPage + 1)" class="page-link">&raquo;</a>
+                                </li>
+                                <li class="page-item" [ngClass]="{ 'disabled': currentPage + 1 === totalPages }">
+                                    <a (click)="cambiarPagina(totalPages - 1)" class="page-link">Última</a>
                                 </li>
                             </ul>
                         </nav>

@@ -6,27 +6,27 @@ import { IdeaDto } from '../../interfaces/ideaDto';
 import { IdeaItemAdminComponent } from '../../components/idea-item-admin/idea-item-admin.component';
 
 @Component({
-	selector: 'zona-admin-ideas',
-	standalone: true,
-	imports: [
-		FormsModule,
-		CommonModule,
+    selector: 'zona-admin-ideas',
+    standalone: true,
+    imports: [
+        FormsModule,
+        CommonModule,
         IdeaItemAdminComponent
-	],
-	templateUrl: './zona-admin-ideas.component.html',
-	styleUrl: './zona-admin-ideas.component.scss'
+    ],
+    templateUrl: './zona-admin-ideas.component.html',
+    styleUrl: './zona-admin-ideas.component.scss'
 })
 export class ZonaAdminIdeasComponent {
 
-	filterSearch = '';
-	ideas: IdeaDto[] = [];
+    filterSearch = '';
+    ideas: IdeaDto[] = [];
     ideasNotFound: boolean = true;
     currentPage: number = 0;
     totalPages: number = 0;
-    pageSize: number = 10;
+    pageSize: number = 8;
     registrosTotales: number = 0;
 
-	constructor(
+    constructor(
         private ideasService: IdeasServicioService
     ) { }
 
@@ -60,17 +60,30 @@ export class ZonaAdminIdeasComponent {
         this.ideasNotFound = (this.ideas.length === 0);
     }
 
-	actualizarPageSize() {
+    actualizarPageSize() {
         if (this.pageSize >= this.registrosTotales) {
             this.currentPage = 0;
         }
         this.cargarIdeas();
     }
 
-	async cambiarPagina(pagina: number) {
+    async cambiarPagina(pagina: number) {
         if (pagina >= 0 && pagina < this.totalPages) {
             this.currentPage = pagina;
             await this.cargarIdeas();
+        }
+    }
+
+    onInputBusqueda() {
+        this.currentPage = 0;
+        this.cargarIdeas();
+    }
+
+    cargarModificaciones() {
+        if (this.ideas.length == 1) {
+            this.ideas = [];
+        } else {
+            this.cargarIdeas();
         }
     }
 }
