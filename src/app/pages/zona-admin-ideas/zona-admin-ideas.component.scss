@@ -58,3 +58,23 @@ select[name="dataTable_length"] {
 a.page-link:hover {
     cursor: pointer;
 }
+
+
+
+@media (width < 1850px) {
+    .card-bar {
+        grid-template-columns: repeat(3, 0.5fr);
+    }
+}
+
+@media (width < 1400px) {
+    .card-bar {
+        grid-template-columns: repeat(2, 0.5fr);
+    }
+}
+
+@media (width < 900px) {
+    .card-bar {
+        grid-template-columns: repeat(1, 0.5fr);
+    }
+}

@@ -103,6 +103,7 @@ export class ZonaAdminNoticiasComponent {
                 this.noticiasService.deleteNoticia(id).then(() => {
                     if (this.noticias.length == 1) {
                         this.noticias = [];
+                        this.updateNoticiasNotFound();
                     } else {
                         this.cargarNoticias();
                     }

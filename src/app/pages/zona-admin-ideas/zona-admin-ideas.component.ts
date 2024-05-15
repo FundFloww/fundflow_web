@@ -82,6 +82,7 @@ export class ZonaAdminIdeasComponent {
     cargarModificaciones() {
         if (this.ideas.length == 1) {
             this.ideas = [];
+            this.updateIdeasNotFound();
         } else {
             this.cargarIdeas();
         }

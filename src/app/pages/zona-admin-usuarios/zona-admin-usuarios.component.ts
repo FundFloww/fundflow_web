@@ -103,6 +103,7 @@ export class ZonaAdminUsuariosComponent {
                 this.usuariosService.deleteUsuario(id).then(() => {
                     if(this.usuarios.length == 1) {
                         this.usuarios = [];
+                        this.updateUsuariosNotFound();
                     } else {
                         this.cargarUsuarios();
                     }
