@@ -1,15 +1,15 @@
 form div.mb-3 input {
     height: 43px;
     padding: 6px 12px;
-    border-radius: .375rem;
-    border: 0;
-    background-color: #ebefff;
-    outline: none;
 }
 
 form div.mb-3 textarea {
     padding: 10px 12px;
     height: 150px;
+}
+
+form div.mb-3 input,
+form div.mb-3 textarea{
     border-radius: .375rem;
     border: 0;
     background-color: #ebefff;

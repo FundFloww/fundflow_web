@@ -195,4 +195,23 @@ export class IdeasServicioService {
             throw error;
         }
     }
+
+    async getIdeaPorId(id: number) {
+        try {
+            const response = await fetch(`${this.apiURL}/api/ideas/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al obtener la idea');
+            }
+
+            return await response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
 }

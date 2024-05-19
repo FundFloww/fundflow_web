@@ -1,0 +1,86 @@
+<div class="modal fade" id="myModal" aria-hidden="true" aria-labelledby="myModal" data-bs-backdrop="static"
+    (hidden.bs.modal)="resetForm()">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary" id="exampleModalToggleLabel">Modificar datos de la idea</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-5 py-3">
+                <form novalidate autocomplete="off" #editForm="ngForm">
+                    <div class="mb-3">
+                        <label for="titulo">Titulo</label>
+                        <input id="titulo" type="text" class="form-control" name="titulo" value="{{this.idea?.titulo}}"
+                            placeholder="Titulo de la idea" [(ngModel)]="ideaTemporal.titulo" #titulo="ngModel" required
+                            [ngClass]="validClasses(titulo, 'is-valid', 'is-invalid')" (input)="cambioRealizado()">
+                        <div class="invalid-feedback">
+                            Titular requerido
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion">Descripción <small>(max {{100 - (ideaTemporal.descripcion?.length ||
+                                0)}})</small></label>
+                        <textarea id="descripcion" class="form-control" name="descripcion"
+                            value="{{this.idea?.descripcion}}" placeholder="Breve descripción de la idea..."
+                            [(ngModel)]="ideaTemporal.descripcion" required maxlength="100" #descripcion="ngModel"
+                            [ngClass]="validClasses(descripcion, 'is-valid', 'is-invalid')"
+                            (input)="cambioRealizado()"></textarea>
+                        <div class="invalid-feedback">
+                            Descripción requerida
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="imagenes">Imágenes</label>
+                        <div class="imagenes mt-1 mb-3">
+                            @for (imagen of ideaTemporal.imagenes; track $index) {
+                                <div class="imagen-container">
+                                    <img class="border border-light" src="{{ imagen }}" alt="imagen" loading="lazy">
+                                    <div *ngIf="(ideaTemporal.imagenes.length > 1) || (imagenesFile.length >= 1 && imagenesFile[0].name != '')" 
+                                        class="bg-white btn-trash">
+                                        <img role="button" (click)="deleteImagen($index)" class="ms-2 target" src="../../../assets/icons/trash.svg"
+                                            alt="eliminar" loading="lazy">
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        @for (imagen of imagenesFile; track $index) {
+                        <div class="input-imagen">
+                            <input type="file" class="form-control mb-1" name="imagen" #fileImage
+                                (change)="changeImage(fileImage, $index)" required>
+                            <div class="btn btn-danger ms-2" (click)="borrarImagen($index)">X</div>
+                        </div>
+                        }
+
+                        <button class="btn btn-primary text-white my-3" (click)="agregarOtraImagen($event)">
+                            Agregar otra imagen
+                        </button>
+                        <!-- <div class="invalid-feedback">
+                            Enlace requerido
+                        </div> -->
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="campo">Campo</label>
+                        <select class="form-select" [(ngModel)]="ideaTemporal.campo" name="campo" required
+                            #campo="ngModel" [ngClass]="validClasses(campo, 'is-valid', 'is-invalid')"
+                            (input)="cambioRealizado()">
+                            <option value="" selected disabled>Selecciona un campo</option>
+                            @for (campo of camposArray; track $index ) {
+                            <option value={{campo.toUpperCase()}}>{{campo}}</option>
+                            }
+                        </select>
+                        <div class="invalid-feedback">
+                            Campo requerido
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" (click)="editIdea()"
+                    [disabled]="editForm.invalid || !cambio || imagenesVacias()">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>

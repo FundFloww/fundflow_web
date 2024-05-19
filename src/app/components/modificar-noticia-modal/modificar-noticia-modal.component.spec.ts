@@ -10,8 +10,8 @@ describe('ModificarNoticiaModalComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ModificarNoticiaModalComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ModificarNoticiaModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

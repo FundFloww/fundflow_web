@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
 import { IdeaDto } from '../../interfaces/ideaDto';
 import { IdeaItemAdminComponent } from '../../components/idea-item-admin/idea-item-admin.component';
+import { ModificarIdeaModalComponent } from '../../components/modificar-idea-modal/modificar-idea-modal.component';
+import { IdeaEditarDto } from '../../interfaces/ideaEditarDto';
 
 @Component({
     selector: 'zona-admin-ideas',
@@ -11,7 +13,8 @@ import { IdeaItemAdminComponent } from '../../components/idea-item-admin/idea-it
     imports: [
         FormsModule,
         CommonModule,
-        IdeaItemAdminComponent
+        IdeaItemAdminComponent,
+        ModificarIdeaModalComponent
     ],
     templateUrl: './zona-admin-ideas.component.html',
     styleUrl: './zona-admin-ideas.component.scss'
@@ -25,6 +28,13 @@ export class ZonaAdminIdeasComponent {
     totalPages: number = 0;
     pageSize: number = 8;
     registrosTotales: number = 0;
+
+    ideaEditar: IdeaEditarDto = {
+        titulo: '',
+        descripcion: '',
+        imagenes: [],
+        campo: undefined
+    };
 
     constructor(
         private ideasService: IdeasServicioService
@@ -86,5 +96,9 @@ export class ZonaAdminIdeasComponent {
         } else {
             this.cargarIdeas();
         }
+    }
+
+    ideaAModificar(ideaAModificar: IdeaEditarDto) {
+        this.ideaEditar = Object.assign({}, ideaAModificar);
     }
 }
