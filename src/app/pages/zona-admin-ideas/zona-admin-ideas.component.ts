@@ -6,6 +6,7 @@ import { IdeaDto } from '../../interfaces/ideaDto';
 import { IdeaItemAdminComponent } from '../../components/idea-item-admin/idea-item-admin.component';
 import { ModificarIdeaModalComponent } from '../../components/modificar-idea-modal/modificar-idea-modal.component';
 import { IdeaEditarDto } from '../../interfaces/ideaEditarDto';
+import { camposKeys } from '../../enum/campos';
 
 @Component({
     selector: 'zona-admin-ideas',
@@ -28,6 +29,8 @@ export class ZonaAdminIdeasComponent {
     totalPages: number = 0;
     pageSize: number = 8;
     registrosTotales: number = 0;
+    camposArray: string[] = camposKeys;
+    campoFilter: string = 'TODOS';
 
     ideaEditar: IdeaEditarDto = {
         titulo: '',

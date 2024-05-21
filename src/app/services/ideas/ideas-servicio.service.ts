@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 import { InversionEnviar } from '../../interfaces/InversionEnviar';
 import { Hito } from '../../interfaces/hito';
 import { IdeaItemAdminComponent } from '../../components/idea-item-admin/idea-item-admin.component';
+import { IdeaEditarDto } from '../../interfaces/ideaEditarDto';
 
 @Injectable({
     providedIn: 'root'
@@ -81,6 +82,26 @@ export class IdeasServicioService {
         } catch (error) {
             console.error(error);
             throw error;
+        }
+    }
+
+    async editIdea(idea: IdeaEditarDto) {
+        try {
+            const response = await fetch(`${this.apiURL}/api/ideas/editar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(idea),
+            });
+            if(!response.ok) {
+                throw new Error(`Error al enviar la idea a la base de datos. Código de estado: ${response.status}`);
+            }
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+            
         }
     }
 
