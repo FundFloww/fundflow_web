@@ -49,7 +49,7 @@ export class ZonaAdminIdeasComponent {
 
     async cargarIdeas() {
         try {
-            const res = await this.ideasService.getIdeasAdmin(this.currentPage, this.pageSize, this.filterSearch.trim());
+            const res = await this.ideasService.getIdeasAdmin(this.currentPage, this.pageSize, this.filterSearch.trim(), this.campoFilter);
             if (res != null) {
                 this.ideas = res.content;
                 this.totalPages = res.totalPages;
@@ -87,7 +87,7 @@ export class ZonaAdminIdeasComponent {
         }
     }
 
-    onInputBusqueda() {
+    onInputBusquedaOCampo() {
         this.currentPage = 0;
         this.cargarIdeas();
     }

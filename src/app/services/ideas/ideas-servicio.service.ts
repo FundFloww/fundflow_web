@@ -201,11 +201,15 @@ export class IdeasServicioService {
         }
     }
 
-    async getIdeasAdmin(page: number, size: number, searchString: string) {
+    async getIdeasAdmin(page: number, size: number, searchString: string, campo: string) {
         try {
             let url = `${this.apiURL}/api/ideas/admin?page=${page}&size=${size}`;
             if (searchString !== '') {
                 url += `&search=${searchString}`;
+            }
+
+            if(campo !== 'TODOS') {
+                url += `&campo=${campo}`;
             }
 
             const response = await fetch(url);

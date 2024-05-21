@@ -21,13 +21,9 @@
                             </select>
                             registros
                         </label>
-                        <!-- <div class="search me-3">
-                            <img src="../../assets/icons/search.svg" alt="">
-                            <input type="search" [(ngModel)]="filterSearch" placeholder="Buscar" (input)="onInputBusqueda()">
-                        </div> -->
                         <div class="d-flex gap-2 me-3">
                             <select name="select-campo" class="form-select" aria-label="Default select example"
-                            [(ngModel)]="campoFilter">
+                            [(ngModel)]="campoFilter" (change)="onInputBusquedaOCampo()">
                                 <option value="TODOS" selected>Todos los campos</option>
                                 @for (campo of camposArray; track $index ) {
                                     <option value={{campo.toUpperCase()}}>{{campo}}</option>
@@ -35,7 +31,7 @@
                             </select>
                             <div class="search">
                                 <img src="../../assets/icons/search.svg" alt="">
-                                <input type="search" [(ngModel)]="filterSearch" (input)="onInputBusqueda()"
+                                <input type="search" [(ngModel)]="filterSearch" (input)="onInputBusquedaOCampo()"
                                     placeholder="Buscar">
                             </div>
                         </div>
