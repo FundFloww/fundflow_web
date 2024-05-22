@@ -26,11 +26,55 @@ h1 {
     padding: 10px;
 }
 
-.news-container {
-    display: flex;
-    flex-direction: column;
+.hover-grow{
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.hover-grow:hover {
+    transform: scale(1.01);
+}
+
+.card-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 0.5fr);
+    justify-content: center;
+    gap: 2rem;
+}
+
+.card-bar a{
+    color: rgb(110, 110, 110);
+    text-decoration: none;
+}
+
+.card-bar a .card-noticia{
+    overflow-y: auto;
+    height: 250px;
+    border-radius: 1rem;
 }
 
 .news-item {
     padding: 15px;
+}
+
+@media (width < 1850px) {
+    .card-bar {
+        grid-template-columns: repeat(2, 0.5fr);
+    }
+}
+
+@media (width < 1400px) {
+    .card-bar {
+        grid-template-columns: repeat(2, 0.5fr);
+    }
+}
+
+@media (width < 900px) {
+    .card-bar {
+        grid-template-columns: repeat(1, 0.5fr);
+    }
+    .card-bar a .card-noticia{
+        height: 300px;
+        width: 400px;
+    }
 }

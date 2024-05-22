@@ -4,35 +4,23 @@
             [session]="session"></app-side-bar>
         <div id="content" class="col-10 h-100 pe-0 ps-0">
             <section class="section-content">
-                <app-header [filterSearch]="filterSearch" (filterSearchChange)="onFilterIdeasChange($event)"></app-header>
+                <app-header [filterSearch]="filterSearch"
+                    (filterSearchChange)="onFilterNoticiasChange($event)"></app-header>
                 <h1 class="news-item bg-light-l">Noticias - Novedades en el mundo de las inversiones</h1>
-                <div class="news-container bg-light-l">
-                    <div class="news-item bg-light-l">
-                        <h2><a
-                                href="https://emprendedores.es/firmas/es-2024-un-buen-ano-para-conseguir-financiacion-publica-para-startups-y-pymes/">¿Es
-                                2024 un buen año para conseguir financiación pública para startups y pymes?</a></h2>
-                        <p>En el mundo del emprendimiento, las líneas de financiación pública pueden llegar a
-                            convertirse en aliadas esenciales para muchas startups, especialmente, en las etapas
-                            iniciales...</p>
+                <div class="default-bar card-bar bg-light-l p-4"
+                    [ngClass]="{ 'd-flex justify-content-center align-items-center': noticiasNotFound }">
+                    <ng-container *ngFor="let noticia of noticias">
+                        <a href="{{noticia.link}}" target="_blank" class="hover-grow" rel="noopener noreferrer">
+                            <div class="card-noticia bg-light p-3 d-flex flex-column">
+                                <h3 class="text-primary mb-3">{{ noticia.titulo }}</h3>
+                                <p>{{noticia.descripcion}}</p>
+                                <small class="align-self-end mt-auto">{{noticia.fecha | date: 'd/MM/Y, H:mm' }}</small>
+                            </div>
+                        </a>
+                    </ng-container>
+                    <div *ngIf="noticiasNotFound" class="no-results-message">
+                        No hay resultados para esta búsqueda
                     </div>
-
-                    <div class="news-item bg-light-l">
-                        <h2><a
-                                href="https://www.eleconomista.es/tecnologia/noticias/12658341/02/24/le-pide-a-chatgpt-que-lo-haga-rico-con-una-inversion-de-100-euros-ganancias-de-mas-de-1200-euros-en-el-primer-dia.html">
-                                Le pide a ChatGPT que lo haga rico con una inversión de 100 euros: ganancias de más de
-                                1.200 euros en el primer día</a></h2>
-                        <p>Así es, la revolución de la inteligencia artificial no tiene límites. Resulta que ahora se
-                            sumerge en la misma economía, con la posibilidad de hacer inversiones inteligentes o crear
-                            empresas en línea.</p>
-                    </div>
-
-                    <div class="news-item bg-light-l">
-                        <h2><a
-                                href="https://www.eleconomista.es/economia/noticias/12316751/06/23/la-franquicia-apuesta-por-el-modelo-de-intraemprendimiento-para-crecer.html">La
-                                franquicia apuesta por el modelo de intraemprendimiento para crecer</a></h2>
-                        <p>La franquicia sigue siendo un modelo de negocio generador de empleo, puesto que en 2022 daba trabajo a 303.595 personas, por las 294.231 que empleaba en 2019, lo que equivale a un incremento del 3,18 %.</p>
-                    </div>
-
                 </div>
             </section>
         </div>

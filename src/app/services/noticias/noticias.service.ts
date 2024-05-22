@@ -32,6 +32,21 @@ export class NoticiasService {
         }
     }
 
+    async getNoticiasMostrar(searchString: string) {
+        try {
+            let url = `${this.urlBase}/api/noticias/mostrar`;
+            if (searchString !== '') {
+                url += `?search=${searchString}`;
+            }
+
+            const response = await fetch(url);
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     async deleteNoticia(noticiaId: number) {
         try {
             const response = await fetch(`${this.urlBase}/api/noticias/eliminar/${noticiaId}`, {
