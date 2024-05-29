@@ -10,6 +10,7 @@ import { IdeaNueva } from '../../interfaces/ideaNueva';
 import { IdeasServicioService } from '../../services/ideas/ideas-servicio.service';
 import { ImagenesService } from '../../services/imagenes/imagenes.service';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
+import { IaService } from '../../services/ia/ia.service';
 
 @Component({
     selector: 'app-form-idea',
@@ -28,11 +29,13 @@ export class FormIdeaComponent {
     session: boolean | null = null;
     camposArray: string[] = camposKeys;
     enviandoIdea: boolean = false;
+    descripcionAux: string = '';
 
     constructor(
         private usuariosService: UsuariosService,
         private ideasServicio: IdeasServicioService,
         private imagenesService: ImagenesService,
+        private iaService: IaService,
         private router: Router
     ) { }
 
@@ -43,6 +46,7 @@ export class FormIdeaComponent {
         imagenesFile: [new File([], '')],
         campo: undefined,
         emprendedor: [],
+        ods: ''
     }
 
     async ngOnInit() {
@@ -95,6 +99,12 @@ export class FormIdeaComponent {
             this.enviandoIdea = true;
             this.nuevaIdea.imagenes = await this.imagenesService.subirImagenes(this.nuevaIdea.imagenesFile);
             this.nuevaIdea.emprendedor.push(await this.usuariosService.getUsuario());
+            this.descripcionAux = this.nuevaIdea.descripcion.replace(/[\n\r]/g, '');
+            this.nuevaIdea.ods = await this.iaService.getODS(this.descripcionAux);
+            this.nuevaIdea.ods = this.nuevaIdea.ods.replace(/\s/g, '');
+            if(this.nuevaIdea.ods == '0'){
+                this.nuevaIdea.ods = '';
+            }
             await this.ideasServicio.addIdea(this.nuevaIdea);
             this.router.navigate(['/inicio']);
         } catch (error) {

@@ -9,4 +9,5 @@ export interface IdeaNueva {
     imagenesFile: File[];
     campo?: Campos;
     emprendedor: Usuario[];
+    ods: string;
 }

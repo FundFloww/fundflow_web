@@ -14,7 +14,9 @@
     <div class="card-body">
         <div class="titulo">
             <h5 class="card-title mb-0">{{ idea.titulo }}</h5>
-            <p class="card-text">Apoya {{ cantidadODS }} ODS</p>
+            @if(this.cantidadODS > 0) {
+                <p class="card-text"><small class="text-body-secondary campo">Apoya {{ cantidadODS }} ODS</small></p>
+            }
         </div>
         <p class="card-text"><small class="text-body-secondary campo">Campo: {{ idea.campo }}</small></p>
         <div class="caja-des">

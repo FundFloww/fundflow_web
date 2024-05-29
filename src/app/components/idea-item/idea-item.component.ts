@@ -34,9 +34,11 @@ export class IdeaItemComponent {
     async ngOnInit() {
         this.usuario = await this.usuariosService.getUsuarioPorId(this.idea.emprendedor[0].id ?? 0);
         
-        var odsAux = this.idea.ods.split(',');
+        var odsAux = []
+        if(this.idea.ods){
+            odsAux = this.idea.ods.split(',');
+        }
         this.cantidadODS = odsAux.length;
-        console.log(this.cantidadODS);
     }
 
     onClickProfile() {        
