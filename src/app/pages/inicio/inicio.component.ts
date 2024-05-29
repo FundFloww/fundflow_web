@@ -29,7 +29,6 @@ import { IdeasFilterPipe } from '../../pipes/ideas/ideas-filter.pipe';
 export class InicioComponent {
     ideas: IdeaDto[] = [];
     camposArray: string[] = camposKeys;
-    open: boolean = true;
     session: boolean | null = null;
     camposSeleccionados: string[] = [];
     ideasNotFound: boolean = false;
@@ -50,20 +49,6 @@ export class InicioComponent {
 
         this.session = await this.usuariosService.loggedIn();
         this.onScrollMove();
-    }
-
-    onOpenBar(evento?: Event) {
-        const cerrarBar = document.getElementById('cerrar-bar')!;
-
-        if(evento?.target !== cerrarBar.children[0]) {
-            return;
-        }
-        
-        if(getComputedStyle(cerrarBar).display === 'none') {
-            return;
-        }
-
-        this.open = onOpenBarFunction(this.open);
     }
 
     toggleCampo(campo: string) {

@@ -1,109 +1,116 @@
 <div class="container-fluid root-element bg-light relative">
-    <div class="row">
-        <app-side-bar 
-            class="col-2 px-0" id="side-bar" 
-            (click)="onOpenBar($event)" 
-            [open]="open"
-            [session]="session"
-        ></app-side-bar>
-        <div id="content" class="col-10 h-100 pe-0 ps-0">
-            <section class="section-content">
-                <div class="idea-info bg-light-l">
-                    <div class="titulo-idea">
-                        <div class="start">
-                            <img class="border border-light" src="{{ this.imagenMain }}" alt="perfil" loading="lazy">
-                            <div class="datos-titulo">
-                                <h1>{{ this.idea?.titulo }}</h1>
-                                <div (click)="onClickProfile()" class="nombre-usuario">{{ this.nombreCompleto }}</div>
-                            </div>
+    <app-side-bar [session]="session"></app-side-bar>
+    <div class="content h-100 pe-0 ps-0">
+        <section class="section-content">
+            <div class="idea-info bg-light-l">
+                <div class="titulo-idea">
+                    <div class="start">
+                        <img class="border border-light" src="{{ this.imagenMain }}" alt="perfil" loading="lazy">
+                        <div class="datos-titulo">
+                            <h1>{{ this.idea?.titulo }}</h1>
+                            <div (click)="onClickProfile()" class="nombre-usuario">{{ this.nombreCompleto }}</div>
                         </div>
-                        @if(this.session && !this.propietario) {
-                            <button id="boton-guardar" (click)="onClickGuardar()" class="btn btn-primary text-light-l">
-                                <span id="texto-boton">Añadir a favoritos!</span>
-                                <img id="no-guardado-tick" class="no-guardado" src="../../../assets/icons/no_guardado.svg" alt="guardado" loading="lazy">
-                                <img id="guardar-tick" class="guardado" src="../../../assets/icons/guardado.svg" alt="guardado" loading="lazy">
-                            </button>
-                        }
                     </div>
-                    <h4>Descripción</h4>
-                    <p>{{ this.idea?.descripcion }}</p>
+                    @if(this.session && !this.propietario) {
+                    <button id="boton-guardar" (click)="onClickGuardar()" class="btn btn-primary text-light-l">
+                        <span id="texto-boton">Añadir a favoritos!</span>
+                        <img id="no-guardado-tick" class="no-guardado" src="../../../assets/icons/no_guardado.svg"
+                            alt="guardado" loading="lazy">
+                        <img id="guardar-tick" class="guardado" src="../../../assets/icons/guardado.svg" alt="guardado"
+                            loading="lazy">
+                    </button>
+                    }
                 </div>
-                <div class="inversores-info bg-light-l">
-                    <div>
-                        <p>{{ this.inversionesRecibidas.length }}</p>
-                        <p>Inversiones</p>
-                    </div>
-                    <div>
-                        <p>{{ this.idea?.hitos?.length }}</p>
-                        <p>Hitos Terminados</p>
-                    </div>
-                    <div>
-                        <p>{{ this.totalRecibido }}€</p>
-                        <p>Total Invertido</p>
-                    </div>
+                <h4>Descripción</h4>
+                <p>{{ this.idea?.descripcion }}</p>
+            </div>
+            <div class="inversores-info bg-light-l">
+                <div>
+                    <p>{{ this.inversionesRecibidas.length }}</p>
+                    <p>Inversiones</p>
                 </div>
-                <div class="imagenes-idea bg-light-l">
-                    <h4>Imagenes</h4>
-                    <div (scroll)="onScrollMove()" id="imagenes-container" class="imagenes">
-                        <button *ngIf="this.idea?.imagenes?.length! > 1" (click)="onClickRetroceder()" class="retroceder"><img src="../../../assets/icons/retroceder.svg" alt="retroceder" loading="lazy"></button>
-                        @for (imagen of this.idea?.imagenes; track $index) {
-                            <img class="border border-light" (click)="onClickImage($event)" src="{{ imagen }}" alt="imagen" loading="lazy">
-                        }
-                        <button *ngIf="this.idea?.imagenes?.length! > 1" (click)="onClickAvanzar()" class="avanzar"><img src="../../../assets/icons/avanzar.svg" alt="retroceder" loading="lazy"></button>
-                    </div>
+                <div>
+                    <p>{{ this.idea?.hitos?.length }}</p>
+                    <p>Hitos Terminados</p>
                 </div>
-                <div class="linea-tiempo bg-light-l">
-                    <h4>Linea de tiempo</h4>
-                    <ul class="hitos">
-                        @for(hito of this.idea?.hitos; track $index) {
-                            <li class="hito">
-                                <div class="custom-bullet"></div>
-                                <h5 class="titulo-hito d-flex align-items-center">
-                                    {{ hito.titulo }}
-                                    @if(this.propietario) {
-                                        <img (click)="onClickEliminarHito(hito)" role="button" class="ms-2 target" src="../../../assets/icons/trash.svg" alt="eliminar" loading="lazy">
-                                    }
-                                </h5>
-                                <div class="fecha-hito">{{ hito.fecha.toString().split('T')[0].split('-').reverse().join('/') }}</div>
-                                <div class="descripcion-hito">{{ hito.texto }}</div>
-                            </li>
-                        }
-                        @if(this.idea?.hitos?.length === 0) {
-                            <li class="hito">
-                                <h5 class="titulo-hito">No hay hitos</h5>
-                            </li>
-                        }
-                        @if(this.propietario) {
-                            <li class="hito" [ngClass]="{'d-none' : !this.idea?.hitos || this.idea?.hitos?.length === 0 || nuevoHito}">
-                                <button (click)="onClickNuevoHito()" class="btn btn-primary text-light-l">Añadir Hito</button>
-                            </li>
-                            @if(!this.idea?.hitos || this.idea?.hitos?.length === 0 || this.nuevoHito) {
-                                <li class="hito">
-                                    <div class="custom-bullet"></div>
-                                    <h5 class="titulo-hito"><input [(ngModel)]="this.hito.titulo" name="titulo-hito" type="text" placeholder="Titulo"></h5>
-                                    <div class="fecha-hito">{{ this.fechaHoy }}</div>
-                                    <div class="descripcion-hito"><textarea [(ngModel)]="this.hito.texto" name="contenido-hito" class="texto-hito" placeholder="Contenido..."></textarea></div>
-                                    <div>
-                                        <button (click)="onClickGuardarHito()" class="btn btn-primary text-light-l mt-3">Guardar</button>
-                                        <button (click)="onClickCancelarHito()" class="btn btn-primary text-light-l mt-3 ms-2">Cancelar</button>
-                                    </div>
-                                </li>
+                <div>
+                    <p>{{ this.totalRecibido }}€</p>
+                    <p>Total Invertido</p>
+                </div>
+            </div>
+            <div class="imagenes-idea bg-light-l">
+                <h4>Imagenes</h4>
+                <div (scroll)="onScrollMove()" id="imagenes-container" class="imagenes">
+                    <button *ngIf="this.idea?.imagenes?.length! > 1" (click)="onClickRetroceder()"
+                        class="retroceder"><img src="../../../assets/icons/retroceder.svg" alt="retroceder"
+                            loading="lazy"></button>
+                    @for (imagen of this.idea?.imagenes; track $index) {
+                    <img class="border border-light" (click)="onClickImage($event)" src="{{ imagen }}" alt="imagen"
+                        loading="lazy">
+                    }
+                    <button *ngIf="this.idea?.imagenes?.length! > 1" (click)="onClickAvanzar()" class="avanzar"><img
+                            src="../../../assets/icons/avanzar.svg" alt="retroceder" loading="lazy"></button>
+                </div>
+            </div>
+            <div class="linea-tiempo bg-light-l">
+                <h4>Linea de tiempo</h4>
+                <ul class="hitos">
+                    @for(hito of this.idea?.hitos; track $index) {
+                    <li class="hito">
+                        <div class="custom-bullet"></div>
+                        <h5 class="titulo-hito d-flex align-items-center">
+                            {{ hito.titulo }}
+                            @if(this.propietario) {
+                            <img (click)="onClickEliminarHito(hito)" role="button" class="ms-2 target"
+                                src="../../../assets/icons/trash.svg" alt="eliminar" loading="lazy">
                             }
-                        }    
-                    </ul>
-                </div>
-                @if(this.session ) {
-                    <div id="invertir-section" class="invertir bg-light-l col-10">
-                        @if(!this.propietario) {
-                            <button [routerLink]="['/invertir/' + this.ideaId]" class="btn btn-primary text-light-l">Invertir</button>
-                        }
-                        <!-- } @else {
+                        </h5>
+                        <div class="fecha-hito">{{ hito.fecha.toString().split('T')[0].split('-').reverse().join('/') }}
+                        </div>
+                        <div class="descripcion-hito">{{ hito.texto }}</div>
+                    </li>
+                    }
+                    @if(this.idea?.hitos?.length === 0) {
+                    <li class="hito">
+                        <h5 class="titulo-hito">No hay hitos</h5>
+                    </li>
+                    }
+                    @if(this.propietario) {
+                    <li class="hito"
+                        [ngClass]="{'d-none' : !this.idea?.hitos || this.idea?.hitos?.length === 0 || nuevoHito}">
+                        <button (click)="onClickNuevoHito()" class="btn btn-primary text-light-l">Añadir Hito</button>
+                    </li>
+                    @if(!this.idea?.hitos || this.idea?.hitos?.length === 0 || this.nuevoHito) {
+                    <li class="hito">
+                        <div class="custom-bullet"></div>
+                        <h5 class="titulo-hito"><input [(ngModel)]="this.hito.titulo" name="titulo-hito" type="text"
+                                placeholder="Titulo"></h5>
+                        <div class="fecha-hito">{{ this.fechaHoy }}</div>
+                        <div class="descripcion-hito"><textarea [(ngModel)]="this.hito.texto" name="contenido-hito"
+                                class="texto-hito" placeholder="Contenido..."></textarea></div>
+                        <div>
+                            <button (click)="onClickGuardarHito()"
+                                class="btn btn-primary text-light-l mt-3">Guardar</button>
+                            <button (click)="onClickCancelarHito()"
+                                class="btn btn-primary text-light-l mt-3 ms-2">Cancelar</button>
+                        </div>
+                    </li>
+                    }
+                    }
+                </ul>
+            </div>
+            @if(this.session ) {
+            <div id="invertir-section" class="invertir bg-light-l col-10">
+                @if(!this.propietario) {
+                <button [routerLink]="['/invertir/' + this.ideaId]"
+                    class="btn btn-primary text-light-l">Invertir</button>
+                }
+                <!-- } @else {
                             <button class="btn btn-primary text-light-l">Editar</button>
                         } -->
-                    </div>
-                }
-            </section>
-        </div>
+            </div>
+            }
+        </section>
     </div>
     <div id="overlay" class="overlay">
         <img id="image-overlay" class="images-click" src="" alt="visualize-image" loading="lazy">
@@ -111,5 +118,5 @@
     </div>
     <div class="loader-wrapper" *ngIf="cargandoIdeas">
         <div class="loader"></div>
-    </div>   
+    </div>
 </div>

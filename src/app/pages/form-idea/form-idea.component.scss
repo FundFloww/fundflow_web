@@ -3,8 +3,23 @@
 }
 
 #side-bar,
-#content {
+.content {
     transition: 0.3s all;
+}
+
+.content {
+    width: 100%;
+    height: 100vh;
+}
+
+.content-data {
+    width: 100%;
+}
+
+.root-element {
+    display: flex;
+    width: 100%;
+    padding: 0;
 }
 
 .imagen {

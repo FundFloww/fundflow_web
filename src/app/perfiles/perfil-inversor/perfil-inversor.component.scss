@@ -5,10 +5,22 @@
     background-color: #FFFFFF;
 }
 
-#side-bar, #content {
+.root-element {
+    display: flex;
+}
+
+#side-bar, .content {
     transition: 0.3s all;
 }
 
+.content {
+    width: 100%;
+    display: flex;
+
+    div { 
+        margin-left: 0px;
+    }
+}
 .banner {
     height: 170px;
 }

@@ -1,7 +1,6 @@
 <div class="container-fluid root-element bg-light">
     <div class="row">
-        <app-side-bar class="col-2 px-0 me-0 no-bootstrap-styles" id="side-bar" (click)="onOpenBar()" [open]="open"
-            [session]="session"></app-side-bar>
+        <app-side-bar [session]="session"></app-side-bar>
         <div id="content" class="col-10 px-0">
             <section class="section-content bg-light-l">
                 <app-header></app-header>

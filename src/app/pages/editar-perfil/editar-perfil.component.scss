@@ -5,9 +5,21 @@
     background-color: #FFFFFF;
 }
 
-#side-bar, #content {
+#side-bar, .content {
     transition: 0.3s all;
 }
+
+.content {
+    width: 100%;
+    height: 100vh;
+}
+
+.root-element {
+    display: flex;
+    width: 100%;
+    padding: 0;
+}
+
 
 .banner {
     height: 170px;

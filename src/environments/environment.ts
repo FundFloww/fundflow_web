@@ -1,7 +1,9 @@
-const ip = "192.168.1.21:9000"
+const ipBack = "localhost:9000"
+const ipOllama = "localhost:3000"
 
 export const environment = {
     production: true,
-    baseUrl: `http://${ip}`,
-    ip: ip
+    baseUrl: `http://${ipBack}`,
+    ipBack: ipBack,
+    ipOllama: ipOllama,
 };

@@ -5,8 +5,24 @@
     background-color: #FFFFFF;
 }
 
-#side-bar, #content {
+#side-bar, .content {
     transition: 0.3s all;
+}
+
+.content {
+    display: flex;
+
+    div { 
+        margin-left: 0px;
+    }
+}
+
+#content-data {
+    width: 100%;
+}
+
+.root-element {
+    width: 100%;
 }
 
 .banner {

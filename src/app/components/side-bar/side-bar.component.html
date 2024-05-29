@@ -1,19 +1,21 @@
-<div id="sidebar-content" class="root">
-    <section class="root-element">
-        <div class="default-bar title-bar bg-light-l">
-            <img (click)="onHomeClick()" src="../../assets/img/logo_color_titulo.png" alt="logo" loading="lazy">
-            <h3 (click)="onHomeClick()" class="f-sora-bold">FundFlow</h3>
-        </div>
-        <div class="options">
-            @for (elemento of elementos; track elemento.id) {
-                @if(elemento.id === 1)
-                {
-                    <app-side-bar-elemento [open]="open" [elemento]="elemento"></app-side-bar-elemento>
-                } @else {
-                    <app-side-bar-elemento [elemento]="elemento"></app-side-bar-elemento>
+<div class="sidebar">
+    <div (click)="onOpenBar($event)" id="sidebar-content" class="root">
+        <section class="root-element">
+            <div class="default-bar title-bar bg-light-l">
+                <img (click)="onHomeClick()" src="../../assets/img/logo_color_titulo.png" alt="logo">
+                <h3 (click)="onHomeClick()" class="f-sora-bold">FundFlow</h3>
+            </div>
+            <div class="options">
+                @for (elemento of elementsSideBar; track elemento.id) {
+                    @if(elemento.id === 1)
+                    {
+                        <app-side-bar-elemento [open]="open" [elemento]="elemento"></app-side-bar-elemento>
+                    } @else {
+                        <app-side-bar-elemento [elemento]="elemento"></app-side-bar-elemento>
+                    }
                 }
-            }
-        </div>
-        <span id="cerrar-bar" class="abrir-cerrar-bar"><img src="../../assets/icons/abrir-barra.svg" alt="open-bar" loading="lazy"></span>
-    </section>
+            </div>
+            <span id="cerrar-bar" class="abrir-cerrar-bar"><img src="../../assets/icons/abrir-barra.svg" alt="open-bar" ></span>
+        </section>
+    </div>
 </div>

@@ -44,6 +44,15 @@ h4 {
     font-weight: 600;
 }
 
+.content {
+    width: 100%;
+    height: 100vh;
+}
+
+.root-element {
+    display: flex;
+}
+
 .idea-info {
     padding: 20px;
     

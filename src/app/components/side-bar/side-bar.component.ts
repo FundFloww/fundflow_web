@@ -3,6 +3,8 @@ import { SideBarElementoComponent } from '../side-bar-elemento/side-bar-elemento
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { Usuario } from '../../interfaces/usuario';
+import { onOpenBarFunction } from '../../functions/sideBarFunctions';
+import { ElementSideBar, elementsSideBar, UserType } from '../../utils/sidebar.utils';
 
 @Component({
     selector: 'app-side-bar',
@@ -12,93 +14,16 @@ import { Usuario } from '../../interfaces/usuario';
     styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent {
+
+    @Input() session: boolean | null = null;
+    open: boolean = true;
+    timesLoaded = 0;
+    elementsSideBar: ElementSideBar[] = []
+
     constructor(
         private usuarioService: UsuariosService,
         private router: Router
     ) {}
-
-    @Input() session: boolean | null = null;
-    @Input() open: boolean = false;
-
-    timesLoaded = 0;
-
-    rutaIconos = '../../assets/icons';
-    elementos = [
-        {
-            id: 1,
-            nombre: 'Inicio',
-            icono: 'inicio',
-            destino: '/',
-            ruta: `${this.rutaIconos}/home.svg`
-        },
-        {
-            id: 2,
-            nombre: 'Noticias',
-            icono: 'noticias',
-            destino: '/noticias',
-            ruta: `${this.rutaIconos}/noticias.svg`
-        },
-        {
-            id: 3,
-            nombre: 'Mis Ideas',
-            icono: 'ideas',
-            destino: '/perfil/0',
-            ruta: `${this.rutaIconos}/emprendedor.svg`
-        },
-        {
-            id: 4,
-            nombre: 'Mis Inversiones',
-            icono: 'inversiones',
-            destino: '/perfil/0',
-            ruta: `${this.rutaIconos}/inversor.svg`
-        },
-        {
-            id: 5,
-            nombre: 'Crear Idea',
-            icono: 'añadir',
-            destino: '/idea/añadir',
-            ruta: `${this.rutaIconos}/añadir.svg`
-        },
-        {
-            id: 6,
-            nombre: 'Guardados',
-            icono: 'guardados',
-            destino: '/perfil/0',
-            ruta: `${this.rutaIconos}/guardados.svg`
-        },
-        {
-            id: 7,
-            nombre: 'Cerrar Sesión',
-            icono: 'logout',
-            destino: '/logout',
-            ruta: `${this.rutaIconos}/logout.svg`
-        },
-        {
-            id: 8,
-            nombre: 'Iniciar sesión',
-            icono: 'login',
-            destino: '/login',
-            ruta: `${this.rutaIconos}/login.svg`
-        },
-        {
-            id: 9,
-            nombre: 'Registrarse',
-            icono: 'registro',
-            destino: '/registro',
-            ruta: `${this.rutaIconos}/register.svg`
-        },
-        {
-            id: 10,
-            nombre: 'Chat',
-            icono: 'chat',
-            destino: '/chat',
-            ruta: `${this.rutaIconos}/chat.svg`
-        }
-    ];
-
-    onHomeClick() {
-        this.router.navigate(['/']);
-    }
 
     async ngOnChanges() {
         if(this.session != null) {
@@ -108,27 +33,41 @@ export class SideBarComponent {
         this.sideBarChange();
     }
 
-    async validateSession() {
-        if(this.session) {
-            this.elementos = this.elementos.filter(e => e.id < 8 || e.id === 10);
-            await this.validateTipoUsuario();
+    onHomeClick() {
+        this.router.navigate(['/']);
+    }
+
+    onOpenBar(event?: Event) {
+        const target = event?.target as HTMLElement;
+        const cerrarBar = document.getElementById('cerrar-bar')!;
+
+        if(target !== cerrarBar.children[0]) {
+            return;
+        }
+        
+        if(getComputedStyle(cerrarBar).display === 'none') {
             return;
         }
 
-        this.elementos = this.elementos.filter(e => e.id < 3 || e.id > 7);
+        this.open = onOpenBarFunction(this.open);
     }
 
-    async validateTipoUsuario() {
-        const usuario: Usuario = await this.usuarioService.getUsuario();
+    async validateSession() {
+        this.elementsSideBar = elementsSideBar.filter(e => e.userType === UserType.ALL);
 
-        if(usuario.tipo[0] === 'INVERSOR') {
-            this.elementos = this.elementos.filter(e => e.id !== 3 && e.id !== 5);
+        if(this.session) {
+            const usuario: Usuario = await this.usuarioService.getUsuario();
+            const userType = usuario.tipo[0] as UserType;
+            this.validateTipoUsuario(userType);
+            return;
         }
 
-        if(usuario.tipo[0] === 'EMPRENDEDOR') {
-            this.elementos = this.elementos.filter(e => e.id !== 4 && e.id !== 6);
-        }
+        this.elementsSideBar = [...this.elementsSideBar, ...elementsSideBar.filter(e => e.userType === UserType.ANONIMO)];
+    }
 
+    async validateTipoUsuario(userType: UserType) {
+        const filteredElements = elementsSideBar.filter(e => e.userType === userType || e.userType === UserType.LOGEADO);
+        this.elementsSideBar = [...this.elementsSideBar, ...filteredElements];
     }
 
     sideBarChange() {

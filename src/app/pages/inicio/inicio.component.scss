@@ -13,11 +13,16 @@
 }
 
 .root-element {
+    display: flex;
     min-height: 100vh;
 }
 
-#side-bar, #content {
+#side-bar, .content {
     transition: 0.3s all;
+}
+
+.content {
+    width: 100%;
 }
 
 .top-bar {

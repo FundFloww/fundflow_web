@@ -1,5 +1,6 @@
 export interface Message {
     sender: string,
     text: string,
-    time?: Date
+    time?: Date,
+    read?: boolean
 }

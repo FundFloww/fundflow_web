@@ -1,110 +1,101 @@
-<div *ngIf="usuario !== null" class="container-fluid root-element bg-light">
-    <div class="row">
-        <app-side-bar 
-            class="col-2 px-0 me-0 no-bootstrap-styles" id="side-bar" 
-            (click)="onOpenBar($event)" 
-            [open]="open"
-            [session]="session"
-        ></app-side-bar>
-        <div class="col-10 mx-0 bg-light h-100" id="content">
-            <div class="row bg-light">
-                <div class="banner bg-primary mx-0 px-0">
-                    @if(usuario?.banner) {
-                        <img src="{{usuario?.banner}}" class="foto-banner mx-0" alt="banner_perfil">
-                    } @else {
-                        <img src="../../../../assets/img/banner.jpg"
-                            class="foto-banner mx-0" alt="banner_perfil">
-                    }
-                </div>
-                <div class="col-md-4 col-12 bg-light-l mx-0 ps-5 fila-info">
-                    <div class="info-perfil d-grid gap-4">
-                        <div>
-                            @if(usuario?.imagen) {
-                                <img src="{{usuario?.imagen}}"
-                                    alt="foto_perfil" class="rounded-circle foto-perfil">
-                            } @else {
-                                <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Free-Download.png"
-                                    alt="foto_perfil" class="rounded-circle foto-perfil bg-light">
-                            }
-                        </div>
-                        <div>
-                            <p class="h2"><strong>{{ this.usuario?.nombre }} {{this.usuario?.apellidos}}</strong></p>
-                            <p class="h5 text-muted">{{ this.usuario?.profesion }}</p>
-                        </div>
-                        <div *ngIf="!mismoId ; else elseID">
-                            <a [routerLink]="['/perfil', idUsuario ,'correo']" class="btn btn-primary text-light">Enviar mensaje</a>
-                        </div>
-                        <ng-template #elseID>
-                            <div>
-                                <a class="btn btn-primary text-light" [routerLink]="['/perfil/editar']">Editar perfil</a>
-                            </div>
-                        </ng-template>
-                    </div>
-                </div>
-                <div class="col-md-8 col-12 bg-light-l pt-5 cotenedor-datos">
-                    <div class="row mt-4 fila-vacia"></div>
-                    <div class="row justify-content-start mt-3 fila-datos">
-                        <div class="row justify-content-start inversores">
-                            <div class="col-2 text-center me-5">
-                                <p class="h2"><strong>{{ this.totalInvertido }}€</strong></p>
-                                <p>Invertido</p>
-                            </div>
-                            <div class="col-2 text-center">
-                                <p class="h2"><strong>{{ this.inversionesIdea.length }}</strong></p>
-                                <p>Proyectos</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            @if(this.usuario?.descripcion) {
-                                <div class="col-10">
-                                    <p class="h4"><strong>Descripción</strong></p>
-                                    <p>{{ this.usuario?.descripcion }}</p>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-light-l mt-4 mx-0">
-                    <div class="mb-3 selector">
-                        <div class="w-100 tabs mt-2">
-                            <input type="radio" name="tipoUsuario" id="radio-1" [value]="'EMPRENDEDOR'" [checked]="ver === 'Inversiones'" (change)="ver = 'Inversiones'" checked>
-                            <label for="radio-1" class="tab"><span class="h4">Inversiones</span></label>
-                            
-                            <input type="radio" name="tipoUsuario" id="radio-2" [value]="'INVERSOR'" [checked]="ver === 'Guardados'" (change)="ver = 'Guardados'">
-                            <label for="radio-2" class="tab"><span class="h4">Guardados</span></label>
-                            
-                        </div>
-                    </div>
-                    <hr>
-                    <div *ngIf="ver === 'Inversiones'; else elseInversiones" 
-                        class="default-bar bg-light-l mt-1 mx-0"
-                        [ngClass]="inversionesIdea.length !== 0 ? 'card-bar' : 'empty-cards'"
-                    >
-                        @if(inversionesIdea.length != 0) {
-                            @for (idea of inversionesIdea; track idea.id) {
-                                <app-idea-item [idea]="idea"></app-idea-item>
-                            }
+<div *ngIf="usuario !== null" class="root-element bg-light">
+    <app-side-bar [session]="session"></app-side-bar>
+    <div class="content bg-light h-100">
+        <div class="row bg-light">
+            <div class="banner bg-primary mx-0 px-0">
+                @if(usuario?.banner) {
+                <img src="{{usuario?.banner}}" class="foto-banner mx-0" alt="banner_perfil">
+                } @else {
+                <img src="../../../../assets/img/banner.jpg" class="foto-banner mx-0" alt="banner_perfil">
+                }
+            </div>
+            <div class="col-md-4 col-12 bg-light-l mx-0 ps-5 fila-info">
+                <div class="info-perfil d-grid gap-4">
+                    <div>
+                        @if(usuario?.imagen) {
+                        <img src="{{usuario?.imagen}}" alt="foto_perfil" class="rounded-circle foto-perfil">
                         } @else {
-                            <p class="text-muted h2">No has realizado ninguna inversión.</p>
+                        <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Free-Download.png"
+                            alt="foto_perfil" class="rounded-circle foto-perfil bg-light">
+                        }
+                    </div>
+                    <div>
+                        <p class="h2"><strong>{{ this.usuario?.nombre }} {{this.usuario?.apellidos}}</strong></p>
+                        <p class="h5 text-muted">{{ this.usuario?.profesion }}</p>
+                    </div>
+                    <div *ngIf="!mismoId ; else elseID">
+                        <a [routerLink]="['/chat', idUsuario]" class="btn btn-primary text-light">Enviar mensaje</a>
+                    </div>
+                    <ng-template #elseID>
+                        <div>
+                            <a class="btn btn-primary text-light" [routerLink]="['/perfil/editar']">Editar perfil</a>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="col-md-8 col-12 bg-light-l pt-5 cotenedor-datos">
+                <div class="row mt-4 fila-vacia"></div>
+                <div class="row justify-content-start mt-3 fila-datos">
+                    <div class="row justify-content-start inversores">
+                        <div class="col-2 text-center me-5">
+                            <p class="h2"><strong>{{ this.totalInvertido }}€</strong></p>
+                            <p>Invertido</p>
+                        </div>
+                        <div class="col-2 text-center">
+                            <p class="h2"><strong>{{ this.inversionesIdea.length }}</strong></p>
+                            <p>Proyectos</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @if(this.usuario?.descripcion) {
+                        <div class="col-10">
+                            <p class="h4"><strong>Descripción</strong></p>
+                            <p>{{ this.usuario?.descripcion }}</p>
+                        </div>
                         }
                     </div>
                 </div>
             </div>
+            <div class="bg-light-l mt-4 mx-0">
+                <div class="mb-3 selector">
+                    <div class="w-100 tabs mt-2">
+                        <input type="radio" name="tipoUsuario" id="radio-1" [value]="'EMPRENDEDOR'"
+                            [checked]="ver === 'Inversiones'" (change)="ver = 'Inversiones'" checked>
+                        <label for="radio-1" class="tab"><span class="h4">Inversiones</span></label>
+
+                        <input type="radio" name="tipoUsuario" id="radio-2" [value]="'INVERSOR'"
+                            [checked]="ver === 'Guardados'" (change)="ver = 'Guardados'">
+                        <label for="radio-2" class="tab"><span class="h4">Guardados</span></label>
+
+                    </div>
+                </div>
+                <hr>
+                <div *ngIf="ver === 'Inversiones'; else elseInversiones" class="default-bar bg-light-l mt-1 mx-0"
+                    [ngClass]="inversionesIdea.length !== 0 ? 'card-bar' : 'empty-cards'">
+                    @if(inversionesIdea.length != 0) {
+                    @for (idea of inversionesIdea; track idea.id) {
+                    <app-idea-item [idea]="idea"></app-idea-item>
+                    }
+                    } @else {
+                    <p class="text-muted h2">No has realizado ninguna inversión.</p>
+                    }
+                </div>
+            </div>
         </div>
-        <div class="loader-wrapper" *ngIf="cargandoIdea">
-            <div class="loader"></div>
-        </div>  
+    </div>
+    <div class="loader-wrapper" *ngIf="cargandoIdea">
+        <div class="loader"></div>
     </div>
 
 
     <ng-template #elseInversiones>
         <div [ngClass]="inversionesIdea.length !== 0 || guardados.length  ? 'card-bar' : 'empty-cards'">
             @if(guardados.length != 0) {
-                @for (idea of guardados; track idea.id) {
-                    <app-idea-item [idea]="idea"></app-idea-item>
-                }
+            @for (idea of guardados; track idea.id) {
+            <app-idea-item [idea]="idea"></app-idea-item>
+            }
             } @else {
-                <p class="text-muted h2">No tienes ningún proyecto guardado.</p>
+            <p class="text-muted h2">No tienes ningún proyecto guardado.</p>
             }
         </div>
     </ng-template>

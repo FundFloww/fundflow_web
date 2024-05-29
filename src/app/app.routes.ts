@@ -37,6 +37,7 @@ export const routes: Routes = [
     { path: 'logout', component: LogoutComponent },
     { path: 'registro', component: RegistroComponent },
     { path: 'noticias', component: NoticiasComponent},
+    { path: 'chat/:id', component: ChatPageComponent},
     { path: 'chat', component: ChatPageComponent},
     { 
         path: 'admin',
